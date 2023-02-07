@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
-import 'helper/routes/app_pages.dart';
+import 'helper/routes/AppPages.dart';
 
 Future<void> main() async {
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
@@ -10,8 +10,8 @@ Future<void> main() async {
   ));
   runApp(
     GetMaterialApp(
-      initialRoute: AppRoutes.initial,
-      getPages: AppRoutes.routes,
+      initialRoute: AppPages.initial,
+      getPages: AppPages.routes,
       debugShowCheckedModeBanner: false,
     ),
   );

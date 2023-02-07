@@ -1,43 +1,22 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-import 'colors.dart';
+import 'ColorRes.dart';
 import 'fonts.dart';
-TextView(String text,{Color? color = Colors.white,double? fontSize=16,String? fontFamily=Fonts.regular,
-  bool? centerAlign,bool? overFlow,double? letterSpacing,bool? underLine,Function? callBack}) {
-  return callBack==null ? _text(text, centerAlign, underLine, letterSpacing, overFlow, color, fontSize, fontFamily) : InkWell(
-    onTap: (){
-      callBack.call();
-    },
-    child: _text(text, centerAlign, underLine, letterSpacing, overFlow, color, fontSize, fontFamily),
-  );
-}
 
-Text _text(String text, bool? centerAlign, bool? underLine, double? letterSpacing, bool? overFlow, Color? color, double? fontSize, String? fontFamily) {
-  return Text(
-    text,
-    textAlign: centerAlign==null ? TextAlign.start : TextAlign.center,
-    style: TextStyle(
-        decoration: underLine!=null ? TextDecoration.underline : null,
-        letterSpacing: letterSpacing ?? null,
-        overflow: overFlow!=null ? TextOverflow.ellipsis:null,
-        color: color,
-        fontSize: fontSize,
-        fontFamily: fontFamily),
-    // overflow: TextOverflow.ellipsis,
-  );
-}
 
-Widget CustomLayout({required String title,required Widget child,Function? onBack}) {
+
+
+Widget customLayout({required String title,required Widget child,Function? onBack}) {
   return Stack(
       children: [
         SizedBox(
           width: Get.width,
-          child: SvgPicture.asset(CommonUi.setSvgImage("app_bg"),fit: BoxFit.fitHeight,),
+          child: SvgPicture.asset(CommonUi.setSvgImage("app_bg"),fit: BoxFit.fitHeight,
+          width: Get.width,),
         ),
         SafeArea(
           child: Column(
@@ -63,11 +42,9 @@ Widget CustomLayout({required String title,required Widget child,Function? onBac
               Expanded(
                 child: Container(
                   width: Get.width,
+                  padding: const EdgeInsets.only(left: 30.0, top: 20, right: 30),
                   decoration: CommonUi.curvedBoxDecoration(topLeft: 20,topRight: 20),
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 30.0, top: 20, right: 30),
-                    child: child,
-                  ),
+                  child: child,
                 ),
               )
             ],
@@ -91,7 +68,7 @@ class CommonUi {
       {String fontFamily = Fonts.regular,
       double fontSize = FontSize.font16,
       TextDecoration decoration = TextDecoration.none,
-      Color color = MyColors.colorBlack}) {
+      Color color = ColorRes.colorBlack}) {
     return TextStyle(
         fontFamily: fontFamily,
         fontSize: fontSize,
@@ -106,9 +83,9 @@ class CommonUi {
 
       },
       child: Container(
-        padding: EdgeInsets.only(top: 12,bottom: 12),
+        padding: const EdgeInsets.only(top: 12,bottom: 12),
         width: Get.width,
-        decoration: CommonUi.curvedBoxDecoration(backgroundColor: MyColors.buttonColor),
+        decoration: CommonUi.curvedBoxDecoration(backgroundColor: ColorRes.buttonColor),
         child: Center(child: Text(buttonText,style: CommonUi.customButtonTextStyle(fontSize: fontSize),)),
       ),
     );
@@ -118,7 +95,7 @@ class CommonUi {
       {String fontFamily = Fonts.semiBold,
       required double fontSize,
       TextDecoration decoration = TextDecoration.none,
-      Color textColor = MyColors.white}) {
+      Color textColor = ColorRes.white}) {
     return TextStyle(
         fontFamily: fontFamily,
         fontSize: fontSize,
@@ -131,7 +108,7 @@ class CommonUi {
       double topRight = 4.0,
       double bottomLeft = 4.0,
       double bottomRight = 4.0,
-      backgroundColor = MyColors.white}) {
+      backgroundColor = ColorRes.white}) {
     return BoxDecoration(
         color: backgroundColor,
         borderRadius: BorderRadius.only(
@@ -142,13 +119,13 @@ class CommonUi {
   }
 
   static curvedBoxDecorationWithShadow(
-      {double radius = 20.0, backgroundColor = MyColors.white}) {
+      {double radius = 20.0, backgroundColor = ColorRes.white}) {
     return BoxDecoration(
       color: backgroundColor,
       borderRadius: BorderRadius.all(Radius.circular(radius)),
       boxShadow: const [
         BoxShadow(
-          color: MyColors.greyColor,
+          color: ColorRes.greyColor,
           spreadRadius: 2,
           blurRadius: 5,
           offset: Offset(0, 0),
@@ -161,12 +138,12 @@ class CommonUi {
       {text,
       width,
       height,
-      backgroundColor = MyColors.bluecolor,
+      backgroundColor = ColorRes.bluecolor,
       radius = 50.0,
-      textColor = MyColors.white,
+      textColor = ColorRes.white,
       textSized = 14,
       showBorder = false,
-      borderColor = MyColors.bluecolor,
+      borderColor = ColorRes.bluecolor,
       margin = 70.0,
       onPressed}) {
     return Container(
@@ -197,8 +174,8 @@ class CommonUi {
   }
 
   static roundedDecorationWithBorder(
-      {outLineColor = MyColors.greyColor,
-      bgColor = MyColors.greyColor,
+      {outLineColor = ColorRes.greyColor,
+      bgColor = ColorRes.greyColor,
       radius = 10.0,
       borderWidth = 1.0}) {
     return BoxDecoration(
@@ -208,8 +185,8 @@ class CommonUi {
   }
 
   static roundedDecorationWithBorderRadius(
-      {outLineColor = MyColors.greyColor,
-      bgColor = MyColors.greyColor,
+      {outLineColor = ColorRes.greyColor,
+      bgColor = ColorRes.greyColor,
       topLeft = 0.0,
       topRight = 0.0,
       bottomLeft = 0.0,
@@ -223,10 +200,10 @@ class CommonUi {
   }
 
   static textFieldDecoration(
-      {outlineColor = MyColors.textFieldOutlineColor,
+      {outlineColor = ColorRes.textFieldOutlineColor,
       cornerRadius = 4.0,
       hintText = "",
-      fillColor = MyColors.white,
+      fillColor = ColorRes.white,
       verticalSpace = 14.0, isPass = false,RxBool? passwordVisible,
       }) {
     return InputDecoration(
@@ -268,17 +245,17 @@ class CommonUi {
       labelStyle: CommonUi.customTextStyle(),
       contentPadding:
           EdgeInsets.symmetric(horizontal: 10, vertical: verticalSpace),
-      hintStyle: CommonUi.customTextStyle(color: MyColors.greyColor),
+      hintStyle: CommonUi.customTextStyle(color: ColorRes.greyColor),
       isDense: true,
       hintText: hintText,
     );
   }
 
   static textFieldDecorationWithText(
-      {outlineColor = MyColors.greyColor,
+      {outlineColor = ColorRes.greyColor,
       cornerRadius = 10.0,
       hintText = "",
-      fillColor = MyColors.greyColor,
+      fillColor = ColorRes.greyColor,
       verticalSpace = 10.0,
       prefixWidth = 20.0,
       suffixWidth = 20.0,
@@ -315,7 +292,7 @@ class CommonUi {
         ),
         contentPadding:
             EdgeInsets.symmetric(horizontal: 0, vertical: verticalSpace),
-        hintStyle: CommonUi.customTextStyle(color: MyColors.greyColor),
+        hintStyle: CommonUi.customTextStyle(color: ColorRes.greyColor),
         isDense: true,
         hintText: hintText,
         prefixIconConstraints: BoxConstraints(
@@ -338,15 +315,15 @@ class CommonUi {
                 child: Text(suffixText,
                     style: CommonUi.customTextStyle(
                         fontSize: 16))),
-        prefixStyle: CommonUi.customTextStyle(color: MyColors.colorBlack));
+        prefixStyle: CommonUi.customTextStyle(color: ColorRes.colorBlack));
   }
 
   static textFieldDecorationWithIcon(
-      {outlineColor = MyColors.textFieldOutlineColor,
-      filledColor = MyColors.white,
+      {outlineColor = ColorRes.textFieldOutlineColor,
+      filledColor = ColorRes.white,
       cornerRadius = 10.0,
       hintText = "",
-      hintIconColor = MyColors.greyColor,
+      hintIconColor = ColorRes.greyColor,
       showSuffix = false,
       onSuffixTap}) {
     return InputDecoration(
@@ -448,7 +425,7 @@ class CommonUi {
       [toastLength = 7, snackPosition = SnackPosition.TOP]) {
     Get.snackbar(title, message,
         snackPosition: snackPosition,
-        backgroundColor: MyColors.white,
+        backgroundColor: ColorRes.white,
         duration: Duration(seconds: toastLength));
   }
 
@@ -471,7 +448,7 @@ class CommonUi {
       onLeadingPressed,
       onActionPressed}) {
     return AppBar(
-      backgroundColor: MyColors.bluecolor,
+      backgroundColor: ColorRes.bluecolor,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(
           bottom: Radius.circular(10),
@@ -487,7 +464,7 @@ class CommonUi {
       title: Text(
         title,
         style: CommonUi.customTextStyle(
-            color: MyColors.white,
+            color: ColorRes.white,
             fontSize: 18,
             fontFamily: Fonts.semiBold),
       ),
@@ -496,7 +473,7 @@ class CommonUi {
             ? GestureDetector(
                 onTap: onActionPressed,
                 child: Container(
-                    margin: EdgeInsets.only(right: 20),
+                    margin: const EdgeInsets.only(right: 20),
                     child: SvgPicture.asset(CommonUi.setSvgImage(actionIcon))),
               )
             : Container()
@@ -510,11 +487,11 @@ class CommonUi {
       style: CommonUi.customTextStyle(
         fontSize: 16,
       ),
-      cursorColor: MyColors.colorBlack,
+      cursorColor: ColorRes.colorBlack,
       decoration: InputDecoration(
         counterText: "",
-        fillColor: MyColors.greyColor,
-        focusColor: MyColors.greyColor,
+        fillColor: ColorRes.greyColor,
+        focusColor: ColorRes.greyColor,
         filled: true,
         suffixIcon: SvgPicture.asset(
           CommonUi.setSvgImage('clear_icon'),
@@ -534,30 +511,30 @@ class CommonUi {
         focusedBorder: const OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(10)),
           borderSide: BorderSide(
-            color: MyColors.greyColor,
+            color: ColorRes.greyColor,
           ),
         ),
         enabledBorder: const OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(10)),
           borderSide: BorderSide(
-            color: MyColors.greyColor,
+            color: ColorRes.greyColor,
           ),
         ),
         errorBorder: const OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(10)),
           borderSide: BorderSide(
-            color: MyColors.greyColor,
+            color: ColorRes.greyColor,
           ),
         ),
         disabledBorder: const OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(10)),
           borderSide: BorderSide(
-            color: MyColors.greyColor,
+            color: ColorRes.greyColor,
           ),
         ),
         contentPadding:
             const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-        hintStyle: CommonUi.customTextStyle(color: MyColors.colorGreen),
+        hintStyle: CommonUi.customTextStyle(color: ColorRes.colorGreen),
         isDense: true,
         hintText: hintText.tr,
       ),
@@ -578,9 +555,9 @@ class CommonUi {
           height: height,
           width: width,
           placeholder: (context, url) =>
-              Container(color: MyColors.greyColor),
+              Container(color: ColorRes.greyColor),
           errorWidget: (context, url, error) =>
-              Container(color: MyColors.greyColor)),
+              Container(color: ColorRes.greyColor)),
     );
   }
 
@@ -590,8 +567,8 @@ class CommonUi {
       padding: const EdgeInsets.all(4),
       decoration: CommonUi.roundedDecorationWithBorder(
           radius: 5.0,
-          bgColor: MyColors.greyColor,
-          outLineColor: MyColors.greyColor),
+          bgColor: ColorRes.greyColor,
+          outLineColor: ColorRes.greyColor),
       child: Theme(
         data: ThemeData(
           splashColor: Colors.transparent,
@@ -601,8 +578,8 @@ class CommonUi {
           controller: tabController,
           indicator: CommonUi.roundedDecorationWithBorder(
               radius: 5.0,
-              bgColor: MyColors.white,
-              outLineColor: MyColors.white),
+              bgColor: ColorRes.white,
+              outLineColor: ColorRes.white),
           labelPadding: const EdgeInsets.symmetric(horizontal: 3.0),
           padding: EdgeInsets.zero,
           labelStyle: CommonUi.customTextStyle(
@@ -613,8 +590,8 @@ class CommonUi {
             fontFamily: Fonts.light,
             fontSize: 14,
           ),
-          labelColor: MyColors.bluecolor,
-          unselectedLabelColor: MyColors.colorBlack,
+          labelColor: ColorRes.bluecolor,
+          unselectedLabelColor: ColorRes.colorBlack,
           tabs: list,
           onTap: onPressed,
         ),
@@ -639,7 +616,7 @@ class CommonUi {
             margin: const EdgeInsets.symmetric(horizontal: 4),
             height: 15,
             width: 1.5,
-            color: MyColors.colorBlack,
+            color: ColorRes.colorBlack,
           ),
         }
       ],
