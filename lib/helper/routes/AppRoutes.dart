@@ -30,7 +30,7 @@ class AppRoutes {
   static const String forgotPass = '/forgotPass';
   static const String verification = '/verification';
   static const String resetPass = '/resetPass';
-  static const String home = '/home';
+  static const String dashboard = '/dashboard';
 
 
 }

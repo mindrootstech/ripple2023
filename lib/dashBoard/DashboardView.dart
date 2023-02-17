@@ -4,66 +4,73 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:ripplefect/dashBoard/controller/DashboardController.dart';
 
+import '../helper/constants/ColorRes.dart';
 import '../helper/constants/CommonUi.dart';
-
+import '../helper/constants/strings.dart';
 
 class DashboardView extends GetView<DashboardController> {
-
   @override
   Widget build(BuildContext context) {
-
-    return  Obx(()=>
-        Stack(
-          children: [
-            controller.currentIndex.value!=10?  Scaffold(
-                body: Container(
-                    child: controller.children[controller.currentIndex.value]),
-                bottomNavigationBar: Stack(
-                  children: [
-                    Container(
-                      margin: const EdgeInsets.only(left: 12, bottom: 12, right: 12,top: 12),
-                      child: BottomBar(
-                        padding: const EdgeInsets.only(left: 30,right: 30),
-                        backgroundColor: Colors.transparent,
-                        showActiveBackgroundColor: false,
-                        selectedIndex: controller.currentIndex.value,
-                        onTap: controller.onTabTapped,
-                        items: <BottomBarItem>[
-                          BottomBarItem(
-                            backgroundColorOpacity: 0,
-                            icon: SvgPicture.asset(CommonUi.setSvgImage(controller.currentIndex.value == 0 ? 'home_icon_filled' : 'home_icon'),),
-                            activeColor: Colors.transparent,
-                            // label: '',
-                          ),
-                          BottomBarItem(
-                            backgroundColorOpacity: 0,
-                            icon: SvgPicture.asset(CommonUi.setSvgImage(controller.currentIndex.value == 1 ? 'local_icon_filled' : 'local_icon')),
-                            activeColor: Colors.transparent,
-                          ),
-                          BottomBarItem(
-                            backgroundColorOpacity: 0,
-                            icon: SvgPicture.asset(CommonUi.setSvgImage(controller.currentIndex.value == 2 ? 'library_icon_filled' : 'library_icon')),
-                            activeColor: Colors.transparent,
-                          ),
-                          BottomBarItem(
-                            backgroundColorOpacity: 0,
-                            icon: SvgPicture.asset(CommonUi.setSvgImage(controller.currentIndex.value == 3 ? 'setting_icon_filled' : 'setting_icon')),
-                            activeColor: Colors.transparent,
-                          )
-                        ],
-                      ),
+    return Obx(
+      () => Stack(
+        children: [
+          Scaffold(
+              body: Container(
+                  child: controller.children[controller.currentIndex.value]),
+              bottomNavigationBar: BottomNavigationBar(
+                  items: <BottomNavigationBarItem>[
+                    BottomNavigationBarItem(
+                        icon: SvgPicture.asset(
+                          CommonUi.setSvgImage(
+                              controller.currentIndex.value == 0
+                                  ? 'home_icon_filled'
+                                  : 'home_icon'),
+                        ),
+                        label: Strings.textHome,
+                        backgroundColor: Colors.white),
+                    BottomNavigationBarItem(
+                        icon: SvgPicture.asset(CommonUi.setSvgImage(
+                            controller.currentIndex.value == 1
+                                ? 'local_icon_filled'
+                                : 'local_icon')),
+                        label: Strings.textLocal,
+                        backgroundColor: Colors.white),
+                    BottomNavigationBarItem(
+                      icon: SvgPicture.asset(CommonUi.setSvgImage(
+                          controller.currentIndex.value == 2
+                              ? 'feed_icon_filled'
+                              : 'feed_icon')),
+                      label: Strings.textFeed,
+                      backgroundColor: Colors.white,
                     ),
+                    BottomNavigationBarItem(
+                      icon: SvgPicture.asset(CommonUi.setSvgImage(
+                          controller.currentIndex.value == 3
+                              ? 'challenges_icon_filled'
+                              : 'challenges_icon')),
+                      label: Strings.textChallenges,
+                      backgroundColor: Colors.white,
+                    ),
+                    BottomNavigationBarItem(
+                      icon: SvgPicture.asset(CommonUi.setSvgImage(
+                          controller.currentIndex.value == 4
+                              ? 'profile_icon_filled'
+                              : 'profile_icon')),
+                      label: Strings.textProfile,
+                      backgroundColor: Colors.white,
+                    ),
+
                   ],
-                )
-            ):const SizedBox(),
-          ],
-        ),
+                  type: BottomNavigationBarType.fixed,
+                  currentIndex: controller.currentIndex.value,
+                  selectedItemColor: ColorRes.colorGreen,
+                  iconSize: 40,
+                  selectedLabelStyle: const TextStyle(color: ColorRes.colorGreen),
+                  showSelectedLabels: true,
+                  unselectedLabelStyle: const TextStyle(color: Colors.white, fontSize: 14),                  onTap: controller.onTabTapped,
+                  elevation: 5)),
+        ],
+      ),
     );
   }
 }
-
-
-
-
-
-

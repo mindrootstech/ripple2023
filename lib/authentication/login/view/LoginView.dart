@@ -54,7 +54,7 @@ class LoginView extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     CommonUi.customButton(buttonText:"Login",fontSize:FontSize.font20,callBack: (){
-                      Get.toNamed(AppRoutes.home);
+                      // Get.toNamed(AppRoutes.home);
 
                     }),
                     const SizedBox(height: 20,),

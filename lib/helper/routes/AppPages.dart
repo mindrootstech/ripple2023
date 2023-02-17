@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:ripplefect/dashBoard/DashboardView.dart';
+import 'package:ripplefect/dashBoard/binding/DashboardBinding.dart';
 import '../../appOnBoarding/complete_onboard/view/CompleteOnboardView.dart';
 import '../../appOnBoarding/onboard/binding/OnboardBinding.dart';
 import '../../appOnBoarding/onboard/view/OnboardView.dart';
@@ -21,7 +23,7 @@ import '../../dashBoard/home/view/HomeView.dart';
 import 'AppRoutes.dart';
 
 class AppPages {
-  static const initial = AppRoutes.splash;
+  static const initial = AppRoutes.dashboard;
 
 
   static final routes = [
@@ -34,6 +36,6 @@ class AppPages {
     GetPage(name: AppRoutes.forgotPass, page: () => const ForgotPassView(), binding: ForgotPassBinding()),
     GetPage(name: AppRoutes.verification, page: () => const VerificationView(), binding: VerificationBinding()),
     GetPage(name: AppRoutes.resetPass, page: () => const ResetPassView(), binding: ResetPassBinding()),
-    GetPage(name: AppRoutes.home, page: () => const HomeView(), binding: HomeBinding()),
+    GetPage(name: AppRoutes.dashboard, page: () =>  DashboardView(), bindings: [DashBoardBinding(),HomeBinding()]),
   ];
 }

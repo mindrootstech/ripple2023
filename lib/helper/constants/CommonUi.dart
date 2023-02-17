@@ -66,7 +66,7 @@ class CommonUi {
 
   static TextStyle customTextStyle(
       {String fontFamily = Fonts.regular,
-      double fontSize = FontSize.font16,
+      double fontSize = FontSize.font14,
       TextDecoration decoration = TextDecoration.none,
       Color color = ColorRes.colorBlack}) {
     return TextStyle(
@@ -76,7 +76,7 @@ class CommonUi {
         color: color);
   }
 
-  static GestureDetector customButton({String buttonText = "Next",fontSize =FontSize.font24,Function? callBack}) {
+  static GestureDetector customButton({String buttonText = "Next",fontSize =FontSize.font22,Function? callBack}) {
     return GestureDetector(
       onTap: () {
         callBack?.call();

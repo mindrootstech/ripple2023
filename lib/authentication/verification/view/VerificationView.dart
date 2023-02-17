@@ -70,7 +70,7 @@ class VerificationView extends StatelessWidget {
                     alignment: Alignment.center,
                     margin: const EdgeInsets.only(bottom: 50),
                     child: Text("Resend passcode after 00:25",
-                      style: CommonUi.customTextStyle(fontSize: FontSize.font16,
+                      style: CommonUi.customTextStyle(fontSize: FontSize.font14,
                           decoration: TextDecoration.underline,
                       fontFamily: Fonts.bold,
                       color: ColorRes.greyColor),),

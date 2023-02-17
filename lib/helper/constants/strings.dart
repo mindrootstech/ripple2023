@@ -2,8 +2,7 @@
 class Strings {
 
 
- // Dashboard Screen
-  static String textHome = 'Home';
+ /// OnBoarding Screen
 
   static String onboard_1Title = 'Find a action';
   static String onboard_1Desc = 'We curate and bring the foremost actions around, that affects the planet, where you can choose a action as per commitment level that works for you.';
@@ -20,5 +19,19 @@ class Strings {
   static String onboard_4Title = 'Join community';
   static String onboard_4Desc = 'We work with local communities, educational institutes, governments and organizations to inspire, empower and put climate action at the heart of everything they do. ';
   static String onboard_4Image = 'onboard_4_img';
+
+
+
+  ///dashboard text........................
+
+  static String textHome = 'Home';
+  static String textLocal = 'Local';
+  static String textFeed = 'Feed';
+  static String textChallenges = 'Challenges';
+  static String textProfile = 'Profile';
+
+
+
+
 
 }

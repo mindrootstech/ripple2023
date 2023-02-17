@@ -4,13 +4,13 @@ import 'package:get/get.dart';
 import 'package:ripplefect/dashBoard/home/view/HomeView.dart';
 
 class DashboardController extends GetxController{
-  var currentIndex = 10.obs;
+  var currentIndex = 0.obs;
 
 
 
 
   final List<Widget> children = [
-    const HomeView(),
+     HomeView(),
     Container(),
     Container(),
     Container(),
