@@ -15,7 +15,7 @@ class LoginView extends StatelessWidget {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: GetX<LoginController>(builder: (controller) {
-        return customLayout(
+        return CommonUi.customLayout(
             title: Strings.login,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

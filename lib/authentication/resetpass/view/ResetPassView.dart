@@ -15,7 +15,7 @@ class ResetPassView extends StatelessWidget {
       resizeToAvoidBottomInset: false,
       body: GetX<ResetPassController>(
         builder: (controller) {
-          return customLayout(
+          return CommonUi.customLayout(
               title: Strings.resetPass,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

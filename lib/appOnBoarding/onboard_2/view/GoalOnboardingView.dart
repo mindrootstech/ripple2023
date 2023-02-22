@@ -26,7 +26,7 @@ class GoalOnboardingView extends StatelessWidget {
               }
               return back;
             },
-            child: customLayout(
+            child: CommonUi.customLayout(
               title: controller.titles.value[controller.titleNumber.value],
               onBack: (){
                 if(controller.pageNo.value != 1){

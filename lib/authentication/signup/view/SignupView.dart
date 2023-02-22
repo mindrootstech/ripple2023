@@ -15,7 +15,7 @@ class SignupView extends StatelessWidget {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: GetX<SignupController>(builder: (controller) {
-        return customLayout(
+        return CommonUi.customLayout(
             title: Strings.createAccount,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

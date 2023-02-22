@@ -14,6 +14,7 @@ class ColorRes {
   static const Color lightBluecolor = Color.fromRGBO(231, 241, 255, 1);
   static const Color white = Colors.white;
   static const Color textFieldOutlineColor = Color.fromRGBO(163, 170, 185, 1);
+  static const Color colorWhiteGrey = Color.fromRGBO(236, 236, 236, 1.0);
   static const Color colorBlack = Colors.black;
   static const Color colorBlack2 = Color.fromRGBO(0, 0, 0, 0.6588235294117647);
   static const Color colorGreen =   Colors.green;

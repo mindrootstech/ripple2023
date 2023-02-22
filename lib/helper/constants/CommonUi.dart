@@ -7,53 +7,9 @@ import 'package:get/get.dart';
 import 'ColorRes.dart';
 import 'fonts.dart';
 
-
-
-
-Widget customLayout({required String title,required Widget child,Function? onBack}) {
-  return Stack(
-      children: [
-        SizedBox(
-          width: Get.width,
-          child: SvgPicture.asset(CommonUi.setSvgImage("app_bg"),fit: BoxFit.fitHeight,
-          width: Get.width,),
-        ),
-        SafeArea(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              GestureDetector(
-                onTap: () {
-                  if(onBack!=null){
-                    onBack.call();
-                  }else{
-                    Get.back();
-                  }
-                },
-                child: const Padding(
-                  padding: EdgeInsets.only(left: 20,top: 12,bottom: 16),
-                  child: Icon(Icons.arrow_back_ios_new,color: Colors.white,),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 24.0,bottom: 16),
-                child: Text(title,style: CommonUi.customTextStyle(fontSize: FontSize.font26,fontFamily: Fonts.semiBold,color: Colors.white),),
-              ),
-              Expanded(
-                child: Container(
-                  width: Get.width,
-                  padding: const EdgeInsets.only(left: 30.0, top: 20, right: 30),
-                  decoration: CommonUi.curvedBoxDecoration(topLeft: 20,topRight: 20),
-                  child: child,
-                ),
-              )
-            ],
-          ),
-        ),
-      ]);
-}
-
 class CommonUi {
+  static var marginLeftRight=22.0;
+
   static String setPngImage(String name) {
     return "assets/images/$name.png";
   }
@@ -64,11 +20,56 @@ class CommonUi {
 
 
 
+  static customLayout({required String title,required Widget child,Function? onBack}) {
+    return Stack(
+        children: [
+          SizedBox(
+            width: Get.width,
+            child: SvgPicture.asset(CommonUi.setSvgImage("app_bg"),fit: BoxFit.fitHeight,
+              width: Get.width,),
+          ),
+          SafeArea(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    if(onBack!=null){
+                      onBack.call();
+                    }else{
+                      Get.back();
+                    }
+                  },
+                  child: const Padding(
+                    padding: EdgeInsets.only(left: 20,top: 12,bottom: 16),
+                    child: Icon(Icons.arrow_back_ios_new,color: Colors.white,),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 24.0,bottom: 16),
+                  child: Text(title,style: CommonUi.customTextStyle(fontSize: FontSize.font26,fontFamily: Fonts.semiBold,color: Colors.white),),
+                ),
+                Expanded(
+                  child: Container(
+                    width: Get.width,
+                    padding: const EdgeInsets.only(left: 30.0, top: 20, right: 30),
+                    decoration: CommonUi.curvedBoxDecoration(topLeft: 20,topRight: 20),
+                    child: child,
+                  ),
+                )
+              ],
+            ),
+          ),
+        ]);
+  }
+
+
+
   static TextStyle customTextStyle(
       {String fontFamily = Fonts.regular,
-      double fontSize = FontSize.font14,
-      TextDecoration decoration = TextDecoration.none,
-      Color color = ColorRes.colorBlack}) {
+        double fontSize = FontSize.font14,
+        TextDecoration decoration = TextDecoration.none,
+        Color color = ColorRes.colorBlack}) {
     return TextStyle(
         fontFamily: fontFamily,
         fontSize: fontSize,
@@ -93,9 +94,9 @@ class CommonUi {
 
   static TextStyle customButtonTextStyle(
       {String fontFamily = Fonts.semiBold,
-      required double fontSize,
-      TextDecoration decoration = TextDecoration.none,
-      Color textColor = ColorRes.white}) {
+        required double fontSize,
+        TextDecoration decoration = TextDecoration.none,
+        Color textColor = ColorRes.white}) {
     return TextStyle(
         fontFamily: fontFamily,
         fontSize: fontSize,
@@ -105,10 +106,10 @@ class CommonUi {
 
   static curvedBoxDecoration(
       {double topLeft = 4.0,
-      double topRight = 4.0,
-      double bottomLeft = 4.0,
-      double bottomRight = 4.0,
-      backgroundColor = ColorRes.white}) {
+        double topRight = 4.0,
+        double bottomLeft = 4.0,
+        double bottomRight = 4.0,
+        backgroundColor = ColorRes.white}) {
     return BoxDecoration(
         color: backgroundColor,
         borderRadius: BorderRadius.only(
@@ -119,16 +120,23 @@ class CommonUi {
   }
 
   static curvedBoxDecorationWithShadow(
-      {double radius = 20.0, backgroundColor = ColorRes.white}) {
+      {double radius = 20.0,
+        backgroundColor = ColorRes.white,
+        double spreadRadius=2.0,
+        double blurRadius= 5.0,
+        double  offsetX=0.0,
+        double offsetY=0.0,
+
+      }) {
     return BoxDecoration(
       color: backgroundColor,
       borderRadius: BorderRadius.all(Radius.circular(radius)),
-      boxShadow: const [
+      boxShadow:  [
         BoxShadow(
           color: ColorRes.greyColor,
-          spreadRadius: 2,
-          blurRadius: 5,
-          offset: Offset(0, 0),
+          spreadRadius: spreadRadius,
+          blurRadius: blurRadius,
+          offset: Offset(offsetX, offsetY),
         ),
       ],
     );
@@ -136,16 +144,16 @@ class CommonUi {
 
   static roundedButton(
       {text,
-      width,
-      height,
-      backgroundColor = ColorRes.bluecolor,
-      radius = 50.0,
-      textColor = ColorRes.white,
-      textSized = 14,
-      showBorder = false,
-      borderColor = ColorRes.bluecolor,
-      margin = 70.0,
-      onPressed}) {
+        width,
+        height,
+        backgroundColor = ColorRes.bluecolor,
+        radius = 50.0,
+        textColor = ColorRes.white,
+        textSized = 14,
+        showBorder = false,
+        borderColor = ColorRes.bluecolor,
+        margin = 70.0,
+        onPressed}) {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: margin),
       child: TextButton(
@@ -175,9 +183,9 @@ class CommonUi {
 
   static roundedDecorationWithBorder(
       {outLineColor = ColorRes.greyColor,
-      bgColor = ColorRes.greyColor,
-      radius = 10.0,
-      borderWidth = 1.0}) {
+        bgColor = ColorRes.greyColor,
+        radius = 10.0,
+        borderWidth = 1.0}) {
     return BoxDecoration(
         color: bgColor,
         border: Border.all(color: outLineColor, width: borderWidth),
@@ -186,25 +194,28 @@ class CommonUi {
 
   static roundedDecorationWithBorderRadius(
       {outLineColor = ColorRes.greyColor,
-      bgColor = ColorRes.greyColor,
-      topLeft = 0.0,
-      topRight = 0.0,
-      bottomLeft = 0.0,
-      bottomRight = 0.0,
-      borderWidth = 1.0}) {
+        bgColor = ColorRes.greyColor,
+        topLeft = 0.0,
+        topRight = 0.0,
+        bottomLeft = 0.0,
+        bottomRight = 0.0,
+        borderWidth = 1.0}) {
     return BoxDecoration(
         color: bgColor,
         border: Border.all(color: outLineColor, width: borderWidth),
         borderRadius: BorderRadius.only(topLeft: Radius.circular(topLeft),topRight: Radius.circular(topRight),
-        bottomLeft: Radius.circular(bottomLeft),bottomRight: Radius.circular(bottomRight)));
+            bottomLeft: Radius.circular(bottomLeft),bottomRight: Radius.circular(bottomRight)));
   }
 
   static textFieldDecoration(
       {outlineColor = ColorRes.textFieldOutlineColor,
-      cornerRadius = 4.0,
-      hintText = "",
-      fillColor = ColorRes.white,
-      verticalSpace = 14.0, isPass = false,RxBool? passwordVisible,
+        cornerRadius = 4.0,
+        hintText = "",
+        fillColor = ColorRes.white,
+        verticalSpace = 14.0,
+        isPass = false,
+        RxBool? passwordVisible,
+        double contentHorizontal=10.0
       }) {
     return InputDecoration(
       counterText: "",
@@ -243,8 +254,7 @@ class CommonUi {
         ),
       ),
       labelStyle: CommonUi.customTextStyle(),
-      contentPadding:
-          EdgeInsets.symmetric(horizontal: 10, vertical: verticalSpace),
+      contentPadding: EdgeInsets.symmetric(horizontal: contentHorizontal, vertical: verticalSpace),
       hintStyle: CommonUi.customTextStyle(color: ColorRes.greyColor),
       isDense: true,
       hintText: hintText,
@@ -253,14 +263,14 @@ class CommonUi {
 
   static textFieldDecorationWithText(
       {outlineColor = ColorRes.greyColor,
-      cornerRadius = 10.0,
-      hintText = "",
-      fillColor = ColorRes.greyColor,
-      verticalSpace = 10.0,
-      prefixWidth = 20.0,
-      suffixWidth = 20.0,
-      String prefixText = '',
-      String suffixText = ''}) {
+        cornerRadius = 10.0,
+        hintText = "",
+        fillColor = ColorRes.greyColor,
+        verticalSpace = 10.0,
+        prefixWidth = 20.0,
+        suffixWidth = 20.0,
+        String prefixText = '',
+        String suffixText = ''}) {
     return InputDecoration(
         counterText: "",
         fillColor: fillColor,
@@ -291,7 +301,7 @@ class CommonUi {
           ),
         ),
         contentPadding:
-            EdgeInsets.symmetric(horizontal: 0, vertical: verticalSpace),
+        EdgeInsets.symmetric(horizontal: 0, vertical: verticalSpace),
         hintStyle: CommonUi.customTextStyle(color: ColorRes.greyColor),
         isDense: true,
         hintText: hintText,
@@ -304,28 +314,28 @@ class CommonUi {
         prefixIcon: prefixText.isEmpty
             ? const SizedBox()
             : Container(
-                margin: const EdgeInsets.only(left: 10),
-                child: Text(prefixText,
-                    style: CommonUi.customTextStyle(
-                        fontSize: 16))),
+            margin: const EdgeInsets.only(left: 10),
+            child: Text(prefixText,
+                style: CommonUi.customTextStyle(
+                    fontSize: 16))),
         suffixIcon: suffixText.isEmpty
             ? const SizedBox()
             : Container(
-                margin: const EdgeInsets.only(right: 10),
-                child: Text(suffixText,
-                    style: CommonUi.customTextStyle(
-                        fontSize: 16))),
+            margin: const EdgeInsets.only(right: 10),
+            child: Text(suffixText,
+                style: CommonUi.customTextStyle(
+                    fontSize: 16))),
         prefixStyle: CommonUi.customTextStyle(color: ColorRes.colorBlack));
   }
 
   static textFieldDecorationWithIcon(
       {outlineColor = ColorRes.textFieldOutlineColor,
-      filledColor = ColorRes.white,
-      cornerRadius = 10.0,
-      hintText = "",
-      hintIconColor = ColorRes.greyColor,
-      showSuffix = false,
-      onSuffixTap}) {
+        filledColor = ColorRes.white,
+        cornerRadius = 10.0,
+        hintText = "",
+        hintIconColor = ColorRes.greyColor,
+        showSuffix = false,
+        onSuffixTap}) {
     return InputDecoration(
       counterText: "",
       fillColor: filledColor,
@@ -334,8 +344,8 @@ class CommonUi {
       prefixIcon: Icon(Icons.search, color: hintIconColor, size: 30),
       suffixIcon: showSuffix
           ? GestureDetector(
-              onTap: onSuffixTap,
-              child: Icon(Icons.clear, color: hintIconColor, size: 30))
+          onTap: onSuffixTap,
+          child: Icon(Icons.clear, color: hintIconColor, size: 30))
           : const SizedBox(),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.all(Radius.circular(cornerRadius)),
@@ -369,7 +379,7 @@ class CommonUi {
   }
 
   static showErrorDialog(String title, String message,
-  {toastlength = 5, snackPosition = SnackPosition.BOTTOM, backToFirst = false}) {
+      {toastlength = 5, snackPosition = SnackPosition.BOTTOM, backToFirst = false}) {
     if(GetPlatform.isIOS){
       showCupertinoModalPopup<void>(
         context: Get.context!,
@@ -442,11 +452,11 @@ class CommonUi {
 
   static customAppBar(
       {title = "",
-      showLeading = false,
-      showAction = false,
-      actionIcon = "",
-      onLeadingPressed,
-      onActionPressed}) {
+        showLeading = false,
+        showAction = false,
+        actionIcon = "",
+        onLeadingPressed,
+        onActionPressed}) {
     return AppBar(
       backgroundColor: ColorRes.bluecolor,
       shape: const RoundedRectangleBorder(
@@ -458,8 +468,8 @@ class CommonUi {
       elevation: 0.0,
       leading: showLeading
           ? GestureDetector(
-              onTap: onLeadingPressed,
-              child: const Icon(Icons.arrow_back_ios_new_rounded))
+          onTap: onLeadingPressed,
+          child: const Icon(Icons.arrow_back_ios_new_rounded))
           : Container(),
       title: Text(
         title,
@@ -471,11 +481,11 @@ class CommonUi {
       actions: [
         showAction
             ? GestureDetector(
-                onTap: onActionPressed,
-                child: Container(
-                    margin: const EdgeInsets.only(right: 20),
-                    child: SvgPicture.asset(CommonUi.setSvgImage(actionIcon))),
-              )
+          onTap: onActionPressed,
+          child: Container(
+              margin: const EdgeInsets.only(right: 20),
+              child: SvgPicture.asset(CommonUi.setSvgImage(actionIcon))),
+        )
             : Container()
       ],
     );
@@ -533,7 +543,7 @@ class CommonUi {
           ),
         ),
         contentPadding:
-            const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+        const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
         hintStyle: CommonUi.customTextStyle(color: ColorRes.colorGreen),
         isDense: true,
         hintText: hintText.tr,
@@ -623,3 +633,7 @@ class CommonUi {
     );
   }
 }
+
+
+
+

@@ -14,7 +14,7 @@ class ForgotPassView extends StatelessWidget {
     var controller = ForgotPassController();
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      body: customLayout(
+      body: CommonUi.customLayout(
           title: Strings.forgotPass,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

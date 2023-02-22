@@ -18,7 +18,7 @@ class VerificationView extends StatelessWidget {
       builder: (controller) {
         return Scaffold(
           resizeToAvoidBottomInset: false,
-          body: customLayout(
+          body: CommonUi.customLayout(
               title: Strings.enterCode,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

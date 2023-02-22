@@ -101,7 +101,12 @@ class Strings {
 
 
 
+ /// Home Text.........
 
+  static String textSearchHint = 'Search action, business, industry...';
+  static String textForYou = 'For you';
+  static String textFilter = 'Filter';
+  static String textSuggestedBased = 'Suggested based on your profile interests.';
 
 
 
