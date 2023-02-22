@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ripplefect/helper/constants/CommonUi.dart';
 import 'package:ripplefect/helper/constants/fonts.dart';
+import 'package:ripplefect/helper/constants/strings.dart';
 import 'package:ripplefect/helper/routes/AppRoutes.dart';
 import '../controller/ForgotPassController.dart';
 
@@ -14,14 +15,14 @@ class ForgotPassView extends StatelessWidget {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: customLayout(
-          title: "Forgot Password",
+          title: Strings.forgotPass,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("Enter your email address below. We will send you a 6 digit code to verify your account.",
+              Text(Strings.enterYourEmail,
                 style: CommonUi.customTextStyle(),),
               const SizedBox(height: 30,),
-              Text("My Email", style: CommonUi.customTextStyle(
+              Text(Strings.myEmail, style: CommonUi.customTextStyle(
                   fontFamily: Fonts.semiBold, fontSize: FontSize.font20),),
               const SizedBox(height: 15,),
               TextFormField(
@@ -31,7 +32,7 @@ class ForgotPassView extends StatelessWidget {
               const SizedBox(height: 25,),
 
               const Spacer(),
-              CommonUi.customButton(buttonText:"Continue",fontSize:FontSize.font20,callBack: (){
+              CommonUi.customButton(buttonText:Strings.continueTxt,fontSize:FontSize.font20,callBack: (){
                 Get.toNamed(AppRoutes.verification);
 
               }),

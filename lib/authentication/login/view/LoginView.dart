@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:ripplefect/helper/constants/CommonUi.dart';
 import 'package:ripplefect/helper/constants/ColorRes.dart';
 import 'package:ripplefect/helper/constants/fonts.dart';
+import 'package:ripplefect/helper/constants/strings.dart';
 import 'package:ripplefect/helper/routes/AppRoutes.dart';
 import '../controller/LoginController.dart';
 class LoginView extends StatelessWidget {
@@ -15,25 +16,25 @@ class LoginView extends StatelessWidget {
       resizeToAvoidBottomInset: false,
       body: GetX<LoginController>(builder: (controller) {
         return customLayout(
-            title: "Log In",
+            title: Strings.login,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("My Email", style: CommonUi.customTextStyle(
+                Text(Strings.myEmail, style: CommonUi.customTextStyle(
                     fontFamily: Fonts.semiBold, fontSize: FontSize.font20),),
                 const SizedBox(height: 15,),
                 TextFormField(
                   controller: controller.emailField,
-                  decoration: CommonUi.textFieldDecoration(hintText: "Enter Email"),
+                  decoration: CommonUi.textFieldDecoration(hintText: Strings.enterEmail),
                 ),
                 const SizedBox(height: 25,),
-                Text("My Password", style: CommonUi.customTextStyle(
+                Text(Strings.myPass, style: CommonUi.customTextStyle(
                     fontFamily: Fonts.semiBold, fontSize: FontSize.font20),),
                 const SizedBox(height: 15,),
                 TextFormField(
                   controller: controller.passField,
                   obscureText: !controller.passVisible.value,
-                  decoration: CommonUi.textFieldDecoration(hintText: "Enter Password",
+                  decoration: CommonUi.textFieldDecoration(hintText: Strings.enterPass,
                       isPass: true,passwordVisible: controller.passVisible),
                 ),
                 const SizedBox(height: 10,),
@@ -44,7 +45,7 @@ class LoginView extends StatelessWidget {
                   child: Container(
                     padding: const EdgeInsets.only(left: 10,top: 10,bottom: 10),
                     alignment: Alignment.centerRight,
-                    child: Text("Forgot my password?", style: CommonUi.customTextStyle(
+                    child: Text(Strings.forgotMyPass, style: CommonUi.customTextStyle(
                         fontFamily: Fonts.medium, fontSize: FontSize.font12,color: ColorRes.greyColor),),
                   ),
                 ),
@@ -53,15 +54,15 @@ class LoginView extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    CommonUi.customButton(buttonText:"Login",fontSize:FontSize.font20,callBack: (){
+                    CommonUi.customButton(buttonText:Strings.login,fontSize:FontSize.font20,callBack: (){
                       // Get.toNamed(AppRoutes.home);
 
                     }),
                     const SizedBox(height: 20,),
-                    Text("OR", style: CommonUi.customTextStyle(
+                    Text(Strings.or, style: CommonUi.customTextStyle(
                         fontFamily: Fonts.bold,color: ColorRes.greyColor),),
                     const SizedBox(height: 20,),
-                    Text("Login using", style: CommonUi.customTextStyle(
+                    Text(Strings.loginUsing, style: CommonUi.customTextStyle(
                         fontFamily: Fonts.bold,color: ColorRes.greyColor),),
                     const SizedBox(height: 5,),
                     Wrap(

@@ -76,14 +76,14 @@ class CommonUi {
         color: color);
   }
 
-  static GestureDetector customButton({String buttonText = "Next",fontSize =FontSize.font22,Function? callBack}) {
+  static GestureDetector customButton({String buttonText = "Next",fontSize =FontSize.font22,padding=12.0,Function? callBack}) {
     return GestureDetector(
       onTap: () {
         callBack?.call();
 
       },
       child: Container(
-        padding: const EdgeInsets.only(top: 12,bottom: 12),
+        padding: EdgeInsets.only(top: padding,bottom: padding),
         width: Get.width,
         decoration: CommonUi.curvedBoxDecoration(backgroundColor: ColorRes.buttonColor),
         child: Center(child: Text(buttonText,style: CommonUi.customButtonTextStyle(fontSize: fontSize),)),

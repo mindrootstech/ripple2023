@@ -4,6 +4,7 @@ import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:ripplefect/helper/constants/CommonUi.dart';
 import 'package:ripplefect/helper/constants/ColorRes.dart';
 import 'package:ripplefect/helper/constants/fonts.dart';
+import 'package:ripplefect/helper/constants/strings.dart';
 import 'package:ripplefect/helper/routes/AppRoutes.dart';
 
 import '../controller/VerificationController.dart';
@@ -18,11 +19,11 @@ class VerificationView extends StatelessWidget {
         return Scaffold(
           resizeToAvoidBottomInset: false,
           body: customLayout(
-              title: "Enter Code",
+              title: Strings.enterCode,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("Enter the code that you have received in your email.",
+                  Text(Strings.enterCodeEmail,
                     style: CommonUi.customTextStyle(),),
                   const SizedBox(height: 30,),
                   PinCodeTextField(
@@ -69,13 +70,13 @@ class VerificationView extends StatelessWidget {
                   Container(
                     alignment: Alignment.center,
                     margin: const EdgeInsets.only(bottom: 50),
-                    child: Text("Resend passcode after 00:25",
+                    child: Text(Strings.resentAfter+" 00:25",
                       style: CommonUi.customTextStyle(fontSize: FontSize.font14,
                           decoration: TextDecoration.underline,
                       fontFamily: Fonts.bold,
                       color: ColorRes.greyColor),),
                   ),
-                  CommonUi.customButton(buttonText:"Continue",fontSize:FontSize.font20,callBack: (){
+                  CommonUi.customButton(buttonText:Strings.continueTxt,fontSize:FontSize.font20,callBack: (){
                     Get.toNamed(AppRoutes.resetPass);
 
                   }),

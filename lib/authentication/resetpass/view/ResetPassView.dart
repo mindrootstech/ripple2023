@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ripplefect/helper/constants/CommonUi.dart';
 import 'package:ripplefect/helper/constants/fonts.dart';
+import 'package:ripplefect/helper/constants/strings.dart';
 import 'package:ripplefect/helper/routes/AppRoutes.dart';
 import '../controller/ResetPassController.dart';
 
@@ -15,39 +16,39 @@ class ResetPassView extends StatelessWidget {
       body: GetX<ResetPassController>(
         builder: (controller) {
           return customLayout(
-              title: "Reset Password",
+              title: Strings.resetPass,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Enter your email address below. We will send you a 6 digit code to verify your account.",
+                    Strings.enterYourEmail,
                     style: CommonUi.customTextStyle(),),
                   const SizedBox(height: 30,),
 
-                  Text("Create Password", style: CommonUi.customTextStyle(
+                  Text(Strings.createPass, style: CommonUi.customTextStyle(
                       fontFamily: Fonts.semiBold, fontSize: FontSize.font20),),
                   const SizedBox(height: 15,),
                   TextFormField(
                     controller: controller.currentField,
                     obscureText: !controller.currentVisible.value,
-                    decoration: CommonUi.textFieldDecoration(hintText: "Enter Password",
+                    decoration: CommonUi.textFieldDecoration(hintText: Strings.enterPass,
                         isPass: true,passwordVisible: controller.currentVisible),
                   ),
 
                   const SizedBox(height: 25,),
 
-                  Text("Confirm Password", style: CommonUi.customTextStyle(
+                  Text(Strings.confirmPass, style: CommonUi.customTextStyle(
                       fontFamily: Fonts.semiBold, fontSize: FontSize.font20),),
                   const SizedBox(height: 15,),
                   TextFormField(
                     controller: controller.confirmField,
                     obscureText: !controller.confirmVisible.value,
-                    decoration: CommonUi.textFieldDecoration(hintText: "Confirm Password",
+                    decoration: CommonUi.textFieldDecoration(hintText: Strings.confirmPass,
                         isPass: true,passwordVisible: controller.confirmVisible),
                   ),
 
                   const Spacer(),
-                  CommonUi.customButton(buttonText:"Continue",fontSize:FontSize.font20,callBack: (){
+                  CommonUi.customButton(buttonText:Strings.continueTxt,fontSize:FontSize.font20,callBack: (){
                     Get.offAllNamed(AppRoutes.login);
 
                   }),

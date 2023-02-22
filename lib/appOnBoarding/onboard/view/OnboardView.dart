@@ -61,7 +61,7 @@ class OnboardView extends StatelessWidget {
                     const SizedBox(
                       height: 50,
                     ),
-                    CommonUi.customButton(buttonText: controller.pageNo.value == 3 ? "Continue" : "Next",callBack: () {
+                    CommonUi.customButton(buttonText: controller.pageNo.value == 3 ? Strings.continueTxt : Strings.next,callBack: () {
                       controller.pageController.value.animateToPage(
                           controller.pageNo.value + 1,
                           duration: const Duration(milliseconds: 200),
@@ -85,11 +85,11 @@ class OnboardView extends StatelessWidget {
                           TextSpan(
                             children: [
                               TextSpan(
-                                text: 'Already have an account? ',
+                                text: Strings.alreadyAccount,
                                 style: CommonUi.customTextStyle(),
                               ),
                               TextSpan(
-                                text: 'Login',
+                                text: Strings.login,
                                 style: CommonUi.customTextStyle(
                                     color: ColorRes.buttonColor,
                                     decoration:

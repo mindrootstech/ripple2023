@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:ripplefect/helper/constants/strings.dart';
 import '../model/OnboardModel.dart';
 
 class OnboardGoalController extends GetxController{
@@ -8,40 +9,40 @@ class OnboardGoalController extends GetxController{
   var progressValue = 0.25.obs;
   var pageNo = 1.obs;
 
-  var titles = ["What is your why?","What your want to do more?","Pick a goal"].obs;
+  var titles = [Strings.whatIsWhy,Strings.whatYourWant,Strings.pickGoal].obs;
   var titleNumber = 0.obs;
 
   var type = 1;
   var yourWayList_1 = [
-    GoalOnboardModel("Our Children","children",true.obs),
-    GoalOnboardModel("My health","health",false.obs),
-    GoalOnboardModel("A loved area affected","area",false.obs),
-    GoalOnboardModel("To influence accountability","magnet",false.obs),
-    GoalOnboardModel("My faith","faith",false.obs),
-    GoalOnboardModel("Love for the ocean","ocean",false.obs),
-    GoalOnboardModel("Preservation of nature","nature",false.obs),
-    GoalOnboardModel("Animals","animal",false.obs),
+    GoalOnboardModel(Strings.outChildren,"children",true.obs),
+    GoalOnboardModel(Strings.myHealth,"health",false.obs),
+    GoalOnboardModel(Strings.aLovedArea,"area",false.obs),
+    GoalOnboardModel(Strings.toInfluence,"magnet",false.obs),
+    GoalOnboardModel(Strings.myFaith,"faith",false.obs),
+    GoalOnboardModel(Strings.loveFor,"ocean",false.obs),
+    GoalOnboardModel(Strings.preservationNature,"nature",false.obs),
+    GoalOnboardModel(Strings.animals,"animal",false.obs),
   ].obs;
 
 
   var moreList_2 = [
-    GoalOnboardModel("Eat sustainably","eat",false.obs),
-    GoalOnboardModel("Get around greener","learn",false.obs),
-    GoalOnboardModel("Shop mindfully","area",false.obs),
-    GoalOnboardModel("Reduce my waste","recycle",true.obs),
-    GoalOnboardModel("Protect living things","faith",false.obs),
-    GoalOnboardModel("Advocate","advocate",false.obs),
-    GoalOnboardModel("Restoration of nature","restore_nature",false.obs),
-    GoalOnboardModel("Heat and cool smarter","cool",false.obs),
-    GoalOnboardModel("Learn and Share","learn",false.obs),
+    GoalOnboardModel(Strings.eatSustainably,"eat",false.obs),
+    GoalOnboardModel(Strings.getAround,"learn",false.obs),
+    GoalOnboardModel(Strings.shopMindFul,"area",false.obs),
+    GoalOnboardModel(Strings.reduceWaste,"recycle",true.obs),
+    GoalOnboardModel(Strings.protectLiving,"faith",false.obs),
+    GoalOnboardModel(Strings.advocate,"advocate",false.obs),
+    GoalOnboardModel(Strings.restoration,"restore_nature",false.obs),
+    GoalOnboardModel(Strings.heatAndCool,"cool",false.obs),
+    GoalOnboardModel(Strings.learnShare,"learn",false.obs),
   ].obs;
 
 
   var goalList_3 = [
-    GoalOnboardModel("Casual","eat",false.obs,action: "1 action / wk"),
-    GoalOnboardModel("Regular","eat",false.obs,action: "2 actions / wk"),
-    GoalOnboardModel("Serious","eat",false.obs,action: "4 actions / wk"),
-    GoalOnboardModel("Intense","eat",false.obs,action: "7 actions / wk"),
+    GoalOnboardModel(Strings.casual,"eat",false.obs,action: "1 action / wk"),
+    GoalOnboardModel(Strings.regular,"eat",false.obs,action: "2 actions / wk"),
+    GoalOnboardModel(Strings.serious,"eat",false.obs,action: "4 actions / wk"),
+    GoalOnboardModel(Strings.intense,"eat",false.obs,action: "7 actions / wk"),
   ].obs;
 
 }

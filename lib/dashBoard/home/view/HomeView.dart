@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -128,7 +129,6 @@ class HomeView extends StatelessWidget {
                       ],
                     ),
                   ),
-
                   Container(
                     margin: const EdgeInsets.only(top: 18,bottom: 16),
                     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 13),
@@ -158,7 +158,6 @@ class HomeView extends StatelessWidget {
                       ],
                     ),
                   ),
-
                   Text(
                     "Featured Challenges",
                     style: CommonUi.customTextStyle(
@@ -166,19 +165,100 @@ class HomeView extends StatelessWidget {
                         fontFamily: Fonts.bold,
                         color: Colors.white),
                   ),
-                  Stack(
-                    children: [
-                      SizedBox(
-                        height: 300,
-                        child: PageViewJ(
-                          itemCount: welcomeColors.length,
-                          modifier: const Modifier(viewportFraction: .73,padEnds: false,
-                              scrollDirection: Axis.horizontal),
-                          transform: StackTransform(),
-                          itemBuilder: pageViewItem,
+                  SizedBox(height: 15,),
+
+                  CarouselSlider.builder(
+                    options: CarouselOptions(
+                      height: 300,
+                      aspectRatio: 16 / 9,
+                      viewportFraction: 0.8,
+                      initialPage: 0,
+                      enableInfiniteScroll: true,
+                      reverse: false,
+                      autoPlay: false,
+                      autoPlayInterval: const Duration(seconds: 3),
+                      autoPlayAnimationDuration: const Duration(milliseconds: 800),
+                      autoPlayCurve: Curves.fastOutSlowIn,
+                      enlargeCenterPage: true,
+                      enlargeFactor: 0.2,
+                      scrollDirection: Axis.horizontal,
+                    ),
+                    itemCount: controller.modelList.length,
+                    itemBuilder: (BuildContext context, int itemIndex, int pageViewIndex) =>
+                        Stack(
+                          children: [
+                            Column(
+                              children: [
+                                Expanded(
+                                  // child: ClipRRect(
+                                  //   borderRadius: BorderRadius.only(topLeft: Radius.circular(20),topRight: Radius.circular(20)),
+                                  //   child: Image.network("https://images.pexels.com/photos/60597/dahlia-red-blossom-bloom-60597.jpeg"),
+                                  // ),
+                                  child: SizedBox(
+                                    width: Get.width,
+                                    child: ClipRRect(
+                                      borderRadius: const BorderRadius.only(topLeft: Radius.circular(20),topRight: Radius.circular(20)),
+                                    child: Image.network(
+                                        "https://images.pexels.com/photos/60597/dahlia-red-blossom-bloom-60597.jpeg",
+                                        fit: BoxFit.cover,
+                                        loadingBuilder: (BuildContext context, Widget child,
+                                            ImageChunkEvent? loadingProgress){
+                                          if (loadingProgress == null) return child;
+                                          return  Center(
+                                            child: CircularProgressIndicator(
+                                              color: Colors.white70,
+                                              value: loadingProgress.expectedTotalBytes != null
+                                                  ? loadingProgress.cumulativeBytesLoaded /
+                                                  loadingProgress.expectedTotalBytes!
+                                                  : null,
+                                            ),
+                                          );
+                                        },
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Container(
+                                  decoration: const BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.only(bottomRight: Radius.circular(20),bottomLeft: Radius.circular(20))
+                                  ),
+                                  padding: const EdgeInsets.all(14),
+                                  child: Column(
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Image.asset(CommonUi.setPngImage("demo")),
+                                          const SizedBox(width: 10,),
+                                          Expanded(
+                                            child: Column(
+                                              children: [
+                                                Text("The Vegan Meal Challenge",style: CommonUi.customTextStyle(fontFamily: Fonts.bold,fontSize: 14),),
+                                                const SizedBox(height: 5,),
+                                                Text("Nov 20, 2022 to Jan 20, 2023",style: CommonUi.customTextStyle(fontSize: 13)),
+                                              ],
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                      const SizedBox(height: 10,),
+                                      Text("Focus on what you eat, reduce food waste, make more sustainable food choices",style: CommonUi.customTextStyle(fontFamily: Fonts.bold,fontSize: 14),),
+                                      Padding(
+                                        padding: const EdgeInsets.only(left: 30,right: 30,top: 8),
+                                        child: CommonUi.customButton(buttonText: "Join Challenge",fontSize: FontSize.font14,padding: 10.0),
+                                      )
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                            Container(
+                              alignment: Alignment.topRight,
+                              padding: EdgeInsets.only(right: 5,top: 5),
+                              child: Image.asset(CommonUi.setPngImage("heart"),height: 25,width: 25,),
+                            )
+                          ],
                         ),
-                      ),
-                    ],
                   ),
 
                 ],

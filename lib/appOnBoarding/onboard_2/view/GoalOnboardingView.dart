@@ -5,6 +5,7 @@ import 'package:ripplefect/appOnBoarding/onboard_2/controller/OnboardGoalControl
 import 'package:ripplefect/helper/constants/CommonUi.dart';
 import 'package:ripplefect/helper/constants/ColorRes.dart';
 import 'package:ripplefect/helper/constants/fonts.dart';
+import 'package:ripplefect/helper/constants/strings.dart';
 import '../../../helper/routes/AppRoutes.dart';
 
 class GoalOnboardingView extends StatelessWidget {
@@ -70,7 +71,7 @@ class GoalOnboardingView extends StatelessWidget {
 
                   const SizedBox(height: 10,),
 
-                  CommonUi.customButton(buttonText:"Continue",fontSize:FontSize.font20,callBack: (){
+                  CommonUi.customButton(buttonText:Strings.continueTxt,fontSize:FontSize.font20,callBack: (){
                     movePage(controller);
                     if(controller.titleNumber.value==2){
                       Get.toNamed(AppRoutes.completeOnBoard);

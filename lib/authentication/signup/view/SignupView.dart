@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:ripplefect/helper/constants/CommonUi.dart';
 import 'package:ripplefect/helper/constants/ColorRes.dart';
 import 'package:ripplefect/helper/constants/fonts.dart';
+import 'package:ripplefect/helper/constants/strings.dart';
 import '../../../helper/routes/AppRoutes.dart';
 import '../controller/SignupController.dart';
 
@@ -15,41 +16,41 @@ class SignupView extends StatelessWidget {
       resizeToAvoidBottomInset: false,
       body: GetX<SignupController>(builder: (controller) {
         return customLayout(
-            title: "Create account",
+            title: Strings.createAccount,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("My  Name", style: CommonUi.customTextStyle(
+                Text(Strings.myName, style: CommonUi.customTextStyle(
                     fontFamily: Fonts.semiBold, fontSize: FontSize.font20),),
                 const SizedBox(height: 15,),
                 TextFormField(
-                  decoration: CommonUi.textFieldDecoration(hintText: "Full Name"),
+                  decoration: CommonUi.textFieldDecoration(hintText: Strings.fullName),
                 ),
                 const SizedBox(height: 25,),
-                Text("My Email", style: CommonUi.customTextStyle(
+                Text(Strings.myEmail, style: CommonUi.customTextStyle(
                     fontFamily: Fonts.semiBold, fontSize: FontSize.font20),),
                 const SizedBox(height: 15,),
                 TextFormField(
-                  decoration: CommonUi.textFieldDecoration(hintText: "Email Address"),
+                  decoration: CommonUi.textFieldDecoration(hintText: Strings.emailAddress),
                 ),
                 const SizedBox(height: 50,),
-                Text("Setup my password", style: CommonUi.customTextStyle(
+                Text(Strings.setUpPass, style: CommonUi.customTextStyle(
                     fontFamily: Fonts.semiBold, fontSize: FontSize.font20),),
                 const SizedBox(height: 15,),
                 TextFormField(
                   obscureText: !controller.passVisible.value,
-                  decoration: CommonUi.textFieldDecoration(hintText: "Create Password",
+                  decoration: CommonUi.textFieldDecoration(hintText: Strings.createPass,
                       isPass: true,passwordVisible: controller.passVisible),
                 ),
                 const SizedBox(height: 10,),
-                Text("Password must contain atleast 8 characters", style: CommonUi.customTextStyle(
+                Text(Strings.passMustContain, style: CommonUi.customTextStyle(
                     fontFamily: Fonts.medium, fontSize: FontSize.font12,color: ColorRes.greyColor),),
                 const Spacer(),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("By continuing you accept our Terms of Service and Privacy Policy.",textAlign: TextAlign.center,
+                    Text(Strings.acceptTerms,textAlign: TextAlign.center,
                       style: CommonUi.customTextStyle(
                         fontFamily: Fonts.medium, fontSize: FontSize.font12,color: ColorRes.lightTextColor),),
                     const SizedBox(height: 15,),
@@ -61,7 +62,7 @@ class SignupView extends StatelessWidget {
                       onTap: (){
                         Get.toNamed(AppRoutes.login);
                       },
-                      child: Text("Do it later", style: CommonUi.customTextStyle(
+                      child: Text(Strings.doLater, style: CommonUi.customTextStyle(
                           fontFamily: Fonts.bold,color: ColorRes.greyColor),),
                     ),
                     const SizedBox(height: 20,),
