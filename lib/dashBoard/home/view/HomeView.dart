@@ -313,6 +313,7 @@ class HomeView extends StatelessWidget {
                  SvgPicture.asset(CommonUi.setSvgImage('filter_icon')),
                  Text(Strings.textFilter,style:CommonUi.customTextStyle(fontSize: 13,fontFamily: Fonts.bold),),
                  const Icon(Icons.arrow_drop_down_sharp)
+
                ],
              ),
            ),
