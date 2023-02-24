@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-import '../controller/OnboardController.dart';
+import '../controller/OnBoardController.dart';
 
 class OnboardBinding extends Bindings{
 

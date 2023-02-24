@@ -10,7 +10,7 @@ import '../model/OnboardModel.dart';
 
 class GoalPageItem extends StatelessWidget {
   var type = 0;
-  RxList<GoalOnboardModel> list;
+  RxList<Goal> list;
 
   GoalPageItem(this.type, this.list, {super.key});
 
@@ -38,7 +38,7 @@ class GoalPageItem extends StatelessWidget {
                         list[i].isSelected.value = false;
                       }
                     }
-                    model.isSelected.value = !model.isSelected.value;
+                    model.isSelected.value =  !model.isSelected.value;
                   },
                   child: Obx(() {
                     return Container(
@@ -71,9 +71,9 @@ class GoalPageItem extends StatelessWidget {
                                 right: 8),
                             child: type != 3 ? Row(
                               children: [
-                                SvgPicture.asset(CommonUi.setSvgImage(model.img)),
+                                SvgPicture.asset("${model.icon}.svg"??''),
                                 const SizedBox(width: 28,),
-                                Text(model.title, style: CommonUi.customTextStyle(
+                                Text(model.name, style: CommonUi.customTextStyle(
                                     color: model.isSelected.value
                                         ? ColorRes.bluecolor
                                         : ColorRes.colorBlack,
@@ -83,12 +83,12 @@ class GoalPageItem extends StatelessWidget {
                             ) : Row(
                               children: [
                                 const SizedBox(width: 12,),
-                                Text(model.title, style: CommonUi.customTextStyle(
+                                Text(model.name, style: CommonUi.customTextStyle(
                                     color: ColorRes.colorBlack,
                                     fontFamily: Fonts.bold,
                                     fontSize: FontSize.font20),),
                                 const Spacer(),
-                                Text(model.action!,style: CommonUi.customTextStyle(
+                                Text(model.limits!,style: CommonUi.customTextStyle(
                                   fontSize: FontSize.font20,
                                   fontFamily: Fonts.medium
                                 ),),

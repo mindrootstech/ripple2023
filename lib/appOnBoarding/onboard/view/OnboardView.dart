@@ -6,7 +6,7 @@ import 'package:ripplefect/helper/constants/strings.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../../helper/routes/AppRoutes.dart';
 import '../component/PageViewItem.dart';
-import '../controller/OnboardController.dart';
+import '../controller/OnBoardController.dart';
 
 class OnboardView extends StatelessWidget {
   const OnboardView({Key? key}) : super(key: key);
@@ -28,7 +28,7 @@ class OnboardView extends StatelessWidget {
                 onPageChanged: (value) {
                   controller.pageNo.value = value;
                 },
-                controller: controller.pageController.value,
+                controller: controller.pControllers[0],
                 children: <Widget>[
                   PageViewItem(Strings.onboard_1Title.tr,
                       Strings.onboard_1Desc.tr, Strings.onboard_1Image),
@@ -47,7 +47,7 @@ class OnboardView extends StatelessWidget {
                 child: Column(
                   children: [
                     SmoothPageIndicator(
-                        controller: controller.pageController.value,
+                        controller: controller.pControllers[0],
                         count: 4,
                         effect: const SlideEffect(
                             spacing: 12,
@@ -62,7 +62,7 @@ class OnboardView extends StatelessWidget {
                       height: 50,
                     ),
                     CommonUi.customButton(buttonText: controller.pageNo.value == 3 ? Strings.continueTxt : Strings.next,callBack: () {
-                      controller.pageController.value.animateToPage(
+                      controller.pControllers[0].animateToPage(
                           controller.pageNo.value + 1,
                           duration: const Duration(milliseconds: 200),
                           curve: Curves.linear);

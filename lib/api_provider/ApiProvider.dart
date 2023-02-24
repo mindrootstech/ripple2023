@@ -131,6 +131,21 @@ class ApiProvider extends GetConnect {
     }
   }
 
+  Future<String> onBoardingApi() async {
+    try {
+      final response = await client.get(Uri.parse("$baseUrl/one-time-data"));
+      if (response.statusCode == 200) {
+        return response.body;
+      } else {
+        return response.body;
+      }
+    } catch (e) {
+      return 'error';
+    }
+  }
+
+
+
 
 
 }

@@ -6,7 +6,7 @@ import 'package:ripplefect/helper/constants/ColorRes.dart';
 import 'package:ripplefect/helper/constants/fonts.dart';
 import 'package:ripplefect/helper/constants/strings.dart';
 import '../../../helper/routes/AppRoutes.dart';
-import '../controller/OnboardController.dart';
+import '../controller/OnBoardController.dart';
 
 class GoalOnBoardingView extends StatelessWidget {
   const GoalOnBoardingView({Key? key}) : super(key: key);
@@ -59,7 +59,7 @@ class GoalOnBoardingView extends StatelessWidget {
                         controller.titleNumber.value = value;
                         controller.goalPageNo.value = value+1;
                       },
-                      controller: controller.pageController.value,
+                      controller: controller.pControllers[1],
                       children: <Widget>[
                         GoalPageItem(1,controller.yourWayList_1),
                         GoalPageItem(2,controller.moreList_2),
@@ -98,7 +98,7 @@ class GoalOnBoardingView extends StatelessWidget {
     if(controller.goalPageNo.value == 2){
       controller.progressValue.value = 1.0;
     }
-    controller.pageController.value.animateToPage(controller.goalPageNo.value,
+   controller.pControllers[1].animateToPage(controller.goalPageNo.value,
     duration: const Duration(milliseconds: 400),
     curve: Curves.easeIn
     );
