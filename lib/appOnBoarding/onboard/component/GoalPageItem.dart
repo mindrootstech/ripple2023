@@ -7,6 +7,7 @@ import 'package:ripplefect/helper/constants/fonts.dart';
 
 import '../model/OnboardModel.dart';
 
+
 class GoalPageItem extends StatelessWidget {
   var type = 0;
   RxList<GoalOnboardModel> list;

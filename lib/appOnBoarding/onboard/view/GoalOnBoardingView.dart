@@ -1,26 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ripplefect/appOnBoarding/onboard_2/component/GoalPageItem.dart';
-import 'package:ripplefect/appOnBoarding/onboard_2/controller/OnboardGoalController.dart';
+import 'package:ripplefect/appOnBoarding/onboard/component/GoalPageItem.dart';
 import 'package:ripplefect/helper/constants/CommonUi.dart';
 import 'package:ripplefect/helper/constants/ColorRes.dart';
 import 'package:ripplefect/helper/constants/fonts.dart';
 import 'package:ripplefect/helper/constants/strings.dart';
 import '../../../helper/routes/AppRoutes.dart';
+import '../controller/OnboardController.dart';
 
-class GoalOnboardingView extends StatelessWidget {
-  const GoalOnboardingView({Key? key}) : super(key: key);
+class GoalOnBoardingView extends StatelessWidget {
+  const GoalOnBoardingView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: GetX<OnboardGoalController>(
+      body: GetX<OnboardController>(
         builder: (controller) {
           return WillPopScope(
             onWillPop: () async {
               var back = true;
-              if(controller.pageNo.value != 1){
-                controller.pageNo.value=controller.pageNo.value-2;
+              if(controller.goalPageNo.value != 1){
+                controller.goalPageNo.value=controller.goalPageNo.value-2;
                 movePage(controller);
                 back = false;
               }
@@ -29,8 +29,8 @@ class GoalOnboardingView extends StatelessWidget {
             child: CommonUi.customLayout(
               title: controller.titles.value[controller.titleNumber.value],
               onBack: (){
-                if(controller.pageNo.value != 1){
-                  controller.pageNo.value=controller.pageNo.value-2;
+                if(controller.goalPageNo.value != 1){
+                  controller.goalPageNo.value=controller.goalPageNo.value-2;
                   movePage(controller);
                   return;
                 }
@@ -57,7 +57,7 @@ class GoalOnboardingView extends StatelessWidget {
                       physics: const NeverScrollableScrollPhysics(),
                       onPageChanged: (value) {
                         controller.titleNumber.value = value;
-                        controller.pageNo.value = value+1;
+                        controller.goalPageNo.value = value+1;
                       },
                       controller: controller.pageController.value,
                       children: <Widget>[
@@ -88,17 +88,17 @@ class GoalOnboardingView extends StatelessWidget {
     );
   }
 
-  void movePage(OnboardGoalController controller) {
-    if(controller.pageNo.value == 0){
+  void movePage(OnboardController controller) {
+    if(controller.goalPageNo.value == 0){
       controller.progressValue.value = 0.25;
     }
-    if(controller.pageNo.value == 1){
+    if(controller.goalPageNo.value == 1){
       controller.progressValue.value = 0.50;
     }
-    if(controller.pageNo.value == 2){
+    if(controller.goalPageNo.value == 2){
       controller.progressValue.value = 1.0;
     }
-    controller.pageController.value.animateToPage(controller.pageNo.value,
+    controller.pageController.value.animateToPage(controller.goalPageNo.value,
     duration: const Duration(milliseconds: 400),
     curve: Curves.easeIn
     );

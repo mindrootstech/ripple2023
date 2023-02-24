@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
 import 'ColorRes.dart';
@@ -60,6 +61,7 @@ class CommonUi {
               ],
             ),
           ),
+
         ]);
   }
 
@@ -632,6 +634,18 @@ class CommonUi {
       ],
     );
   }
+
+  static showToast(String message) {
+    return Fluttertoast.showToast(
+        msg: message.tr,
+        toastLength: Toast.LENGTH_LONG,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 3,
+        backgroundColor: ColorRes.onboardIndicatorNonActiveColor,
+        textColor: Colors.black,
+        fontSize: 16.0);
+  }
+
 }
 
 
