@@ -210,7 +210,10 @@ class CommonUi {
   }
 
   static textFieldDecoration(
-      {outlineColor = ColorRes.textFieldOutlineColor,
+      {
+        outlineColor = ColorRes.textFieldOutlineColor,
+        errorColor = ColorRes.colorRed,
+        focusColor = ColorRes.bluecolor,
         cornerRadius = 4.0,
         hintText = "",
         fillColor = ColorRes.white,
@@ -234,7 +237,7 @@ class CommonUi {
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.all(Radius.circular(cornerRadius)),
         borderSide: BorderSide(
-          color: outlineColor,
+          color: focusColor,
         ),
       ),
       enabledBorder: OutlineInputBorder(
@@ -246,7 +249,7 @@ class CommonUi {
       errorBorder: OutlineInputBorder(
         borderRadius: BorderRadius.all(Radius.circular(cornerRadius)),
         borderSide: BorderSide(
-          color: outlineColor,
+          color: errorColor,
         ),
       ),
       disabledBorder: OutlineInputBorder(

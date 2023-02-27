@@ -17,6 +17,7 @@ class ColorRes {
   static const Color colorWhiteGrey = Color.fromRGBO(236, 236, 236, 1.0);
   static const Color colorBlack = Colors.black;
   static const Color colorBlack2 = Color.fromRGBO(0, 0, 0, 0.6588235294117647);
+  static const Color colorRed = Color.fromRGBO(246, 34, 34, 0.6588235294117647);
   static const Color colorGreen =   Colors.green;
   static const Color colorOrange = Colors.orange;
   static const Color progressColor = Color.fromRGBO(0, 0, 0, 0.5764705882352941);

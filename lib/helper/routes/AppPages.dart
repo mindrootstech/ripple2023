@@ -26,7 +26,7 @@ class AppPages {
     GetPage(name: AppRoutes.onBoard, page: () => const OnboardView(), binding: OnboardBinding()),
     GetPage(name: AppRoutes.goalOnBoard, page: () => const GoalOnBoardingView()),
     GetPage(name: AppRoutes.completeOnBoard, page: () => const CompleteOnboardView(),arguments: CompleteOnboardBinding()),
-    GetPage(name: AppRoutes.signup, page: () => const SignupView(),binding: AuthBinding()),
+    GetPage(name: AppRoutes.signup, page: () =>  SignupView(),binding: AuthBinding()),
     GetPage(name: AppRoutes.login, page: () => const LoginView(),binding: AuthBinding()),
     GetPage(name: AppRoutes.forgotPass, page: () => const ForgotPassView()),
     GetPage(name: AppRoutes.verification, page: () => const VerificationView()),

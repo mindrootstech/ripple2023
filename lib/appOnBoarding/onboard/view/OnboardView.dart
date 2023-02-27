@@ -24,17 +24,7 @@ class OnboardView extends StatelessWidget {
           backgroundColor: Colors.white,
           body: Stack(
             children: [
-            GifImage(
-            height: Get.height,
-            fit: BoxFit.cover,
-            image: const AssetImage("assets/images/mygif.gif"),
-            controller: controller.animationCtrl,
-             ),
-              Container(
-                height: Get.height,
-                width: Get.width,
-                color: Colors.white,
-              ),
+
               PageView(
                 physics: const ClampingScrollPhysics(),
                 onPageChanged: (value) {

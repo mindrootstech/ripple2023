@@ -19,7 +19,8 @@ class FontSize
   static const font13 = 13.0;
   static const font14 = 14.0;
   static const font16 = 16.0;
-  static const font20 = 18.0;
+  static const font18 = 18.0;
+  static const font20 = 20.0;
   static const font22 = 24.0;
   static const font26 = 24.0;
   static const font28 = 26.0;

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gif/flutter_gif.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 import 'package:ripplefect/helper/constants/CommonUi.dart';
 import 'package:ripplefect/helper/constants/ColorRes.dart';
 import 'package:ripplefect/helper/constants/fonts.dart';
@@ -46,13 +47,19 @@ class _GifLoderState extends State<CompleteOnboardView> with SingleTickerProvide
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text("Congratulations! ", style: CommonUi.customTextStyle(
-                    fontFamily: Fonts.bold,color: ColorRes.white,fontSize: FontSize.font32),),
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: CommonUi.marginLeftRight),
+                  child: Text("Congratulations! ", style: CommonUi.customTextStyle(
+                      fontFamily: Fonts.bold,color: ColorRes.white,fontSize: FontSize.font32),),
+                ),
                 const SizedBox(height: 15,),
-                Text("You just earned 20 points for completing onboarding. Create an account to claim your reward!",
-                  textAlign: TextAlign.center,
-                  style: CommonUi.customTextStyle(
-                      fontFamily: Fonts.bold,color: ColorRes.white,fontSize: FontSize.font20),),
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: CommonUi.marginLeftRight),
+                  child: Text("You just earned 20 points for completing onboarding. Create an account to claim your reward!",
+                    textAlign: TextAlign.center,
+                    style: CommonUi.customTextStyle(
+                        fontFamily: Fonts.semiBold,color: ColorRes.white,fontSize: FontSize.font20),),
+                ),
                 const SizedBox(height: 40,),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -90,11 +97,12 @@ class _GifLoderState extends State<CompleteOnboardView> with SingleTickerProvide
     );
   }
   Widget _buildGif(){
-    return GifImage(
-      height: Get.height,
-      fit: BoxFit.cover,
-      image: const AssetImage("assets/images/mygif.gif"),
-      controller: _animationCtrl,
+    return Container(
+
+      child: Lottie.asset('assets/lottie/complete_lottie.json',height: Get.height,
+        width: Get.width,
+        alignment: Alignment.center
+   ),
     );
   }
 }
