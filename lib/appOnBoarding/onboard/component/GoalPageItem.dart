@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -87,21 +88,29 @@ class GoalPageItem extends StatelessWidget {
                             child: type != 3 ? Row(
                               children: [
                                 SvgPicture.string(model.icon??''),
-                                const SizedBox(width: 28,),
-                                Text(model.name, style: CommonUi.customTextStyle(
-                                    color: model.isSelected.value
-                                        ? ColorRes.bluecolor
-                                        : ColorRes.colorBlack,
-                                    fontFamily: Fonts.bold,
-                                    fontSize: FontSize.font20),)
+                                const SizedBox(width: 22,),
+                                Expanded(
+                                  child: AutoSizeText(model.name,
+                                    maxLines: 1,
+                                    style: CommonUi.customTextStyle(
+                                      color: model.isSelected.value
+                                          ? ColorRes.bluecolor
+                                          : ColorRes.colorBlack,
+                                      fontFamily: Fonts.semiBold,
+                                      fontSize: FontSize.font20),),
+                                )
                               ],
                             ) : Row(
                               children: [
                                 const SizedBox(width: 12,),
-                                Text(model.name, style: CommonUi.customTextStyle(
-                                    color: ColorRes.colorBlack,
-                                    fontFamily: Fonts.bold,
-                                    fontSize: FontSize.font20),),
+                                Expanded(
+                                  child: AutoSizeText(model.name,
+                                    maxLines: 1,
+                                    style: CommonUi.customTextStyle(
+                                      color: ColorRes.colorBlack,
+                                      fontFamily: Fonts.semiBold,
+                                      fontSize: FontSize.font20),),
+                                ),
                                 const Spacer(),
                                 Text(model.limits!,style: CommonUi.customTextStyle(
                                   fontSize: FontSize.font20,
