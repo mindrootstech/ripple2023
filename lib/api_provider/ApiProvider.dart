@@ -106,7 +106,7 @@ class ApiProvider extends GetConnect {
       final response = await client.post(Uri.parse("$baseUrl/reset-password"), body: {
         'email': email,
         'password': pass,
-      });
+      },);
       if (response.statusCode == 200) {
         return response.body;
       } else {

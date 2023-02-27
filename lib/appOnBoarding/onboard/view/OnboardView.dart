@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gif/flutter_gif.dart';
 import 'package:get/get.dart';
 import 'package:ripplefect/helper/constants/CommonUi.dart';
 import 'package:ripplefect/helper/constants/ColorRes.dart';
@@ -23,6 +24,17 @@ class OnboardView extends StatelessWidget {
           backgroundColor: Colors.white,
           body: Stack(
             children: [
+            GifImage(
+            height: Get.height,
+            fit: BoxFit.cover,
+            image: const AssetImage("assets/images/mygif.gif"),
+            controller: controller.animationCtrl,
+             ),
+              Container(
+                height: Get.height,
+                width: Get.width,
+                color: Colors.white,
+              ),
               PageView(
                 physics: const ClampingScrollPhysics(),
                 onPageChanged: (value) {
@@ -75,7 +87,7 @@ class OnboardView extends StatelessWidget {
                         if(controller.pageNo.value==3){
                           Get.toNamed(AppRoutes.login);
                         }else{
-                          Get.toNamed(AppRoutes.completeOnBoard);
+                          Get.offAllNamed(AppRoutes.completeOnBoard);
                         }
                       },
                       child: Padding(

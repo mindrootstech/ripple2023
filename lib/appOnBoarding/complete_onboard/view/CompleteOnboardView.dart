@@ -33,39 +33,47 @@ class _GifLoderState extends State<CompleteOnboardView> with SingleTickerProvide
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorRes.appColor,
-      body: Stack(
-        children: [
-          _buildGif(),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text("Congratulations! ", style: CommonUi.customTextStyle(
-                  fontFamily: Fonts.bold,color: ColorRes.white,fontSize: FontSize.font32),),
-              const SizedBox(height: 15,),
-              Text("You just earned 20 points for completing onboarding. Create an account to claim your reward!",
-                textAlign: TextAlign.center,
-                style: CommonUi.customTextStyle(
-                    fontFamily: Fonts.bold,color: ColorRes.white,fontSize: FontSize.font20),),
-              const SizedBox(height: 40,),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  socialLoginImage("google"),
-                  socialLoginImage("facebook",isFacebook: true),
-                  socialLoginImage("apple"),
-                  InkWell(
-                    onTap: (){
-                      Get.toNamed(AppRoutes.signup);
-                    },
-                      child: socialLoginImage("email")
-                  ),
-                ],
-              ),
+      body: SizedBox(
+        height: Get.height,
+        child: Stack(
+          children: [
+            Positioned(
+              bottom: 0,
+                top: 0,
+                left: 0,
+                right: 0,
+                child: _buildGif()),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text("Congratulations! ", style: CommonUi.customTextStyle(
+                    fontFamily: Fonts.bold,color: ColorRes.white,fontSize: FontSize.font32),),
+                const SizedBox(height: 15,),
+                Text("You just earned 20 points for completing onboarding. Create an account to claim your reward!",
+                  textAlign: TextAlign.center,
+                  style: CommonUi.customTextStyle(
+                      fontFamily: Fonts.bold,color: ColorRes.white,fontSize: FontSize.font20),),
+                const SizedBox(height: 40,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    socialLoginImage("google"),
+                    socialLoginImage("facebook",isFacebook: true),
+                    socialLoginImage("apple"),
+                    InkWell(
+                      onTap: (){
+                        Get.toNamed(AppRoutes.signup);
+                      },
+                        child: socialLoginImage("email")
+                    ),
+                  ],
+                ),
 
 
-            ],
-          ),
-        ],
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -83,6 +91,8 @@ class _GifLoderState extends State<CompleteOnboardView> with SingleTickerProvide
   }
   Widget _buildGif(){
     return GifImage(
+      height: Get.height,
+      fit: BoxFit.cover,
       image: const AssetImage("assets/images/mygif.gif"),
       controller: _animationCtrl,
     );

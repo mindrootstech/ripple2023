@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:ripplefect/helper/constants/CommonUi.dart';
 import 'package:ripplefect/helper/constants/fonts.dart';
@@ -35,6 +34,9 @@ class PageViewItem extends StatelessWidget {
                         fontSize: FontSize.font32,
                         fontFamily: Fonts.semiBold),
                   ),
+                  const SizedBox(
+                    height: 20,
+                  ),
                   Text(
                     description,
                     style: CommonUi.customTextStyle(),
@@ -44,7 +46,6 @@ class PageViewItem extends StatelessWidget {
             ),
           ),
         ),
-        Center(child: SvgPicture.asset(CommonUi.setSvgImage('app_icon')))
       ],
     );
   }

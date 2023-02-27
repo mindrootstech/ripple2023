@@ -303,19 +303,50 @@ class HomeView extends StatelessWidget {
              height: 8,
            ),
            Text(Strings.textSuggestedBased,style:CommonUi.customTextStyle(fontSize: 15),),
-           Container(
-             margin: const EdgeInsets.only(top: 10),
-             decoration: CommonUi.roundedDecorationWithBorder(outLineColor: ColorRes.colorWhiteGrey,bgColor:ColorRes.white),
-             padding: const EdgeInsets.all(4),
-             child: Row(
-               mainAxisSize: MainAxisSize.min,
-               children: [
-                 SvgPicture.asset(CommonUi.setSvgImage('filter_icon')),
-                 Text(Strings.textFilter,style:CommonUi.customTextStyle(fontSize: 13,fontFamily: Fonts.bold),),
-                 const Icon(Icons.arrow_drop_down_sharp)
+           Row(
+             children: [
+               Container(
+                 margin: const EdgeInsets.only(top: 10),
+                 decoration: CommonUi.roundedDecorationWithBorder(outLineColor: ColorRes.colorWhiteGrey,bgColor:ColorRes.white),
+                 padding: const EdgeInsets.all(4),
+                 child: Row(
+                   mainAxisSize: MainAxisSize.min,
+                   children: [
+                     SvgPicture.asset(CommonUi.setSvgImage('filter_icon')),
+                     Text(Strings.textFilter,style:CommonUi.customTextStyle(fontSize: 13,fontFamily: Fonts.bold),),
+                     const Icon(Icons.arrow_drop_down_sharp)
 
-               ],
-             ),
+                   ],
+                 ),
+               ),
+               Expanded(
+                 child: SizedBox(
+                   height: 60,
+                   child: ListView.builder(
+                     scrollDirection: Axis.horizontal,
+                     itemCount: 3,
+                     itemBuilder: (BuildContext context, int index) {
+                       return Center(
+                         child: Container(
+                           margin: const EdgeInsets.only(top: 10,left: 8),
+                           decoration: CommonUi.roundedDecorationWithBorder(outLineColor: ColorRes.colorWhiteGrey,bgColor:ColorRes.white),
+                           padding: const EdgeInsets.symmetric(horizontal: 6,vertical: 4),
+                           child: Row(
+                             mainAxisSize: MainAxisSize.min,
+                             children: [
+                               Text(index==0?'Oceans':'Fashion',style:CommonUi.customTextStyle(fontSize: 13,fontFamily: Fonts.bold),),
+                               const Icon(Icons.clear)
+
+                             ],
+                           ),
+                         ),
+                       );
+                     }
+
+                   ),
+                 ),
+               ),
+             ],
            ),
          ],
        ),

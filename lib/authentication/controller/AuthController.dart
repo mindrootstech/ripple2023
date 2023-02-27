@@ -1,4 +1,6 @@
 
+import 'dart:async';
+
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
@@ -33,6 +35,8 @@ class AuthController extends GetxController{
 
   /// verification code controllers...
   var pinController = TextEditingController();
+  late Timer timer;
+  var counter = 25.obs;
 
 
   /// Reset pass controllers.....
@@ -83,7 +87,7 @@ class AuthController extends GetxController{
     }else if(rPassField.text.isEmpty){
       CommonUi.showToast(Strings.textPasswordIsRequired);
       return;
-    }else if(rPassField.text.length<6){
+    }else if(rPassField.text.length<8){
       CommonUi.showToast(Strings.textPasswordLength);
       return;
     }
@@ -148,10 +152,10 @@ class AuthController extends GetxController{
   }
 
   //Forgot password api
-  void  fpApiImplementation() async {
-    var userEmail=emailField.text.trim();
+  void  fpApiImplementation(bool timer) async {
+    var userEmail=fpEmailField.text.trim();
     final bool validEmail = EmailValidator.validate(userEmail);
-    if(emailField.text.isEmpty){
+    if(fpEmailField.text.isEmpty){
       CommonUi.showToast(Strings.textEmailIsRequired);
       return;
     }else if(validEmail==false){
@@ -169,6 +173,9 @@ class AuthController extends GetxController{
         if(response.status) {
           CommonUi.showToast(response.message);
           Get.toNamed(AppRoutes.verification);
+          if(timer){
+            getOtpRemainingTime();
+          }
         }else{
           CommonUi.showToast(response.message);
         }
@@ -181,7 +188,7 @@ class AuthController extends GetxController{
 
   //verification code api
   void  vcApiImplementation() async {
-    var userEmail=emailField.text.trim();
+    var userEmail=fpEmailField.text.trim();
     if(pinController.text.isEmpty){
       CommonUi.showToast(Strings.textVerificationCodeIsRequired);
       return;
@@ -197,7 +204,7 @@ class AuthController extends GetxController{
         if(response.status) {
           CommonUi.showToast(response.message);
           Get.toNamed(AppRoutes.resetPass);
-          fpFieldsClear();
+
         }else{
           CommonUi.showToast(response.message);
         }
@@ -210,6 +217,7 @@ class AuthController extends GetxController{
 
   //reset password api
   void  resetPassApiImplementation() async {
+    var userEmail=fpEmailField.text.trim();
     var pass=resetPassField.text.trim();
     var cPass=confirmPassField.text.trim();
     if(pass.isEmpty){
@@ -223,7 +231,7 @@ class AuthController extends GetxController{
       return;
     }
     loader.value=true;
-    await apiProvider.resetPassApi(pass,cPass).then((value){
+    await apiProvider.resetPassApi(userEmail,pass).then((value){
       if(value=='error'){
         loader.value=false;
         return;
@@ -234,6 +242,7 @@ class AuthController extends GetxController{
           CommonUi.showToast(response.message);
           Get.offAllNamed(AppRoutes.login);
           vcFieldsClear();
+          fpFieldsClear();
         }else{
           CommonUi.showToast(response.message);
         }
@@ -243,6 +252,19 @@ class AuthController extends GetxController{
       loader.value=false;
     });
   }
+
+
+ void getOtpRemainingTime(){
+   counter.value = 25;
+    timer= Timer.periodic(const Duration(seconds: 1), (timer) {
+      counter.value--;
+      print('the count is ${counter.value}');
+      if (counter.value == 0) {
+        timer.cancel();
+      }
+    });
+  }
+
 
 
 }

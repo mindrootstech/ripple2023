@@ -74,7 +74,7 @@ class GoalOnBoardingView extends StatelessWidget {
                   CommonUi.customButton(buttonText:Strings.continueTxt,fontSize:FontSize.font20,callBack: (){
                     movePage(controller);
                     if(controller.titleNumber.value==2){
-                      Get.toNamed(AppRoutes.completeOnBoard);
+                      Get.offAllNamed(AppRoutes.completeOnBoard);
                     }
 
                   }),
@@ -98,9 +98,8 @@ class GoalOnBoardingView extends StatelessWidget {
     if(controller.goalPageNo.value == 2){
       controller.progressValue.value = 1.0;
     }
-   controller.pControllers[1].animateToPage(controller.goalPageNo.value,
-    duration: const Duration(milliseconds: 400),
-    curve: Curves.easeIn
-    );
+   controller.pControllers[1].animateToPage(controller.goalPageNo.value, duration: const Duration(milliseconds: 400), curve: Curves.easeIn);
   }
+
+
 }

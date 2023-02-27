@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_gif/flutter_gif.dart';
 import 'package:get/get.dart';
 import 'package:ripplefect/api_provider/ApiProvider.dart';
 import 'package:ripplefect/helper/constants/CommonUi.dart';
@@ -6,7 +7,7 @@ import 'package:ripplefect/helper/constants/CommonUi.dart';
 import '../../../helper/constants/strings.dart';
 import '../model/OnboardModel.dart';
 
-class OnboardController extends GetxController{
+class OnboardController extends GetxController with GetSingleTickerProviderStateMixin{
   var apiProvider=ApiProvider();
 
   var skipText = "SKIP".obs;
@@ -25,9 +26,14 @@ class OnboardController extends GetxController{
   var yourWayList_1 = <Goal>[].obs;
   var moreList_2 = <Goal>[].obs;
   var goalList_3 = <Goal>[].obs;
+  var selectedIndex=0.obs;
+  late FlutterGifController animationCtrl;
+
 
   @override
   void onInit() {
+    animationCtrl = FlutterGifController(vsync: this,duration: const Duration(seconds:1));
+    animationCtrl.repeat(min:0, max:100, period:const Duration(seconds:4));
     pControllers.add(PageController());
     pControllers.add(PageController());
     getOnBoardingData();

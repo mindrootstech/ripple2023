@@ -6,7 +6,6 @@ import 'package:ripplefect/helper/constants/CommonUi.dart';
 import 'package:ripplefect/helper/constants/ColorRes.dart';
 import 'package:ripplefect/helper/constants/fonts.dart';
 import 'package:ripplefect/helper/constants/strings.dart';
-import 'package:ripplefect/helper/routes/AppRoutes.dart';
 
 import '../controller/AuthController.dart';
 
@@ -16,6 +15,8 @@ class VerificationView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Get.find<AuthController>().pinController = TextEditingController();
+    Get.find<AuthController>().getOtpRemainingTime();
     return GetX<AuthController>(
       builder: (controller) {
         return Scaffold(
@@ -24,6 +25,10 @@ class VerificationView extends StatelessWidget {
             children: [
               CommonUi.customLayout(
                 title: Strings.enterCode,
+                onBack: (){
+                  controller.timer.cancel();
+                  Get.back();
+                },
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -71,17 +76,42 @@ class VerificationView extends StatelessWidget {
                       appContext: context,
                     ),
                     const Spacer(),
-                    Container(
-                      alignment: Alignment.center,
-                      margin: const EdgeInsets.only(bottom: 50),
-                      child: Text("${Strings.resentAfter} 00:25",
-                        style: CommonUi.customTextStyle(fontSize: FontSize.font14,
-                            decoration: TextDecoration.underline,
-                            fontFamily: Fonts.bold,
-                            color: ColorRes.greyColor),),
-                    ),
+                    if(controller.counter.value>0)...{
+                      Container(
+                        alignment: Alignment.center,
+                        margin: const EdgeInsets.only(bottom: 50),
+                        child: Text("${Strings.resentAfter} ${controller.counter.value}",
+                          style: CommonUi.customTextStyle(fontSize: FontSize.font14,
+                              decoration: TextDecoration.underline,
+                              fontFamily: Fonts.bold,
+                              color: ColorRes.greyColor),),
+                      ),
+                    }else...{
+                      GestureDetector(
+                        onTap: (){
+                          controller.fpApiImplementation(true);
+
+                        },
+                        child:  Container(
+                          alignment: Alignment.center,
+                          margin: const EdgeInsets.only(bottom: 50),
+                          child: Text(Strings.resentCode,
+                            style: CommonUi.customTextStyle(fontSize: FontSize.font14,
+                                decoration: TextDecoration.underline,
+                                fontFamily: Fonts.bold,
+                                color: ColorRes.greyColor),),
+                        ),
+                      ),
+
+                    },
+
                     CommonUi.customButton(buttonText:Strings.continueTxt,fontSize:FontSize.font20,callBack: (){
-                      controller.vcApiImplementation();
+                      if(controller.counter.value>0){
+                        controller.vcApiImplementation();
+                      }else{
+                        CommonUi.showToast('Please resend otp');
+                      }
+
 
 
                     }),

@@ -62,6 +62,7 @@ dependencies:
   fluttertoast: ^8.2.1
   email_validator: ^2.1.16
 
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

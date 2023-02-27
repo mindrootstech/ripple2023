@@ -69,7 +69,7 @@ class CommonUi {
 
   static TextStyle customTextStyle(
       {String fontFamily = Fonts.regular,
-        double fontSize = FontSize.font14,
+        double fontSize = FontSize.font16,
         TextDecoration decoration = TextDecoration.none,
         Color color = ColorRes.colorBlack}) {
     return TextStyle(

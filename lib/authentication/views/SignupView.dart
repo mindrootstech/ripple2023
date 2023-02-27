@@ -65,13 +65,40 @@ class SignupView extends StatelessWidget {
                         }),
                         const SizedBox(height: 15,),
                         GestureDetector(
-                          onTap: (){
-                            Get.toNamed(AppRoutes.login);
-                            controller.registerFieldsClear();
+                          onTap: () {
+                              Get.toNamed(AppRoutes.login);
+
                           },
-                          child: Text(Strings.doLater, style: CommonUi.customTextStyle(
-                              fontFamily: Fonts.bold,color: ColorRes.greyColor),),
+                          child: Padding(
+                            padding: const EdgeInsets.all(15.0),
+                            child:  Text.rich(
+                              TextSpan(
+                                children: [
+                                  TextSpan(
+                                    text: Strings.alreadyAccount,
+                                    style: CommonUi.customTextStyle(),
+                                  ),
+                                  TextSpan(
+                                    text: Strings.login,
+                                    style: CommonUi.customTextStyle(
+                                        color: ColorRes.buttonColor,
+                                        decoration:
+                                        TextDecoration.underline),
+                                  ),
+                                ],
+                              ),
+                            )
+
+                          ),
                         ),
+                        // GestureDetector(
+                        //   onTap: (){
+                        //     Get.toNamed(AppRoutes.login);
+                        //     controller.registerFieldsClear();
+                        //   },
+                        //   child: Text(Strings.doLater, style: CommonUi.customTextStyle(
+                        //       fontFamily: Fonts.bold,color: ColorRes.greyColor),),
+                        // ),
                         const SizedBox(height: 20,),
                       ],
                     ),

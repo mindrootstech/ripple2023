@@ -98,6 +98,7 @@ class Strings {
   static String enterCode = 'Enter Code';
   static String enterCodeEmail = 'Enter the code that you have received in your email.';
   static String resentAfter = 'Resend passcode after';
+  static String resentCode = 'Resend code';
 
 
 
@@ -127,7 +128,7 @@ class Strings {
    static String textNameIsRequired='Name is required';
    static String textPleaseEnterValidEmail='Please enter a valid email';
    static String textPasswordIsRequired='Password is required';
-   static String textPasswordLength='Password should at least 6 digit';
+   static String textPasswordLength='Password should at least 8 digit';
    static String textVerificationCodeIsRequired='Verification code is required';
   static String textCPasswordIsRequired='Confirm password is required';
   static String textNotMatching='Confirm password and Password are not matching';

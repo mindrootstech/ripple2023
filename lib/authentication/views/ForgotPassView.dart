@@ -38,7 +38,7 @@ class ForgotPassView extends StatelessWidget {
                         height: 15,
                       ),
                       TextFormField(
-                        controller: controller.emailField,
+                        controller: controller.fpEmailField,
                         decoration: CommonUi.textFieldDecoration(
                             hintText: "xyzabc@gmail.com"),
                       ),
@@ -50,7 +50,7 @@ class ForgotPassView extends StatelessWidget {
                           buttonText: Strings.continueTxt,
                           fontSize: FontSize.font20,
                           callBack: () {
-                            controller.fpApiImplementation();
+                            controller.fpApiImplementation(false);
                           }),
                       const SizedBox(
                         height: 50,
