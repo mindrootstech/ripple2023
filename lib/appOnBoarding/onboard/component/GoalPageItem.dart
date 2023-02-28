@@ -9,6 +9,8 @@ import 'package:ripplefect/helper/constants/CommonUi.dart';
 import 'package:ripplefect/helper/constants/ColorRes.dart';
 import 'package:ripplefect/helper/constants/fonts.dart';
 
+import '../../../helper/constants/strings.dart';
+import '../../../helper/routes/AppRoutes.dart';
 import '../model/OnboardModel.dart';
 
 
@@ -25,22 +27,17 @@ class GoalPageItem extends StatelessWidget {
       child: Column(
         children: [
           Container(
-            decoration: CommonUi.roundedDecorationWithBorder(
-                outLineColor: ColorRes.noProgressColor,
-                bgColor: Colors.white,
-                borderWidth:1.5 ,
-                radius: 8.0
-            ),
-            margin: const EdgeInsets.only(top: 24),
-            child: ListView.separated(
+            // decoration: CommonUi.roundedDecorationWithBorder(
+            //     outLineColor: ColorRes.noProgressColor,
+            //     bgColor: Colors.white,
+            //     borderWidth:1.5 ,
+            //     radius: 8.0
+            // ),
+            margin: const EdgeInsets.only(top: 24,bottom: 40),
+            child: ListView.builder(
               shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
               itemCount: list.length,
-              separatorBuilder: (BuildContext context, int index) {
-                return Container(
-                    height:  1,
-                    color: ColorRes.noProgressColor,
-                  );
-              },
               itemBuilder: (BuildContext context, int index) {
                 var model = list[index];
                 return InkWell(
@@ -77,7 +74,28 @@ class GoalPageItem extends StatelessWidget {
                           bgColor: ColorRes.lightBluecolor,
                           borderWidth: 1.0 // mid
                       )
-                          : null,
+                          : !model.isSelected.value && index == 0?
+                            CommonUi.roundedDecorationWithBorderRadius(
+                                outLineColor: ColorRes.noProgressColor,
+                                bgColor: Colors.white,
+                                 topLeft: 8.0,
+                                 topRight: 8.0,
+                                borderWidth: 1.0 //top
+                            )
+                                : model.isSelected.value && index == list.length-1 ?
+                            CommonUi.roundedDecorationWithBorderRadius(
+                                outLineColor: ColorRes.noProgressColor,
+                                bgColor: Colors.white,
+                                bottomLeft: 8.0,
+                                bottomRight: 8.0,
+                                borderWidth: 1.0 //bottom
+                            ):CommonUi.roundedDecorationWithBorderRadius(
+                               outLineColor: ColorRes.noProgressColor,
+                               bgColor: Colors.white,
+                                topLeft: 0.0,
+                                topRight: 0.0,
+                                borderWidth: 1.0 //top
+                            ),
                       child: Column(
                         children: [
                           Padding(
@@ -132,8 +150,28 @@ class GoalPageItem extends StatelessWidget {
               },
             ),
           ),
+          CommonUi.customButton(buttonText:Strings.continueTxt,callBack: (){
+            movePage(controller);
+            if(controller.titleNumber.value==2){
+              Get.offAllNamed(AppRoutes.completeOnBoard);
+            }
+          }),
+          const SizedBox(height: 20,)
         ],
       ),
     );
   }
+  void movePage(OnboardController controller) {
+    if(controller.goalPageNo.value == 0){
+      controller.progressValue.value = 0.25;
+    }
+    if(controller.goalPageNo.value == 1){
+      controller.progressValue.value = 0.50;
+    }
+    if(controller.goalPageNo.value == 2){
+      controller.progressValue.value = 1.0;
+    }
+    controller.pControllers[1].animateToPage(controller.goalPageNo.value, duration: const Duration(milliseconds: 400), curve: Curves.easeIn);
+  }
+
 }

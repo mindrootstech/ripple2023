@@ -69,6 +69,31 @@ class ApiProvider extends GetConnect {
   }
 
 
+  Future<String> socialLoginApi(String name,String email, int socialType, String socialToken) async {
+    var deviceType = '';
+    if (Platform.isIOS) {
+      deviceType = 'ios';
+    } else {
+      deviceType = 'android';
+    }
+    try {
+      final response = await client.post(Uri.parse("$baseUrl/social-auth"), body: {
+        'name':name,
+        'email': email,
+        'social_type': socialType.toString(),
+        'device_type': deviceType,
+        'device_token': 'sdfsd',
+        'social_token': socialToken ,
+      });
+      if (response.statusCode == 200) {
+        return response.body;
+      } else {
+        return response.body;
+      }
+    } catch (e) {
+      return 'error';
+    }
+  }
 
   Future<String> forgotPassApi(String email) async {
     try {

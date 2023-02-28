@@ -13,36 +13,36 @@ class PageViewItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
+    return Column(
       children: [
-        Image.asset(CommonUi.setPngImage(imageName),fit: BoxFit.fill,width: Get.width),
-        Positioned(
-          bottom: 0,
+        Expanded(
+          child: Image.asset(CommonUi.setPngImage(imageName),fit: BoxFit.fill,
+              width: Get.width),
+        ),
+        Container(
+          // height: Get.height/2.1,
+          width: Get.width,
+          padding:  EdgeInsets.only(top: 25),
+          decoration: CommonUi.curvedBoxDecoration(bottomRight: 0.0,bottomLeft: 0.0),
           child: Container(
-            height: Get.height/2.1,
-            width: Get.width,
-            padding: const EdgeInsets.only(top: 25),
-            decoration: CommonUi.curvedBoxDecoration(bottomRight: 0.0,bottomLeft: 0.0),
-            child: Container(
-              margin: const EdgeInsets.symmetric(horizontal: 30),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    title,
-                    style: CommonUi.customTextStyle(
-                        fontSize: 30,
-                        fontFamily: Fonts.semiBold),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Text(
-                    description,
-                    style: CommonUi.customTextStyle(),
-                  ),
-                ],
-              ),
+            margin: const EdgeInsets.symmetric(horizontal: 30),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: CommonUi.customTextStyle(
+                      fontSize: 30,
+                      fontFamily: Fonts.semiBold),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Text(
+                  description,
+                  style: CommonUi.customTextStyle(),
+                ),
+              ],
             ),
           ),
         ),

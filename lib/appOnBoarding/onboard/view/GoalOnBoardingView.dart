@@ -71,14 +71,7 @@ class GoalOnBoardingView extends StatelessWidget {
 
                   const SizedBox(height: 10,),
 
-                  CommonUi.customButton(buttonText:Strings.continueTxt,callBack: (){
-                    movePage(controller);
-                    if(controller.titleNumber.value==2){
-                      Get.offAllNamed(AppRoutes.completeOnBoard);
-                    }
 
-                  }),
-                  const SizedBox(height: 20,)
                 ],
               ),
             ),

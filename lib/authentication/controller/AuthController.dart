@@ -12,6 +12,7 @@ import 'package:ripplefect/api_provider/ApiProvider.dart';
 import 'package:ripplefect/helper/common_classes/LocalStorage.dart';
 import 'package:ripplefect/helper/constants/strings.dart';
 import 'package:ripplefect/helper/routes/AppRoutes.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import '../../../helper/constants/CommonUi.dart';
 import '../model/AuthModel.dart';
 
@@ -127,6 +128,31 @@ class AuthController extends GetxController{
     });
   }
 
+  //Social Login
+  void  socialLoginApiImplementation(String name,String email,int loginType,String socialToken) async {
+    loader.value=true;
+    await apiProvider.socialLoginApi(name,email,loginType,socialToken).then((value){
+      if(value=='error'){
+        loader.value=false;
+        return;
+      }
+      else{
+        var response = authModelFromJson(value);
+        if(response.status) {
+          localStorage.saveAuthCode(response.data.token??'');
+          CommonUi.showToast(response.message);
+          Get.offAllNamed(AppRoutes.dashboard);
+        }else{
+          CommonUi.showToast(response.message);
+        }
+        loader.value=false;
+      }
+    }).catchError((e){
+      loader.value=false;
+    });
+  }
+
+
   //Forgot password api
   void  fpApiImplementation(bool timer) async {
     var userEmail=fpEmailField.text.trim();
@@ -212,6 +238,7 @@ class AuthController extends GetxController{
   }
 
 
+
  void getOtpRemainingTime(){
    counter.value = 25;
     timer= Timer.periodic(const Duration(seconds: 1), (timer) {
@@ -271,7 +298,11 @@ class AuthController extends GetxController{
        var socialName = facebookProfile['name'];
        var socialEmail = facebookProfile['email'];
        var socialId = facebookProfile['id'];
-
+       if(facebookLoginResult.accessToken!=null){
+         socialLoginApiImplementation(socialName,socialEmail,2,facebookLoginResult.accessToken!.token);
+       }else{
+         loader.value = false;
+       }
         break;
     }
   }
@@ -293,12 +324,34 @@ class AuthController extends GetxController{
 
     try {
       var data = await _googleSignIn.signIn();
-      print(data!.email);
-      // onGoogleSignInResult(data);
+      if(data!=null){
+        socialLoginApiImplementation(data.displayName??'',data.email??'',3,data.id??'');
+      }
+
     } catch (error) {
       var er = error;
     }
   }
+
+  //login with apple
+  Future<void> applyAppleLogin() async {
+    final result = await SignInWithApple.getAppleIDCredential(
+        scopes: [
+          AppleIDAuthorizationScopes.email,
+          AppleIDAuthorizationScopes.fullName,
+        ],);
+    socialLoginApiImplementation(result.givenName??'',result.email??'',4,result.userIdentifier??'');
+
+    try {
+      print("e");
+    }catch(e){
+      loader.value = false;
+      print(e);
+    }
+
+  }
+
+
 
 
 

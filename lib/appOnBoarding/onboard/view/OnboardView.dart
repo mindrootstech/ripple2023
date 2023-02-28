@@ -22,30 +22,30 @@ class OnboardView extends StatelessWidget {
         },
         child: Scaffold(
           backgroundColor: Colors.white,
-          body: Stack(
+          body: Column(
             children: [
 
-              PageView(
-                physics: const ClampingScrollPhysics(),
-                onPageChanged: (value) {
-                  controller.pageNo.value = value;
-                },
-                controller: controller.pControllers[0],
-                children: <Widget>[
-                  PageViewItem(Strings.onboard_1Title.tr,
-                      Strings.onboard_1Desc.tr, Strings.onboard_1Image),
-                  PageViewItem(Strings.onboard_2Title.tr,
-                      Strings.onboard_2Desc.tr, Strings.onboard_2Image),
-                  PageViewItem(Strings.onboard_3Title, Strings.onboard_3Desc.tr,
-                      Strings.onboard_3Image),
-                  PageViewItem(Strings.onboard_4Title.tr,
-                      Strings.onboard_4Desc.tr, Strings.onboard_4Image),
-                ],
+              Expanded(
+                child: PageView(
+                  physics: const ClampingScrollPhysics(),
+                  onPageChanged: (value) {
+                    controller.pageNo.value = value;
+                  },
+                  controller: controller.pControllers[0],
+                  children: <Widget>[
+                    PageViewItem(Strings.onboard_1Title.tr,
+                        Strings.onboard_1Desc.tr, Strings.onboard_1Image),
+                    PageViewItem(Strings.onboard_2Title.tr,
+                        Strings.onboard_2Desc.tr, Strings.onboard_2Image),
+                    PageViewItem(Strings.onboard_3Title, Strings.onboard_3Desc.tr,
+                        Strings.onboard_3Image),
+                    PageViewItem(Strings.onboard_4Title.tr,
+                        Strings.onboard_4Desc.tr, Strings.onboard_4Image),
+                  ],
+                ),
               ),
-              Positioned(
-                bottom: 20,
-                left: 28,
-                right: 28,
+              Container(
+                margin: const EdgeInsets.only(top: 32),
                 child: Column(
                   children: [
                     SmoothPageIndicator(
@@ -63,16 +63,22 @@ class OnboardView extends StatelessWidget {
                     const SizedBox(
                       height: 50,
                     ),
-                    CommonUi.customButton(buttonText: controller.pageNo.value == 3 ? Strings.continueTxt : Strings.next,callBack: () {
-                      controller.pControllers[0].animateToPage(
-                          controller.pageNo.value + 1,
-                          duration: const Duration(milliseconds: 200),
-                          curve: Curves.linear);
-                      if(controller.pageNo.value==3){
-                        Get.toNamed(AppRoutes.goalOnBoard);
-                      }
-                    }),
-                    GestureDetector(
+                    Container(
+                      margin: EdgeInsets.only(left: CommonUi.marginLeftRight,right: CommonUi.marginLeftRight),
+                      child: CommonUi.customButton(buttonText: controller.pageNo.value == 3 ? Strings.continueTxt : Strings.next,callBack: () {
+                        controller.pControllers[0].animateToPage(
+                            controller.pageNo.value + 1,
+                            duration: const Duration(milliseconds: 200),
+                            curve: Curves.linear);
+                        if(controller.pageNo.value==3){
+                          Get.toNamed(AppRoutes.goalOnBoard);
+                        }
+                      }),
+                    ),
+
+
+
+                    InkWell(
                       onTap: () {
                         if(controller.pageNo.value==3){
                           Get.toNamed(AppRoutes.login);

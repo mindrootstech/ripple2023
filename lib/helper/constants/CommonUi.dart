@@ -204,9 +204,15 @@ class CommonUi {
         borderWidth = 1.0}) {
     return BoxDecoration(
         color: bgColor,
-        border: Border.all(color: outLineColor, width: borderWidth),
+        border: Border(
+          top: BorderSide(width: borderWidth, color: outLineColor),
+          left: BorderSide(width: borderWidth, color: outLineColor),
+          right: BorderSide(width: borderWidth, color: outLineColor),
+          bottom: BorderSide(width: borderWidth, color: outLineColor),
+        ),
         borderRadius: BorderRadius.only(topLeft: Radius.circular(topLeft),topRight: Radius.circular(topRight),
-            bottomLeft: Radius.circular(bottomLeft),bottomRight: Radius.circular(bottomRight)));
+            bottomLeft: Radius.circular(bottomLeft),bottomRight: Radius.circular(bottomRight))
+    );
   }
 
   static textFieldDecoration(

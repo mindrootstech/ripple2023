@@ -6,6 +6,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:ripplefect/authentication/controller/AuthController.dart';
+import 'package:ripplefect/helper/common_classes/CommonLoader.dart';
 import 'package:ripplefect/helper/constants/CommonUi.dart';
 import 'package:ripplefect/helper/constants/ColorRes.dart';
 import 'package:ripplefect/helper/constants/fonts.dart';
@@ -66,7 +67,7 @@ class CompleteOnboardView extends StatelessWidget {
                     if(Platform.isIOS)...{
                       InkWell(
                         onTap: (){
-
+                          controller.applyAppleLogin();
                         }, child: socialLoginImage("apple")),
                     },
 
@@ -78,10 +79,16 @@ class CompleteOnboardView extends StatelessWidget {
                     ),
                   ],
                 ),
-
-
               ],
             ),
+
+            Obx((){
+              if(controller.loader.value){
+                return const CommonLoader();
+              }else{
+                return const SizedBox();
+              }
+            })
           ],
         ),
       ),

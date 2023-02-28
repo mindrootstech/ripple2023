@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -131,9 +133,26 @@ class LoginView extends StatelessWidget with InputValidationMixin{
                           Wrap(
                             spacing: 12,
                             children: [
-                              socialLoginImage("google"),
-                              socialLoginImage("facebook", isFacebook: true),
-                              socialLoginImage("apple"),
+                              InkWell(
+                                  onTap: (){
+                                    controller.loginWithGoogle();
+                                  },
+                                  child: socialLoginImage("google")),
+
+                              InkWell(
+                                  onTap: (){
+                                    controller.loginWithFacebook();
+                                  },
+                                  child: socialLoginImage("facebook",isFacebook: true)),
+
+
+                              if(Platform.isIOS)...{
+                                InkWell(
+                                    onTap: (){
+                                      controller.applyAppleLogin();
+                                    }, child: socialLoginImage("apple")),
+                              },
+
                             ],
                           ),
                           const SizedBox(

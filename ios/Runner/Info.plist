@@ -28,7 +28,7 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string></string>
+			<string>com.ios.rippleapp</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>fb2700880193474800</string>
@@ -42,31 +42,17 @@
 				<string>com.googleusercontent.apps.300557807249-8174ll397mcepbijkg6mo43usok3idu8</string>
 			</array>
 		</dict>
-		<dict>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>CFBundleURLName</key>
-			<string>Bundle ID</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
-			</array>
-		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
-	<key>FacebookAdvertiserIDCollectionEnabled</key>
-    	<string>TRUE</string>
-    	<key>FacebookAppID</key>
-    	<string>2700880193474800</string>
-    	<key>FacebookAutoLogAppEventsEnabled</key>
-    	<string>TRUE</string>
-    	<key>FacebookClientToken</key>
-    	<string>17fbff351b46f6a43036350d21990d6b</string>
-    	<key>FacebookDisplayName</key>
-    	<string>Rippl</string>
-    	<key>FirebaseAppDelegateProxyEnabled</key>
-    	<false/>
+    <key>FacebookAppID</key>
+    <string>2700880193474800</string>
+    <key>FacebookAutoLogAppEventsEnabled</key>
+    <string>TRUE</string>
+    <key>FacebookClientToken</key>
+    <string>17fbff351b46f6a43036350d21990d6b</string>
+    <key>FacebookDisplayName</key>
+    <string>Rippl</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
