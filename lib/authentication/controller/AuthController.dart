@@ -1,9 +1,13 @@
 
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:http/http.dart';
 import 'package:ripplefect/api_provider/ApiProvider.dart';
 import 'package:ripplefect/helper/common_classes/LocalStorage.dart';
 import 'package:ripplefect/helper/constants/strings.dart';
@@ -100,17 +104,6 @@ class AuthController extends GetxController{
   //login User Api
   void  loginApiImplementation(int loginType,String socialToken) async {
     var userEmail=emailField.text.trim();
-    final bool validEmail = EmailValidator.validate(userEmail);
-    if(emailField.text.isEmpty){
-      CommonUi.showToast(Strings.textEmailIsRequired);
-      return;
-    }else if(validEmail==false){
-      CommonUi.showToast(Strings.textPleaseEnterValidEmail);
-      return;
-    }else if(passField.text.isEmpty){
-      CommonUi.showToast(Strings.textPasswordIsRequired);
-      return;
-    }
     loader.value=true;
     await apiProvider.loginApi(userEmail, passField.text,loginType,socialToken).then((value){
       if(value=='error'){
@@ -137,14 +130,6 @@ class AuthController extends GetxController{
   //Forgot password api
   void  fpApiImplementation(bool timer) async {
     var userEmail=fpEmailField.text.trim();
-    final bool validEmail = EmailValidator.validate(userEmail);
-    if(fpEmailField.text.isEmpty){
-      CommonUi.showToast(Strings.textEmailIsRequired);
-      return;
-    }else if(validEmail==false){
-      CommonUi.showToast(Strings.textPleaseEnterValidEmail);
-      return;
-    }
     loader.value=true;
     await apiProvider.forgotPassApi(userEmail).then((value){
       if(value=='error'){
@@ -203,16 +188,6 @@ class AuthController extends GetxController{
     var userEmail=fpEmailField.text.trim();
     var pass=resetPassField.text.trim();
     var cPass=confirmPassField.text.trim();
-    if(pass.isEmpty){
-      CommonUi.showToast(Strings.textPasswordIsRequired);
-      return;
-    }else if(cPass.isEmpty){
-      CommonUi.showToast(Strings.textCPasswordIsRequired);
-      return;
-    }else if(pass!=cPass){
-      CommonUi.showToast(Strings.textNotMatching);
-      return;
-    }
     loader.value=true;
     await apiProvider.resetPassApi(userEmail,pass).then((value){
       if(value=='error'){
@@ -246,6 +221,82 @@ class AuthController extends GetxController{
         timer.cancel();
       }
     });
+  }
+
+
+
+
+  ///Social integrations................................
+
+
+  // login with facebook
+  Future<void> loginWithFacebook() async {
+    var facebookLoginResult;
+    // try {
+    //   FacebookAuth.instance.logOut();
+    // } catch (e) {
+    //   print(e);
+    // }
+    try{
+      facebookLoginResult = await FacebookAuth.instance.login(permissions: ['public_profile']);
+    }catch(e){
+      print(e);
+    }
+    switch (facebookLoginResult.status.toString()) {
+      case 'LoginStatus.error':
+        print("Error");
+
+        break;
+      case 'LoginStatus.cancelled':
+        print("CancelledByUser");
+
+        break;
+      case 'LoginStatus.success':
+        print("LoggedIn");
+
+        var graphResponse = await Client().get(Uri.parse(
+            'https://graph.facebook.com/v2.12/me?fields=name,first_name,last_name,email&access_token=${facebookLoginResult.accessToken!.token}'));
+      var  facebookProfile = json.decode(graphResponse.body);
+        loader.value = true;
+        Map<String, dynamic> map = {
+          'name': facebookProfile['name'],
+          'email':
+          facebookProfile['email'] == null ? "" : facebookProfile['email'],
+          'profile_pic':
+          "https://graph.facebook.com/${facebookProfile['id']}/picture?type=large&redirect=true&width=600&height=600",
+          'login_token': facebookProfile['id'],
+          'login_type': "2",
+          'apple_token': "",
+        };
+       var socialName = facebookProfile['name'];
+       var socialEmail = facebookProfile['email'];
+       var socialId = facebookProfile['id'];
+
+        break;
+    }
+  }
+
+  // login with google
+  Future<void> loginWithGoogle() async {
+    // facebookOrGoogle = "2";
+    GoogleSignIn _googleSignIn = GoogleSignIn(
+      scopes: [
+        'email',
+      ],
+    );
+
+    try {
+      await _googleSignIn.signOut();
+    } catch (e) {
+      print(e);
+    }
+
+    try {
+      var data = await _googleSignIn.signIn();
+      // onGoogleSignInResult(data);
+    } catch (error) {
+      var er = error;
+    }
   }
 
 

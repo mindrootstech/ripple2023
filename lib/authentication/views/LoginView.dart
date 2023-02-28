@@ -7,10 +7,12 @@ import 'package:ripplefect/helper/constants/ColorRes.dart';
 import 'package:ripplefect/helper/constants/fonts.dart';
 import 'package:ripplefect/helper/constants/strings.dart';
 import 'package:ripplefect/helper/routes/AppRoutes.dart';
+import '../../helper/common_classes/InputValidationMixin.dart';
 import '../controller/AuthController.dart';
 
-class LoginView extends StatelessWidget {
-  const LoginView({Key? key}) : super(key: key);
+class LoginView extends StatelessWidget with InputValidationMixin{
+   LoginView({Key? key}) : super(key: key);
+  final formGlobalKey = GlobalKey < FormState > ();
 
   @override
   Widget build(BuildContext context) {
@@ -21,105 +23,126 @@ class LoginView extends StatelessWidget {
           children: [
             CommonUi.customLayout(
                 title: Strings.login,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      Strings.myEmail,
-                      style: CommonUi.customTextStyle(
-                          fontFamily: Fonts.semiBold, fontSize: 18.0),
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    TextFormField(
-                      controller: controller.emailField,
-                      decoration: CommonUi.textFieldDecoration(
-                          hintText: Strings.enterEmail),
-                    ),
-                    const SizedBox(
-                      height: 25,
-                    ),
-                    Text(
-                      Strings.myPass,
-                      style: CommonUi.customTextStyle(
-                          fontFamily: Fonts.semiBold, fontSize: 18),
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    TextFormField(
-                      controller: controller.passField,
-                      obscureText: !controller.passVisible.value,
-                      decoration: CommonUi.textFieldDecoration(
-                          hintText: Strings.enterPass,
-                          isPass: true,
-                          passwordVisible: controller.passVisible),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        Get.toNamed(AppRoutes.forgotPass);
-                      },
-                      child: Container(
-                        padding:
-                        const EdgeInsets.only(left: 10, top: 10, bottom: 10),
-                        alignment: Alignment.centerRight,
-                        child: Text(
-                          Strings.forgotMyPass,
-                          style: CommonUi.customTextStyle(
-                              fontFamily: Fonts.medium,
-                              fontSize: 12,
-                              color: ColorRes.greyColor),
+                child:  Form(
+                  key: formGlobalKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        Strings.myEmail,
+                        style: CommonUi.customTextStyle(
+                            fontFamily: Fonts.semiBold, fontSize: 18.0),
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      TextFormField(
+                        validator: (email) {
+                          if (isEmailValid(email??'')) {
+                            return null;
+                          } else {
+                            return Strings.textValidEmail;
+                          }
+                        },
+                        controller: controller.emailField,
+                        decoration: CommonUi.textFieldDecoration(
+                            hintText: Strings.enterEmail),
+                      ),
+                      const SizedBox(
+                        height: 25,
+                      ),
+                      Text(
+                        Strings.myPass,
+                        style: CommonUi.customTextStyle(
+                            fontFamily: Fonts.semiBold, fontSize: 18),
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      TextFormField(
+                        controller: controller.passField,
+                        validator: (password) {
+                          if (isPasswordValid(password??'')) {
+                            return null;
+                          } else {
+                            return Strings.textValidPassword;
+                          }
+                        },
+                        obscureText: !controller.passVisible.value,
+                        decoration: CommonUi.textFieldDecoration(
+                            hintText: Strings.enterPass,
+                            isPass: true,
+                            passwordVisible: controller.passVisible),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          Get.toNamed(AppRoutes.forgotPass);
+                        },
+                        child: Container(
+                          padding:
+                          const EdgeInsets.only(left: 10, top: 10, bottom: 10),
+                          alignment: Alignment.centerRight,
+                          child: Text(
+                            Strings.forgotMyPass,
+                            style: CommonUi.customTextStyle(
+                                fontFamily: Fonts.medium,
+                                fontSize: 12,
+                                color: ColorRes.greyColor),
+                          ),
                         ),
                       ),
-                    ),
-                    const Spacer(),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        CommonUi.customButton(
-                            buttonText: Strings.login,
-                            fontSize: 18.0,
-                            callBack: () {
-                              controller.loginApiImplementation(1, '');
-                            }),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        Text(
-                          Strings.or,
-                          style: CommonUi.customTextStyle(
-                              fontFamily: Fonts.semiBold, color: ColorRes.greyColor),
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        Text(
-                          Strings.loginUsing,
-                          style: CommonUi.customTextStyle(
-                              fontFamily: Fonts.semiBold, color: ColorRes.greyColor),
-                        ),
-                        const SizedBox(
-                          height: 5,
-                        ),
-                        Wrap(
-                          spacing: 12,
-                          children: [
-                            socialLoginImage("google"),
-                            socialLoginImage("facebook", isFacebook: true),
-                            socialLoginImage("apple"),
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                      ],
-                    ),
-                  ],
+                      const Spacer(),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          CommonUi.customButton(
+                              buttonText: Strings.login,
+                              fontSize: 18.0,
+                              callBack: () {
+                                FocusScope.of(context).unfocus();
+                                if (formGlobalKey.currentState!.validate()) {
+                                  controller.loginApiImplementation(1, '');
+                                }
+
+                              }),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          Text(
+                            Strings.or,
+                            style: CommonUi.customTextStyle(
+                                fontFamily: Fonts.semiBold, color: ColorRes.greyColor),
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          Text(
+                            Strings.loginUsing,
+                            style: CommonUi.customTextStyle(
+                                fontFamily: Fonts.semiBold, color: ColorRes.greyColor),
+                          ),
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          Wrap(
+                            spacing: 12,
+                            children: [
+                              socialLoginImage("google"),
+                              socialLoginImage("facebook", isFacebook: true),
+                              socialLoginImage("apple"),
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 )),
             if(controller.loader.value)...{
               const CommonLoader()

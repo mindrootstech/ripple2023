@@ -2,8 +2,7 @@ import 'package:get/get.dart';
 import 'package:ripplefect/authentication/binding/AuthBinding.dart';
 import 'package:ripplefect/dashBoard/DashboardView.dart';
 import 'package:ripplefect/dashBoard/binding/DashboardBinding.dart';
-import '../../appOnBoarding/complete_onboard/binding/CompleteOnboardBinding.dart';
-import '../../appOnBoarding/complete_onboard/view/CompleteOnboardView.dart';
+import '../../appOnBoarding/onboard/view/CompleteOnboardView.dart';
 import '../../appOnBoarding/onboard/binding/OnboardBinding.dart';
 import '../../appOnBoarding/onboard/view/OnboardView.dart';
 import '../../appOnBoarding/onboard/view/GoalOnBoardingView.dart';
@@ -25,12 +24,12 @@ class AppPages {
     GetPage(name: AppRoutes.splash, page: () => const SplashScreen(), binding: SplashBinding()),
     GetPage(name: AppRoutes.onBoard, page: () => const OnboardView(), binding: OnboardBinding()),
     GetPage(name: AppRoutes.goalOnBoard, page: () => const GoalOnBoardingView()),
-    GetPage(name: AppRoutes.completeOnBoard, page: () => const CompleteOnboardView(),arguments: CompleteOnboardBinding()),
+    GetPage(name: AppRoutes.completeOnBoard, page: () =>  CompleteOnboardView(),binding: AuthBinding()),
     GetPage(name: AppRoutes.signup, page: () =>  SignupView(),binding: AuthBinding()),
-    GetPage(name: AppRoutes.login, page: () => const LoginView(),binding: AuthBinding()),
-    GetPage(name: AppRoutes.forgotPass, page: () => const ForgotPassView()),
-    GetPage(name: AppRoutes.verification, page: () => const VerificationView()),
-    GetPage(name: AppRoutes.resetPass, page: () => const ResetPassView()),
+    GetPage(name: AppRoutes.login, page: () =>  LoginView(),binding: AuthBinding()),
+    GetPage(name: AppRoutes.forgotPass, page: () =>  ForgotPassView()),
+    GetPage(name: AppRoutes.verification, page: () =>  VerificationView()),
+    GetPage(name: AppRoutes.resetPass, page: () =>  ResetPassView()),
     GetPage(name: AppRoutes.dashboard, page: () =>  DashboardView(), bindings: [DashBoardBinding(),HomeBinding()]),
   ];
 }

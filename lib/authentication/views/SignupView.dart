@@ -42,7 +42,7 @@ class SignupView extends StatelessWidget with InputValidationMixin {
                                   if (isNameValid(name??'')) {
                                     return null;
                                   } else {
-                                    return 'Enter your name';
+                                    return Strings.textYourName;
                                   }
                                 },
                                 controller: controller.rNameField,
@@ -54,11 +54,11 @@ class SignupView extends StatelessWidget with InputValidationMixin {
                               const SizedBox(height: 15,),
                               TextFormField(
                                 controller: controller.rEmailField,
-                                validator: (password) {
-                                  if (isPasswordValid(password??'')) {
+                                validator: (email) {
+                                  if (isEmailValid(email??'')) {
                                     return null;
                                   } else {
-                                    return 'Enter a valid Email';
+                                    return Strings.textValidEmail;
                                   }
                                 },
                                 decoration: CommonUi.textFieldDecoration(hintText: Strings.emailAddress),
@@ -74,7 +74,7 @@ class SignupView extends StatelessWidget with InputValidationMixin {
                                   if (isPasswordValid(password??'')) {
                                     return null;
                                   } else {
-                                    return 'Enter a valid password';
+                                    return Strings.textValidPassword;
                                   }
                                 },
                                 decoration: CommonUi.textFieldDecoration(hintText: Strings.createPass,

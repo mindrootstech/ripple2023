@@ -12,8 +12,8 @@ class Strings {
   static String onboard_2Desc = 'Take a step and commit to practical actions and make it success. Small or big actions, whatever you choose, there is no wrong step - except no step at all.';
   static String onboard_2Image = 'onboard_2_img';
 
-  static String onboard_3Title = 'Find a action';
-  static String onboard_3Desc = 'We curate and bring the foremost actions around, that affects the planet, where you can choose a action as per commitment level that works for you.';
+  static String onboard_3Title = 'Track progress';
+  static String onboard_3Desc = 'Track your actions, activities and carbon emission estimates, understand the individual and combined impact scale for each completed actions. ';
   static String onboard_3Image = 'onboard_3_img';
 
   static String onboard_4Title = 'Join community';
@@ -83,6 +83,7 @@ class Strings {
   static String resetPass = 'Reset Password';
   static String createPass = 'Create Password';
   static String confirmPass = 'Confirm Password';
+  static String resetPassDesc = 'Set the new password for your account so you can login and access all the features.';
 
   //signup
   static String createAccount = 'Create account';
@@ -124,6 +125,10 @@ class Strings {
 
 
   ///Toast text......
+   static String textValidPassword='Enter a valid password';
+   static String textValidEmail='Enter a valid email';
+   static String textValidOtp='Enter a valid otp';
+   static String textYourName='Enter your name';
    static String textEmailIsRequired='Email is required';
    static String textNameIsRequired='Name is required';
    static String textPleaseEnterValidEmail='Please enter a valid email';

@@ -3,29 +3,16 @@ import 'package:flutter_gif/flutter_gif.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
+import 'package:ripplefect/authentication/controller/AuthController.dart';
 import 'package:ripplefect/helper/constants/CommonUi.dart';
 import 'package:ripplefect/helper/constants/ColorRes.dart';
 import 'package:ripplefect/helper/constants/fonts.dart';
 import 'package:ripplefect/helper/routes/AppRoutes.dart';
 
-class CompleteOnboardView extends StatefulWidget {
-  const CompleteOnboardView({Key? key}) : super(key: key);
 
-  @override
-  State<CompleteOnboardView> createState() => _GifLoderState();
-}
-
-class _GifLoderState extends State<CompleteOnboardView>{
-
-  @override
-  void initState() {
-    super.initState();
-
-  }
-  @override
-  void dispose() {
-    super.dispose();
-  }
+class CompleteOnboardView extends StatelessWidget {
+   CompleteOnboardView({Key? key}) : super(key: key);
+   var controller=Get.find<AuthController>();
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +23,7 @@ class _GifLoderState extends State<CompleteOnboardView>{
         child: Stack(
           children: [
             Positioned(
-              bottom: 0,
+                bottom: 0,
                 top: 0,
                 left: 0,
                 right: 0,
@@ -61,13 +48,17 @@ class _GifLoderState extends State<CompleteOnboardView>{
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    socialLoginImage("google"),
+                    InkWell(
+                        onTap: (){
+                          controller.loginWithFacebook();
+                        },
+                        child: socialLoginImage("google")),
                     socialLoginImage("facebook",isFacebook: true),
                     socialLoginImage("apple"),
                     InkWell(
-                      onTap: (){
-                        Get.toNamed(AppRoutes.signup);
-                      },
+                        onTap: (){
+                          Get.toNamed(AppRoutes.signup);
+                        },
                         child: socialLoginImage("email")
                     ),
                   ],
@@ -97,9 +88,9 @@ class _GifLoderState extends State<CompleteOnboardView>{
     return Container(
 
       child: Lottie.asset('assets/lottie/complete_lottie.json',height: Get.height,
-        width: Get.width,
-        alignment: Alignment.center
-   ),
+          width: Get.width,
+          alignment: Alignment.center
+      ),
     );
   }
 }

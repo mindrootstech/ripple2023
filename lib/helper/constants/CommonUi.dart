@@ -230,8 +230,9 @@ class CommonUi {
           onPressed: () {
             passwordVisible?.value = !passwordVisible.value;
           },
-          icon: passwordVisible?.value==true ?
-          SvgPicture.asset(setSvgImage("eye_close")) : SvgPicture.asset(setSvgImage("logo"))
+          icon: passwordVisible?.value==false ?
+           SvgPicture.asset(setSvgImage("eye_close")):const Icon(Icons.remove_red_eye_outlined,
+            size: 25,)
       ) : const SizedBox(),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.all(Radius.circular(cornerRadius)),
