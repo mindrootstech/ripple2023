@@ -4,6 +4,7 @@ class ColorRes {
 
   static const Color appColor = Color.fromRGBO(1, 135, 95, 1);
   static const Color homeBgColor = Color.fromRGBO(242, 242, 242, 1);
+  static const Color colorDotNonActive = Color.fromRGBO(238, 238, 238, 0.8);
   static const Color colorGray = Color.fromRGBO(217, 217,217, 1);
   static const Color onboardIndicatorActiveColor = Color.fromRGBO(38, 172, 132, 1);
   static const Color onboardIndicatorNonActiveColor = Color.fromRGBO(130, 130, 130, 1);

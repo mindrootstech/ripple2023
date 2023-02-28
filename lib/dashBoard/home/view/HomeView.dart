@@ -263,7 +263,7 @@ class HomeView extends StatelessWidget {
                    alignment: Alignment.center,
                    margin: const EdgeInsets.only(top: 15,bottom: 15),
                    child: DotsIndicator(
-                     decorator: const DotsDecorator(activeColor: ColorRes.white,activeSize: Size.square(8.0),size:Size.square(8.0) ),
+                     decorator: const DotsDecorator(activeColor: ColorRes.white,activeSize: Size.square(10.0),size:Size.square(8.0),color: ColorRes.colorDotNonActive ),
                      dotsCount: controller.modelList.length,
                      position: double.parse(controller.currentIndex.value.toString()),
                    ),
@@ -281,12 +281,19 @@ class HomeView extends StatelessWidget {
          width: Get.width,
          child: Stack(
            children: [
-             TextFormField(
-               style: CommonUi.customTextStyle(),
-               // controller: controller.passField,
-               // obscureText: !controller.passVisible.value,
-               decoration: CommonUi.textFieldDecoration(hintText: Strings.textSearchHint,
-                   passwordVisible: null,contentHorizontal: 48),
+             InkWell(
+               onTap: (){
+                 AllActionSheet().showSheet();
+
+               },
+               child: TextFormField(
+                 enabled: false,
+                 style: CommonUi.customTextStyle(),
+                 // controller: controller.passField,
+                 // obscureText: !controller.passVisible.value,
+                 decoration: CommonUi.textFieldDecoration(hintText: Strings.textSearchHint,
+                     passwordVisible: null,contentHorizontal: 48),
+               ),
              ),
              Positioned(
                top: 0,
@@ -325,7 +332,7 @@ class HomeView extends StatelessWidget {
                        const SizedBox(width:5),
                        SvgPicture.asset(CommonUi.setSvgImage('filter_icon')),
                        const SizedBox(width:5),
-                       Text(Strings.textFilter,style:CommonUi.customTextStyle(fontSize: 12,fontFamily: Fonts.bold),),
+                       Text(Strings.textFilter,style:CommonUi.customTextStyle(fontSize: 13,fontFamily: Fonts.bold),),
                        const Icon(Icons.arrow_drop_down_sharp)
                      ],
                    ),
@@ -345,8 +352,8 @@ class HomeView extends StatelessWidget {
                              child: Row(
                                mainAxisSize: MainAxisSize.min,
                                children: [
-                                 Text(index==0?'Oceans':'Fashion',style:CommonUi.customTextStyle(fontSize: 12,fontFamily: Fonts.bold),),
-                                 const Icon(Icons.clear)
+                                 Text(index==0?'Oceans':'Fashion',style:CommonUi.customTextStyle(fontSize: 13,fontFamily: Fonts.bold),),
+                                 Icon(Icons.clear,size: 18,)
 
                                ],
                              ),
@@ -426,7 +433,7 @@ class HomeView extends StatelessWidget {
                                      Container(
                                        padding:const EdgeInsets.only(left: 8,right: 8,top: 2,bottom: 2),
                                        decoration: CommonUi.curvedBoxDecoration(backgroundColor: ColorRes.appColor),
-                                       child: Text("50 Pts",style: CommonUi.customTextStyle(fontFamily: Fonts.heavy,fontSize: 11),),
+                                       child: Text("50 Pts",style: CommonUi.customTextStyle(fontFamily: Fonts.heavy,fontSize: 12,color: Colors.white),),
                                      )
                                    ],
                                  ),
