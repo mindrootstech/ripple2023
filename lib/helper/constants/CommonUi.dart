@@ -69,17 +69,17 @@ class CommonUi {
 
   static TextStyle customTextStyle(
       {String fontFamily = Fonts.regular,
-        double fontSize = 14,
+        double fontSize = 14.0,
         TextDecoration decoration = TextDecoration.none,
         Color color = ColorRes.colorBlack}) {
     return TextStyle(
         fontFamily: fontFamily,
-        fontSize: fontSize,
+        fontSize: double.parse(fontSize.toString()),
         decoration: decoration,
         color: color);
   }
 
-  static GestureDetector customButton({String buttonText = "Next",fontSize =22,padding=12.0,Function? callBack}) {
+  static GestureDetector customButton({String buttonText = "Next",fontSize =22.0,padding=12.0,Function? callBack}) {
     return GestureDetector(
       onTap: () {
         callBack?.call();

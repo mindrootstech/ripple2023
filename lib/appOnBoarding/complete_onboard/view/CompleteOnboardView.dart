@@ -50,7 +50,7 @@ class _GifLoderState extends State<CompleteOnboardView> with SingleTickerProvide
                 Container(
                   margin: EdgeInsets.symmetric(horizontal: CommonUi.marginLeftRight),
                   child: Text("Congratulations! ", style: CommonUi.customTextStyle(
-                      fontFamily: Fonts.bold,color: ColorRes.white,fontSize: 30),),
+                      fontFamily: Fonts.bold,color: ColorRes.white,fontSize: 30.0),),
                 ),
                 const SizedBox(height: 15,),
                 Container(

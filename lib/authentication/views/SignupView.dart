@@ -62,7 +62,7 @@ class SignupView extends StatelessWidget with InputValidationMixin {
                             ),
                             const SizedBox(height: 50,),
                             Text(Strings.setUpPass, style: CommonUi.customTextStyle(
-                                fontFamily: Fonts.semiBold, fontSize: 18),),
+                                fontFamily: Fonts.semiBold, fontSize: 18.0),),
                             const SizedBox(height: 15,),
                             TextFormField(
 
@@ -80,7 +80,7 @@ class SignupView extends StatelessWidget with InputValidationMixin {
                             ),
                             const SizedBox(height: 10,),
                             Text(Strings.passMustContain, style: CommonUi.customTextStyle(
-                                fontFamily: Fonts.medium, fontSize: 12,color: ColorRes.greyColor),),
+                                fontFamily: Fonts.medium, fontSize: 12.0,color: ColorRes.greyColor),),
                             const Spacer(),
                             // const SizedBox(
                             //   height: 50,
@@ -93,7 +93,7 @@ class SignupView extends StatelessWidget with InputValidationMixin {
                                   style: CommonUi.customTextStyle(
                                       fontFamily: Fonts.medium, fontSize: 12,color: ColorRes.lightTextColor),),
                                 const SizedBox(height: 15,),
-                                CommonUi.customButton(fontSize:18,callBack: (){
+                                CommonUi.customButton(fontSize:18.0,callBack: (){
                                   FocusScope.of(context).unfocus();
                                   if (formGlobalKey.currentState!.validate()) {
                                     // formGlobalKey.currentState!.save();
