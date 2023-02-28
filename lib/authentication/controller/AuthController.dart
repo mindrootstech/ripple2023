@@ -232,11 +232,11 @@ class AuthController extends GetxController{
   // login with facebook
   Future<void> loginWithFacebook() async {
     var facebookLoginResult;
-    // try {
-    //   FacebookAuth.instance.logOut();
-    // } catch (e) {
-    //   print(e);
-    // }
+    try {
+      FacebookAuth.instance.logOut();
+    } catch (e) {
+      print(e);
+    }
     try{
       facebookLoginResult = await FacebookAuth.instance.login(permissions: ['public_profile']);
     }catch(e){
@@ -261,7 +261,7 @@ class AuthController extends GetxController{
         Map<String, dynamic> map = {
           'name': facebookProfile['name'],
           'email':
-          facebookProfile['email'] == null ? "" : facebookProfile['email'],
+          facebookProfile['email'] ?? "",
           'profile_pic':
           "https://graph.facebook.com/${facebookProfile['id']}/picture?type=large&redirect=true&width=600&height=600",
           'login_token': facebookProfile['id'],
