@@ -49,7 +49,7 @@ class ForgotPassView extends StatelessWidget {
                       const Spacer(),
                       CommonUi.customButton(
                           buttonText: Strings.continueTxt,
-                          fontSize: 18,
+                          fontSize: 18.0,
                           callBack: () {
                             controller.fpApiImplementation(false);
                           }),

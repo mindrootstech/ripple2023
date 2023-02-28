@@ -101,7 +101,7 @@ class CommonUi {
         Color textColor = ColorRes.white}) {
     return TextStyle(
         fontFamily: fontFamily,
-        fontSize: fontSize,
+        fontSize: double.parse(fontSize.toString()),
         decoration: decoration,
         color: textColor);
   }

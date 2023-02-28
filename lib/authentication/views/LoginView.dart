@@ -27,7 +27,7 @@ class LoginView extends StatelessWidget {
                     Text(
                       Strings.myEmail,
                       style: CommonUi.customTextStyle(
-                          fontFamily: Fonts.semiBold, fontSize: 18),
+                          fontFamily: Fonts.semiBold, fontSize: 18.0),
                     ),
                     const SizedBox(
                       height: 15,
@@ -83,7 +83,7 @@ class LoginView extends StatelessWidget {
                       children: [
                         CommonUi.customButton(
                             buttonText: Strings.login,
-                            fontSize: 18,
+                            fontSize: 18.0,
                             callBack: () {
                               controller.loginApiImplementation(1, '');
                             }),
