@@ -3,11 +3,11 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:pageviewj/pageviewj.dart';
 import 'package:ripplefect/dashBoard/home/controller/HomeController.dart';
 import 'package:ripplefect/helper/constants/ColorRes.dart';
 import 'package:ripplefect/helper/constants/fonts.dart';
 import 'package:ripplefect/helper/constants/strings.dart';
+import 'package:ripplefect/helper/routes/AppRoutes.dart';
 import '../../../helper/constants/CommonUi.dart';
 
 
@@ -19,32 +19,28 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      body: Stack(children: [
-       Image.asset(CommonUi.setPngImage('app_bg'),
-         fit: BoxFit.fill,
-         height: 650,
-         width: Get.width,
-       ),
-        SafeArea(
-          child: SingleChildScrollView(
-            child: Padding(
-              padding:  EdgeInsets.only(left:CommonUi.marginLeftRight, right: CommonUi.marginLeftRight),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                   getHeaderPartView(),
-                  getFeaturePartView(),
-                    getSearchFieldView(),
-                  forYouPartView(),
-
-
-
-                ],
-              ),
+      body: SingleChildScrollView(
+        child: Stack(children: [
+         Image.asset(CommonUi.setPngImage('app_bg'),
+           fit: BoxFit.fill,
+           height: 650,
+           width: Get.width,
+         ),
+          Padding(
+            padding:  EdgeInsets.only(left:CommonUi.marginLeftRight, right: CommonUi.marginLeftRight,top: 20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                getHeaderPartView(),
+                getFeaturePartView(),
+                getSearchFieldView(),
+                forYouPartView(),
+                suggestionsView()
+              ],
             ),
           ),
-        ),
-      ]),
+        ]),
+      ),
     );
   }
 
@@ -58,7 +54,7 @@ class HomeView extends StatelessWidget {
          Text(
            "Hello, User!",
            style: CommonUi.customTextStyle(
-               fontSize: FontSize.font28,
+               fontSize: 26,
                fontFamily: Fonts.bold,
                color: Colors.white),
          ),
@@ -74,14 +70,14 @@ class HomeView extends StatelessWidget {
                        style: CommonUi.customTextStyle(
                            fontFamily: Fonts.bold,
                            color: ColorRes.white,
-                           fontSize: FontSize.font22),
+                           fontSize: 20),
                      ),
                      TextSpan(
                        text: '  points.',
                        style: CommonUi.customTextStyle(
                            fontFamily: Fonts.bold,
                            color: ColorRes.white,
-                           fontSize: FontSize.font12),
+                           fontSize: 12),
                      ),
                    ],
                  ),
@@ -98,7 +94,7 @@ class HomeView extends StatelessWidget {
                    children: [
                      Text("View Rewards",
                          style: CommonUi.customTextStyle(
-                             fontSize: FontSize.font14,
+                             fontSize: 12,
                              fontFamily: Fonts.semiBold,
                              color: ColorRes.white)),
                      const SizedBox(
@@ -123,7 +119,7 @@ class HomeView extends StatelessWidget {
              children: [
                Text("Complete profile and get 20 reward points!",
                    style: CommonUi.customTextStyle(
-                     fontSize: FontSize.font12,
+                     fontSize: 11,
                      color: ColorRes.colorBlack,
                      fontFamily: Fonts.medium,
                    )),
@@ -136,7 +132,7 @@ class HomeView extends StatelessWidget {
                      radius: 8.0),
                  child: Text("Profile",
                      style: CommonUi.customTextStyle(
-                         fontSize: FontSize.font12,
+                         fontSize: 11,
                          fontFamily: Fonts.medium,
                          color: ColorRes.buttonColor)),
                ),
@@ -155,15 +151,15 @@ class HomeView extends StatelessWidget {
          Text(
            "Featured Challenges",
            style: CommonUi.customTextStyle(
-               fontSize: FontSize.font28,
-               fontFamily: Fonts.bold,
+               fontSize: 22,
+               fontFamily: Fonts.heavy,
                color: Colors.white),
          ),
          const SizedBox(height: 15,),
 
          CarouselSlider.builder(
            options: CarouselOptions(
-               height: 300,
+               height: 330,
                aspectRatio: 16 / 9,
                viewportFraction: 0.8,
                initialPage: 0,
@@ -226,19 +222,19 @@ class HomeView extends StatelessWidget {
                                  Expanded(
                                    child: Column(
                                      children: [
-                                       Text("The Vegan Meal Challenge",style: CommonUi.customTextStyle(fontFamily: Fonts.bold,fontSize: 14),),
+                                       Text("The Vegan Meal Challenge",style: CommonUi.customTextStyle(fontFamily: Fonts.semiBold),),
                                        const SizedBox(height: 5,),
-                                       Text("Nov 20, 2022 to Jan 20, 2023",style: CommonUi.customTextStyle(fontSize: 13)),
+                                       Text("Nov 20, 2022 to Jan 20, 2023",style: CommonUi.customTextStyle(fontSize: 12)),
                                      ],
                                    ),
                                  )
                                ],
                              ),
                              const SizedBox(height: 10,),
-                             Text("Focus on what you eat, reduce food waste, make more sustainable food choices",style: CommonUi.customTextStyle(fontFamily: Fonts.bold,fontSize: 14),),
+                             Text("Focus on what you eat, reduce food waste, make more sustainable food choices",style: CommonUi.customTextStyle(fontFamily: Fonts.medium),),
                              Padding(
                                padding: const EdgeInsets.only(left: 30,right: 30,top: 8),
-                               child: CommonUi.customButton(buttonText: "Join Challenge",fontSize: FontSize.font14,padding: 10.0),
+                               child: CommonUi.customButton(buttonText: "Join Challenge",padding: 10.0),
                              )
                            ],
                          ),
@@ -276,6 +272,7 @@ class HomeView extends StatelessWidget {
        child: Stack(
          children: [
            TextFormField(
+             style: CommonUi.customTextStyle(),
              // controller: controller.passField,
              // obscureText: !controller.passVisible.value,
              decoration: CommonUi.textFieldDecoration(hintText: Strings.textSearchHint,
@@ -298,11 +295,11 @@ class HomeView extends StatelessWidget {
        child: Column(
          crossAxisAlignment: CrossAxisAlignment.start,
          children: [
-           Text(Strings.textForYou,style:CommonUi.customTextStyle(fontSize: 22,fontFamily: Fonts.bold),),
+           Text(Strings.textForYou,style:CommonUi.customTextStyle(fontSize: 20,fontFamily: Fonts.heavy),),
            const SizedBox(
              height: 8,
            ),
-           Text(Strings.textSuggestedBased,style:CommonUi.customTextStyle(fontSize: 15),),
+           Text(Strings.textSuggestedBased,style:CommonUi.customTextStyle(fontSize: 14),),
            Row(
              children: [
                Container(
@@ -313,7 +310,7 @@ class HomeView extends StatelessWidget {
                    mainAxisSize: MainAxisSize.min,
                    children: [
                      SvgPicture.asset(CommonUi.setSvgImage('filter_icon')),
-                     Text(Strings.textFilter,style:CommonUi.customTextStyle(fontSize: 13,fontFamily: Fonts.bold),),
+                     Text(Strings.textFilter,style:CommonUi.customTextStyle(fontSize: 12,fontFamily: Fonts.bold),),
                      const Icon(Icons.arrow_drop_down_sharp)
 
                    ],
@@ -334,7 +331,7 @@ class HomeView extends StatelessWidget {
                            child: Row(
                              mainAxisSize: MainAxisSize.min,
                              children: [
-                               Text(index==0?'Oceans':'Fashion',style:CommonUi.customTextStyle(fontSize: 13,fontFamily: Fonts.bold),),
+                               Text(index==0?'Oceans':'Fashion',style:CommonUi.customTextStyle(fontSize: 12,fontFamily: Fonts.bold),),
                                const Icon(Icons.clear)
 
                              ],
@@ -352,4 +349,126 @@ class HomeView extends StatelessWidget {
        ),
      );
   }
+
+
+   Widget suggestionsView() {
+     return Column(
+       crossAxisAlignment: CrossAxisAlignment.start,
+       children: [
+         Container(
+           height: 300,
+           width: 300,
+           child: ListView.builder(
+               physics: const BouncingScrollPhysics(),
+               padding: EdgeInsets.zero,
+               scrollDirection: Axis.horizontal,
+               itemCount: 10,
+               itemBuilder: (BuildContext context, int index) {
+                 return Container(
+                   margin: EdgeInsets.only(right: 10),
+                   width: 175,
+                   child: Stack(
+                     children: [
+                       Column(
+                         children: [
+                           Expanded(
+                             child: SizedBox(
+                               width: 300,
+                               height: 300,
+                               child: ClipRRect(
+                                 borderRadius: const BorderRadius.only(topLeft: Radius.circular(20),topRight: Radius.circular(20)),
+                                 child: Image.network(
+                                   "https://images.pexels.com/photos/60597/dahlia-red-blossom-bloom-60597.jpeg",
+                                   fit: BoxFit.cover,
+                                   loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress){
+                                     if (loadingProgress == null) return child;
+                                     return  Center(
+                                       child: CircularProgressIndicator(
+                                         color: Colors.white70,
+                                         value: loadingProgress.expectedTotalBytes != null
+                                             ? loadingProgress.cumulativeBytesLoaded /
+                                             loadingProgress.expectedTotalBytes!
+                                             : null,
+                                       ),
+                                     );
+                                   },
+                                 ),
+                               ),
+                             ),
+                           ),
+                           Container(
+                             decoration: const BoxDecoration(
+                                 color: Colors.white,
+                                 borderRadius: BorderRadius.only(bottomRight: Radius.circular(20),bottomLeft: Radius.circular(20))
+                             ),
+                             padding: const EdgeInsets.all(14),
+                             child: Column(
+                               children: [
+                                 Row(
+                                   children: [
+                                     Image.asset(CommonUi.setPngImage("test_company")),
+                                     Expanded(
+                                       child: Container(
+                                         padding:EdgeInsets.only(left: 8,right: 8,top: 2,bottom: 2)
+                                         ,decoration: CommonUi.curvedBoxDecoration(backgroundColor: ColorRes.appColor),
+                                         child: Text("50 Pts",style: CommonUi.customTextStyle(fontFamily: Fonts.heavy,fontSize: 11),),
+                                       ),
+                                     )
+                                   ],
+                                 ),
+                                 const SizedBox(height: 8,),
+                                 Padding(
+                                   padding: const EdgeInsets.only(left: 15),
+                                   child: Text("Advocate for the restoration of seagrass in our oceans.",textAlign: TextAlign.start,style: CommonUi.customTextStyle(fontFamily: Fonts.bold,fontSize: 15),),
+                                 ),
+                                 Container(
+                                   margin: EdgeInsets.only(top: 9),
+                                   padding: EdgeInsets.only(left: 4,right: 4),
+                                   color: ColorRes.colorGray,
+                                 ),
+                                 Row(
+                                   children: [
+                                     Spacer(),
+                                     Wrap(
+                                       spacing: 4,
+                                       children: [
+                                         ClipOval(
+                                           child: Container(
+                                             color: ColorRes.greyColor,
+                                           ),
+                                         ),
+                                         ClipOval(
+                                           child: Container(
+                                             color: ColorRes.greyColor,
+                                           ),
+                                         ),
+                                         ClipOval(
+                                           child: Container(
+                                             color: ColorRes.greyColor,
+                                           ),
+                                         ),
+                                       ],
+                                     )
+                                   ],
+                                 )
+                               ],
+                             ),
+                           )
+                         ],
+                       ),
+                       Container(
+                         alignment: Alignment.topRight,
+                         padding: const EdgeInsets.only(right: 5,top: 5),
+                         child: Image.asset(CommonUi.setPngImage("heart"),height: 25,width: 25,),
+                       ),
+                     ],
+                   ),
+                 );
+               }
+           ),
+         ),
+       ],
+     );
+   }
+
 }

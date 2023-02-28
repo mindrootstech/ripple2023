@@ -31,7 +31,7 @@ class PageViewItem extends StatelessWidget {
                   Text(
                     title,
                     style: CommonUi.customTextStyle(
-                        fontSize: FontSize.font32,
+                        fontSize: 30,
                         fontFamily: Fonts.semiBold),
                   ),
                   const SizedBox(

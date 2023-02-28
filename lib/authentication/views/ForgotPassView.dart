@@ -32,12 +32,13 @@ class ForgotPassView extends StatelessWidget {
                         Strings.myEmail,
                         style: CommonUi.customTextStyle(
                             fontFamily: Fonts.semiBold,
-                            fontSize: FontSize.font20),
+                            fontSize: 18),
                       ),
                       const SizedBox(
                         height: 15,
                       ),
                       TextFormField(
+                        style: CommonUi.customTextStyle(),
                         controller: controller.fpEmailField,
                         decoration: CommonUi.textFieldDecoration(
                             hintText: "xyzabc@gmail.com"),
@@ -48,7 +49,7 @@ class ForgotPassView extends StatelessWidget {
                       const Spacer(),
                       CommonUi.customButton(
                           buttonText: Strings.continueTxt,
-                          fontSize: FontSize.font20,
+                          fontSize: 18,
                           callBack: () {
                             controller.fpApiImplementation(false);
                           }),

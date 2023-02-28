@@ -97,7 +97,7 @@ class GoalPageItem extends StatelessWidget {
                                           ? ColorRes.bluecolor
                                           : ColorRes.colorBlack,
                                       fontFamily: Fonts.semiBold,
-                                      fontSize: FontSize.font20),),
+                                      fontSize: 18),),
                                 )
                               ],
                             ) : Row(
@@ -109,11 +109,11 @@ class GoalPageItem extends StatelessWidget {
                                     style: CommonUi.customTextStyle(
                                       color: ColorRes.colorBlack,
                                       fontFamily: Fonts.semiBold,
-                                      fontSize: FontSize.font20),),
+                                      fontSize: 18),),
                                 ),
                                 const Spacer(),
                                 Text(model.limits!,style: CommonUi.customTextStyle(
-                                  fontSize: FontSize.font20,
+                                  fontSize: 18,
                                   fontFamily: Fonts.medium
                                 ),),
                                 const SizedBox(width: 12,)

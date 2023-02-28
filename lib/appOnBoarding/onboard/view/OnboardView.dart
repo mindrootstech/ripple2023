@@ -94,8 +94,7 @@ class OnboardView extends StatelessWidget {
                                 text: Strings.login,
                                 style: CommonUi.customTextStyle(
                                     color: ColorRes.buttonColor,
-                                    decoration:
-                                    TextDecoration.underline),
+                                    decoration: TextDecoration.underline),
                               ),
                             ],
                           ),

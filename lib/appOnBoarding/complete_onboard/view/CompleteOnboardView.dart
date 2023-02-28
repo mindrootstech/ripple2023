@@ -50,7 +50,7 @@ class _GifLoderState extends State<CompleteOnboardView> with SingleTickerProvide
                 Container(
                   margin: EdgeInsets.symmetric(horizontal: CommonUi.marginLeftRight),
                   child: Text("Congratulations! ", style: CommonUi.customTextStyle(
-                      fontFamily: Fonts.bold,color: ColorRes.white,fontSize: FontSize.font32),),
+                      fontFamily: Fonts.bold,color: ColorRes.white,fontSize: 30),),
                 ),
                 const SizedBox(height: 15,),
                 Container(
@@ -58,7 +58,7 @@ class _GifLoderState extends State<CompleteOnboardView> with SingleTickerProvide
                   child: Text("You just earned 20 points for completing onboarding. Create an account to claim your reward!",
                     textAlign: TextAlign.center,
                     style: CommonUi.customTextStyle(
-                        fontFamily: Fonts.semiBold,color: ColorRes.white,fontSize: FontSize.font20),),
+                        fontFamily: Fonts.semiBold,color: ColorRes.white,fontSize: 18),),
                 ),
                 const SizedBox(height: 40,),
                 Row(

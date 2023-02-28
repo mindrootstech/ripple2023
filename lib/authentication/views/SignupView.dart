@@ -32,7 +32,7 @@ class SignupView extends StatelessWidget with InputValidationMixin {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(Strings.myName, style: CommonUi.customTextStyle(
-                                fontFamily: Fonts.semiBold, fontSize: FontSize.font20),),
+                                fontFamily: Fonts.semiBold, fontSize: 18),),
                             const SizedBox(height: 15,),
                             TextFormField(
                               validator: (name) {
@@ -47,7 +47,7 @@ class SignupView extends StatelessWidget with InputValidationMixin {
                             ),
                             const SizedBox(height: 25,),
                             Text(Strings.myEmail, style: CommonUi.customTextStyle(
-                                fontFamily: Fonts.semiBold, fontSize: FontSize.font20),),
+                                fontFamily: Fonts.semiBold, fontSize: 18),),
                             const SizedBox(height: 15,),
                             TextFormField(
                               controller: controller.rEmailField,
@@ -62,7 +62,7 @@ class SignupView extends StatelessWidget with InputValidationMixin {
                             ),
                             const SizedBox(height: 50,),
                             Text(Strings.setUpPass, style: CommonUi.customTextStyle(
-                                fontFamily: Fonts.semiBold, fontSize: FontSize.font20),),
+                                fontFamily: Fonts.semiBold, fontSize: 18),),
                             const SizedBox(height: 15,),
                             TextFormField(
 
@@ -80,7 +80,7 @@ class SignupView extends StatelessWidget with InputValidationMixin {
                             ),
                             const SizedBox(height: 10,),
                             Text(Strings.passMustContain, style: CommonUi.customTextStyle(
-                                fontFamily: Fonts.medium, fontSize: FontSize.font12,color: ColorRes.greyColor),),
+                                fontFamily: Fonts.medium, fontSize: 12,color: ColorRes.greyColor),),
                             const Spacer(),
                             // const SizedBox(
                             //   height: 50,
@@ -91,9 +91,9 @@ class SignupView extends StatelessWidget with InputValidationMixin {
                               children: [
                                 Text(Strings.acceptTerms,textAlign: TextAlign.center,
                                   style: CommonUi.customTextStyle(
-                                      fontFamily: Fonts.medium, fontSize: FontSize.font12,color: ColorRes.lightTextColor),),
+                                      fontFamily: Fonts.medium, fontSize: 12,color: ColorRes.lightTextColor),),
                                 const SizedBox(height: 15,),
-                                CommonUi.customButton(fontSize:FontSize.font20,callBack: (){
+                                CommonUi.customButton(fontSize:18,callBack: (){
                                   FocusScope.of(context).unfocus();
                                   if (formGlobalKey.currentState!.validate()) {
                                     // formGlobalKey.currentState!.save();

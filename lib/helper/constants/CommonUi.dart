@@ -48,7 +48,7 @@ class CommonUi {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(left: 24.0,bottom: 16),
-                  child: Text(title,style: CommonUi.customTextStyle(fontSize: FontSize.font26,fontFamily: Fonts.semiBold,color: Colors.white),),
+                  child: Text(title,style: CommonUi.customTextStyle(fontSize: 24,fontFamily: Fonts.semiBold,color: Colors.white),),
                 ),
                 Expanded(
                   child: Container(
@@ -69,7 +69,7 @@ class CommonUi {
 
   static TextStyle customTextStyle(
       {String fontFamily = Fonts.regular,
-        double fontSize = FontSize.font16,
+        double fontSize = 14,
         TextDecoration decoration = TextDecoration.none,
         Color color = ColorRes.colorBlack}) {
     return TextStyle(
@@ -79,7 +79,7 @@ class CommonUi {
         color: color);
   }
 
-  static GestureDetector customButton({String buttonText = "Next",fontSize =FontSize.font22,padding=12.0,Function? callBack}) {
+  static GestureDetector customButton({String buttonText = "Next",fontSize =22,padding=12.0,Function? callBack}) {
     return GestureDetector(
       onTap: () {
         callBack?.call();

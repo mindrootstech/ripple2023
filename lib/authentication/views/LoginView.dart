@@ -27,7 +27,7 @@ class LoginView extends StatelessWidget {
                     Text(
                       Strings.myEmail,
                       style: CommonUi.customTextStyle(
-                          fontFamily: Fonts.semiBold, fontSize: FontSize.font20),
+                          fontFamily: Fonts.semiBold, fontSize: 18),
                     ),
                     const SizedBox(
                       height: 15,
@@ -43,7 +43,7 @@ class LoginView extends StatelessWidget {
                     Text(
                       Strings.myPass,
                       style: CommonUi.customTextStyle(
-                          fontFamily: Fonts.semiBold, fontSize: FontSize.font20),
+                          fontFamily: Fonts.semiBold, fontSize: 18),
                     ),
                     const SizedBox(
                       height: 15,
@@ -71,7 +71,7 @@ class LoginView extends StatelessWidget {
                           Strings.forgotMyPass,
                           style: CommonUi.customTextStyle(
                               fontFamily: Fonts.medium,
-                              fontSize: FontSize.font12,
+                              fontSize: 12,
                               color: ColorRes.greyColor),
                         ),
                       ),
@@ -83,7 +83,7 @@ class LoginView extends StatelessWidget {
                       children: [
                         CommonUi.customButton(
                             buttonText: Strings.login,
-                            fontSize: FontSize.font20,
+                            fontSize: 18,
                             callBack: () {
                               controller.loginApiImplementation(1, '');
                             }),
@@ -93,7 +93,7 @@ class LoginView extends StatelessWidget {
                         Text(
                           Strings.or,
                           style: CommonUi.customTextStyle(
-                              fontFamily: Fonts.bold, color: ColorRes.greyColor),
+                              fontFamily: Fonts.semiBold, color: ColorRes.greyColor),
                         ),
                         const SizedBox(
                           height: 20,
@@ -101,7 +101,7 @@ class LoginView extends StatelessWidget {
                         Text(
                           Strings.loginUsing,
                           style: CommonUi.customTextStyle(
-                              fontFamily: Fonts.bold, color: ColorRes.greyColor),
+                              fontFamily: Fonts.semiBold, color: ColorRes.greyColor),
                         ),
                         const SizedBox(
                           height: 5,

@@ -81,9 +81,9 @@ class VerificationView extends StatelessWidget {
                         alignment: Alignment.center,
                         margin: const EdgeInsets.only(bottom: 50),
                         child: Text("${Strings.resentAfter} ${controller.counter.value}",
-                          style: CommonUi.customTextStyle(fontSize: FontSize.font14,
+                          style: CommonUi.customTextStyle(
                               decoration: TextDecoration.underline,
-                              fontFamily: Fonts.bold,
+                              fontFamily: Fonts.semiBold,
                               color: ColorRes.greyColor),),
                       ),
                     }else...{
@@ -96,7 +96,7 @@ class VerificationView extends StatelessWidget {
                           alignment: Alignment.center,
                           margin: const EdgeInsets.only(bottom: 50),
                           child: Text(Strings.resentCode,
-                            style: CommonUi.customTextStyle(fontSize: FontSize.font14,
+                            style: CommonUi.customTextStyle(fontSize: 14,
                                 decoration: TextDecoration.underline,
                                 fontFamily: Fonts.bold,
                                 color: ColorRes.greyColor),),
@@ -105,7 +105,7 @@ class VerificationView extends StatelessWidget {
 
                     },
 
-                    CommonUi.customButton(buttonText:Strings.continueTxt,fontSize:FontSize.font20,callBack: (){
+                    CommonUi.customButton(buttonText:Strings.continueTxt,fontSize:18,callBack: (){
                       if(controller.counter.value>0){
                         controller.vcApiImplementation();
                       }else{

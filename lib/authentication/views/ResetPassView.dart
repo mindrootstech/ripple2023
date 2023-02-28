@@ -30,7 +30,7 @@ class ResetPassView extends StatelessWidget {
                       const SizedBox(height: 30,),
 
                       Text(Strings.createPass, style: CommonUi.customTextStyle(
-                          fontFamily: Fonts.semiBold, fontSize: FontSize.font20),),
+                          fontFamily: Fonts.semiBold, fontSize: 18),),
                       const SizedBox(height: 15,),
                       TextFormField(
                         controller: controller.resetPassField,
@@ -42,7 +42,7 @@ class ResetPassView extends StatelessWidget {
                       const SizedBox(height: 25,),
 
                       Text(Strings.confirmPass, style: CommonUi.customTextStyle(
-                          fontFamily: Fonts.semiBold, fontSize: FontSize.font20),),
+                          fontFamily: Fonts.semiBold, fontSize: 18),),
                       const SizedBox(height: 15,),
                       TextFormField(
                         controller: controller.confirmPassField,
@@ -52,7 +52,7 @@ class ResetPassView extends StatelessWidget {
                       ),
 
                       const Spacer(),
-                      CommonUi.customButton(buttonText:Strings.continueTxt,fontSize:FontSize.font20,callBack: (){
+                      CommonUi.customButton(buttonText:Strings.continueTxt,fontSize:18,callBack: (){
                         controller.resetPassApiImplementation();
 
                       }),
