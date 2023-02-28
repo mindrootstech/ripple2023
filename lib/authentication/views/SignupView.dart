@@ -89,9 +89,12 @@ class SignupView extends StatelessWidget with InputValidationMixin {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text(Strings.acceptTerms,textAlign: TextAlign.center,
-                                  style: CommonUi.customTextStyle(
-                                      fontFamily: Fonts.medium, fontSize: 12,color: ColorRes.lightTextColor),),
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 40,right: 40),
+                                  child: Text(Strings.acceptTerms,textAlign: TextAlign.center,
+                                    style: CommonUi.customTextStyle(
+                                        fontFamily: Fonts.medium, fontSize: 12,color: ColorRes.lightTextColor),),
+                                ),
                                 const SizedBox(height: 15,),
                                 CommonUi.customButton(fontSize:18.0,callBack: (){
                                   FocusScope.of(context).unfocus();
