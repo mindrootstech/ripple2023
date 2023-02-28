@@ -26,7 +26,7 @@ class CommonUi {
         children: [
           SizedBox(
             width: Get.width,
-            child: SvgPicture.asset(CommonUi.setSvgImage("app_bg"),fit: BoxFit.fitHeight,
+            child: SvgPicture.asset(CommonUi.setSvgImage("app_bg"),fit: BoxFit.cover,
               width: Get.width,),
           ),
           SafeArea(
