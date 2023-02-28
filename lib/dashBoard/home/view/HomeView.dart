@@ -20,6 +20,7 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return Scaffold(
+      backgroundColor: ColorRes.homeBgColor,
       resizeToAvoidBottomInset: false,
       body: SingleChildScrollView(
         child: Stack(children: [
@@ -29,7 +30,7 @@ class HomeView extends StatelessWidget {
            width: Get.width,
          ),
           Padding(
-            padding:  const EdgeInsets.only(top: 20),
+            padding:  const EdgeInsets.only(top: 30),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -63,7 +64,7 @@ class HomeView extends StatelessWidget {
                  color: Colors.white),
            ),
            Container(
-             padding: const EdgeInsets.only(top: 16, bottom: 6, left: 8, right: 8),
+             padding: const EdgeInsets.only(top: 16, bottom: 6,),
              child: Row(
                children: [
                  Text.rich(
@@ -117,13 +118,13 @@ class HomeView extends StatelessWidget {
            ),
            Container(
              margin: const EdgeInsets.only(top: 18,bottom: 16),
-             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 13),
+             padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
              decoration: CommonUi.curvedBoxDecoration(),
              child: Row(
                children: [
                  Text("Complete profile and get 20 reward points!",
                      style: CommonUi.customTextStyle(
-                       fontSize: 11,
+                       fontSize: 12,
                        color: ColorRes.colorBlack,
                        fontFamily: Fonts.medium,
                      )),
@@ -166,7 +167,7 @@ class HomeView extends StatelessWidget {
 
            CarouselSlider.builder(
              options: CarouselOptions(
-                 height: 330,
+                 height: 350,
                  aspectRatio: 16 / 9,
                  viewportFraction: 0.8,
                  initialPage: 0,
@@ -241,7 +242,7 @@ class HomeView extends StatelessWidget {
                                Text("Focus on what you eat, reduce food waste, make more sustainable food choices",style: CommonUi.customTextStyle(fontFamily: Fonts.medium),),
                                Padding(
                                  padding: const EdgeInsets.only(left: 30,right: 30,top: 8),
-                                 child: CommonUi.customButton(buttonText: "Join Challenge",padding: 10.0),
+                                 child: CommonUi.customButton(buttonText: "Join Challenge",padding: 10.0,fontSize: 14.0),
                                )
                              ],
                            ),
@@ -262,7 +263,7 @@ class HomeView extends StatelessWidget {
                    alignment: Alignment.center,
                    margin: const EdgeInsets.only(top: 15,bottom: 15),
                    child: DotsIndicator(
-                     decorator: const DotsDecorator(activeColor: ColorRes.white,activeSize: Size.square(16.0),size:Size.square(12.0) ),
+                     decorator: const DotsDecorator(activeColor: ColorRes.white,activeSize: Size.square(8.0),size:Size.square(8.0) ),
                      dotsCount: controller.modelList.length,
                      position: double.parse(controller.currentIndex.value.toString()),
                    ),
@@ -370,7 +371,7 @@ class HomeView extends StatelessWidget {
        crossAxisAlignment: CrossAxisAlignment.start,
        children: [
          Container(
-           height: 300,
+           height: 250,
            width: Get.width,
            child: ListView.builder(
                physics: const BouncingScrollPhysics(),

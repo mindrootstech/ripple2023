@@ -83,7 +83,7 @@ class OnboardView extends StatelessWidget {
                         if(controller.pageNo.value==3){
                           Get.toNamed(AppRoutes.login);
                         }else{
-                          Get.offAllNamed(AppRoutes.completeOnBoard);
+                          Get.toNamed(AppRoutes.completeOnBoard);
                         }
                       },
                       child: Padding(
