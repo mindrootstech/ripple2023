@@ -27,5 +27,7 @@ class ColorRes {
   static const Color colorWhiteGradientBottom = Color.fromRGBO(198,198,198, 1);
   static const Color socialLoginColors = Color.fromRGBO(224,224,224, 1);
   static const Color socialLoginFacebookColors = Color.fromRGBO(66,103,178, 1);
+  static const Color colorLightGrey = Color.fromRGBO(227, 233, 254, 1);
+
 
 }

@@ -111,6 +111,9 @@ class Strings {
   static String textSuggestedBased = 'Suggested based on your profile interests.';
   static String textSeeAllActions = 'See All Actions';
   static String textAllActions = 'All Actions';
+  static String textSearchActionBusiness = 'Search action, business, industry...';
+  static String textCategories = 'Categories';
+  static String textActions = 'Actions';
 
 
 

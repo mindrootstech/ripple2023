@@ -655,6 +655,17 @@ class CommonUi {
         fontSize: 16.0);
   }
 
+  static getBorderRadius(double radius, Color color, {Color borderColor = Colors.transparent,double borderWidth=0.0}){
+    return BoxDecoration(
+        borderRadius: BorderRadius.circular(radius),
+        color: color,
+        border: Border.all(
+          color: borderColor,
+          width:borderWidth,
+        )
+    );
+  }
+
 }
 
 
