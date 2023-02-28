@@ -109,6 +109,8 @@ class Strings {
   static String textForYou = 'For you';
   static String textFilter = 'Filter';
   static String textSuggestedBased = 'Suggested based on your profile interests.';
+  static String textSeeAllActions = 'See All Actions';
+  static String textAllActions = 'All Actions';
 
 
 
