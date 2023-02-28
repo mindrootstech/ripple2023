@@ -293,6 +293,7 @@ class AuthController extends GetxController{
 
     try {
       var data = await _googleSignIn.signIn();
+      print(data!.email);
       // onGoogleSignInResult(data);
     } catch (error) {
       var er = error;

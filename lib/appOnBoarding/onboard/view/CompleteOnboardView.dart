@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_gif/flutter_gif.dart';
 import 'package:flutter_svg/svg.dart';
@@ -50,11 +52,24 @@ class CompleteOnboardView extends StatelessWidget {
                   children: [
                     InkWell(
                         onTap: (){
-                          controller.loginWithFacebook();
+                          controller.loginWithGoogle();
                         },
                         child: socialLoginImage("google")),
-                    socialLoginImage("facebook",isFacebook: true),
-                    socialLoginImage("apple"),
+
+                    InkWell(
+                      onTap: (){
+                        controller.loginWithFacebook();
+                      },
+                        child: socialLoginImage("facebook",isFacebook: true)),
+
+
+                    if(Platform.isIOS)...{
+                      InkWell(
+                        onTap: (){
+
+                        }, child: socialLoginImage("apple")),
+                    },
+
                     InkWell(
                         onTap: (){
                           Get.toNamed(AppRoutes.signup);
