@@ -15,18 +15,15 @@ class CompleteOnboardView extends StatefulWidget {
   State<CompleteOnboardView> createState() => _GifLoderState();
 }
 
-class _GifLoderState extends State<CompleteOnboardView> with SingleTickerProviderStateMixin{
+class _GifLoderState extends State<CompleteOnboardView>{
 
-  late FlutterGifController _animationCtrl;
   @override
   void initState() {
     super.initState();
-    _animationCtrl = FlutterGifController(vsync: this,duration: const Duration(seconds:1));
-    _animationCtrl.repeat(min:0, max:100, period:const Duration(seconds:4));
+
   }
   @override
   void dispose() {
-    _animationCtrl.dispose();
     super.dispose();
   }
 

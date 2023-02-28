@@ -7,7 +7,7 @@ import 'package:ripplefect/helper/constants/CommonUi.dart';
 import '../../../helper/constants/strings.dart';
 import '../model/OnboardModel.dart';
 
-class OnboardController extends GetxController with GetSingleTickerProviderStateMixin{
+class OnboardController extends GetxController {
   var apiProvider=ApiProvider();
 
   var skipText = "SKIP".obs;
@@ -27,17 +27,19 @@ class OnboardController extends GetxController with GetSingleTickerProviderState
   var moreList_2 = <Goal>[].obs;
   var goalList_3 = <Goal>[].obs;
   var selectedIndex=0.obs;
-  late FlutterGifController animationCtrl;
 
 
   @override
   void onInit() {
-    animationCtrl = FlutterGifController(vsync: this,duration: const Duration(seconds:1));
-    animationCtrl.repeat(min:0, max:100, period:const Duration(seconds:4));
     pControllers.add(PageController());
     pControllers.add(PageController());
     getOnBoardingData();
     super.onInit();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   Future<void> getOnBoardingData() async {
@@ -60,5 +62,6 @@ class OnboardController extends GetxController with GetSingleTickerProviderState
 
     });
   }
+
 
 }

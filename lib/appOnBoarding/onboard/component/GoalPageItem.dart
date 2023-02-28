@@ -87,7 +87,10 @@ class GoalPageItem extends StatelessWidget {
                                 right: 8),
                             child: type != 3 ? Row(
                               children: [
-                                SvgPicture.string(model.icon??''),
+                                SvgPicture.string(model.icon??'',
+                                fit: BoxFit.fill,
+                                height: 36,
+                                width: 36,),
                                 const SizedBox(width: 22,),
                                 Expanded(
                                   child: AutoSizeText(model.name,

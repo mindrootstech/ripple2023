@@ -74,23 +74,6 @@ class AuthController extends GetxController{
     //register user Api
   void  registerApiImplementation(int registerType,String socialToken) async {
     var userEmail=rEmailField.text.trim();
-    final bool validEmail = EmailValidator.validate(userEmail);
-    if(rNameField.text.isEmpty){
-      CommonUi.showToast(Strings.textNameIsRequired);
-      return;
-    }else if(rEmailField.text.isEmpty){
-      CommonUi.showToast(Strings.textEmailIsRequired);
-      return;
-    }else if(validEmail==false){
-      CommonUi.showToast(Strings.textPleaseEnterValidEmail);
-      return;
-    }else if(rPassField.text.isEmpty){
-      CommonUi.showToast(Strings.textPasswordIsRequired);
-      return;
-    }else if(rPassField.text.length<8){
-      CommonUi.showToast(Strings.textPasswordLength);
-      return;
-    }
     loader.value=true;
     await apiProvider.registerApi(rNameField.text,userEmail, rPassField.text,registerType,socialToken).then((value){
       if(value=='error'){
