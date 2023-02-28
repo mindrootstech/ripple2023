@@ -3,4 +3,6 @@
     <string name="app_name">"Rippl"</string>
     <string name="facebook_app_id">2700880193474800</string>
     <string name="fb_login_protocol_scheme">fb2700880193474800</string>
+    <string name="facebook_client_token">4388b6116baeccaf3e1804eefa3dbd28</string>
+
 </resources>
