@@ -6,8 +6,7 @@ import '../../appOnBoarding/onboard/view/CompleteOnboardView.dart';
 import '../../appOnBoarding/onboard/binding/OnboardBinding.dart';
 import '../../appOnBoarding/onboard/view/OnboardView.dart';
 import '../../appOnBoarding/onboard/view/GoalOnBoardingView.dart';
-import '../../appOnBoarding/splash/binding/splash_binding.dart';
-import '../../appOnBoarding/splash/view/splash_view.dart';
+import '../../appOnBoarding/splash/splash_view.dart';
 import '../../authentication/views/ForgotPassView.dart';
 import '../../authentication/views/LoginView.dart';
 import '../../authentication/views/ResetPassView.dart';
@@ -17,11 +16,11 @@ import '../../dashBoard/home/binding/HomeBinding.dart';
 import 'AppRoutes.dart';
 
 class AppPages {
-  static const initial = AppRoutes.dashboard;
+  static const initial = AppRoutes.splash;
 
 
   static final routes = [
-    GetPage(name: AppRoutes.splash, page: () => const SplashScreen(), binding: SplashBinding()),
+    GetPage(name: AppRoutes.splash, page: () => const SplashScreen()),
     GetPage(name: AppRoutes.onBoard, page: () => const OnboardView(), binding: OnboardBinding()),
     GetPage(name: AppRoutes.goalOnBoard, page: () => const GoalOnBoardingView()),
     GetPage(name: AppRoutes.completeOnBoard, page: () =>  CompleteOnboardView(),binding: AuthBinding()),

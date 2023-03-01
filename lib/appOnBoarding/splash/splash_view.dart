@@ -1,9 +1,10 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ripplefect/helper/common_classes/LocalStorage.dart';
 import 'package:ripplefect/helper/constants/CommonUi.dart';
 import 'package:ripplefect/helper/constants/ColorRes.dart';
-import '../../../helper/routes/AppRoutes.dart';
+import '../../helper/routes/AppRoutes.dart';
 
 
 class SplashScreen extends StatefulWidget {
@@ -15,6 +16,7 @@ class SplashScreen extends StatefulWidget {
 
 
 class _SplashScreenState extends State<SplashScreen> {
+  var localStorage=LocalStorage();
   /// Similar to **Navigation.pushReplacement**
   Future<dynamic> off(dynamic page, {dynamic arguments}) async {
     Get.off(
@@ -24,6 +26,7 @@ class _SplashScreenState extends State<SplashScreen> {
       duration: const Duration(milliseconds: 250),
     );
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,7 +45,11 @@ class _SplashScreenState extends State<SplashScreen> {
   initState()  {
     super.initState();
     Timer(const Duration(seconds: 2), () async {
-      Get.offAndToNamed(AppRoutes.onBoard);
+      if(localStorage.getAuthCode()!=''){
+        Get.offAndToNamed(AppRoutes.dashboard);
+      }else{
+        Get.offAndToNamed(AppRoutes.onBoard);
+      }
     });
 
   }
