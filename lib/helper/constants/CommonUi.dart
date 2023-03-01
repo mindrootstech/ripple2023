@@ -663,8 +663,8 @@ class CommonUi {
         toastLength: Toast.LENGTH_LONG,
         gravity: ToastGravity.BOTTOM,
         timeInSecForIosWeb: 3,
-        backgroundColor: ColorRes.onboardIndicatorNonActiveColor,
-        textColor: Colors.black,
+        backgroundColor: ColorRes.colorBlack2,
+        textColor: Colors.white,
         fontSize: 16.0);
   }
 

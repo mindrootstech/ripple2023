@@ -72,7 +72,6 @@ class AllActionSheet{
               itemCount: 10,
               itemBuilder: (BuildContext context, int index) {
                 return Container(
-                  height: 120,
                   width: 160,
                   margin: const EdgeInsets.only(right:  10),
                   decoration: BoxDecoration(

@@ -23,9 +23,9 @@ class OnboardController extends GetxController {
   var titles = [Strings.whatIsWhy,Strings.whatYourWant,Strings.pickGoal].obs;
   var titleNumber = 0.obs;
   var type = 1;
-  var yourWayList_1 = <Goal>[].obs;
-  var moreList_2 = <Goal>[].obs;
-  var goalList_3 = <Goal>[].obs;
+  var list_1 = <Goal>[].obs;
+  var list_2 = <Goal>[].obs;
+  var list_3 = <Goal>[].obs;
   var selectedIndex=0.obs;
 
 
@@ -51,9 +51,9 @@ class OnboardController extends GetxController {
         var response = onBoardModelFromJson(value);
         if(response.status) {
           // CommonUi.showToast(response.message);
-          yourWayList_1.addAll(response.data.why);
-          moreList_2.addAll(response.data.more);
-          goalList_3.addAll(response.data.goal);
+          list_1.addAll(response.data.why);
+          list_2.addAll(response.data.more);
+          list_3.addAll(response.data.goal);
         }else{
           CommonUi.showToast(response.message);
         }

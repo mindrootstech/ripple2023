@@ -61,17 +61,13 @@ class GoalOnBoardingView extends StatelessWidget {
                       },
                       controller: controller.pControllers[1],
                       children: <Widget>[
-                        GoalPageItem(1,controller.yourWayList_1),
-                        GoalPageItem(2,controller.moreList_2),
-                        GoalPageItem(3,controller.goalList_3),
+                        GoalPageItem(1,controller.list_1),
+                        GoalPageItem(2,controller.list_2),
+                        GoalPageItem(3,controller.list_3),
                       ],
                     ),
                   ),
-
-
                   const SizedBox(height: 10,),
-
-
                 ],
               ),
             ),

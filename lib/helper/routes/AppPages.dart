@@ -16,7 +16,7 @@ import '../../dashBoard/home/binding/HomeBinding.dart';
 import 'AppRoutes.dart';
 
 class AppPages {
-  static const initial = AppRoutes.splash;
+  static const initial = AppRoutes.onBoard;
 
 
   static final routes = [
