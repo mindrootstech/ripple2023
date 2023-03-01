@@ -44,6 +44,18 @@ class OnboardView extends StatelessWidget {
                   ],
                 ),
               ),
+              SmoothPageIndicator(
+                  controller: controller.pControllers[0],
+                  count: 4,
+                  effect:  const SlideEffect(
+                      spacing: 12,
+                      dotWidth: 12,
+                      dotHeight: 12,
+                      dotColor:
+                      ColorRes.onboardIndicatorNonActiveColor,
+                      activeDotColor:
+                      ColorRes.onboardIndicatorActiveColor),
+                  onDotClicked: (index) {}),
               Container(
                 margin: const EdgeInsets.only(top: 32),
                 child: Column(
