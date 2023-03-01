@@ -4,6 +4,7 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:ripplefect/dashBoard/bottom_sheets/FiltersSheet.dart';
 import 'package:ripplefect/dashBoard/home/controller/HomeController.dart';
 import 'package:ripplefect/helper/constants/ColorRes.dart';
 import 'package:ripplefect/helper/constants/fonts.dart';
@@ -340,15 +341,21 @@ class HomeView extends StatelessWidget {
                    margin: const EdgeInsets.only(top: 10),
                    decoration: CommonUi.roundedDecorationWithBorder(outLineColor: ColorRes.colorWhiteGrey,bgColor:ColorRes.white),
                    padding: const EdgeInsets.all(4),
-                   child: Row(
-                     mainAxisSize: MainAxisSize.min,
-                     children: [
-                       const SizedBox(width:5),
-                       SvgPicture.asset(CommonUi.setSvgImage('filter_icon')),
-                       const SizedBox(width:5),
-                       Text(Strings.textFilter,style:CommonUi.customTextStyle(fontSize: 13,fontFamily: Fonts.bold),),
-                       const Icon(Icons.arrow_drop_down_sharp)
-                     ],
+                   //filter
+                   child: InkWell(
+                     onTap: (){
+                       FiltersSheet().showSheet();
+                     },
+                     child: Row(
+                       mainAxisSize: MainAxisSize.min,
+                       children: [
+                         const SizedBox(width:5),
+                         SvgPicture.asset(CommonUi.setSvgImage('filter_icon')),
+                         const SizedBox(width:5),
+                         Text(Strings.textFilter,style:CommonUi.customTextStyle(fontSize: 13,fontFamily: Fonts.bold),),
+                         const Icon(Icons.arrow_drop_down_sharp)
+                       ],
+                     ),
                    ),
                  ),
                  Expanded(
