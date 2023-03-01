@@ -48,21 +48,6 @@ class OnboardView extends StatelessWidget {
                 margin: const EdgeInsets.only(top: 32),
                 child: Column(
                   children: [
-                    SmoothPageIndicator(
-                        controller: controller.pControllers[0],
-                        count: 4,
-                        effect: const SlideEffect(
-                            spacing: 12,
-                            dotWidth: 12,
-                            dotHeight: 12,
-                            dotColor:
-                            ColorRes.onboardIndicatorNonActiveColor,
-                            activeDotColor:
-                            ColorRes.onboardIndicatorActiveColor),
-                        onDotClicked: (index) {}),
-                    const SizedBox(
-                      height: 50,
-                    ),
                     Container(
                       margin: EdgeInsets.only(left: CommonUi.marginLeftRight,right: CommonUi.marginLeftRight),
                       child: CommonUi.customButton(buttonText: controller.pageNo.value == 3 ? Strings.continueTxt : Strings.next,callBack: () {
@@ -76,14 +61,12 @@ class OnboardView extends StatelessWidget {
                       }),
                     ),
 
-
-
                     InkWell(
                       onTap: () {
                         if(controller.pageNo.value==3){
-                          Get.toNamed(AppRoutes.login);
+                          Get.offAllNamed(AppRoutes.login);
                         }else{
-                          Get.toNamed(AppRoutes.completeOnBoard);
+                          Get.offAllNamed(AppRoutes.completeOnBoard);
                         }
                       },
                       child: Padding(
@@ -110,7 +93,10 @@ class OnboardView extends StatelessWidget {
                           style: CommonUi.customTextStyle(),
                         ),
                       ),
-                    )
+                    ),
+                    const SizedBox(
+                      height: 30,
+                    ),
                   ],
                 ),
               ),

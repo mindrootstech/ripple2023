@@ -25,6 +25,9 @@ class LoginView extends StatelessWidget with InputValidationMixin{
           children: [
             CommonUi.customLayout(
                 title: Strings.login,
+                onBack: (){
+                  Get.offAllNamed(AppRoutes.signup);
+                },
                 child:  Form(
                   key: formGlobalKey,
                   child: Column(
@@ -76,9 +79,7 @@ class LoginView extends StatelessWidget with InputValidationMixin{
                             isPass: true,
                             passwordVisible: controller.passVisible),
                       ),
-                      const SizedBox(
-                        height: 10,
-                      ),
+
                       GestureDetector(
                         onTap: () {
                           Get.toNamed(AppRoutes.forgotPass);

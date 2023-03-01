@@ -78,7 +78,7 @@ class HomeView extends StatelessWidget {
                              fontSize: 20),
                        ),
                        TextSpan(
-                         text: '  points.',
+                         text: '  points',
                          style: CommonUi.customTextStyle(
                              fontFamily: Fonts.bold,
                              color: ColorRes.white,
@@ -185,7 +185,6 @@ class HomeView extends StatelessWidget {
                  }
              ),
              itemCount: controller.modelList.length,
-
              itemBuilder: (BuildContext context, int itemIndex, int pageViewIndex) =>
                  Stack(
                    children: [
@@ -194,24 +193,38 @@ class HomeView extends StatelessWidget {
                          Expanded(
                            child: SizedBox(
                              width: Get.width,
-                             child: ClipRRect(
-                               borderRadius: const BorderRadius.only(topLeft: Radius.circular(20),topRight: Radius.circular(20)),
-                               child: Image.network(
-                                 "https://images.pexels.com/photos/60597/dahlia-red-blossom-bloom-60597.jpeg",
-                                 fit: BoxFit.cover,
-                                 loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress){
-                                   if (loadingProgress == null) return child;
-                                   return  Center(
-                                     child: CircularProgressIndicator(
-                                       color: Colors.white70,
-                                       value: loadingProgress.expectedTotalBytes != null
-                                           ? loadingProgress.cumulativeBytesLoaded /
-                                           loadingProgress.expectedTotalBytes!
-                                           : null,
-                                     ),
-                                   );
-                                 },
-                               ),
+                             child: Stack(
+                               children: [
+                                 ClipRRect(
+                                   borderRadius: const BorderRadius.only(topLeft: Radius.circular(20),topRight: Radius.circular(20)),
+                                   child: Image.network(
+                                     "https://images.pexels.com/photos/60597/dahlia-red-blossom-bloom-60597.jpeg",
+                                     fit: BoxFit.cover,
+                                     width: Get.width,
+                                     loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress){
+                                       if (loadingProgress == null) return child;
+                                       return  Center(
+                                         child: CircularProgressIndicator(
+                                           color: Colors.white70,
+                                           value: loadingProgress.expectedTotalBytes != null
+                                               ? loadingProgress.cumulativeBytesLoaded /
+                                               loadingProgress.expectedTotalBytes!
+                                               : null,
+                                         ),
+                                       );
+                                     },
+                                   ),
+                                 ),
+                                 Positioned(
+                                   left: 16,
+                                   bottom: 0,
+                                   child: Container(
+                                     padding: const EdgeInsets.symmetric(horizontal: 8,vertical: 2),
+                                     decoration: CommonUi.curvedBoxDecoration(backgroundColor: Colors.white,bottomRight: 0.0,bottomLeft: 0.0),
+                                     child: Text('250 Pts',style: CommonUi.customTextStyle(fontSize: 11,fontFamily: Fonts.regular,color: ColorRes.colorGreen2),),
+                                   ),
+                                 )
+                               ],
                              ),
                            ),
                          ),
@@ -254,6 +267,7 @@ class HomeView extends StatelessWidget {
                        padding: const EdgeInsets.only(right: 5,top: 5),
                        child: Image.asset(CommonUi.setPngImage("heart"),height: 25,width: 25,),
                      ),
+
                    ],
                  ),
            ),
@@ -292,7 +306,7 @@ class HomeView extends StatelessWidget {
                  // controller: controller.passField,
                  // obscureText: !controller.passVisible.value,
                  decoration: CommonUi.textFieldDecoration(hintText: Strings.textSearchHint,
-                     passwordVisible: null,contentHorizontal: 48),
+                     passwordVisible: null,contentLeft: 48),
                ),
              ),
              Positioned(

@@ -10,17 +10,17 @@ import '../../helper/constants/CommonUi.dart';
 import '../../helper/constants/fonts.dart';
 import '../../helper/constants/strings.dart';
 
-class AllActionSheet{
+class FiltersSheet{
 
   void showSheet(){
     Get.bottomSheet(
       Container(
         margin: EdgeInsets.symmetric(horizontal: CommonUi.marginLeftRight),
-        height: Get.height/1.1,
+        height: Get.height/1.5,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-           getHeaderPart(),
+            getHeaderPart(),
             Expanded(
               child: SingleChildScrollView(
                 child: Column(
@@ -31,7 +31,7 @@ class AllActionSheet{
                 ),
               ),
             ),
-            
+
           ],
         ),
       ),
@@ -128,7 +128,7 @@ class AllActionSheet{
             shrinkWrap: true,
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
-                childAspectRatio: 1/1.4,
+                childAspectRatio: 1/1.2,
                 crossAxisSpacing: 10,
                 mainAxisSpacing: 15),
             physics: const BouncingScrollPhysics(),
@@ -137,7 +137,6 @@ class AllActionSheet{
             itemCount: 10,
             itemBuilder: (BuildContext context, int index) {
               return Container(
-                decoration: CommonUi.getBorderRadius(8.0, Colors.transparent,borderWidth: 1.0, borderColor: ColorRes.noProgressColor),
                 // margin:  EdgeInsets.only(left: CommonUi.marginLeftRight , right: CommonUi.marginLeftRight),
                 child: Stack(
                   children: [
@@ -224,7 +223,7 @@ class AllActionSheet{
     );
   }
 
- Widget getHeaderPart() {
+  Widget getHeaderPart() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -302,7 +301,7 @@ class AllActionSheet{
 
       ],
     );
- }
+  }
 
 
 }

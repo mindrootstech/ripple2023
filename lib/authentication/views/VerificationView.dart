@@ -91,7 +91,7 @@ class VerificationView extends StatelessWidget with InputValidationMixin{
                         Container(
                           alignment: Alignment.center,
                           margin: const EdgeInsets.only(bottom: 50),
-                          child: Text("${Strings.resentAfter} ${controller.counter.value}",
+                          child: Text(controller.counter.value>9?"${Strings.resentAfter} 00:${controller.counter.value}":"${Strings.resentAfter} 00:0${controller.counter.value}",
                             style: CommonUi.customTextStyle(
                                 decoration: TextDecoration.underline,
                                 fontFamily: Fonts.semiBold,
@@ -118,7 +118,7 @@ class VerificationView extends StatelessWidget with InputValidationMixin{
                       },
 
                       CommonUi.customButton(buttonText:Strings.continueTxt,fontSize:18.0,callBack: (){
-                        FocusScope.of(context).unfocus();
+                        // FocusScope.of(context).unfocus();
                         if (formGlobalKey.currentState!.validate()) {
                           if(controller.counter.value>0){
                             controller.vcApiImplementation();

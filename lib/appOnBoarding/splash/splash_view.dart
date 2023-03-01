@@ -46,7 +46,7 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     Timer(const Duration(seconds: 2), () async {
       if(localStorage.getAuthCode()!=''){
-        Get.offAndToNamed(AppRoutes.dashboard);
+        Get.offAndToNamed(AppRoutes.onBoard);
       }else{
         Get.offAndToNamed(AppRoutes.onBoard);
       }

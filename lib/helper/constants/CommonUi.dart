@@ -21,7 +21,7 @@ class CommonUi {
 
 
 
-  static customLayout({required String title,required Widget child,Function? onBack}) {
+  static customLayout({required String title,required Widget child,Function? onBack, bool isBack=true}) {
     return Stack(
         children: [
           SizedBox(
@@ -33,19 +33,26 @@ class CommonUi {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                GestureDetector(
-                  onTap: () {
-                    if(onBack!=null){
-                      onBack.call();
-                    }else{
-                      Get.back();
-                    }
-                  },
-                  child: const Padding(
-                    padding: EdgeInsets.only(left: 20,top: 12,bottom: 16),
-                    child: Icon(Icons.arrow_back_ios_new,color: Colors.white,),
+                if(isBack)...{
+                  GestureDetector(
+                    onTap: () {
+                      if(onBack!=null){
+                        onBack.call();
+                      }else{
+                        Get.back();
+                      }
+                    },
+                    child: const Padding(
+                      padding: EdgeInsets.only(left: 20,top: 12,bottom: 16),
+                      child: Icon(Icons.arrow_back_ios_new,color: Colors.white,),
+                    ),
                   ),
-                ),
+                }else...{
+                  const SizedBox(
+                    height: 50,
+                  )
+                },
+
                 Padding(
                   padding: const EdgeInsets.only(left: 24.0,bottom: 16),
                   child: Text(title,style: CommonUi.customTextStyle(fontSize: 24,fontFamily: Fonts.semiBold,color: Colors.white),),
@@ -54,7 +61,7 @@ class CommonUi {
                   child: Container(
                     width: Get.width,
                     padding: const EdgeInsets.only(left: 30.0, top: 20, right: 30),
-                    decoration: CommonUi.curvedBoxDecoration(topLeft: 20,topRight: 20),
+                    decoration: CommonUi.curvedBoxDecoration(topLeft: 20,topRight: 20,backgroundColor: Colors.white),
                     child: child,
                   ),
                 )
@@ -225,7 +232,7 @@ class CommonUi {
         verticalSpace = 14.0,
         isPass = false,
         RxBool? passwordVisible,
-        double contentHorizontal=10.0
+        double contentLeft=10.0
       }) {
     return InputDecoration(
       counterText: "",
@@ -271,7 +278,7 @@ class CommonUi {
         ),
       ),
       labelStyle: CommonUi.customTextStyle(),
-      contentPadding: EdgeInsets.symmetric(horizontal: contentHorizontal, vertical: verticalSpace),
+      contentPadding: EdgeInsets.only(left: contentLeft, top: verticalSpace,bottom:verticalSpace ),
       hintStyle: CommonUi.customTextStyle(color: ColorRes.greyColor),
       isDense: true,
       hintText: hintText,

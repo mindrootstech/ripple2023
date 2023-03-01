@@ -20,6 +20,7 @@ class ForgotPassView extends StatelessWidget with InputValidationMixin {
             children: [
               CommonUi.customLayout(
                   title: Strings.forgotPass,
+
                   child: Form(
                     key: formGlobalKey,
                     child: Column(
