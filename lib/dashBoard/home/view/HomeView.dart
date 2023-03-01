@@ -9,6 +9,7 @@ import 'package:ripplefect/dashBoard/home/controller/HomeController.dart';
 import 'package:ripplefect/helper/constants/ColorRes.dart';
 import 'package:ripplefect/helper/constants/fonts.dart';
 import 'package:ripplefect/helper/constants/strings.dart';
+import 'package:ripplefect/helper/routes/AppRoutes.dart';
 import '../../../helper/constants/CommonUi.dart';
 import '../../bottom_sheets/AllActionSheet.dart';
 
@@ -398,124 +399,129 @@ class HomeView extends StatelessWidget {
      return Column(
        crossAxisAlignment: CrossAxisAlignment.start,
        children: [
-         Container(
-           height: 250,
-           width: Get.width,
-           child: ListView.builder(
-               physics: const BouncingScrollPhysics(),
-               padding: EdgeInsets.zero,
-               scrollDirection: Axis.horizontal,
-               itemCount: 10,
-               itemBuilder: (BuildContext context, int index) {
-                 return Container(
-                   margin:  EdgeInsets.only(left: index == 0? CommonUi.marginLeftRight : 0, right: 10),
-                   width: 175,
-                   child: Stack(
-                     children: [
-                       Column(
-                         children: [
-                           Expanded(
-                             child: SizedBox(
-                               width: 300,
-                               height: 300,
-                               child: ClipRRect(
-                                 borderRadius: const BorderRadius.only(topLeft: Radius.circular(20),topRight: Radius.circular(20)),
-                                 child: Image.network(
-                                   "https://images.pexels.com/photos/60597/dahlia-red-blossom-bloom-60597.jpeg",
-                                   fit: BoxFit.cover,
-                                   loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress){
-                                     if (loadingProgress == null) return child;
-                                     return  Center(
-                                       child: CircularProgressIndicator(
-                                         color: Colors.white70,
-                                         value: loadingProgress.expectedTotalBytes != null
-                                             ? loadingProgress.cumulativeBytesLoaded /
-                                             loadingProgress.expectedTotalBytes!
-                                             : null,
-                                       ),
-                                     );
-                                   },
+         InkWell(
+           onTap: (){
+             Get.toNamed(AppRoutes.dashboardDetail);
+           },
+           child: Container(
+             height: 250,
+             width: Get.width,
+             child: ListView.builder(
+                 physics: const BouncingScrollPhysics(),
+                 padding: EdgeInsets.zero,
+                 scrollDirection: Axis.horizontal,
+                 itemCount: 10,
+                 itemBuilder: (BuildContext context, int index) {
+                   return Container(
+                     margin:  EdgeInsets.only(left: index == 0? CommonUi.marginLeftRight : 0, right: 10),
+                     width: 175,
+                     child: Stack(
+                       children: [
+                         Column(
+                           children: [
+                             Expanded(
+                               child: SizedBox(
+                                 width: 300,
+                                 height: 300,
+                                 child: ClipRRect(
+                                   borderRadius: const BorderRadius.only(topLeft: Radius.circular(20),topRight: Radius.circular(20)),
+                                   child: Image.network(
+                                     "https://images.pexels.com/photos/60597/dahlia-red-blossom-bloom-60597.jpeg",
+                                     fit: BoxFit.cover,
+                                     loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress){
+                                       if (loadingProgress == null) return child;
+                                       return  Center(
+                                         child: CircularProgressIndicator(
+                                           color: Colors.white70,
+                                           value: loadingProgress.expectedTotalBytes != null
+                                               ? loadingProgress.cumulativeBytesLoaded /
+                                               loadingProgress.expectedTotalBytes!
+                                               : null,
+                                         ),
+                                       );
+                                     },
+                                   ),
                                  ),
                                ),
                              ),
-                           ),
-                           Container(
-                             decoration: const BoxDecoration(
-                                 color: Colors.white,
-                                 borderRadius: BorderRadius.only(bottomRight: Radius.circular(20),bottomLeft: Radius.circular(20))
-                             ),
-                             padding: const EdgeInsets.all(14),
-                             child: Column(
-                               children: [
-                                 Row(
-                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                   children: [
-                                     Image.asset(CommonUi.setPngImage("test_company"), height: 16,width: 45),
-                                     Container(
-                                       padding:const EdgeInsets.only(left: 8,right: 8,top: 2,bottom: 2),
-                                       decoration: CommonUi.curvedBoxDecoration(backgroundColor: ColorRes.appColor),
-                                       child: Text("50 Pts",style: CommonUi.customTextStyle(fontFamily: Fonts.heavy,fontSize: 12,color: Colors.white),),
-                                     )
-                                   ],
-                                 ),
-                                 const SizedBox(height: 8),
-                                 Padding(
-                                   padding: const EdgeInsets.only(left: 0, right: 8),
-                                   child: Text("Advocate for the restoration of seagrass in our oceans.",textAlign: TextAlign.start,style: CommonUi.customTextStyle(fontFamily: Fonts.semiBold,fontSize: 15),),
-                                 ),
-                                 Container(
-                                   height: 1,
-                                   margin: const EdgeInsets.only(top: 9),
-                                   padding: const EdgeInsets.only(left: 4,right: 4),
-                                   color: ColorRes.colorGray,
-                                 ),
+                             Container(
+                               decoration: const BoxDecoration(
+                                   color: Colors.white,
+                                   borderRadius: BorderRadius.only(bottomRight: Radius.circular(20),bottomLeft: Radius.circular(20))
+                               ),
+                               padding: const EdgeInsets.all(14),
+                               child: Column(
+                                 children: [
+                                   Row(
+                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                     children: [
+                                       Image.asset(CommonUi.setPngImage("test_company"), height: 16,width: 45),
+                                       Container(
+                                         padding:const EdgeInsets.only(left: 8,right: 8,top: 2,bottom: 2),
+                                         decoration: CommonUi.curvedBoxDecoration(backgroundColor: ColorRes.appColor),
+                                         child: Text("50 Pts",style: CommonUi.customTextStyle(fontFamily: Fonts.heavy,fontSize: 12,color: Colors.white),),
+                                       )
+                                     ],
+                                   ),
+                                   const SizedBox(height: 8),
+                                   Padding(
+                                     padding: const EdgeInsets.only(left: 0, right: 8),
+                                     child: Text("Advocate for the restoration of seagrass in our oceans.",textAlign: TextAlign.start,style: CommonUi.customTextStyle(fontFamily: Fonts.semiBold,fontSize: 15),),
+                                   ),
+                                   Container(
+                                     height: 1,
+                                     margin: const EdgeInsets.only(top: 9),
+                                     padding: const EdgeInsets.only(left: 4,right: 4),
+                                     color: ColorRes.colorGray,
+                                   ),
 
-                                 Container(
-                                   width: Get.width,
-                                     margin: const EdgeInsets.only(right: 5, top: 10),
-                                     child: Align(
-                                         alignment: Alignment.topRight,
-                                         child: Image.asset(CommonUi.setPngImage("three_dots_icon"), height: 5,width: 25))),
-                                 
-                                 // Row(
-                                 //   children: [
-                                 //     Spacer(),
-                                 //     Wrap(
-                                 //       spacing: 4,
-                                 //       children: [
-                                 //         ClipOval(
-                                 //           child: Container(
-                                 //             color: ColorRes.greyColor,
-                                 //           ),
-                                 //         ),
-                                 //         ClipOval(
-                                 //           child: Container(
-                                 //             color: ColorRes.greyColor,
-                                 //           ),
-                                 //         ),
-                                 //         ClipOval(
-                                 //           child: Container(
-                                 //             color: ColorRes.greyColor,
-                                 //           ),
-                                 //         ),
-                                 //       ],
-                                 //     )
-                                 //   ],
-                                 // )
-                               ],
-                             ),
-                           )
-                         ],
-                       ),
-                       Container(
-                         alignment: Alignment.topRight,
-                         padding: const EdgeInsets.only(right: 5,top: 5),
-                         child: Image.asset(CommonUi.setPngImage("heart"),height: 25,width: 25,),
-                       ),
-                     ],
-                   ),
-                 );
-               }
+                                   Container(
+                                     width: Get.width,
+                                       margin: const EdgeInsets.only(right: 5, top: 10),
+                                       child: Align(
+                                           alignment: Alignment.topRight,
+                                           child: Image.asset(CommonUi.setPngImage("three_dots_icon"), height: 5,width: 25))),
+
+                                   // Row(
+                                   //   children: [
+                                   //     Spacer(),
+                                   //     Wrap(
+                                   //       spacing: 4,
+                                   //       children: [
+                                   //         ClipOval(
+                                   //           child: Container(
+                                   //             color: ColorRes.greyColor,
+                                   //           ),
+                                   //         ),
+                                   //         ClipOval(
+                                   //           child: Container(
+                                   //             color: ColorRes.greyColor,
+                                   //           ),
+                                   //         ),
+                                   //         ClipOval(
+                                   //           child: Container(
+                                   //             color: ColorRes.greyColor,
+                                   //           ),
+                                   //         ),
+                                   //       ],
+                                   //     )
+                                   //   ],
+                                   // )
+                                 ],
+                               ),
+                             )
+                           ],
+                         ),
+                         Container(
+                           alignment: Alignment.topRight,
+                           padding: const EdgeInsets.only(right: 5,top: 5),
+                           child: Image.asset(CommonUi.setPngImage("heart"),height: 25,width: 25,),
+                         ),
+                       ],
+                     ),
+                   );
+                 }
+             ),
            ),
          ),
          const SizedBox(height: 17),

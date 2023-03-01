@@ -10,6 +10,7 @@ class AppRoutes {
   static const String verification = '/verification';
   static const String resetPass = '/resetPass';
   static const String dashboard = '/dashboard';
+  static const String dashboardDetail = '/dashboardDetail';
 
 
 }
