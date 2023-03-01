@@ -142,19 +142,7 @@ class ApiProvider extends GetConnect {
     }
   }
 
-  Future<String> logoutApi() async {
-    try {
-      final response = await client.post(Uri.parse("$baseUrl/logout"),
-          headers: {'Authorization': "Bearer ${localStorage.getAuthCode()}"});
-      if (response.statusCode == 200) {
-        return response.body;
-      } else {
-        return response.body;
-      }
-    } catch (e) {
-      return 'error';
-    }
-  }
+
 
   Future<String> onBoardingApi() async {
     try {
@@ -169,6 +157,19 @@ class ApiProvider extends GetConnect {
     }
   }
 
+  Future<String> logoutApi() async {
+    try {
+      final response = await client.post(Uri.parse("$baseUrl/logout"),
+          headers: {'Authorization': "Bearer ${localStorage.getAuthCode()}"});
+      if (response.statusCode == 200) {
+        return response.body;
+      } else {
+        return response.body;
+      }
+    } catch (e) {
+      return 'error';
+    }
+  }
 
 
 

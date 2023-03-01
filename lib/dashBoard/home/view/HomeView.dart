@@ -9,6 +9,7 @@ import 'package:ripplefect/dashBoard/home/controller/HomeController.dart';
 import 'package:ripplefect/helper/constants/ColorRes.dart';
 import 'package:ripplefect/helper/constants/fonts.dart';
 import 'package:ripplefect/helper/constants/strings.dart';
+import '../../../helper/common_classes/LogoutDialog.dart';
 import 'package:ripplefect/helper/routes/AppRoutes.dart';
 import '../../../helper/constants/CommonUi.dart';
 import '../../bottom_sheets/AllActionSheet.dart';
@@ -90,28 +91,33 @@ class HomeView extends StatelessWidget {
                    ),
                  ),
                  const Spacer(),
-                 Container(
-                   padding: const EdgeInsets.symmetric(horizontal: 12,vertical: 6),
-                   decoration: CommonUi.roundedDecorationWithBorder(
-                       outLineColor: ColorRes.white,
-                       bgColor: Colors.transparent,
-                       borderWidth:2.0,
-                       radius: 20.0),
-                   child: Row(
-                     children: [
-                       Text("View Rewards",
-                           style: CommonUi.customTextStyle(
-                               fontSize: 12,
-                               fontFamily: Fonts.semiBold,
-                               color: ColorRes.white)),
-                       const SizedBox(
-                         width: 5,
-                       ),
-                       SvgPicture.asset(CommonUi.setSvgImage("right_arrow"),
-                         height: 14,
-                         color: ColorRes.white,
-                         width: 14,)
-                     ],
+                 GestureDetector(
+                   onTap: (){
+                     LogoutDialog().showDialog();
+                   },
+                   child: Container(
+                     padding: const EdgeInsets.symmetric(horizontal: 12,vertical: 6),
+                     decoration: CommonUi.roundedDecorationWithBorder(
+                         outLineColor: ColorRes.white,
+                         bgColor: Colors.transparent,
+                         borderWidth:2.0,
+                         radius: 20.0),
+                     child: Row(
+                       children: [
+                         Text("View Rewards",
+                             style: CommonUi.customTextStyle(
+                                 fontSize: 12,
+                                 fontFamily: Fonts.semiBold,
+                                 color: ColorRes.white)),
+                         const SizedBox(
+                           width: 5,
+                         ),
+                         SvgPicture.asset(CommonUi.setSvgImage("right_arrow"),
+                           height: 14,
+                           color: ColorRes.white,
+                           width: 14,)
+                       ],
+                     ),
                    ),
                  ),
 
@@ -199,22 +205,25 @@ class HomeView extends StatelessWidget {
                                children: [
                                  ClipRRect(
                                    borderRadius: const BorderRadius.only(topLeft: Radius.circular(20),topRight: Radius.circular(20)),
-                                   child: Image.network(
-                                     "https://images.pexels.com/photos/60597/dahlia-red-blossom-bloom-60597.jpeg",
-                                     fit: BoxFit.cover,
-                                     width: Get.width,
-                                     loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress){
-                                       if (loadingProgress == null) return child;
-                                       return  Center(
-                                         child: CircularProgressIndicator(
-                                           color: Colors.white70,
-                                           value: loadingProgress.expectedTotalBytes != null
-                                               ? loadingProgress.cumulativeBytesLoaded /
-                                               loadingProgress.expectedTotalBytes!
-                                               : null,
-                                         ),
-                                       );
-                                     },
+                                   child: Container(
+                                     color: ColorRes.colorGreyLight,
+                                     child: Image.network(
+                                       "https://images.pexels.com/photos/60597/dahlia-red-blossom-bloom-60597.jpeg",
+                                       fit: BoxFit.cover,
+                                       width: Get.width,
+                                       loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress){
+                                         if (loadingProgress == null) return child;
+                                         return  Center(
+                                           child: CircularProgressIndicator(
+                                             color: Colors.white70,
+                                             value: loadingProgress.expectedTotalBytes != null
+                                                 ? loadingProgress.cumulativeBytesLoaded /
+                                                 loadingProgress.expectedTotalBytes!
+                                                 : null,
+                                           ),
+                                         );
+                                       },
+                                     ),
                                    ),
                                  ),
                                  Positioned(
@@ -257,17 +266,25 @@ class HomeView extends StatelessWidget {
                                Text("Focus on what you eat, reduce food waste, make more sustainable food choices",style: CommonUi.customTextStyle(fontFamily: Fonts.medium),),
                                Padding(
                                  padding: const EdgeInsets.only(left: 30,right: 30,top: 8),
-                                 child: CommonUi.customButton(buttonText: "Join Challenge",padding: 10.0,fontSize: 14.0),
+                                 child: GestureDetector(
+                                   onTap: (){
+
+                                   },
+                                     child: CommonUi.customButton(buttonText: "Join Challenge",padding: 10.0,fontSize: 14.0)),
                                )
                              ],
                            ),
                          )
                        ],
                      ),
-                     Container(
-                       alignment: Alignment.topRight,
-                       padding: const EdgeInsets.only(right: 5,top: 5),
-                       child: Image.asset(CommonUi.setPngImage("heart"),height: 25,width: 25,),
+                     GestureDetector(
+                       onTap: (){
+                       },
+                       child: Container(
+                         alignment: Alignment.topRight,
+                         padding: const EdgeInsets.only(right: 5,top: 5),
+                         child: Image.asset(CommonUi.setPngImage("heart"),height: 25,width: 25,),
+                       ),
                      ),
 
                    ],

@@ -4,6 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:ripplefect/dashBoard/bottom_sheets/FiltersSheet.dart';
 
 import '../../helper/constants/ColorRes.dart';
 import '../../helper/constants/CommonUi.dart';
@@ -81,13 +82,16 @@ class AllActionSheet{
                     children: [
                       ClipRRect(
                           borderRadius: BorderRadius.circular(10),
-                          child: CachedNetworkImage(imageUrl: 'https://picsum.photos/250?image=18')),
-                      index == 0 ?  Positioned(
+                          child: Container(
+                              color: ColorRes.colorGreyLight,
+                              child: CachedNetworkImage(imageUrl: 'https://picsum.photos/250?image=18')),
+                      ),
+                        Positioned(
                           top: 16,
                           left: 19,
                           child: Text("Category 1",
                             style: CommonUi.customTextStyle(fontFamily: Fonts.bold, fontSize: 13,
-                                color: ColorRes.white),)) : const SizedBox(),
+                                color: ColorRes.white),)) ,
                       Positioned(
                         bottom: 16,
                         left: 16,
@@ -292,7 +296,12 @@ class AllActionSheet{
                   ),
                 ),
                 const SizedBox(width: 14),
-                Image.asset(CommonUi.setPngImage("filter_icon"),height: 24,width: 24),
+                GestureDetector(
+                  onTap: (){
+                    Get.back();
+                    FiltersSheet().showSheet();
+                  },
+                    child: Image.asset(CommonUi.setPngImage("filter_icon"),height: 24,width: 24)),
                 const SizedBox(width: 14)
               ],
             ),

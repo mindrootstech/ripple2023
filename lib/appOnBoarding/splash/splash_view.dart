@@ -17,26 +17,18 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   var localStorage=LocalStorage();
-  /// Similar to **Navigation.pushReplacement**
-  Future<dynamic> off(dynamic page, {dynamic arguments}) async {
-    Get.off(
-      page,
-      arguments: arguments,
-      transition: Transition.leftToRight,
-      duration: const Duration(milliseconds: 250),
-    );
-  }
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
         child: Container(
-          width: Get.width,
+          width: MediaQuery.of(context).size.width,
           color: ColorRes.appColor,
-          height:Get.height,
+          height:MediaQuery.of(context).size.height,
           // child: SvgPicture.asset(CommonUi1.setSvgImage("logo"),allowDrawingOutsideViewBox: true,).paddingOnly(left: 38,right: 38),
-          child: Image.asset(CommonUi.setPngImage("splash_logo"),fit: BoxFit.contain,width: Get.width),
+          child: Image.asset(CommonUi.setPngImage("splash_logo"),fit: BoxFit.contain,width: MediaQuery.of(context).size.width,),
         ),
       ),
     );
@@ -44,9 +36,9 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   initState()  {
     super.initState();
-    Timer(const Duration(seconds: 2), () async {
+    Timer(const Duration(seconds: 6), () async {
       if(localStorage.getAuthCode()!=''){
-        Get.offAndToNamed(AppRoutes.onBoard);
+        Get.offAndToNamed(AppRoutes.dashboard);
       }else{
         Get.offAndToNamed(AppRoutes.onBoard);
       }

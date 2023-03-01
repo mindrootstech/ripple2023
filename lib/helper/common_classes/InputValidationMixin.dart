@@ -1,7 +1,7 @@
 import 'package:email_validator/email_validator.dart';
 
 mixin InputValidationMixin {
-  bool isPasswordValid(String password) => password.length == 8;
+  bool isPasswordValid(String password) => password.length >= 8;
   bool isConfirmPasswordValid(String password, String cPass) => password == cPass;
   bool isNameValid(String name) {
     if(name.isNotEmpty){

@@ -89,6 +89,13 @@ class GoalPageItem extends StatelessWidget {
                                 bottomLeft: 8.0,
                                 bottomRight: 8.0,
                                 borderWidth: 1.0 //bottom
+                            ) :!model.isSelected.value && index == list.length-1 ?
+                            CommonUi.roundedDecorationWithBorderRadius(
+                                outLineColor: ColorRes.noProgressColor,
+                                bgColor: Colors.white,
+                                bottomLeft: 8.0,
+                                bottomRight: 8.0,
+                                borderWidth: 1.0 //bottom
                             ):CommonUi.roundedDecorationWithBorderRadius(
                                outLineColor: ColorRes.noProgressColor,
                                bgColor: Colors.white,

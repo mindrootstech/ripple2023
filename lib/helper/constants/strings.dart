@@ -106,6 +106,7 @@ class Strings {
  /// Home Text.........
 
   static String textSearchHint = 'Search action, business, industry...';
+  static String textSearchHint2 = 'Search categories...';
   static String textForYou = 'For you';
   static String textFilter = 'Filter';
   static String textSuggestedBased = 'Suggested based on your profile interests.';
@@ -144,4 +145,12 @@ class Strings {
   static String textNotMatching='Confirm password and Password are not matching';
 
 
+
+
+
+
+  ///dialogs
+  static String textLogoutDesc='Are you sure you want to logout?';
+  static String textLogout='Logout';
+  static String textCancel='Cancel';
 }
