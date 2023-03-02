@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_getx_widget.dart';
-import 'package:ripplefect/detail/controller/DashboardDetailController.dart';
+import 'package:ripplefect/detail/controller/ProductDetailController.dart';
 import 'package:ripplefect/helper/constants/CommonUi.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-class DashboardDetailView extends StatelessWidget {
-  const DashboardDetailView({Key? key}) : super(key: key);
+class ProductDetailView extends StatelessWidget {
+  const ProductDetailView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
