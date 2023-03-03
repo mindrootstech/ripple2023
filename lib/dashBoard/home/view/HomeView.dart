@@ -28,7 +28,7 @@ class HomeView extends StatelessWidget {
         child: Stack(children: [
          Image.asset(CommonUi.setPngImage('app_bg'),
            fit: BoxFit.fill,
-           height: 650,
+           height: 670,
            width: Get.width,
          ),
           Padding(
@@ -59,9 +59,10 @@ class HomeView extends StatelessWidget {
              height: 16,
            ),
            Text(
-             "Hello, User!",
+             "Hello, Ripplfect User",
+             maxLines: 1,
              style: CommonUi.customTextStyle(
-                 fontSize: 26,
+                 fontSize: 28,
                  fontFamily: Fonts.bold,
                  color: Colors.white),
            ),
@@ -77,14 +78,14 @@ class HomeView extends StatelessWidget {
                          style: CommonUi.customTextStyle(
                              fontFamily: Fonts.bold,
                              color: ColorRes.white,
-                             fontSize: 22),
+                             fontSize: 24),
                        ),
                        TextSpan(
                          text: '  points',
                          style: CommonUi.customTextStyle(
                              fontFamily: Fonts.bold,
                              color: ColorRes.white,
-                             fontSize: 14),
+                             fontSize: 15),
                        ),
                      ],
                    ),
@@ -105,7 +106,7 @@ class HomeView extends StatelessWidget {
                        children: [
                          Text("View Rewards",
                              style: CommonUi.customTextStyle(
-                                 fontSize: 12,
+                                 fontSize: 14,
                                  fontFamily: Fonts.semiBold,
                                  color: ColorRes.white)),
                          const SizedBox(
@@ -232,7 +233,7 @@ class HomeView extends StatelessWidget {
                                  child: Container(
                                    padding: const EdgeInsets.symmetric(horizontal: 8,vertical: 2),
                                    decoration: CommonUi.curvedBoxDecoration(backgroundColor: Colors.white,bottomRight: 0.0,bottomLeft: 0.0),
-                                   child: Text('250 Pts',style: CommonUi.customTextStyle(fontSize: 11,fontFamily: Fonts.regular,color: ColorRes.colorGreen2),),
+                                   child: Text('250 Pts',style: CommonUi.customTextStyle(fontSize: 13,fontFamily: Fonts.heavy,color: ColorRes.colorGreen2),),
                                  ),
                                )
                              ],

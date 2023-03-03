@@ -4,20 +4,20 @@ class Strings {
 
  /// OnBoarding Screen
 
-  static String onboard_1Title = 'Find a action';
-  static String onboard_1Desc = 'We curate and bring the foremost actions around, that affects the planet, where you can choose a action as per commitment level that works for you.';
+  static String onboard_1Title = 'Find an action';
+  static String onboard_1Desc = 'We find the most impactful actions from around the world and bring them to you.';
   static String onboard_1Image = 'onboard_1_img';
 
   static String onboard_2Title = 'Keep it up';
-  static String onboard_2Desc = 'Take a step and commit to practical actions and make it success. Small or big actions, whatever you choose, there is no wrong step - except no step at all.';
+  static String onboard_2Desc = 'Everyone has a role to play. No matter who you are, there is some small way you can make a difference.';
   static String onboard_2Image = 'onboard_2_img';
 
-  static String onboard_3Title = 'Track progress';
-  static String onboard_3Desc = 'Track your actions, activities and carbon emission estimates, understand the individual and combined impact scale for each completed actions. ';
+  static String onboard_3Title = 'Track your progress';
+  static String onboard_3Desc = 'Track the actions you take and understand your individual and the collective impact our community is making.';
   static String onboard_3Image = 'onboard_3_img';
 
-  static String onboard_4Title = 'Join community';
-  static String onboard_4Desc = 'We work with local communities, educational institutes, governments and organizations to inspire, empower and put climate action at the heart of everything they do. ';
+  static String onboard_4Title = 'Join our community';
+  static String onboard_4Desc = 'We work with local organizations, governments, and nonprofits to make sure you can get involved on a local level. Join our community of individuals evoking change';
   static String onboard_4Image = 'onboard_4_img';
 
 

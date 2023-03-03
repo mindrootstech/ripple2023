@@ -17,58 +17,86 @@ class DashboardView extends GetView<DashboardController> {
           Scaffold(
               body: Container(
                   child: controller.children[controller.currentIndex.value]),
-              bottomNavigationBar: BottomNavigationBar(
-                  items: <BottomNavigationBarItem>[
-                    BottomNavigationBarItem(
-                        icon: SvgPicture.asset(
-                          CommonUi.setSvgImage(
-                              controller.currentIndex.value == 0
-                                  ? 'home_icon_filled'
-                                  : 'home_icon'),
-                        ),
-                        label: Strings.textHome,
-                        backgroundColor: Colors.white),
-                    BottomNavigationBarItem(
-                        icon: SvgPicture.asset(CommonUi.setSvgImage(
-                            controller.currentIndex.value == 1
-                                ? 'local_icon_filled'
-                                : 'local_icon')),
-                        label: Strings.textLocal,
-                        backgroundColor: Colors.white),
-                    BottomNavigationBarItem(
-                      icon: SvgPicture.asset(CommonUi.setSvgImage(
-                          controller.currentIndex.value == 2
-                              ? 'feed_icon_filled'
-                              : 'feed_icon')),
-                      label: Strings.textFeed,
-                      backgroundColor: Colors.white,
-                    ),
-                    BottomNavigationBarItem(
-                      icon: SvgPicture.asset(CommonUi.setSvgImage(
-                          controller.currentIndex.value == 3
-                              ? 'challenges_icon_filled'
-                              : 'challenges_icon')),
-                      label: Strings.textChallenges,
-                      backgroundColor: Colors.white,
-                    ),
-                    BottomNavigationBarItem(
-                      icon: SvgPicture.asset(CommonUi.setSvgImage(
-                          controller.currentIndex.value == 4
-                              ? 'profile_icon_filled'
-                              : 'profile_icon')),
-                      label: Strings.textProfile,
-                      backgroundColor: Colors.white,
-                    ),
+              bottomNavigationBar: Theme(
+                data: ThemeData(
+                  splashColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
 
-                  ],
-                  type: BottomNavigationBarType.fixed,
-                  currentIndex: controller.currentIndex.value,
-                  selectedItemColor: ColorRes.colorGreen,
-                  iconSize: 40,
-                  selectedLabelStyle: const TextStyle(color: ColorRes.colorGreen),
-                  showSelectedLabels: true,
-                  unselectedLabelStyle: const TextStyle(color: Colors.white, fontSize: 14),                  onTap: controller.onTabTapped,
-                  elevation: 5)),
+                ),
+                child: BottomNavigationBar(
+
+                    items: <BottomNavigationBarItem>[
+                      BottomNavigationBarItem(
+                          icon: Padding(
+                            padding: const EdgeInsets.only(bottom: 8.0),
+                            child: SvgPicture.asset(
+                              CommonUi.setSvgImage(
+                                  controller.currentIndex.value == 0
+                                      ? 'home_icon_filled'
+                                      : 'home_icon'),
+                            ),
+                          ),
+                          label: Strings.textHome,
+                          tooltip: '',
+                          backgroundColor: Colors.white),
+                      BottomNavigationBarItem(
+                          icon:Padding(
+                            padding: const EdgeInsets.only(bottom: 8.0),
+                            child: SvgPicture.asset(CommonUi.setSvgImage(
+                                controller.currentIndex.value == 1
+                                    ? 'local_icon_filled'
+                                    : 'local_icon')),
+                          ),
+                          label: Strings.textLocal,
+                          tooltip: '',
+                          backgroundColor: Colors.white),
+                      BottomNavigationBarItem(
+                        icon:Padding(
+                          padding: const EdgeInsets.only(bottom: 8.0),
+                          child: SvgPicture.asset(CommonUi.setSvgImage(
+                              controller.currentIndex.value == 2
+                                  ? 'feed_icon_filled'
+                                  : 'feed_icon')),
+                        ),
+                        label: Strings.textFeed,
+                        tooltip: '',
+                        backgroundColor: Colors.white,
+                      ),
+                      BottomNavigationBarItem(
+                        icon: Padding(
+                          padding: const EdgeInsets.only(bottom: 8.0),
+                          child: SvgPicture.asset(CommonUi.setSvgImage(
+                              controller.currentIndex.value == 3
+                                  ? 'challenges_icon_filled'
+                                  : 'challenges_icon')),
+                        ),
+                        label: Strings.textChallenges,
+                        tooltip: '',
+                        backgroundColor: Colors.white,
+                      ),
+                      BottomNavigationBarItem(
+                        icon:Padding(
+                          padding: const EdgeInsets.only(bottom: 8.0),
+                          child: SvgPicture.asset(CommonUi.setSvgImage(
+                              controller.currentIndex.value == 4
+                                  ? 'profile_icon_filled'
+                                  : 'profile_icon')),
+                        ),
+                        label: Strings.textProfile,
+                        tooltip: '',
+                        backgroundColor: Colors.white,
+                      ),
+
+                    ],
+                    type: BottomNavigationBarType.fixed,
+                    currentIndex: controller.currentIndex.value,
+                    selectedItemColor: ColorRes.colorGreen,
+                    iconSize: 40,
+                    selectedLabelStyle: const TextStyle(color: ColorRes.colorGreen),
+                    showSelectedLabels: true,
+                    unselectedLabelStyle: const TextStyle(color: Colors.white, fontSize: 14),                  onTap: controller.onTabTapped,
+                    elevation: 5),
+              )),
         ],
       ),
     );

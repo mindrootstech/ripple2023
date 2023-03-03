@@ -52,7 +52,7 @@ class FiltersSheet{
                   Expanded(
                     child: SizedBox(
                       height: 48,
-                      child: CommonUi.customButton(buttonText: "Show 10 results",padding: 10.0,fontSize: 20.0),
+                      child: CommonUi.customButtonSmall(buttonText: "Show 10 results",padding: 10.0,fontSize: 20.0),
                     ),
                   )
                 ],
@@ -89,7 +89,7 @@ class FiltersSheet{
               Align(
                 alignment: Alignment.center,
                 child: Text("Filters", style: CommonUi.customTextStyle(
-                  fontFamily: Fonts.bold, fontSize: 20,
+                  fontFamily: Fonts.semiBold, fontSize: 23,
                 )
                 ),
               ),

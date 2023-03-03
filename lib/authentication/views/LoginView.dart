@@ -20,6 +20,7 @@ class LoginView extends StatelessWidget with InputValidationMixin{
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
+      backgroundColor: Colors.white,
       body: GetX<AuthController>(builder: (controller) {
         return Stack(
           children: [

@@ -34,6 +34,7 @@ class CompleteOnboardView extends StatelessWidget {
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+
                 Container(
                   margin: EdgeInsets.symmetric(horizontal: CommonUi.marginLeftRight),
                   child: Text("Congratulations! ", style: CommonUi.customTextStyle(
@@ -42,12 +43,19 @@ class CompleteOnboardView extends StatelessWidget {
                 const SizedBox(height: 15,),
                 Container(
                   margin: EdgeInsets.symmetric(horizontal: CommonUi.marginLeftRight),
-                  child: Text("You just earned 20 points for completing onboarding. Create an account to claim your reward!",
+                  child: Text("You just earned 20 points for completing onboarding. ",
                     textAlign: TextAlign.center,
                     style: CommonUi.customTextStyle(
                         fontFamily: Fonts.semiBold,color: ColorRes.white,fontSize: 18),),
                 ),
-                const SizedBox(height: 40,),
+                _buildTreeGif(),
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: CommonUi.marginLeftRight,vertical: 30),
+                  child: Text("Create an account to claim your reward!",
+                    textAlign: TextAlign.center,
+                    style: CommonUi.customTextStyle(
+                        fontFamily: Fonts.semiBold,color: ColorRes.white,fontSize: 18),),
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -106,13 +114,21 @@ class CompleteOnboardView extends StatelessWidget {
       ),
     );
   }
+
   Widget _buildGif(){
     return Container(
-
-      child: Lottie.asset('assets/lottie/complete_lottie.json',height: Get.height,
+      child: Lottie.asset(CommonUi.setLottie('complete_lottie'),height: Get.height,
           width: Get.width,
           alignment: Alignment.center
       ),
     );
   }
+   Widget _buildTreeGif(){
+     return Container(
+       child: Lottie.asset(CommonUi.setLottie('tree_lottie'),
+           width: Get.width,
+           alignment: Alignment.center
+       ),
+     );
+   }
 }

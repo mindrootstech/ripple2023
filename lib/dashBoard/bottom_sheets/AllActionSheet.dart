@@ -93,7 +93,7 @@ class AllActionSheet{
                           top: 16,
                           left: 19,
                           child: Text("Category 1",
-                            style: CommonUi.customTextStyle(fontFamily: Fonts.bold, fontSize: 13,
+                            style: CommonUi.customTextStyle(fontFamily: Fonts.bold, fontSize: 15,
                                 color: ColorRes.white),)) ,
                       Positioned(
                         bottom: 16,
@@ -189,7 +189,7 @@ class AllActionSheet{
                                   Container(
                                     padding:const EdgeInsets.only(left: 8,right: 8,top: 2,bottom: 2),
                                     decoration: CommonUi.curvedBoxDecoration(backgroundColor: ColorRes.appColor),
-                                    child: Text("50 Pts",style: CommonUi.customTextStyle(fontFamily: Fonts.heavy,fontSize: 11),),
+                                    child: Text("50 Pts",style: CommonUi.customTextStyle(fontFamily: Fonts.heavy,fontSize: 11,color: Colors.white),),
                                   )
                                 ],
                               ),
@@ -290,22 +290,6 @@ class AllActionSheet{
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 4, bottom: 4),
-                  child: Container(
-                    height: 50,
-                    color: ColorRes.noProgressColor,
-                    width: 1,
-                  ),
-                ),
-                const SizedBox(width: 14),
-                GestureDetector(
-                  onTap: (){
-                    // Get.back();
-                    // FiltersSheet().showSheet();
-                  },
-                    child: Image.asset(CommonUi.setPngImage("filter_icon"),height: 24,width: 24)),
-                const SizedBox(width: 14)
               ],
             ),
           ),

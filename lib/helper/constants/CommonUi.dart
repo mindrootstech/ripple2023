@@ -19,6 +19,11 @@ class CommonUi {
     return "assets/svgs/$name.svg";
   }
 
+  static String setLottie(String lottie) {
+    return 'assets/lottie/$lottie.json';
+  }
+
+
 
 
   static customLayout({required String title,required Widget child,Function? onBack, bool isBack=true}) {
@@ -86,7 +91,22 @@ class CommonUi {
         color: color);
   }
 
-  static GestureDetector customButton({String buttonText = "Next",fontSize =22.0,padding=12.0,Function? callBack}) {
+  static GestureDetector customButton({String buttonText = "Next",fontSize =20.0,padding=12.0,Function? callBack}) {
+    return GestureDetector(
+      onTap: () {
+        callBack?.call();
+      },
+      child: Container(
+        padding: EdgeInsets.only(top: padding,bottom: padding),
+        margin: const EdgeInsets.symmetric(horizontal: 40),
+        width: Get.width,
+        decoration: CommonUi.curvedBoxDecoration(backgroundColor: ColorRes.buttonColor),
+        child: Center(child: Text(buttonText,style: CommonUi.customButtonTextStyle(fontSize: fontSize),)),
+      ),
+    );
+  }
+
+  static GestureDetector customButtonSmall({String buttonText = "Next",fontSize =20.0,padding=12.0,Function? callBack}) {
     return GestureDetector(
       onTap: () {
         callBack?.call();
@@ -695,6 +715,7 @@ class CommonUi {
         )
     );
   }
+
 
 }
 

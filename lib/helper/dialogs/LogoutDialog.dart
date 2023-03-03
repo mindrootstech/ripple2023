@@ -34,7 +34,7 @@ class LogoutDialog {
                       Expanded(
                         child: SizedBox(
                           height: 35,
-                          child: CommonUi.customButton(buttonText: Strings.textCancel,padding: 10.0,fontSize: 14.0,
+                          child: CommonUi.customButtonSmall(buttonText: Strings.textCancel,padding: 10.0,fontSize: 14.0,
                           callBack: (){
                             Get.back();
                           }),
@@ -46,7 +46,7 @@ class LogoutDialog {
                       Expanded(
                         child: SizedBox(
                           height: 35,
-                          child: CommonUi.customButton(buttonText: Strings.textLogout,padding: 10.0,fontSize: 14.0,
+                          child: CommonUi.customButtonSmall(buttonText: Strings.textLogout,padding: 10.0,fontSize: 14.0,
                               callBack: (){
                                 Get.back();
                                 controller.logoutApiImplementation();
