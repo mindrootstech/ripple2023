@@ -231,6 +231,7 @@ class ProductDetailView extends StatelessWidget {
              alignment: Alignment.topLeft,
              child: Text(Strings.textHowYouCan,  style: CommonUi.customTextStyle(fontFamily: Fonts.medium, fontSize: 20)))
         ),
+
         Container(
             margin: const EdgeInsets.only(left: 30, right: 30, bottom: 16),
             child:  Align(
