@@ -575,23 +575,18 @@ class CommonUi {
     );
   }
   static Widget loadBannerImages(String? imageUrl) {
-    return Container(
-      child: Image.network(
-        imageUrl ?? "",
+    return CachedNetworkImage(
+        imageUrl: imageUrl??'',
         fit: BoxFit.cover,
-        errorBuilder: (BuildContext c, Object error, StackTrace? stackTrace) {
-          return SvgPicture.asset(CommonUi.setSvgImage('image_placeholder'),color: Colors.white,);
-        },
-        loadingBuilder: (BuildContext context, Widget child,
-            ImageChunkEvent? loadingProgress) {
-          if (loadingProgress == null) return child;
-          return Padding(
-            padding: const EdgeInsets.all(35.0),
-            child: SvgPicture.asset(CommonUi.setSvgImage('image_placeholder'),color: Colors.white,),
-          );
-        },
-      ),
-    );
+        // height: height,
+        // width: width,
+        placeholder: (context, url) =>
+            Container(color: ColorRes.white),
+        errorWidget: (context, url, error) =>
+            Container(color: ColorRes.white));
+
+
+
   }
 
   static customProfileNetworkImage({

@@ -116,13 +116,14 @@ class Strings {
   static String textCategories = 'Categories';
   static String textActions = 'Actions';
 
-
-
-
-
-
-
-
+  /// Details View
+  static String textImpact = 'Impact';
+  static String textPts = 'pts';
+  static String textImpactMetrics = 'Impact Metrics';
+  static String textWhyItMatters= 'Why it Matters';
+  static String textReadMore = '\nRead More ⌵';
+  static String textLearnMore = 'Learn More >';
+  static String textHowYouCan = 'How you can contribute';
 
 
 

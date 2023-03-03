@@ -8,12 +8,13 @@ class ColorRes {
   static const Color colorGray = Color.fromRGBO(217, 217,217, 1);
   static const Color onboardIndicatorActiveColor = Color.fromRGBO(38, 172, 132, 1);
   static const Color onboardIndicatorNonActiveColor = Color.fromRGBO(130, 130, 130, 1);
-  static const Color buttonColor = Color.fromRGBO(38, 68, 172, 1);
+    static const Color buttonColor = Color.fromRGBO(38, 68, 172, 1);
   static const Color greyColor = Color.fromRGBO(79, 96, 112, 1);
   static const Color lightTextColor = Color.fromRGBO(163, 170, 185, 1);
   static const Color ultralightTextColor = Color.fromRGBO(196, 196, 196, 1);
   static const Color noProgressColor = Color.fromRGBO(236, 236, 236, 1);
   static const Color bluecolor = Color.fromRGBO(135, 183, 254, 1);
+  static const Color colorNavyBlue = Color.fromRGBO(42, 51, 79, 1);
   static const Color lightBluecolor = Color.fromRGBO(231, 241, 255, 1);
   static const Color white = Colors.white;
   static const Color textFieldOutlineColor = Color.fromRGBO(163, 170, 185, 1);
@@ -30,7 +31,10 @@ class ColorRes {
   static const Color colorWhiteGradientBottom = Color.fromRGBO(198,198,198, 1);
   static const Color socialLoginColors = Color.fromRGBO(224,224,224, 1);
   static const Color socialLoginFacebookColors = Color.fromRGBO(66,103,178, 1);
+  static const Color colorDarkBlue = Color.fromRGBO(34, 35, 36, 1);
+  static const Color colorBrown = Color.fromRGBO(178, 85, 61, 1);
   static const Color colorLightGrey = Color.fromRGBO(227, 233, 254, 1);
+  static const Color colorCream = Color.fromRGBO(255, 239, 199, 1);
 
 
 }
