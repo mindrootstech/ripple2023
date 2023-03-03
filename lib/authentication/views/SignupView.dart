@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ripplefect/helper/constants/CommonUi.dart';
@@ -25,6 +26,7 @@ class SignupView extends StatelessWidget with InputValidationMixin {
               height: Get.height,
               width: Get.width,
               child: Scaffold(
+                backgroundColor: Colors.white,
                 resizeToAvoidBottomInset: true,
                 body: Form(
                   key: formGlobalKey,
@@ -34,7 +36,6 @@ class SignupView extends StatelessWidget with InputValidationMixin {
                         hasScrollBody: false,
                         child: Container(
                           color: Colors.white,
-
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [

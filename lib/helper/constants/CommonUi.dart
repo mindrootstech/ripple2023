@@ -131,6 +131,7 @@ class CommonUi {
   static curvedBoxDecorationWithShadow(
       {double radius = 20.0,
         backgroundColor = ColorRes.white,
+        Color shadowColor=ColorRes.greyColor,
         double spreadRadius=2.0,
         double blurRadius= 5.0,
         double  offsetX=0.0,
@@ -142,7 +143,7 @@ class CommonUi {
       borderRadius: BorderRadius.all(Radius.circular(radius)),
       boxShadow:  [
         BoxShadow(
-          color: ColorRes.greyColor,
+          color: shadowColor,
           spreadRadius: spreadRadius,
           blurRadius: blurRadius,
           offset: Offset(offsetX, offsetY),
@@ -574,6 +575,8 @@ class CommonUi {
       ),
     );
   }
+
+
   static Widget loadBannerImages(String? imageUrl) {
     return CachedNetworkImage(
         imageUrl: imageUrl??'',
@@ -581,9 +584,9 @@ class CommonUi {
         // height: height,
         // width: width,
         placeholder: (context, url) =>
-            Container(color: ColorRes.white),
+            Container(color: ColorRes.textFieldOutlineColor),
         errorWidget: (context, url, error) =>
-            Container(color: ColorRes.white));
+            Container(color: ColorRes.textFieldOutlineColor));
 
 
 

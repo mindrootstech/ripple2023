@@ -116,14 +116,17 @@ class Strings {
   static String textCategories = 'Categories';
   static String textActions = 'Actions';
 
-  /// Details View
+  /// product Details View
   static String textImpact = 'Impact';
   static String textPts = 'pts';
   static String textImpactMetrics = 'Impact Metrics';
   static String textWhyItMatters= 'Why it Matters';
-  static String textReadMore = '\nRead More ⌵';
+  static String textReadMore = '\n\nRead More ⌵';
+  static String textShowLess = 'Show less';
   static String textLearnMore = 'Learn More >';
   static String textHowYouCan = 'How you can contribute';
+  static String textCompleteAction = 'Complete Action';
+  static String textIAlreadyDid = 'I Already Did This';
 
 
 
@@ -151,7 +154,15 @@ class Strings {
 
 
   ///dialogs
+  //logout
   static String textLogoutDesc='Are you sure you want to logout?';
   static String textLogout='Logout';
   static String textCancel='Cancel';
+
+  //TrackAction
+  static String textKnowHowTrack='Know how we track actions';
+  static String textOnlineActions='Online Actions';
+  static String textOnlineActionsDesc="Proin pellentesque dolor at ante aliquet commodo. Duis urna erat, venenatis ac ultricies id, interdum a sem. ";
+  static String textNuncDignissimErosSem='Nunc dignissim eros sem, ac feugiat augue molestie non. Donec placerat ';
+
 }

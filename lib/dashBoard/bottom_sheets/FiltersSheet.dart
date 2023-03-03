@@ -15,7 +15,7 @@ class FiltersSheet{
   void showSheet(){
     Get.bottomSheet(
       SizedBox(
-        height: Get.height/1.5,
+        height: Get.height/1.8,
         width: Get.width,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

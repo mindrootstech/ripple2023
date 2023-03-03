@@ -86,6 +86,9 @@ class AllActionSheet{
                               color: ColorRes.colorGreyLight,
                               child: CachedNetworkImage(imageUrl: 'https://picsum.photos/250?image=18')),
                       ),
+                        Container(
+                          color: ColorRes.lightBlackColor,
+                        ),
                         Positioned(
                           top: 16,
                           left: 19,
@@ -148,8 +151,8 @@ class AllActionSheet{
                       children: [
                         Expanded(
                           child: SizedBox(
-                            width: 168,
-                            height: 200,
+                            width: double.infinity,
+                            // height: 200,
                             child: ClipRRect(
                               borderRadius: const BorderRadius.only(topLeft: Radius.circular(8),topRight: Radius.circular(8)),
                               child: Image.network(
@@ -298,8 +301,8 @@ class AllActionSheet{
                 const SizedBox(width: 14),
                 GestureDetector(
                   onTap: (){
-                    Get.back();
-                    FiltersSheet().showSheet();
+                    // Get.back();
+                    // FiltersSheet().showSheet();
                   },
                     child: Image.asset(CommonUi.setPngImage("filter_icon"),height: 24,width: 24)),
                 const SizedBox(width: 14)

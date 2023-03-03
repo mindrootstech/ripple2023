@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +8,7 @@ import 'package:ripplefect/dashBoard/home/controller/HomeController.dart';
 import 'package:ripplefect/helper/constants/ColorRes.dart';
 import 'package:ripplefect/helper/constants/fonts.dart';
 import 'package:ripplefect/helper/constants/strings.dart';
-import '../../../helper/common_classes/LogoutDialog.dart';
+import '../../../helper/dialogs/LogoutDialog.dart';
 import 'package:ripplefect/helper/routes/AppRoutes.dart';
 import '../../../helper/constants/CommonUi.dart';
 import '../../bottom_sheets/AllActionSheet.dart';
@@ -78,14 +77,14 @@ class HomeView extends StatelessWidget {
                          style: CommonUi.customTextStyle(
                              fontFamily: Fonts.bold,
                              color: ColorRes.white,
-                             fontSize: 20),
+                             fontSize: 22),
                        ),
                        TextSpan(
                          text: '  points',
                          style: CommonUi.customTextStyle(
                              fontFamily: Fonts.bold,
                              color: ColorRes.white,
-                             fontSize: 12),
+                             fontSize: 14),
                        ),
                      ],
                    ),
@@ -126,13 +125,13 @@ class HomeView extends StatelessWidget {
            ),
            Container(
              margin: const EdgeInsets.only(top: 18,bottom: 16),
-             padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
+             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
              decoration: CommonUi.curvedBoxDecoration(),
              child: Row(
                children: [
                  Text("Complete profile and get 20 reward points!",
                      style: CommonUi.customTextStyle(
-                       fontSize: 12,
+                       fontSize: 14,
                        color: ColorRes.colorBlack,
                        fontFamily: Fonts.medium,
                      )),
@@ -142,10 +141,10 @@ class HomeView extends StatelessWidget {
                    decoration: CommonUi.roundedDecorationWithBorder(
                        outLineColor: ColorRes.buttonColor,
                        bgColor: ColorRes.white,
-                       radius: 8.0),
+                       radius: 20.0),
                    child: Text("Profile",
                        style: CommonUi.customTextStyle(
-                           fontSize: 11,
+                           fontSize: 14,
                            fontFamily: Fonts.medium,
                            color: ColorRes.buttonColor)),
                  ),
@@ -159,152 +158,152 @@ class HomeView extends StatelessWidget {
   }
 
    Widget getFeaturePartView() {
-     return Padding(
-       padding: EdgeInsets.only(left: CommonUi.marginLeftRight, right: CommonUi.marginLeftRight),
-       child: Column(
-         crossAxisAlignment: CrossAxisAlignment.start,
-         children: [
-           Text(
+     return Column(
+       crossAxisAlignment: CrossAxisAlignment.start,
+       children: [
+         Padding(
+           padding: EdgeInsets.only(left: CommonUi.marginLeftRight, right: CommonUi.marginLeftRight),
+           child: Text(
              "Featured Challenges",
              style: CommonUi.customTextStyle(
                  fontSize: 22,
                  fontFamily: Fonts.heavy,
                  color: Colors.white),
            ),
-           const SizedBox(height: 15,),
+         ),
+         const SizedBox(height: 15,),
 
-           CarouselSlider.builder(
-             options: CarouselOptions(
-                 height: 350,
-                 aspectRatio: 16 / 9,
-                 viewportFraction: 0.8,
-                 initialPage: 0,
-                 enableInfiniteScroll: true,
-                 reverse: false,
-                 autoPlay: false,
-                 autoPlayInterval: const Duration(seconds: 3),
-                 autoPlayAnimationDuration: const Duration(milliseconds: 800),
-                 autoPlayCurve: Curves.fastOutSlowIn,
-                 enlargeCenterPage: true,
-                 enlargeFactor: 0.2,
-                 scrollDirection: Axis.horizontal,
-                 onPageChanged: (value,_){
-                   controller.currentIndex.value=value;
-                 }
-             ),
-             itemCount: controller.modelList.length,
-             itemBuilder: (BuildContext context, int itemIndex, int pageViewIndex) =>
-                 Stack(
-                   children: [
-                     Column(
-                       children: [
-                         Expanded(
-                           child: SizedBox(
-                             width: Get.width,
-                             child: Stack(
-                               children: [
-                                 ClipRRect(
-                                   borderRadius: const BorderRadius.only(topLeft: Radius.circular(20),topRight: Radius.circular(20)),
-                                   child: Container(
-                                     color: ColorRes.colorGreyLight,
-                                     child: Image.network(
-                                       "https://images.pexels.com/photos/60597/dahlia-red-blossom-bloom-60597.jpeg",
-                                       fit: BoxFit.cover,
-                                       width: Get.width,
-                                       loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress){
-                                         if (loadingProgress == null) return child;
-                                         return  Center(
-                                           child: CircularProgressIndicator(
-                                             color: Colors.white70,
-                                             value: loadingProgress.expectedTotalBytes != null
-                                                 ? loadingProgress.cumulativeBytesLoaded /
-                                                 loadingProgress.expectedTotalBytes!
-                                                 : null,
-                                           ),
-                                         );
-                                       },
-                                     ),
+         CarouselSlider.builder(
+           options: CarouselOptions(
+               height: 350,
+               aspectRatio: 16 / 9,
+               viewportFraction: 0.8,
+               initialPage: 0,
+               enableInfiniteScroll: true,
+               reverse: false,
+               autoPlay: false,
+               autoPlayInterval: const Duration(seconds: 3),
+               autoPlayAnimationDuration: const Duration(milliseconds: 800),
+               autoPlayCurve: Curves.fastOutSlowIn,
+               enlargeCenterPage: true,
+               enlargeFactor: 0.2,
+               scrollDirection: Axis.horizontal,
+               onPageChanged: (value,_){
+                 controller.currentIndex.value=value;
+               }
+           ),
+           itemCount: controller.modelList.length,
+           itemBuilder: (BuildContext context, int itemIndex, int pageViewIndex) =>
+               Stack(
+                 children: [
+                   Column(
+                     children: [
+                       Expanded(
+                         child: SizedBox(
+                           width: Get.width,
+                           child: Stack(
+                             children: [
+                               ClipRRect(
+                                 borderRadius: const BorderRadius.only(topLeft: Radius.circular(20),topRight: Radius.circular(20)),
+                                 child: Container(
+                                   color: ColorRes.colorGreyLight,
+                                   child: Image.network(
+                                     "https://images.pexels.com/photos/60597/dahlia-red-blossom-bloom-60597.jpeg",
+                                     fit: BoxFit.cover,
+                                     width: Get.width,
+                                     loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress){
+                                       if (loadingProgress == null) return child;
+                                       return  Center(
+                                         child: CircularProgressIndicator(
+                                           color: Colors.white70,
+                                           value: loadingProgress.expectedTotalBytes != null
+                                               ? loadingProgress.cumulativeBytesLoaded /
+                                               loadingProgress.expectedTotalBytes!
+                                               : null,
+                                         ),
+                                       );
+                                     },
                                    ),
                                  ),
-                                 Positioned(
-                                   left: 16,
-                                   bottom: 0,
-                                   child: Container(
-                                     padding: const EdgeInsets.symmetric(horizontal: 8,vertical: 2),
-                                     decoration: CommonUi.curvedBoxDecoration(backgroundColor: Colors.white,bottomRight: 0.0,bottomLeft: 0.0),
-                                     child: Text('250 Pts',style: CommonUi.customTextStyle(fontSize: 11,fontFamily: Fonts.regular,color: ColorRes.colorGreen2),),
+                               ),
+                               Positioned(
+                                 left: 16,
+                                 bottom: 0,
+                                 child: Container(
+                                   padding: const EdgeInsets.symmetric(horizontal: 8,vertical: 2),
+                                   decoration: CommonUi.curvedBoxDecoration(backgroundColor: Colors.white,bottomRight: 0.0,bottomLeft: 0.0),
+                                   child: Text('250 Pts',style: CommonUi.customTextStyle(fontSize: 11,fontFamily: Fonts.regular,color: ColorRes.colorGreen2),),
+                                 ),
+                               )
+                             ],
+                           ),
+                         ),
+                       ),
+                       Container(
+                         decoration: const BoxDecoration(
+                             color: Colors.white,
+                             borderRadius: BorderRadius.only(bottomRight: Radius.circular(20),bottomLeft: Radius.circular(20))
+                         ),
+                         padding: const EdgeInsets.all(14),
+                         child: Column(
+                           children: [
+                             Row(
+                               children: [
+                                 Image.asset(CommonUi.setPngImage("demo")),
+                                 const SizedBox(width: 10,),
+                                 Expanded(
+                                   child: Column(
+                                     children: [
+                                       Text("The Vegan Meal Challenge",style: CommonUi.customTextStyle(fontFamily: Fonts.semiBold),),
+                                       const SizedBox(height: 5,),
+                                       Text("Nov 20, 2022 to Jan 20, 2023",style: CommonUi.customTextStyle(fontSize: 12)),
+                                     ],
                                    ),
                                  )
                                ],
                              ),
-                           ),
+                             const SizedBox(height: 10,),
+                             Text("Focus on what you eat, reduce food waste, make more sustainable food choices",style: CommonUi.customTextStyle(fontFamily: Fonts.medium),),
+                             Padding(
+                               padding: const EdgeInsets.only(left: 30,right: 30,top: 8),
+                               child: GestureDetector(
+                                 onTap: (){
+
+                                 },
+                                   child: CommonUi.customButton(buttonText: "Join Challenge",padding: 10.0,fontSize: 14.0)),
+                             )
+                           ],
                          ),
-                         Container(
-                           decoration: const BoxDecoration(
-                               color: Colors.white,
-                               borderRadius: BorderRadius.only(bottomRight: Radius.circular(20),bottomLeft: Radius.circular(20))
-                           ),
-                           padding: const EdgeInsets.all(14),
-                           child: Column(
-                             children: [
-                               Row(
-                                 children: [
-                                   Image.asset(CommonUi.setPngImage("demo")),
-                                   const SizedBox(width: 10,),
-                                   Expanded(
-                                     child: Column(
-                                       children: [
-                                         Text("The Vegan Meal Challenge",style: CommonUi.customTextStyle(fontFamily: Fonts.semiBold),),
-                                         const SizedBox(height: 5,),
-                                         Text("Nov 20, 2022 to Jan 20, 2023",style: CommonUi.customTextStyle(fontSize: 12)),
-                                       ],
-                                     ),
-                                   )
-                                 ],
-                               ),
-                               const SizedBox(height: 10,),
-                               Text("Focus on what you eat, reduce food waste, make more sustainable food choices",style: CommonUi.customTextStyle(fontFamily: Fonts.medium),),
-                               Padding(
-                                 padding: const EdgeInsets.only(left: 30,right: 30,top: 8),
-                                 child: GestureDetector(
-                                   onTap: (){
-
-                                   },
-                                     child: CommonUi.customButton(buttonText: "Join Challenge",padding: 10.0,fontSize: 14.0)),
-                               )
-                             ],
-                           ),
-                         )
-                       ],
-                     ),
-                     GestureDetector(
-                       onTap: (){
-                       },
-                       child: Container(
-                         alignment: Alignment.topRight,
-                         padding: const EdgeInsets.only(right: 5,top: 5),
-                         child: Image.asset(CommonUi.setPngImage("heart"),height: 25,width: 25,),
-                       ),
-                     ),
-
-                   ],
-                 ),
-           ),
-           if(controller.modelList.isNotEmpty)...{
-             Obx(()=>
-                 Container(
-                   alignment: Alignment.center,
-                   margin: const EdgeInsets.only(top: 15,bottom: 15),
-                   child: DotsIndicator(
-                     decorator: const DotsDecorator(activeColor: ColorRes.white,activeSize: Size.square(10.0),size:Size.square(8.0),color: ColorRes.colorDotNonActive ),
-                     dotsCount: controller.modelList.length,
-                     position: double.parse(controller.currentIndex.value.toString()),
+                       )
+                     ],
                    ),
-                 )
-             )
-           }
-         ],
-       ),
+                   GestureDetector(
+                     onTap: (){
+                     },
+                     child: Container(
+                       alignment: Alignment.topRight,
+                       padding: const EdgeInsets.only(right: 5,top: 5),
+                       child: Image.asset(CommonUi.setPngImage("heart"),height: 25,width: 25,),
+                     ),
+                   ),
+
+                 ],
+               ),
+         ),
+         if(controller.modelList.isNotEmpty)...{
+           Obx(()=>
+               Container(
+                 alignment: Alignment.center,
+                 margin: const EdgeInsets.only(top: 15,bottom: 15),
+                 child: DotsIndicator(
+                   decorator: const DotsDecorator(activeColor: ColorRes.white,activeSize: Size.square(10.0),size:Size.square(8.0),color: ColorRes.colorDotNonActive ),
+                   dotsCount: controller.modelList.length,
+                   position: double.parse(controller.currentIndex.value.toString()),
+                 ),
+               )
+           )
+         }
+       ],
      );
   }
 
@@ -418,9 +417,9 @@ class HomeView extends StatelessWidget {
        children: [
          InkWell(
            onTap: (){
-             Get.toNamed(AppRoutes.dashboardDetail);
+             Get.toNamed(AppRoutes.productDetail);
            },
-           child: Container(
+           child: SizedBox(
              height: 250,
              width: Get.width,
              child: ListView.builder(

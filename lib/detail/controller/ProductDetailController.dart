@@ -6,7 +6,7 @@ import 'package:ripplefect/detail/model/ProductDetailModel.dart';
 
 import '../../helper/constants/ColorRes.dart';
 
-class DashboardDetailController extends GetxController{
+class ProductDetailController extends GetxController{
 
   var pageController = PageController();
   var bannerImages = [].obs;
