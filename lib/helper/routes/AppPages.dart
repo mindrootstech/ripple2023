@@ -3,6 +3,8 @@ import 'package:ripplefect/authentication/binding/AuthBinding.dart';
 import 'package:ripplefect/dashBoard/DashboardView.dart';
 import 'package:ripplefect/dashBoard/binding/DashboardBinding.dart';
 import 'package:ripplefect/dashBoard/local/binding/LocalBinding.dart';
+import 'package:ripplefect/detail/businessDetail/binding/BusinessDetailBinding.dart';
+import 'package:ripplefect/detail/businessDetail/view/BusinessDetailView.dart';
 import '../../appOnBoarding/onboard/view/CompleteOnboardView.dart';
 import '../../appOnBoarding/onboard/binding/OnboardBinding.dart';
 import '../../appOnBoarding/onboard/view/OnboardView.dart';
@@ -19,7 +21,7 @@ import '../../detail/productDetail/view/ProductDetailView.dart';
 import 'AppRoutes.dart';
 
 class AppPages {
-  static const initial = AppRoutes.splash;
+  static const initial = AppRoutes.businessDetail;
 
 
   static final routes = [
@@ -34,5 +36,6 @@ class AppPages {
     GetPage(name: AppRoutes.resetPass, page: () =>  ResetPassView()),
     GetPage(name: AppRoutes.dashboard, page: () =>  DashboardView(), bindings: [DashBoardBinding(),HomeBinding(),LocalBinding()]),
     GetPage(name: AppRoutes.productDetail, page: () =>   const ProductDetailView(), binding: ProductDetailBinding()),
+    GetPage(name: AppRoutes.businessDetail, page: () =>   const BusinessDetailView(), binding: BusinessDetailBinding()),
   ];
 }

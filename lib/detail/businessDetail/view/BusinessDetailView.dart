@@ -11,7 +11,7 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../../helper/constants/fonts.dart';
 import '../../../helper/dialogs/TrackActionDialog.dart';
-import '../../productDetail/controller/ProductDetailController.dart';
+import '../controller/BusinessDetailController.dart';
 
 
 class BusinessDetailView extends StatelessWidget {
@@ -20,7 +20,7 @@ class BusinessDetailView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: GetX<ProductDetailController>(
+      body: GetX<BusinessDetailController>(
         builder: (controller) {
           return Column(
             children: [
@@ -46,7 +46,7 @@ class BusinessDetailView extends StatelessWidget {
   }
 
 
-  Widget getPageViewAndIndicator(ProductDetailController controller){
+  Widget getPageViewAndIndicator(BusinessDetailController controller){
     return Column(
       children: [
         Stack(
@@ -174,7 +174,7 @@ class BusinessDetailView extends StatelessWidget {
     );
   }
 
-  Widget getImpactMetrics(ProductDetailController controller){
+  Widget getImpactMetrics(BusinessDetailController controller){
     return Column(
       children: [
         Container(
@@ -184,47 +184,47 @@ class BusinessDetailView extends StatelessWidget {
             Strings.textImpactMetrics, style: CommonUi.customTextStyle(fontFamily: Fonts.medium, fontSize: 20),
           ),
         ),
-        Container(
-          margin: const EdgeInsets.only(left: 30, right: 30, bottom: 16),
-          height: 70,
-          width: Get.width,
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: controller.metricList.value.length,
-            itemBuilder: (BuildContext context, int index) {
-              return Container(
-                padding: const EdgeInsets.only(top: 8, bottom: 8, left: 11, right: 11),
-                margin: const EdgeInsets.only(left: 30),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(4),
-                    color: controller.metricList[index].bgColor
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(controller.metricList[index].name,style: CommonUi.customTextStyle(
-                        fontFamily: Fonts.semiBold, fontSize: 11, color: controller.metricList[index].textColor!
-                    ),),
-                    const SizedBox(height: 2),
-                    Text(controller.metricList[index].type,style: CommonUi.customTextStyle(
-                        fontFamily: Fonts.regular, fontSize: 11, color: controller.metricList[index].textColor!
-                    ),),
-                    const SizedBox(height: 5),
-                    Text(controller.metricList[index].weight,style: CommonUi.customTextStyle(
-                        fontFamily: Fonts.bold, fontSize: 16, color: controller.metricList[index].textColor!
-                    ),
-                    ),
-                  ],
-                ),
-              );
-            },),
-        ),
+        // Container(
+        //   margin: const EdgeInsets.only(left: 30, right: 30, bottom: 16),
+        //   height: 70,
+        //   width: Get.width,
+        //   child: ListView.builder(
+        //     scrollDirection: Axis.horizontal,
+        //     itemCount: controller.metricList.value.length,
+        //     itemBuilder: (BuildContext context, int index) {
+        //       return Container(
+        //         padding: const EdgeInsets.only(top: 8, bottom: 8, left: 11, right: 11),
+        //         margin: const EdgeInsets.only(left: 30),
+        //         decoration: BoxDecoration(
+        //             borderRadius: BorderRadius.circular(4),
+        //             color: controller.metricList[index].bgColor
+        //         ),
+        //         child: Column(
+        //           crossAxisAlignment: CrossAxisAlignment.start,
+        //           children: [
+        //             Text(controller.metricList[index].name,style: CommonUi.customTextStyle(
+        //                 fontFamily: Fonts.semiBold, fontSize: 11, color: controller.metricList[index].textColor!
+        //             ),),
+        //             const SizedBox(height: 2),
+        //             Text(controller.metricList[index].type,style: CommonUi.customTextStyle(
+        //                 fontFamily: Fonts.regular, fontSize: 11, color: controller.metricList[index].textColor!
+        //             ),),
+        //             const SizedBox(height: 5),
+        //             Text(controller.metricList[index].weight,style: CommonUi.customTextStyle(
+        //                 fontFamily: Fonts.bold, fontSize: 16, color: controller.metricList[index].textColor!
+        //             ),
+        //             ),
+        //           ],
+        //         ),
+        //       );
+        //     },),
+        // ),
 
       ],
     );
   }
 
-  Widget whyItMatters(ProductDetailController controller) {
+  Widget whyItMatters(BusinessDetailController controller) {
     return Padding(
       padding:  EdgeInsets.only(left: CommonUi.marginLeftRight,right: CommonUi.marginLeftRight),
       child: Column(
