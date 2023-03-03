@@ -1,10 +1,8 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:ripplefect/detail/model/ProductDetailModel.dart';
-
-import '../../helper/constants/ColorRes.dart';
+import '../../../helper/constants/ColorRes.dart';
+import '../model/ProductDetailModel.dart';
 
 class ProductDetailController extends GetxController{
 

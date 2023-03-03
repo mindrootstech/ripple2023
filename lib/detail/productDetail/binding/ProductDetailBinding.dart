@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:ripplefect/detail/controller/ProductDetailController.dart';
+import '../controller/ProductDetailController.dart';
 
 
 class ProductDetailBinding extends Bindings{

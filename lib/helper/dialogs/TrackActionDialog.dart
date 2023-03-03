@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ripplefect/helper/constants/CommonUi.dart';
-
 import '../constants/ColorRes.dart';
 import '../constants/fonts.dart';
 import '../constants/strings.dart';

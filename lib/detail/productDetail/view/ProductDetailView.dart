@@ -3,16 +3,16 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_getx_widget.dart';
 import 'package:readmore/readmore.dart';
-import 'package:ripplefect/detail/controller/ProductDetailController.dart';
 import 'package:ripplefect/helper/constants/ColorRes.dart';
 import 'package:ripplefect/helper/constants/CommonUi.dart';
 import 'package:ripplefect/helper/constants/strings.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-import '../../helper/constants/fonts.dart';
-import '../../helper/dialogs/TrackActionDialog.dart';
+import '../../../helper/constants/fonts.dart';
+import '../../../helper/dialogs/TrackActionDialog.dart';
+import '../controller/ProductDetailController.dart';
+
 
 class ProductDetailView extends StatelessWidget {
   const ProductDetailView({Key? key}) : super(key: key);

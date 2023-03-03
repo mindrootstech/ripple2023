@@ -3,8 +3,6 @@ import 'package:ripplefect/authentication/binding/AuthBinding.dart';
 import 'package:ripplefect/dashBoard/DashboardView.dart';
 import 'package:ripplefect/dashBoard/binding/DashboardBinding.dart';
 import 'package:ripplefect/dashBoard/local/binding/LocalBinding.dart';
-import 'package:ripplefect/detail/binding/ProductDetailBinding.dart';
-import 'package:ripplefect/detail/view/ProductDetailView.dart';
 import '../../appOnBoarding/onboard/view/CompleteOnboardView.dart';
 import '../../appOnBoarding/onboard/binding/OnboardBinding.dart';
 import '../../appOnBoarding/onboard/view/OnboardView.dart';
@@ -16,6 +14,8 @@ import '../../authentication/views/ResetPassView.dart';
 import '../../authentication/views/SignupView.dart';
 import '../../authentication/views/VerificationView.dart';
 import '../../dashBoard/home/binding/HomeBinding.dart';
+import '../../detail/productDetail/binding/ProductDetailBinding.dart';
+import '../../detail/productDetail/view/ProductDetailView.dart';
 import 'AppRoutes.dart';
 
 class AppPages {
