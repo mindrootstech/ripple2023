@@ -113,41 +113,41 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: SFUIDisplay-Black
+    - family: AvenirNext-Bold-01
       fonts:
-        - asset: assets/fonts/SFUIDisplay-Black.otf
+        - asset: assets/fonts/AvenirNext-Bold-01.ttf
 
-    - family: SFUIDisplay-Bold
+    - family: AvenirNext-Heavy-09
       fonts:
-        - asset: assets/fonts/SFUIDisplay-Bold.ttf
+        - asset: assets/fonts/AvenirNext-Heavy-09.ttf
 
-    - family: SFUIDisplay-Heavy
+    - family: AvenirNext-Italic-05
       fonts:
-        - asset: assets/fonts/SFUIDisplay-Heavy.otf
+        - asset: assets/fonts/AvenirNext-Italic-05.ttf
 
-    - family: SFUIDisplay-Light
+    - family: AvenirNext-Medium-06
       fonts:
-        - asset: assets/fonts/SFUIDisplay-Light.ttf
+        - asset: assets/fonts/AvenirNext-Medium-06.ttf
 
-    - family: SFUIDisplay-Medium
+    - family: AvenirNext-Regular-08
       fonts:
-        - asset: assets/fonts/SFUIDisplay-Medium.otf
+        - asset: assets/fonts/AvenirNext-Regular-08.ttf
 
-    - family: SFUIDisplay-Regular
+    - family: semibold
       fonts:
-        - asset: assets/fonts/SFUIDisplay-Regular.otf
+        - asset: assets/fonts/semibold.ttf
 
-    - family: SFUIDisplay-Semibold
-      fonts:
-        - asset: assets/fonts/SFUIDisplay-Semibold.otf
-
-    - family: SFUIDisplay-Thin
-      fonts:
-        - asset: assets/fonts/SFUIDisplay-Thin.otf
-
-    - family: SFUIDisplay-Ultralight
-      fonts:
-        - asset: assets/fonts/SFUIDisplay-Ultralight.otf
+#    - family: SFUIDisplay-Semibold
+#      fonts:
+#        - asset: assets/fonts/SFUIDisplay-Semibold.otf
+#
+#    - family: SFUIDisplay-Thin
+#      fonts:
+#        - asset: assets/fonts/SFUIDisplay-Thin.otf
+#
+#    - family: SFUIDisplay-Ultralight
+#      fonts:
+#        - asset: assets/fonts/SFUIDisplay-Ultralight.otf
   # fonts:
   #   - family: Schyler
   #     fonts:

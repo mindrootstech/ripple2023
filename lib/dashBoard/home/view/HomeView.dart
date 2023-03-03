@@ -28,7 +28,7 @@ class HomeView extends StatelessWidget {
         child: Stack(children: [
          Image.asset(CommonUi.setPngImage('app_bg'),
            fit: BoxFit.fill,
-           height: 670,
+           height: 710,
            width: Get.width,
          ),
           Padding(
@@ -130,9 +130,9 @@ class HomeView extends StatelessWidget {
              decoration: CommonUi.curvedBoxDecoration(),
              child: Row(
                children: [
-                 Text("Complete profile and get 20 reward points!",
+                 Text("Complete profile & get 20 reward points!",
                      style: CommonUi.customTextStyle(
-                       fontSize: 14,
+                       fontSize: 12,
                        color: ColorRes.colorBlack,
                        fontFamily: Fonts.medium,
                      )),
@@ -168,7 +168,7 @@ class HomeView extends StatelessWidget {
              "Featured Challenges",
              style: CommonUi.customTextStyle(
                  fontSize: 22,
-                 fontFamily: Fonts.heavy,
+                 fontFamily: Fonts.bold,
                  color: Colors.white),
            ),
          ),
@@ -207,7 +207,7 @@ class HomeView extends StatelessWidget {
                                ClipRRect(
                                  borderRadius: const BorderRadius.only(topLeft: Radius.circular(20),topRight: Radius.circular(20)),
                                  child: Container(
-                                   color: ColorRes.colorGreyLight,
+                                   color: ColorRes.bluecolor,
                                    child: Image.network(
                                      "https://images.pexels.com/photos/60597/dahlia-red-blossom-bloom-60597.jpeg",
                                      fit: BoxFit.cover,
@@ -233,7 +233,7 @@ class HomeView extends StatelessWidget {
                                  child: Container(
                                    padding: const EdgeInsets.symmetric(horizontal: 8,vertical: 2),
                                    decoration: CommonUi.curvedBoxDecoration(backgroundColor: Colors.white,bottomRight: 0.0,bottomLeft: 0.0),
-                                   child: Text('250 Pts',style: CommonUi.customTextStyle(fontSize: 13,fontFamily: Fonts.heavy,color: ColorRes.colorGreen2),),
+                                   child: Text('250 Pts',style: CommonUi.customTextStyle(fontSize: 13,fontFamily: Fonts.bold,color: ColorRes.colorGreen2),),
                                  ),
                                )
                              ],
@@ -348,7 +348,7 @@ class HomeView extends StatelessWidget {
          child: Column(
            crossAxisAlignment: CrossAxisAlignment.start,
            children: [
-             Text(Strings.textForYou,style:CommonUi.customTextStyle(fontSize: 20,fontFamily: Fonts.heavy),),
+             Text(Strings.textForYou,style:CommonUi.customTextStyle(fontSize: 20,fontFamily: Fonts.bold),),
              const SizedBox(
                height: 8,
              ),
@@ -391,8 +391,8 @@ class HomeView extends StatelessWidget {
                              child: Row(
                                mainAxisSize: MainAxisSize.min,
                                children: [
-                                 Text(index==0?'Oceans':'Fashion',style:CommonUi.customTextStyle(fontSize: 13,fontFamily: Fonts.bold),),
-                                 Icon(Icons.clear,size: 18,)
+                                 Text(index==0?'Oceans':'Fashion',style:CommonUi.customTextStyle(fontSize: 13,fontFamily: Fonts.semiBold),),
+                                 const Icon(Icons.clear,size: 18,)
 
                                ],
                              ),
@@ -476,7 +476,7 @@ class HomeView extends StatelessWidget {
                                        Container(
                                          padding:const EdgeInsets.only(left: 8,right: 8,top: 2,bottom: 2),
                                          decoration: CommonUi.curvedBoxDecoration(backgroundColor: ColorRes.appColor),
-                                         child: Text("50 Pts",style: CommonUi.customTextStyle(fontFamily: Fonts.heavy,fontSize: 12,color: Colors.white),),
+                                         child: Text("50 Pts",style: CommonUi.customTextStyle(fontFamily: Fonts.bold,fontSize: 12,color: Colors.white),),
                                        )
                                      ],
                                    ),

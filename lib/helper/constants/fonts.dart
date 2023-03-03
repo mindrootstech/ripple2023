@@ -1,14 +1,13 @@
 class Fonts
 {
 
-  static const black = 'SFUIDisplay-Black';
-  static const bold = 'SFUIDisplay-Bold';
-  static const heavy = 'SFUIDisplay-Heavy';
+  // static const black = 'SFUIDisplay-Black';
+  static const bold = 'AvenirNext-Bold-01';
   static const light = 'SFUIDisplay-Light';
-  static const medium = 'SFUIDisplay-Medium';
-  static const regular = 'SFUIDisplay-Regular';
-  static const semiBold = 'SFUIDisplay-Semibold';
-  static const thin = 'SFUIDisplay-Thin';
-  static const ultraThin = 'SFUIDisplay-Ultralight';
+  static const medium = 'AvenirNext-Medium-06';
+  static const regular = 'AvenirNext-Regular-08';
+  static const semiBold = 'semibold';
+  // static const thin = 'SFUIDisplay-Thin';
+  // static const ultraThin = 'SFUIDisplay-Ultralight';
 
 }

@@ -19,75 +19,33 @@ class CompleteOnboardView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('height of device ${Get.height}');
     return Scaffold(
       backgroundColor: ColorRes.appColor,
       body: SizedBox(
         height: Get.height,
         child: Stack(
           children: [
-            Positioned(
-                bottom: 0,
-                top: 0,
-                left: 0,
-                right: 0,
-                child: _buildGif()),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-
-                Container(
-                  margin: EdgeInsets.symmetric(horizontal: CommonUi.marginLeftRight),
-                  child: Text("Congratulations! ", style: CommonUi.customTextStyle(
-                      fontFamily: Fonts.bold,color: ColorRes.white,fontSize: 30.0),),
+            Container(
+              height: Get.height,
+              width: Get.width,
+              decoration:  BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage(CommonUi.setPngImage('bg_onboarding')),
+                  fit: BoxFit.cover,
                 ),
-                const SizedBox(height: 15,),
-                Container(
-                  margin: EdgeInsets.symmetric(horizontal: CommonUi.marginLeftRight),
-                  child: Text("You just earned 20 points for completing onboarding. ",
-                    textAlign: TextAlign.center,
-                    style: CommonUi.customTextStyle(
-                        fontFamily: Fonts.semiBold,color: ColorRes.white,fontSize: 18),),
-                ),
-                _buildTreeGif(),
-                Container(
-                  margin: EdgeInsets.symmetric(horizontal: CommonUi.marginLeftRight,vertical: 30),
-                  child: Text("Create an account to claim your reward!",
-                    textAlign: TextAlign.center,
-                    style: CommonUi.customTextStyle(
-                        fontFamily: Fonts.semiBold,color: ColorRes.white,fontSize: 18),),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    InkWell(
-                        onTap: (){
-                          controller.loginWithGoogle();
-                        },
-                        child: socialLoginImage("google")),
+              ),
+              padding: const EdgeInsets.only(top: 80,bottom: 30),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
 
-                    InkWell(
-                      onTap: (){
-                        controller.loginWithFacebook();
-                      },
-                        child: socialLoginImage("facebook",isFacebook: true)),
+                children: [
+                 congratulationsPart(),
 
-
-                    if(Platform.isIOS)...{
-                      InkWell(
-                        onTap: (){
-                          controller.applyAppleLogin();
-                        }, child: socialLoginImage("apple")),
-                    },
-
-                    InkWell(
-                        onTap: (){
-                          Get.toNamed(AppRoutes.signup);
-                        },
-                        child: socialLoginImage("email")
-                    ),
-                  ],
-                ),
-              ],
+                  _buildTreeGif(),
+                 socialLoginPart()
+                ],
+              ),
             ),
 
             Obx((){
@@ -124,11 +82,86 @@ class CompleteOnboardView extends StatelessWidget {
     );
   }
    Widget _buildTreeGif(){
-     return Container(
-       child: Lottie.asset(CommonUi.setLottie('tree_lottie'),
-           width: Get.width,
-           alignment: Alignment.center
+     return Expanded(
+       child: Container(
+         margin: const EdgeInsets.symmetric(horizontal: 15,vertical: 50),
+         child: Lottie.asset(CommonUi.setLottie('tree_lottie'),
+             // width: Get.width,
+             // height: Get.height,
+             fit: BoxFit.contain,
+             repeat: true,
+             alignment: Alignment.center
+         ),
        ),
      );
    }
+
+ Widget congratulationsPart() {
+    return Column(
+      children: [
+        Container(
+          margin: EdgeInsets.symmetric(horizontal: CommonUi.marginLeftRight),
+          child: Text("Congratulations! ", style: CommonUi.customTextStyle(
+              fontFamily: Fonts.bold,color: ColorRes.white,fontSize: 30.0),),
+        ),
+        const SizedBox(height: 15,),
+        Container(
+          margin: EdgeInsets.symmetric(horizontal: CommonUi.marginLeftRight),
+          child: Text("You just earned 20 points for completing onboarding. ",
+            textAlign: TextAlign.center,
+            style: CommonUi.customTextStyle(
+                fontFamily: Fonts.regular,color: ColorRes.white,fontSize: 18),),
+        ),
+      ],
+    );
+  }
+
+ Widget socialLoginPart() {
+    return Column(
+      children: [
+        Container(
+          margin: EdgeInsets.symmetric(horizontal: CommonUi.marginLeftRight,vertical: 30),
+          child: Text("Create an account to claim your reward!",
+            textAlign: TextAlign.center,
+            style: CommonUi.customTextStyle(
+                fontFamily: Fonts.regular,color: ColorRes.white,fontSize: 18),),
+        ),
+        Container(
+          margin: EdgeInsets.symmetric(horizontal: CommonUi.marginLeftRight),
+
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              InkWell(
+                  onTap: (){
+                    controller.loginWithGoogle();
+                  },
+                  child: socialLoginImage("google")),
+
+              InkWell(
+                  onTap: (){
+                    controller.loginWithFacebook();
+                  },
+                  child: socialLoginImage("facebook",isFacebook: true)),
+
+
+              if(Platform.isIOS)...{
+                InkWell(
+                    onTap: (){
+                      controller.applyAppleLogin();
+                    }, child: socialLoginImage("apple")),
+              },
+
+              InkWell(
+                  onTap: (){
+                    Get.toNamed(AppRoutes.signup);
+                  },
+                  child: socialLoginImage("email")
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
 }

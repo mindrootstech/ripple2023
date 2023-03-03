@@ -41,7 +41,7 @@ class FiltersSheet{
             ),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 30),
-              height: 80,
+              height: 72,
               width: Get.width,
               color: Colors.white,
               child: Row(
@@ -51,8 +51,8 @@ class FiltersSheet{
                   Expanded(child: Text('Clear all',style: CommonUi.customTextStyle(fontFamily: Fonts.semiBold,fontSize: 17,color: ColorRes.buttonColor),)),
                   Expanded(
                     child: SizedBox(
-                      height: 48,
-                      child: CommonUi.customButtonSmall(buttonText: "Show 10 results",padding: 10.0,fontSize: 20.0),
+                      height: 40,
+                      child: CommonUi.customButtonSmall(buttonText: "Show 10 results",padding: 10.0,fontSize: 14.0),
                     ),
                   )
                 ],
@@ -168,7 +168,7 @@ Widget getTitleText(String text, bool isSelected) {
           // width: double.infinity,
           color:isSelected? Colors.white:Colors.transparent,
           padding: const EdgeInsets.symmetric(vertical: 10),
-          child:  Center(child: Text(text,style: CommonUi.customTextStyle(fontSize: 17,fontFamily: Fonts.semiBold),)),
+          child:  Center(child: Text(text,style: CommonUi.customTextStyle(fontSize: 15,fontFamily: Fonts.semiBold),)),
         ),
       ),
     ],
@@ -226,7 +226,7 @@ Widget filterValuesList(List<String> list, HomeController controller) {
                 Expanded(
                   child: Container(
                     padding: const EdgeInsets.symmetric(vertical: 15),
-                    child:  Text(list[index],style: CommonUi.customTextStyle(fontSize: 17,fontFamily: Fonts.semiBold),),
+                    child:  Text(list[index],style: CommonUi.customTextStyle(fontSize: 15,fontFamily: Fonts.semiBold),),
                   ),
                 ),
               ],

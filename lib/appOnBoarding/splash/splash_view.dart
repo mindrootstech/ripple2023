@@ -41,16 +41,9 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
   @override
   initState()  {
     super.initState();
-    controller = FlutterGifController(vsync: this);
 
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      controller.repeat(
-        min: 0,
-        max: 2,
-        period: const Duration(milliseconds: 200),
-      );
-    });
-
+    controller = FlutterGifController(vsync: this,duration: const Duration(seconds:1));
+    // controller.repeat(min:0, max:0, period:const Duration(seconds:4));
 
     Timer(const Duration(seconds: 6), () async {
       if(localStorage.getAuthCode()!=''){
@@ -62,9 +55,10 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
 
   }
   Widget _buildHandGif(){
-    return GifImage(
-      controller: controller,
-      image: const AssetImage('assets/lottie/splash_lottie.gif'),
+    return Image.asset(
+      // controller: controller,
+      gaplessPlayback: false,
+       'assets/lottie/splash_lottie.gif',
     );
   }
 }

@@ -189,7 +189,7 @@ class AllActionSheet{
                                   Container(
                                     padding:const EdgeInsets.only(left: 8,right: 8,top: 2,bottom: 2),
                                     decoration: CommonUi.curvedBoxDecoration(backgroundColor: ColorRes.appColor),
-                                    child: Text("50 Pts",style: CommonUi.customTextStyle(fontFamily: Fonts.heavy,fontSize: 11,color: Colors.white),),
+                                    child: Text("50 Pts",style: CommonUi.customTextStyle(fontFamily: Fonts.bold,fontSize: 11,color: Colors.white),),
                                   )
                                 ],
                               ),

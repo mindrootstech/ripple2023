@@ -133,7 +133,7 @@ class LoginView extends StatelessWidget with InputValidationMixin{
                             height: 5,
                           ),
                           Wrap(
-                            spacing: 12,
+                            spacing: 17,
                             children: [
                               InkWell(
                                   onTap: (){
