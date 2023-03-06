@@ -5,6 +5,8 @@ import 'package:ripplefect/dashBoard/binding/DashboardBinding.dart';
 import 'package:ripplefect/dashBoard/local/binding/LocalBinding.dart';
 import 'package:ripplefect/detail/businessDetail/binding/BusinessDetailBinding.dart';
 import 'package:ripplefect/detail/businessDetail/view/BusinessDetailView.dart';
+import 'package:ripplefect/myProfile/binding/MyProfileBinding.dart';
+import 'package:ripplefect/myProfile/view/MyProfileView.dart';
 import '../../appOnBoarding/onboard/view/CompleteOnboardView.dart';
 import '../../appOnBoarding/onboard/binding/OnboardBinding.dart';
 import '../../appOnBoarding/onboard/view/OnboardView.dart';
@@ -37,6 +39,7 @@ class AppPages {
     GetPage(name: AppRoutes.dashboard, page: () =>  DashboardView(), bindings: [DashBoardBinding(),HomeBinding(),LocalBinding()]),
     GetPage(name: AppRoutes.productDetail, page: () =>   const ProductDetailView(), binding: ProductDetailBinding()),
     GetPage(name: AppRoutes.businessDetail, page: () =>   const BusinessDetailView(), binding: BusinessDetailBinding()),
+    GetPage(name: AppRoutes.myProfile, page: () =>    MyProfileView(), binding: MyProfileBinding()),
   ];
 
 

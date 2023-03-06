@@ -42,11 +42,12 @@ class PageViewItem extends StatelessWidget {
                 const SizedBox(
                   height: 20,
                 ),
-                Container(
-                  height: 80,
+                SizedBox(
+                  height: 110,
                   child: Text(
                     description,
-                    style: CommonUi.customTextStyle(),
+                    style: CommonUi.customTextStyle(fontSize: 17,
+                        fontFamily: Fonts.regular),
                   ),
                 ),
               ],

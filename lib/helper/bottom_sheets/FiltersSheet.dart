@@ -2,11 +2,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import '../../dashBoard/home/controller/HomeController.dart';
 import '../../helper/constants/ColorRes.dart';
 import '../../helper/constants/CommonUi.dart';
 import '../../helper/constants/fonts.dart';
 import '../../helper/constants/strings.dart';
-import '../home/controller/HomeController.dart';
 
 class FiltersSheet{
 
@@ -32,7 +32,7 @@ class FiltersSheet{
                     }else if(controller.timeSelected.value)...{
                       Expanded(flex:2,child: filterValuesList(controller.timeList,controller))
                     }else...{
-                      Expanded(flex:2,child: filterValuesList(controller.categoriesList,controller))
+                      Expanded(flex:2,child: filterValuesList(controller. categoriesList,controller))
                     }
 
                   ],

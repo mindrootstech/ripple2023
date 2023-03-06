@@ -129,6 +129,29 @@ class Strings {
   static String textIAlreadyDid = 'I Already Did This';
 
 
+  /// my Profile view
+
+  static String textName = 'Name';
+  static String textEmail = 'Email';
+  static String textPassword = 'Password';
+  static String textMobileNumber = 'Mobile number';
+  static String textCity = 'City';
+  static String textCountry = 'Country';
+  static String textDescription = 'Description';
+  static String textWhatIs = 'What is your why?';
+  static String textWhatYourWant = 'What your want to do more?';
+  static String textGoal = 'Goal';
+  static String textEnterName = 'Enter Name';
+  static String textEnterEmail = 'Enter Email';
+  static String textEnterMobileNumber = 'Enter Mobile Number';
+  static String textEnterCityName = 'Enter City Name';
+  static String textEnterCountryName = 'Enter Country Name';
+  static String textEnterHere = 'Enter here...';
+  static String textOurChildren = 'Our Children';
+  static String textReduceMyWaste = 'Reduce my waste';
+  static String textUpdate = 'Update';
+  static String textDeleteAccount = 'Delete Account';
+
 
 
 
@@ -139,6 +162,7 @@ class Strings {
    static String textValidEmail='Enter a valid email';
    static String textValidOtp='Enter a valid otp';
    static String textYourName='Enter your name';
+   static String textYourMobile='Enter valid phone number';
    static String textEmailIsRequired='Email is required';
    static String textNameIsRequired='Name is required';
    static String textPleaseEnterValidEmail='Please enter a valid email';
@@ -158,6 +182,10 @@ class Strings {
   static String textLogoutDesc='Are you sure you want to logout?';
   static String textLogout='Logout';
   static String textCancel='Cancel';
+
+  //Delete Account
+  static String textDeleteAccDesc='Are you sure you want to delete this account?';
+  static String textYes='Yes';
 
   //TrackAction
   static String textKnowHowTrack='Know how we track actions';

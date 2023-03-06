@@ -22,4 +22,13 @@ mixin InputValidationMixin {
      return false;
    }
   }
+
+
+  bool isMobileValid(String number) {
+    if(number.length<10){
+      return true;
+    }else{
+      return false;
+    }
+  }
 }

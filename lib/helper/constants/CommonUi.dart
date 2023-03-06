@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 import 'ColorRes.dart';
 import 'fonts.dart';
@@ -26,7 +27,7 @@ class CommonUi {
 
 
 
-  static customLayout({required String title,required Widget child,Function? onBack, bool isBack=true}) {
+  static customLayout({required String title,required Widget child,Function? onBack, bool isBack=true,double blankHeight=50}) {
     return Stack(
         children: [
           SizedBox(
@@ -53,8 +54,8 @@ class CommonUi {
                     ),
                   ),
                 }else...{
-                  const SizedBox(
-                    height: 50,
+                   SizedBox(
+                    height: blankHeight,
                   )
                 },
 
@@ -714,6 +715,12 @@ class CommonUi {
           width:borderWidth,
         )
     );
+  }
+
+  static getStartTime(String datetime) {
+    var dateTime2=DateTime.parse(datetime);
+   var result= DateFormat.yMMMd().format(dateTime2);
+    return result;
   }
 
 

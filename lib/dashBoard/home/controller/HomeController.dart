@@ -3,7 +3,7 @@ import 'dart:convert';
 
 import 'package:get/get.dart';
 import 'package:ripplefect/api_provider/ApiProvider.dart';
-import 'package:ripplefect/dashBoard/home/model/DashboardModel.dart';
+import 'package:ripplefect/dashBoard/home/model/HomeDataModel.dart';
 import 'package:ripplefect/helper/routes/AppRoutes.dart';
 
 import '../../../helper/common_classes/LocalStorage.dart';
@@ -14,10 +14,15 @@ class HomeController extends GetxController{
   var apiProvider=ApiProvider();
   var localStorage=LocalStorage();
 
-  var modelList = [DashboardModel("one"),DashboardModel("two"),DashboardModel("three"),DashboardModel("four"),DashboardModel("test")];
 
   var loader=false.obs;
 
+
+  ///Home view controller...
+  var userProfile=UsersProfile();
+  var challengeList=<Challenge>[];
+  var categoryList=<CategoryTag>[];
+  var actionList=<Action>[];
 
 
   ///filter sheet controller...
@@ -28,6 +33,46 @@ class HomeController extends GetxController{
   var actionTypeList=['Local','Global','Online','Saved'];
   var timeList = ["5 mins ","Under 30 mins","Couple hours","Ongoing"];
   var categoriesList = ["Compost","Reduce waste in your home","Food Waste","Preserve Oceans","Sustainable Fashion","Reduce Emissions"];
+
+
+
+
+
+
+  @override
+  void onInit() {
+    super.onInit();
+    getHomeDataImplementation();
+  }
+
+
+
+  void  getHomeDataImplementation() async {
+    loader.value=true;
+    await apiProvider.getHomeDataApi().then((value){
+      if(value=='error'){
+        loader.value=false;
+        return;
+      }
+      else{
+        var response = homeDataModelFromJson(value);
+        if(response.status) {
+          if(response.data.usersProfile!=null){
+            userProfile=response.data.usersProfile!;
+            challengeList.addAll(response.data.challenges??[]);
+            actionList.addAll(response.data.articles??[]);
+          }
+
+
+        }else{
+          CommonUi.showToast(response.message);
+        }
+        loader.value=false;
+      }
+    }).catchError((e){
+      loader.value=false;
+    });
+  }
 
 
   void  logoutApiImplementation() async {
@@ -52,5 +97,6 @@ class HomeController extends GetxController{
       CommonUi.showToast('error');
     });
   }
+
 
 }

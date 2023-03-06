@@ -171,6 +171,20 @@ class ApiProvider extends GetConnect {
     }
   }
 
+  Future<String> getHomeDataApi() async {
+    try {
+      final response = await client.get(Uri.parse("$baseUrl/home"),
+          headers: {'Authorization': "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiYmI4NTg5OTQ5Y2IzYzFkZTBmZGE4YTQzYTdhYWQzYjdkNmRmMWUzYmI3MWI4ZGY2NmQ4YzBkYTAwNTBiODVjNmY4NmU1ZmIxMWVjMTYxNmMiLCJpYXQiOjE2NzgwOTQ4NTcuODM3ODUxLCJuYmYiOjE2NzgwOTQ4NTcuODM3ODU0LCJleHAiOjE3MDk3MTcyNTcuODI3NzE4LCJzdWIiOiI0MSIsInNjb3BlcyI6W119.FRWaLkQPd0McW6dTNMSq7hBih-uk40_j_Y-6hwp94Ol8nlndN-aBd63og96QkCnEt9G1xwD66PX9QReHCZbkQuhPjhmVW-mrZq_FZA_a5ZZKlHohg9985JMRTXaWpk_pTFgYXvgM9fPsoJoj6Nspb0p6zGM9wf_g32zMlma39h2iU4T7JyVJvEFE9j52V4ImfMQxQlIb4KiMhTKnWQypPjlQIREVXHcL5NHlNIJ10YMK7oIBU1BuAcF6ojtknXzmILSlCBBk2YG-ZZvw62hzanbhlLa0jYN7vJYVnWsxjwA7Q7SuG6TKiqQQxuk0txKZGcyVMLjI5ksroUmAHoW5wdT5eegacgDRbejgxoD3IaxjqeFF1VSS-XQb_LZNnKAmIGUHhhNZwT253VCZ3gUQKIBOnJeJD65Y_dRYEAusEHDr_XnM0BsCIv3iTsWfK1qxQAnUEk5qp49m1M30u62fGujUKPt_ZdNWZdKgmi0AgcsmW97ih9Y2cRbsB_t2OMmPx35mn4FtGMd4-MKTC7K2TErwZd46z-gfdcdJ5ZWubJywLcO_HQCdhWI0AYOl_dPeH1a9cnkqF6FE7owiCgK73JdbRpJOwIWU6accec_ZeJcKNDLMyqJwD8a-HHViqbRCh_G25t4z1A9CM_IeVhekLVOuT2wD6TfvE_HCy3UwQjU"});
+      if (response.statusCode == 200) {
+        return response.body;
+      } else {
+        return response.body;
+      }
+    } catch (e) {
+      return 'error';
+    }
+  }
+
 
 
 
