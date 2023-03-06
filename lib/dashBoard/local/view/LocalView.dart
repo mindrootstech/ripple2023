@@ -17,8 +17,6 @@ class LocalView extends StatelessWidget {
               child: GoogleMap(
                 padding:  const EdgeInsets.only(bottom: 300),
                 myLocationEnabled: true,
-
-
                 onCameraMove: (value){
                   // controller.skipApiImplementation.value = false;
                   // if(controller.timer != null){
