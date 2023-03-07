@@ -173,6 +173,29 @@ class CommonUi {
     );
   }
 
+
+
+  static curvedBoxDecorationWithShadow2(
+      {double radius = 100.0,
+        backgroundColor = ColorRes.white,
+        Color shadowColor=ColorRes.colorBlack25,
+      }) {
+    return BoxDecoration(
+      color: backgroundColor,
+      borderRadius: BorderRadius.all(Radius.circular(radius)),
+      boxShadow:  [
+        BoxShadow(
+          color: shadowColor,
+          spreadRadius: 0.0,
+          blurRadius: 4.0,
+          offset: const Offset(0.0, 4.0),
+        ),
+      ],
+    );
+  }
+
+
+
   static roundedButton(
       {text,
         width,

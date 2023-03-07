@@ -157,9 +157,7 @@ class MyProfileView extends StatelessWidget with InputValidationMixin {
     );
   }
 
-  Widget getTextFields(String tittle, String hint, textController,
-      bool obscureText, String? Function(String? value) validateError,
-      {TextInputType? keyboardType}) {
+  Widget getTextFields(String tittle, String hint,TextEditingController textController, bool obscureText, String? Function(String? value) validateError, {TextInputType? keyboardType}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -176,7 +174,7 @@ class MyProfileView extends StatelessWidget with InputValidationMixin {
         ),
         TextFormField(
           validator: validateError,
-          // controller: controller.emailField,
+          controller: textController,
           keyboardType: keyboardType,
           decoration: CommonUi.textFieldDecoration(hintText: hint),
           obscureText: obscureText,
@@ -184,6 +182,34 @@ class MyProfileView extends StatelessWidget with InputValidationMixin {
       ],
     );
   }
+
+  Widget getDescTextFields(String tittle, String hint,TextEditingController textController, bool obscureText, String? Function(String? value) validateError, {TextInputType? keyboardType}) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const SizedBox(
+          height: 15,
+        ),
+        Text(
+          tittle,
+          style: CommonUi.customTextStyle(
+              fontFamily: Fonts.semiBold, fontSize: 18.0),
+        ),
+        const SizedBox(
+          height: 5,
+        ),
+        TextFormField(
+          controller: textController,
+          minLines: 6,
+          maxLines: null,
+          keyboardType: TextInputType.multiline,
+          decoration: CommonUi.textFieldDecoration(hintText: hint),
+          obscureText: obscureText,
+        ),
+      ],
+    );
+  }
+
 
   String? validateNameError(String? value) {
     if (isNameValid(value ?? '')) {
@@ -218,29 +244,17 @@ class MyProfileView extends StatelessWidget with InputValidationMixin {
       padding: EdgeInsets.symmetric(horizontal: CommonUi.marginLeftRight),
       child: Column(
         children: [
-          getTextFields(Strings.textName, Strings.textEnterName, null, false,
-              validateNameError),
-          getTextFields(Strings.textEmail, Strings.textEnterEmail, null, false,
-              validateEmailError),
-          getTextFields(
-              Strings.textPassword, "********", null, true, validateNullError),
-          getTextFields(Strings.textMobileNumber, Strings.textEnterMobileNumber,
-              null, false, validateMobileError,
-              keyboardType: TextInputType.number),
-          getTextFields(Strings.textCity, Strings.textEnterCityName, null,
-              false, validateNullError),
-          getTextFields(Strings.textCountry, Strings.textEnterCountryName, null,
-              false, validateNullError),
-          getTextFields(Strings.textDescription, Strings.textEnterHere, null,
-              false, validateNullError),
-          getTextFields(Strings.textWhatIs, Strings.textOurChildren, null,
-              false, validateNullError),
-          getTextFields(Strings.textWhatYourWant, Strings.textReduceMyWaste,
-              null, false, validateNullError),
-          getTextFields(Strings.textGoal, Strings.textEnterHere, null, false,
-              validateNullError),
-          const SizedBox(
-            height: 35,
+          getTextFields(Strings.textName, Strings.textEnterName, controller.nameController, false, validateNameError),
+          getTextFields(Strings.textEmail, Strings.textEnterEmail, controller.emailController, false, validateEmailError),
+          getTextFields(Strings.textPassword, "********", controller.passController, true, validateNullError),
+          getTextFields(Strings.textMobileNumber, Strings.textEnterMobileNumber, controller.mobileController, false, validateMobileError, keyboardType: TextInputType.number),
+          getTextFields(Strings.textCity, Strings.textEnterCityName, controller.cityController, false, validateNullError),
+          getTextFields(Strings.textCountry, Strings.textEnterCountryName, controller.countryController, false, validateNullError),
+          getDescTextFields(Strings.textDescription, Strings.textEnterHere, controller.descriptionController, false, validateNullError),
+          getTextFields(Strings.textWhatIs, Strings.textOurChildren, controller.whatYouController, false, validateNullError),
+          getTextFields(Strings.textWhatYourWant, Strings.textReduceMyWaste, controller.whatYouWantController, false, validateNullError),
+          getTextFields(Strings.textGoal, Strings.textEnterHere, controller.goalController, false, validateNullError),
+          const SizedBox(height: 35,
           ),
           CommonUi.customButton(
               buttonText: Strings.textUpdate,

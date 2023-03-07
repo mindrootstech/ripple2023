@@ -1,14 +1,10 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:readmore/readmore.dart';
 import 'package:ripplefect/helper/constants/ColorRes.dart';
 import 'package:ripplefect/helper/constants/CommonUi.dart';
 import 'package:ripplefect/helper/constants/strings.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-
 import '../../../helper/constants/fonts.dart';
 import '../controller/BusinessDetailController.dart';
 
@@ -308,7 +304,7 @@ class BusinessDetailView extends StatelessWidget {
     );
   }
 
-  getOfferedRewards() {
+  Widget getOfferedRewards() {
     return Container(
       margin: const EdgeInsets.only(left: 20, top: 16, bottom: 16, right: 20),
       child: Column(

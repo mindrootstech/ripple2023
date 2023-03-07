@@ -8,6 +8,7 @@ import 'package:ripplefect/helper/routes/AppRoutes.dart';
 
 import '../../../helper/common_classes/LocalStorage.dart';
 import '../../../helper/constants/CommonUi.dart';
+import '../model/FilterActionModel.dart';
 
 class HomeController extends GetxController{
   var currentIndex=0.obs;
@@ -23,6 +24,8 @@ class HomeController extends GetxController{
   var challengeList=<Challenge>[];
   var categoryList=<CategoryTag>[];
   var actionList=<Action>[];
+  var filterActionList=<AllAction>[];
+  var filterCategoryList=<AllCategory>[];
 
 
   ///filter sheet controller...
@@ -43,6 +46,7 @@ class HomeController extends GetxController{
   void onInit() {
     super.onInit();
     getHomeDataImplementation();
+    getFilterActionImplementation();
   }
 
 
@@ -73,6 +77,29 @@ class HomeController extends GetxController{
       loader.value=false;
     });
   }
+
+  void  getFilterActionImplementation() async {
+    loader.value=true;
+    await apiProvider.getFilterActionApi().then((value){
+      if(value=='error'){
+        loader.value=false;
+        return;
+      }
+      else{
+        var response = filterActionModelFromJson(value);
+        if(response.status) {
+            filterActionList.addAll(response.data.allActions??[]);
+            filterCategoryList.addAll(response.data.allCategory??[]);
+        }else{
+          CommonUi.showToast(response.message);
+        }
+        loader.value=false;
+      }
+    }).catchError((e){
+      loader.value=false;
+    });
+  }
+
 
 
   void  logoutApiImplementation() async {

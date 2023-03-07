@@ -4,12 +4,15 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:ripplefect/dashBoard/home/controller/HomeController.dart';
+import 'package:ripplefect/helper/common_classes/CommonLoader.dart';
 import '../../helper/constants/ColorRes.dart';
 import '../../helper/constants/CommonUi.dart';
 import '../../helper/constants/fonts.dart';
 import '../../helper/constants/strings.dart';
 
 class AllActionSheet{
+ var controller=Get.find<HomeController>();
 
   void showSheet(){
     Get.bottomSheet(
@@ -22,11 +25,13 @@ class AllActionSheet{
            getHeaderPart(),
             Expanded(
               child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    getCategoryListView(),
-                    getActionsList(),
-                  ],
+                child: Obx(()=>
+                  !controller.loader.value? Column(
+                    children: [
+                      getCategoryListView(),
+                      getActionsList(),
+                    ],
+                  ):const CommonLoader(),
                 ),
               ),
             ),
@@ -64,11 +69,11 @@ class AllActionSheet{
               fontSize: 18),),
           Container(
             margin: const EdgeInsets.only(top: 16,bottom:24 ),
-            height: 160,
+            height: 120,
             width: Get.width,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: 10,
+              itemCount: controller.filterCategoryList.length,
               itemBuilder: (BuildContext context, int index) {
                 return Container(
                   width: 160,
@@ -81,8 +86,13 @@ class AllActionSheet{
                       ClipRRect(
                           borderRadius: BorderRadius.circular(10),
                           child: Container(
+                            height: 120,
+                              width: 160,
                               color: ColorRes.colorGreyLight,
-                              child: CachedNetworkImage(imageUrl: 'https://picsum.photos/250?image=18')),
+                              child: CachedNetworkImage(imageUrl: controller.filterCategoryList[index].image,
+                              fit: BoxFit.fill),
+
+                          ),
                       ),
                         Container(
                           color: ColorRes.lightBlackColor,
@@ -90,7 +100,7 @@ class AllActionSheet{
                         Positioned(
                           top: 16,
                           left: 19,
-                          child: Text("Category 1",
+                          child: Text(controller.filterCategoryList[index].name,
                             style: CommonUi.customTextStyle(fontFamily: Fonts.bold, fontSize: 15,
                                 color: ColorRes.white),)) ,
                       Positioned(
@@ -102,7 +112,7 @@ class AllActionSheet{
                               borderRadius: BorderRadius.circular(18),
                               color: ColorRes.colorLightGrey
                           ),
-                          child: Text('20 Actions',
+                          child: Text('${controller.filterCategoryList[index].total} Actions',
                             style: CommonUi.customTextStyle(fontFamily: Fonts.medium, fontSize: 13,
                                 color: ColorRes.colorBlack),
                           ),
@@ -138,7 +148,7 @@ class AllActionSheet{
             physics: const BouncingScrollPhysics(),
             padding: EdgeInsets.zero,
             scrollDirection: Axis.vertical,
-            itemCount: 10,
+            itemCount: controller.filterActionList.length,
             itemBuilder: (BuildContext context, int index) {
               return Container(
                 decoration: CommonUi.getBorderRadius(8.0, Colors.transparent,borderWidth: 1.0, borderColor: ColorRes.noProgressColor),
@@ -146,6 +156,7 @@ class AllActionSheet{
                 child: Stack(
                   children: [
                     Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Expanded(
                           child: SizedBox(
@@ -154,7 +165,7 @@ class AllActionSheet{
                             child: ClipRRect(
                               borderRadius: const BorderRadius.only(topLeft: Radius.circular(8),topRight: Radius.circular(8)),
                               child: Image.network(
-                                "https://images.pexels.com/photos/60597/dahlia-red-blossom-bloom-60597.jpeg",
+                                controller.filterActionList[index].mainImage,
                                 fit: BoxFit.cover,
                                 loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress){
                                   if (loadingProgress == null) return child;
@@ -179,6 +190,7 @@ class AllActionSheet{
                           ),
                           padding: const EdgeInsets.all(14),
                           child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -187,14 +199,17 @@ class AllActionSheet{
                                   Container(
                                     padding:const EdgeInsets.only(left: 8,right: 8,top: 2,bottom: 2),
                                     decoration: CommonUi.curvedBoxDecoration(backgroundColor: ColorRes.appColor),
-                                    child: Text("50 Pts",style: CommonUi.customTextStyle(fontFamily: Fonts.bold,fontSize: 11,color: Colors.white),),
+                                    child: Text("${controller.filterActionList[index].points} Pts",style: CommonUi.customTextStyle(fontFamily: Fonts.bold,fontSize: 11,color: Colors.white),),
                                   )
                                 ],
                               ),
                               const SizedBox(height: 8),
-                              Padding(
+                              Container(
+                                height:40,
                                 padding: const EdgeInsets.only(left: 0, right: 8),
-                                child: Text("Advocate for the restoration of seagrass in our oceans.",textAlign: TextAlign.start,style: CommonUi.customTextStyle(fontFamily: Fonts.semiBold,fontSize: 15),),
+                                child: Text(controller.filterActionList[index].description??'',
+                                  maxLines: 2,
+                                  textAlign: TextAlign.start,style: CommonUi.customTextStyle(fontFamily: Fonts.semiBold,fontSize: 15),),
                               ),
                               Container(
                                 height: 1,
@@ -212,6 +227,7 @@ class AllActionSheet{
                           ),
                         )
                       ],
+
                     ),
                     Container(
                       alignment: Alignment.topRight,

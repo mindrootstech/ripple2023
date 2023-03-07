@@ -238,7 +238,8 @@ class HomeView extends StatelessWidget {
                                  child: Container(
                                    padding: const EdgeInsets.symmetric(horizontal: 8,vertical: 2),
                                    decoration: CommonUi.curvedBoxDecoration(backgroundColor: Colors.white,bottomRight: 0.0,bottomLeft: 0.0),
-                                   child: Text('${controller.challengeList[itemIndex].challengePoints??''} Pts',style: CommonUi.customTextStyle(fontSize: 13,fontFamily: Fonts.bold,color: ColorRes.colorGreen2),),
+                                   child: Text('${controller.challengeList[itemIndex].challengePoints??''} Pts',
+                                     style: CommonUi.customTextStyle(fontSize: 13,fontFamily: Fonts.bold,color: ColorRes.colorGreen2),),
 
                                  ),
                                )
@@ -268,7 +269,9 @@ class HomeView extends StatelessWidget {
                                    child: Column(
                                      crossAxisAlignment: CrossAxisAlignment.start,
                                      children: [
-                                       Text(controller.challengeList[itemIndex].challengeName??'',style: CommonUi.customTextStyle(fontFamily: Fonts.semiBold),),
+                                       Text(controller.challengeList[itemIndex].challengeName??'',
+                                         maxLines: 2,
+                                         style: CommonUi.customTextStyle(fontFamily: Fonts.semiBold),),
                                        const SizedBox(height: 5,),
                                        Text("${CommonUi.getStartTime(controller.challengeList[itemIndex].startDate??'')} to ${CommonUi.getStartTime(controller.challengeList[itemIndex].endDate??'')}",style: CommonUi.customTextStyle(fontSize: 12)),
                                      ],
@@ -277,7 +280,9 @@ class HomeView extends StatelessWidget {
                                ],
                              ),
                              const SizedBox(height: 10,),
-                             Text(controller.challengeList[itemIndex].challengeDesc??'',style: CommonUi.customTextStyle(fontFamily: Fonts.medium),),
+                             Text(controller.challengeList[itemIndex].challengeDesc??'',
+                               maxLines: 3,
+                               style: CommonUi.customTextStyle(fontFamily: Fonts.medium),),
                              Padding(
                                padding: const EdgeInsets.only(left: 30,right: 30,top: 8),
                                child: GestureDetector(
@@ -434,7 +439,7 @@ class HomeView extends StatelessWidget {
              Get.toNamed(AppRoutes.productDetail);
            },
            child: SizedBox(
-             height: 250,
+             height: 255,
              width: Get.width,
              child: ListView.builder(
                  physics: const BouncingScrollPhysics(),
@@ -445,36 +450,36 @@ class HomeView extends StatelessWidget {
                    return Container(
                      margin:  const EdgeInsets.only( right: 10),
                      width: 175,
+                     height: 255,
                      child: Stack(
                        children: [
                          Column(
                            children: [
-                             Expanded(
-                               child: SizedBox(
-                                 width: 300,
-                                 height: 300,
-                                 child: ClipRRect(
-                                   borderRadius: const BorderRadius.only(topLeft: Radius.circular(20),topRight: Radius.circular(20)),
-                                   child: Image.network(
-                                     controller.actionList[index].mainImage??'',
-                                     fit: BoxFit.cover,
-                                     loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress){
-                                       if (loadingProgress == null) return child;
-                                       return  Center(
-                                         child: CircularProgressIndicator(
-                                           color: Colors.white70,
-                                           value: loadingProgress.expectedTotalBytes != null
-                                               ? loadingProgress.cumulativeBytesLoaded /
-                                               loadingProgress.expectedTotalBytes!
-                                               : null,
-                                         ),
-                                       );
-                                     },
-                                   ),
+                             SizedBox(
+                               width: 300,
+                               height: 104,
+                               child: ClipRRect(
+                                 borderRadius: const BorderRadius.only(topLeft: Radius.circular(20),topRight: Radius.circular(20)),
+                                 child: Image.network(
+                                   controller.actionList[index].mainImage??'',
+                                   fit: BoxFit.cover,
+                                   loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress){
+                                     if (loadingProgress == null) return child;
+                                     return  Center(
+                                       child: CircularProgressIndicator(
+                                         color: Colors.white70,
+                                         value: loadingProgress.expectedTotalBytes != null
+                                             ? loadingProgress.cumulativeBytesLoaded /
+                                             loadingProgress.expectedTotalBytes!
+                                             : null,
+                                       ),
+                                     );
+                                   },
                                  ),
                                ),
                              ),
                              Container(
+                               height:150,
                                decoration: const BoxDecoration(
                                    color: Colors.white,
                                    borderRadius: BorderRadius.only(bottomRight: Radius.circular(20),bottomLeft: Radius.circular(20))
@@ -493,50 +498,35 @@ class HomeView extends StatelessWidget {
                                        )
                                      ],
                                    ),
-                                   const SizedBox(height: 8),
                                    Padding(
-                                     padding: const EdgeInsets.only(left: 0, right: 8),
-                                     child: Text(controller.actionList[index].description??'',textAlign: TextAlign.start,style: CommonUi.customTextStyle(fontFamily: Fonts.semiBold,fontSize: 15),),
+                                     padding: const EdgeInsets.only(left: 0, right: 8,top: 8),
+                                     child: Text(controller.actionList[index].description??'',
+                                       maxLines: 3,
+                                       textAlign: TextAlign.start,style: CommonUi.customTextStyle(fontFamily: Fonts.semiBold,fontSize: 15),),
                                    ),
-                                   Container(
-                                     height: 1,
-                                     margin: const EdgeInsets.only(top: 9),
-                                     padding: const EdgeInsets.only(left: 4,right: 4),
-                                     color: ColorRes.colorGray,
+                                   Expanded(
+                                     child: Column(
+                                       mainAxisAlignment: MainAxisAlignment.end,
+                                       children: [
+                                         Container(
+                                           height: 1,
+                                           margin: const EdgeInsets.only(top: 9),
+                                           padding: const EdgeInsets.only(left: 4,right: 4),
+                                           color: ColorRes.colorGray,
+                                         ),
+                                         Container(
+                                             width: Get.width,
+                                             margin: const EdgeInsets.only(right: 5, top: 10),
+                                             child: Align(
+                                                 alignment: Alignment.topRight,
+                                                 child: Image.asset(CommonUi.setPngImage("three_dots_icon"), height: 5,width: 25))),
+                                       ],
+                                     ),
                                    ),
 
-                                   Container(
-                                     width: Get.width,
-                                       margin: const EdgeInsets.only(right: 5, top: 10),
-                                       child: Align(
-                                           alignment: Alignment.topRight,
-                                           child: Image.asset(CommonUi.setPngImage("three_dots_icon"), height: 5,width: 25))),
+                                 
 
-                                   // Row(
-                                   //   children: [
-                                   //     Spacer(),
-                                   //     Wrap(
-                                   //       spacing: 4,
-                                   //       children: [
-                                   //         ClipOval(
-                                   //           child: Container(
-                                   //             color: ColorRes.greyColor,
-                                   //           ),
-                                   //         ),
-                                   //         ClipOval(
-                                   //           child: Container(
-                                   //             color: ColorRes.greyColor,
-                                   //           ),
-                                   //         ),
-                                   //         ClipOval(
-                                   //           child: Container(
-                                   //             color: ColorRes.greyColor,
-                                   //           ),
-                                   //         ),
-                                   //       ],
-                                   //     )
-                                   //   ],
-                                   // )
+
                                  ],
                                ),
                              )

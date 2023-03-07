@@ -11,7 +11,7 @@ class ApiProvider extends GetConnect {
   var localStorage = LocalStorage();
 
 
-  final String baseUrl = "https://development.mind-roots.com/ripple/api"; ///dev url
+  final String baseUrl = "https://development.mind-roots.com/rippl/api"; ///dev url
 
 
   Future<String> registerApi(String name,String email, String password, int registerType, String socialToken) async {
@@ -184,6 +184,26 @@ class ApiProvider extends GetConnect {
       return 'error';
     }
   }
+
+
+  Future<String> getFilterActionApi() async {
+    try {
+      final response = await client.post(Uri.parse("$baseUrl/filterActions"),
+          headers: {'Authorization': "Bearer ${localStorage.getAuthCode()}"},
+      body: {
+        "limit":'5',
+        "search":''
+      });
+      if (response.statusCode == 200) {
+        return response.body;
+      } else {
+        return response.body;
+      }
+    } catch (e) {
+      return 'error';
+    }
+  }
+
 
 
 

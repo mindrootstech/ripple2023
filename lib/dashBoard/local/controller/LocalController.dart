@@ -1,6 +1,8 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:ripplefect/api_provider/ApiProvider.dart';
+import 'package:snapping_sheet/snapping_sheet.dart';
 import '../../../helper/common_classes/LocalStorage.dart';
 
 class LocalController extends GetxController{
@@ -11,7 +13,12 @@ class LocalController extends GetxController{
 
 
   ///map controller....
+  final SnappingSheetController snappingController = SnappingSheetController();
+  final ScrollController snapSheetController = ScrollController();
+  var searchController=TextEditingController();
   late CameraPosition cameraPosition;
+  var isSearch=false.obs;
+
 
 
   @override

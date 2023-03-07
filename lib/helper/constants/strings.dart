@@ -153,6 +153,8 @@ class Strings {
   static String textDeleteAccount = 'Delete Account';
 
 
+  ///Local text.......
+   static String textSearchTextHint='Search business or shop name';
 
 
 
