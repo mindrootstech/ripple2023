@@ -10,9 +10,7 @@ import 'package:ripplefect/helper/constants/strings.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../../helper/constants/fonts.dart';
-import '../../../helper/dialogs/TrackActionDialog.dart';
 import '../controller/BusinessDetailController.dart';
-
 
 class BusinessDetailView extends StatelessWidget {
   const BusinessDetailView({Key? key}) : super(key: key);
@@ -29,15 +27,13 @@ class BusinessDetailView extends StatelessWidget {
                   child: Column(
                     children: [
                       getPageViewAndIndicator(controller),
-                      getHeadingToOnlineText(),
-                      // getImpactMetrics(controller),
-                      whyItMatters(controller),
-
+                      getHeadingToOnlineText(controller),
+                      getActionsTake(),
+                      getOfferedRewards(),
                     ],
                   ),
                 ),
               ),
-              getBottomBoxPart(),
             ],
           );
         },
@@ -45,8 +41,7 @@ class BusinessDetailView extends StatelessWidget {
     );
   }
 
-
-  Widget getPageViewAndIndicator(BusinessDetailController controller){
+  Widget getPageViewAndIndicator(BusinessDetailController controller) {
     return Column(
       children: [
         Stack(
@@ -59,255 +54,422 @@ class BusinessDetailView extends StatelessWidget {
                 onPageChanged: (value) {},
                 controller: controller.pageController,
                 itemBuilder: (BuildContext context, int index) {
-                  return CommonUi.loadBannerImages(controller.bannerImages[index]);
+                  return CommonUi.loadBannerImages(
+                      controller.bannerImages[index]);
                 },
               ),
             ),
             Positioned(
                 top: 30,
-                left:20,
+                left: 20,
                 child: GestureDetector(
-                    onTap: (){
+                    onTap: () {
                       Get.back();
                     },
-                    child: Image.asset(CommonUi.setPngImage("back_icon"),height: 40,width: 40))),
+                    child: Image.asset(CommonUi.setPngImage("back_icon"),
+                        height: 40, width: 40))),
             Positioned(
                 top: 30,
-                right:20,
-                child: Image.asset(CommonUi.setPngImage("heart"),height: 40,width: 40)),
+                right: 20,
+                child: Image.asset(CommonUi.setPngImage("heart"),
+                    height: 40, width: 40)),
           ],
         ),
         const SizedBox(height: 12),
-        controller.bannerImages.isNotEmpty ?
-        Container(
-          margin: const EdgeInsets.only(bottom: 10),
-          child: SmoothPageIndicator(
-              controller: controller.pageController,
-              count: controller.bannerImages.length,
-              effect: const SlideEffect(
-                  spacing: 8,
-                  dotWidth: 8,
-                  dotHeight: 8,
-                  dotColor: ColorRes.colorGray,
-                  activeDotColor: ColorRes.buttonColor),
-              onDotClicked: (index) {}),
-        ) : const SizedBox(),
+        controller.bannerImages.isNotEmpty
+            ? Container(
+                margin: const EdgeInsets.only(bottom: 10),
+                child: SmoothPageIndicator(
+                    controller: controller.pageController,
+                    count: controller.bannerImages.length,
+                    effect: const SlideEffect(
+                        spacing: 8,
+                        dotWidth: 8,
+                        dotHeight: 8,
+                        dotColor: ColorRes.colorGray,
+                        activeDotColor: ColorRes.buttonColor),
+                    onDotClicked: (index) {}),
+              )
+            : const SizedBox(),
       ],
     );
   }
 
-  Widget getHeadingToOnlineText(){
+  Widget getHeadingToOnlineText(BusinessDetailController controller
+      ) {
     return Column(
       children: [
         Container(
-          margin: EdgeInsets.only(left: CommonUi.marginLeftRight, top: 15),
+          margin: EdgeInsets.only(
+              left: CommonUi.marginLeftRight,
+              top: 15,
+              right: CommonUi.marginLeftRight),
           child: Row(
             children: [
               Image.asset(CommonUi.setPngImage("dummy_image")),
               const SizedBox(width: 18),
               Expanded(
-                child: Text("Switch your search engine to Ecosia and plant a tree while browsing.",
-                    style: CommonUi.customTextStyle(fontFamily: Fonts.semiBold,
-                        fontSize: 20)),
+                child: Text(
+                    "Chocolate Espresso Bar",
+                    style: CommonUi.customTextStyle(
+                        fontFamily: Fonts.bold, fontSize: 24)),
               )
             ],
           ),
         ),
-        const SizedBox(height: 24),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Row(
-              children: [
-                Container(
-                  margin:const EdgeInsets.only(right: 4),
-                  padding: const EdgeInsets.all(5),
-                  decoration: const BoxDecoration(shape: BoxShape.circle, color: ColorRes.colorOrange),
-                  child: Text("3",
-                      style: CommonUi.customTextStyle(fontFamily: Fonts.medium,
-                          fontSize: 14, color: ColorRes.white)),
-                ),
-                Text(Strings.textImpact,
-                    style: CommonUi.customTextStyle(fontFamily: Fonts.medium, fontSize: 16, color: ColorRes.greyColor)),
-                const SizedBox(width: 4),
-                Image.asset(CommonUi.setPngImage('info_icon'),height: 18,width: 18)
-
-              ],
-            ),
-            Container(
-              margin:const EdgeInsets.only(left: 8, right: 8),
-              height: 20,
-              width: 2,
-              color: ColorRes.noProgressColor,
-            ),
-            Row(
-              children: [
-                Image.asset(CommonUi.setPngImage('plus_icon'),height: 22,width: 22),
-                const SizedBox(width: 4),
-                Text("120 ${Strings.textPts}",
-                    style: CommonUi.customTextStyle(fontFamily: Fonts.medium, fontSize: 16, color: ColorRes.greyColor)),
-              ],),
-            Container(
-              margin:const EdgeInsets.only(left: 8, right: 8),
-              height: 20,
-              width: 2,
-              color: ColorRes.noProgressColor,
-            ),
-            Row(
-              children: [
-                Image.asset(CommonUi.setPngImage('location_icon'),height: 18,width: 18),
-                const SizedBox(width: 4),
-                Text("Online",
-                    style: CommonUi.customTextStyle(fontFamily: Fonts.medium, fontSize: 16, color: ColorRes.greyColor)),
-              ],
-            )
-          ],
-        ),
+        const SizedBox(height: 16),
         Container(
-          margin: EdgeInsets.only(left:CommonUi.marginLeftRight, right:CommonUi.marginLeftRight, top: 27),
-          height:1,
+          margin: const EdgeInsets.only(left: 24),
           width: Get.width,
-          color: ColorRes.noProgressColor,
-        ),
-
-      ],
-    );
-  }
-
-  Widget getImpactMetrics(BusinessDetailController controller){
-    return Column(
-      children: [
-        Container(
-          width: Get.width,
-          margin: const EdgeInsets.only(left: 30, top: 16, bottom: 16),
           child: Text(
-            Strings.textImpactMetrics, style: CommonUi.customTextStyle(fontFamily: Fonts.medium, fontSize: 20),
+            "Cafe & Coffee Shop",
+            style:
+                CommonUi.customTextStyle(fontFamily: Fonts.medium, fontSize: 16),
+            textAlign: TextAlign.left,
           ),
         ),
-        // Container(
-        //   margin: const EdgeInsets.only(left: 30, right: 30, bottom: 16),
-        //   height: 70,
-        //   width: Get.width,
-        //   child: ListView.builder(
-        //     scrollDirection: Axis.horizontal,
-        //     itemCount: controller.metricList.value.length,
-        //     itemBuilder: (BuildContext context, int index) {
-        //       return Container(
-        //         padding: const EdgeInsets.only(top: 8, bottom: 8, left: 11, right: 11),
-        //         margin: const EdgeInsets.only(left: 30),
-        //         decoration: BoxDecoration(
-        //             borderRadius: BorderRadius.circular(4),
-        //             color: controller.metricList[index].bgColor
-        //         ),
-        //         child: Column(
-        //           crossAxisAlignment: CrossAxisAlignment.start,
-        //           children: [
-        //             Text(controller.metricList[index].name,style: CommonUi.customTextStyle(
-        //                 fontFamily: Fonts.semiBold, fontSize: 11, color: controller.metricList[index].textColor!
-        //             ),),
-        //             const SizedBox(height: 2),
-        //             Text(controller.metricList[index].type,style: CommonUi.customTextStyle(
-        //                 fontFamily: Fonts.regular, fontSize: 11, color: controller.metricList[index].textColor!
-        //             ),),
-        //             const SizedBox(height: 5),
-        //             Text(controller.metricList[index].weight,style: CommonUi.customTextStyle(
-        //                 fontFamily: Fonts.bold, fontSize: 16, color: controller.metricList[index].textColor!
-        //             ),
-        //             ),
-        //           ],
-        //         ),
-        //       );
-        //     },),
-        // ),
-
+        Container(
+          margin: EdgeInsets.only(
+              left: CommonUi.marginLeftRight,
+              right: CommonUi.marginLeftRight,
+              top: 14),
+          child: Text(
+            "Lorem ipsum dolor sit amet, consectetur efefffdf  adipiscing elit, sed do eiusmod tempor cxc.",
+            style: CommonUi.customTextStyle(
+                fontFamily: Fonts.regular, fontSize: 16),
+          ),
+        ),
+        const SizedBox(height: 16),
+        Wrap(
+          runSpacing: -5,
+          children: [
+            for (var item in controller.tags)
+              Padding(
+                padding: const EdgeInsets.only(left: 4,right: 4,),
+                child: Chip(
+                  label: Text(item, style: CommonUi.customTextStyle(
+                      fontFamily: Fonts.semiBold, fontSize: 16),),
+                ),
+              )
+          ],
+        ),
       ],
     );
   }
 
-  Widget whyItMatters(BusinessDetailController controller) {
-    return Padding(
-      padding:  EdgeInsets.only(left: CommonUi.marginLeftRight,right: CommonUi.marginLeftRight),
+
+  getActionsTake() {
+    return Container(
+      margin: const EdgeInsets.only(left: 30, top: 16, bottom: 16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(
-            height:16 ,
+          Text(
+            Strings.textActionsTake,
+            style: CommonUi.customTextStyle(
+                fontFamily: Fonts.bold, fontSize: 18),
           ),
-          Text(Strings.textWhyItMatters, style: CommonUi.customTextStyle(fontFamily: Fonts.medium,fontSize: 20)),
-          const SizedBox(
-            height:16 ,
-          ),
-          ReadMoreText(
-            "Trees mean a happy environment, healthy people, and a strong economy. "
-                "We use the profit we make from your searches to plant trees where they "
-                "are needed most. We restore and protect biodiversity hotspots."
-                "Trees mean a happy environment, healthy people, and a strong economy."
-                "are needed most. We restore and protect biodiversity hotspots. ",
-            style:CommonUi.customTextStyle(fontFamily: Fonts.regular, fontSize: 17),
-            trimLines: 5,
-            colorClickableText: ColorRes.buttonColor,
-            trimMode: TrimMode.Line,
-            trimCollapsedText: Strings.textReadMore,
-            trimExpandedText:Strings.textShowLess ,
-            moreStyle: CommonUi.customTextStyle(fontFamily: Fonts.medium, fontSize: 16, color: ColorRes.buttonColor,),
-          ),
-          const SizedBox(height: 22,),
-          Text(Strings.textHowYouCan,  style: CommonUi.customTextStyle(fontFamily: Fonts.medium, fontSize: 20)),
-          const SizedBox(height: 16,),
-          Text("Get the free browser extension and plant trees with every search.\n\n"
-              "How Ecosia works? \n1. Search the web with Ecosia."
-              "\n2. Browse ads to generate income for Ecosia.\n3. Ecosia uses this income to plant trees.",
-              style: CommonUi.customTextStyle(fontFamily: Fonts.regular, fontSize: 17)),
-          const SizedBox(height: 16,),
-          Text(Strings.textLearnMore,
-              style: CommonUi.customTextStyle(fontFamily: Fonts.medium, fontSize: 16, color: ColorRes.buttonColor)),
-          const SizedBox(height: 16,),
-          Container(
-            margin: EdgeInsets.only( bottom: CommonUi.marginLeftRight),
-            height: 1,
+          const SizedBox(height: 16),
+          SizedBox(
             width: Get.width,
-            color: ColorRes.noProgressColor,
-          ),
-          Row(
-            children: [
-              Text('Learn more about Ecosia',style: CommonUi.customTextStyle(color: ColorRes.colorGreen2,fontFamily: Fonts.semiBold,fontSize: 15),),
-              const SizedBox(
-                width: 4,
-              ),
-              SvgPicture.asset(CommonUi.setSvgImage('green_arrow')),
+            height: 250,
+            child: ListView.builder(
+              // shrinkWrap: true,
+              physics: const BouncingScrollPhysics(),
+              padding: EdgeInsets.zero,
+              scrollDirection: Axis.horizontal,
+              itemCount: 10,
+              itemBuilder: (BuildContext context, int index) {
+                return Container(
+                  width: 170,
+                  decoration: CommonUi.getBorderRadius(8.0, Colors.transparent,
+                      borderWidth: 1.0, borderColor: ColorRes.noProgressColor),
+                  // margin:  EdgeInsets.only(left: CommonUi.marginLeftRight , right: CommonUi.marginLeftRight),
+                  child: Stack(
 
-            ],
-          ),
-          const SizedBox(
-            height: 16,
+                    children: [
+                      Column(
+                        children: [
+                          Expanded(
+                            child: SizedBox(
+                              width: Get.width,
+                              child: ClipRRect(
+                                borderRadius: const BorderRadius.only(
+                                    topLeft: Radius.circular(8),
+                                    topRight: Radius.circular(8)),
+                                child: Image.network(
+                                  "https://images.pexels.com/photos/60597/dahlia-red-blossom-bloom-60597.jpeg",
+                                  fit: BoxFit.cover,
+                                  loadingBuilder: (BuildContext context,
+                                      Widget child,
+                                      ImageChunkEvent? loadingProgress) {
+                                    if (loadingProgress == null) return child;
+                                    return Center(
+                                      child: CircularProgressIndicator(
+                                        color: Colors.white70,
+                                        value: loadingProgress
+                                                    .expectedTotalBytes !=
+                                                null
+                                            ? loadingProgress
+                                                    .cumulativeBytesLoaded /
+                                                loadingProgress
+                                                    .expectedTotalBytes!
+                                            : null,
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                          Container(
+                            decoration: const BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.only(
+                                    bottomRight: Radius.circular(20),
+                                    bottomLeft: Radius.circular(20))),
+                            padding: const EdgeInsets.all(14),
+                            child: Column(
+                              children: [
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Image.asset(
+                                        CommonUi.setPngImage("test_company"),
+                                        height: 16,
+                                        width: 45),
+                                    Container(
+                                      padding: const EdgeInsets.only(
+                                          left: 8, right: 8, top: 2, bottom: 2),
+                                      decoration: CommonUi.curvedBoxDecoration(
+                                          backgroundColor: ColorRes.appColor),
+                                      child: Text(
+                                        "50 Pts",
+                                        style: CommonUi.customTextStyle(
+                                            fontFamily: Fonts.bold,
+                                            fontSize: 11,
+                                            color: Colors.white),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                                const SizedBox(height: 8),
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.only(left: 0, right: 8),
+                                  child: Text(
+                                    "Advocate for the restoration of seagrass in our oceans.",
+                                    textAlign: TextAlign.start,
+                                    style: CommonUi.customTextStyle(
+                                        fontFamily: Fonts.semiBold,
+                                        fontSize: 15),
+                                    maxLines: 2,
+                                  ),
+                                ),
+                                Container(
+                                  height: 1,
+                                  margin: const EdgeInsets.only(top: 9),
+                                  color: ColorRes.colorGray,
+                                ),
+                                Container(
+                                    width: Get.width,
+                                    margin: const EdgeInsets.only(
+                                        right: 5, top: 10),
+                                    child: Align(
+                                        alignment: Alignment.topRight,
+                                        child: Image.asset(
+                                            CommonUi.setPngImage(
+                                                "three_dots_icon"),
+                                            height: 5,
+                                            width: 25))),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                      Container(
+                        alignment: Alignment.topRight,
+                        padding: const EdgeInsets.only(right: 5, top: 5),
+                        child: Image.asset(
+                          CommonUi.setPngImage("heart"),
+                          height: 25,
+                          width: 25,
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
           ),
         ],
       ),
     );
   }
 
-  Widget getBottomBoxPart() {
+  getOfferedRewards() {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: CommonUi.marginLeftRight,horizontal: CommonUi.marginLeftRight),
-      width: Get.width,
-      decoration: CommonUi.curvedBoxDecorationWithShadow(radius: 0.0,spreadRadius: 0.0,blurRadius: 10.0,offsetX:0.0,offsetY: -2.0,shadowColor: ColorRes.colorBlack10),
+      margin: const EdgeInsets.only(left: 20, top: 16, bottom: 16, right: 20),
       child: Column(
         children: [
-          CommonUi.customButton(
-              buttonText: Strings.textCompleteAction,
-              fontSize: 18.0,
-              callBack: () {
-                TrackActionDialog().showDialog();
-              }),
-          const SizedBox(
-            height: 16,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "Offered Rewards",
+                style: CommonUi.customTextStyle(
+                    fontFamily: Fonts.bold, fontSize: 16, color: Colors.black),
+              ),
+              Text(
+                "See All",
+                style: CommonUi.customTextStyle(
+                    fontFamily: Fonts.semiBold,
+                    fontSize: 14,
+                    color: ColorRes.buttonColor),
+              )
+            ],
           ),
-          Text(Strings.textIAlreadyDid,style: CommonUi.customTextStyle(fontSize: 16,fontFamily: Fonts.semiBold,color: ColorRes.buttonColor),),
-          if(Platform.isIOS)...{
-            const SizedBox(
-              height: 16,
+          const SizedBox(height: 16),
+          SizedBox(
+            child: ListView.builder(
+              shrinkWrap: true,
+              physics: const BouncingScrollPhysics(),
+              padding: EdgeInsets.zero,
+              scrollDirection: Axis.vertical,
+              itemCount: 10,
+              itemBuilder: (BuildContext context, int index) {
+                return Container(
+                    padding: const EdgeInsets.all(10),
+                    decoration: CommonUi.getBorderRadius(
+                        8.0, Colors.transparent,
+                        borderWidth: 1.0,
+                        borderColor: ColorRes.noProgressColor),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        SizedBox(
+                          width: 80,
+                          height: 120,
+                          child: ClipRRect(
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(4)),
+                            child: Image.network(
+                              "https://images.pexels.com/photos/60597/dahlia-red-blossom-bloom-60597.jpeg",
+                              fit: BoxFit.cover,
+                              loadingBuilder: (BuildContext context,
+                                  Widget child,
+                                  ImageChunkEvent? loadingProgress) {
+                                if (loadingProgress == null) return child;
+                                return Center(
+                                  child: CircularProgressIndicator(
+                                    color: Colors.white70,
+                                    value: loadingProgress.expectedTotalBytes !=
+                                            null
+                                        ? loadingProgress
+                                                .cumulativeBytesLoaded /
+                                            loadingProgress.expectedTotalBytes!
+                                        : null,
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: Container(
+                            margin: const EdgeInsets.only(left: 24, right: 10),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      "The Rebrand",
+                                      style: CommonUi.customTextStyle(
+                                          fontFamily: Fonts.medium,
+                                          fontSize: 12),
+                                      textAlign: TextAlign.left,
+                                    ),
+                                    Container(
+                                      decoration: CommonUi.getBorderRadius(
+                                          2.0, Colors.transparent,
+                                          borderWidth: 1.0,
+                                          borderColor: ColorRes.colorGreen2),
+                                      padding:
+                                          const EdgeInsets.fromLTRB(6, 2, 6, 2),
+                                      child: Text(
+                                        "100 pts",
+                                        style: CommonUi.customTextStyle(
+                                            fontFamily: Fonts.bold,
+                                            fontSize: 12,
+                                            color: ColorRes.colorGreen2),
+                                        textAlign: TextAlign.left,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(
+                                  height: 8,
+                                ),
+                                Text(
+                                  "Proin pellentesque dolr door at ante aliquet",
+                                  style: CommonUi.customTextStyle(
+                                      fontFamily: Fonts.regular, fontSize: 15),
+                                  textAlign: TextAlign.left,
+                                ),
+                                const SizedBox(
+                                  height: 16,
+                                ),
+                                Container(
+                                  width: Get.width,
+                                  decoration: CommonUi.getBorderRadius(
+                                      2.0, Colors.transparent,
+                                      borderWidth: 1.0,
+                                      borderColor: ColorRes.buttonColor),
+                                  padding:
+                                      const EdgeInsets.fromLTRB(6, 2, 6, 2),
+                                  child: Text(
+                                    "Get Reward",
+                                    style: CommonUi.customTextStyle(
+                                        color: ColorRes.buttonColor,
+                                        fontFamily: Fonts.medium,
+                                        fontSize: 10),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    SvgPicture.asset(
+                                        CommonUi.setSvgImage("online_gift")),
+                                    const SizedBox(
+                                      width: 4,
+                                    ),
+                                    Text(
+                                      "Online",
+                                      style: CommonUi.customTextStyle(
+                                          fontFamily: Fonts.medium,
+                                          fontSize: 10),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        )
+                      ],
+                    ));
+              },
             ),
-          }
+          ),
         ],
       ),
     );

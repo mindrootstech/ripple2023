@@ -193,4 +193,9 @@ class Strings {
   static String textOnlineActionsDesc="Proin pellentesque dolor at ante aliquet commodo. Duis urna erat, venenatis ac ultricies id, interdum a sem. ";
   static String textNuncDignissimErosSem='Nunc dignissim eros sem, ac feugiat augue molestie non. Donec placerat ';
 
+
+  // Business Details
+
+  static String textActionsTake='Actions you can take';
+
 }
