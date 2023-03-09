@@ -84,7 +84,7 @@ class CompleteOnboardView extends StatelessWidget {
    Widget _buildTreeGif(){
      return Expanded(
        child: Container(
-         margin: const EdgeInsets.symmetric(horizontal: 15,vertical: 50),
+         margin: const EdgeInsets.symmetric(horizontal: 17,vertical: 60),
          child: Lottie.asset(CommonUi.setLottie('tree_lottie'),
              // width: Get.width,
              // height: Get.height,

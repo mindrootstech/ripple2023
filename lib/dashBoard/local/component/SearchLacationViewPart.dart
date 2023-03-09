@@ -58,7 +58,7 @@ class SearchLocationViewPart extends StatelessWidget {
                 onTap: (){
                   controller.isSearch.value=true;
                   controller.searchController.text='Coffee Shop';
-                  controller.snappingController.snapToPosition(const SnappingPosition.factor(positionFactor: 0.7,
+                  controller.snappingController.snapToPosition(const SnappingPosition.factor(positionFactor: 0.5,
                     grabbingContentOffset: GrabbingContentOffset.bottom,));
                 },
                 child: Container(

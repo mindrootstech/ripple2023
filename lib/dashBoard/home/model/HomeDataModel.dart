@@ -43,13 +43,13 @@ class Data {
   UsersProfile? usersProfile;
   List<Challenge>? challenges;
   List<CategoryTag>? categoryTags;
-  List<Action>? articles;
+  List<FilterActions>? articles;
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
     usersProfile:json["users_profile"]!=null? UsersProfile.fromJson(json["users_profile"]):UsersProfile(),
     challenges:json["challenges"].length>0? List<Challenge>.from(json["challenges"].map((x) => Challenge.fromJson(x))):<Challenge>[],
     categoryTags:json["category_tags"].length>0? List<CategoryTag>.from(json["category_tags"].map((x) => CategoryTag.fromJson(x))):<CategoryTag>[],
-    articles:json["actions"].length>0? List<Action>.from(json["actions"].map((x) => Action.fromJson(x))):<Action>[],
+    articles:json["actions"].length>0? List<FilterActions>.from(json["actions"].map((x) => FilterActions.fromJson(x))):<FilterActions>[],
   );
 
   Map<String, dynamic> toJson() => {
@@ -61,8 +61,8 @@ class Data {
 }
 
 
-class Action {
-  Action({
+class FilterActions {
+  FilterActions({
      this.id,
      this.title,
      this.points,
@@ -79,7 +79,7 @@ class Action {
 
 
 
-  factory Action.fromJson(Map<String, dynamic> json) => Action(
+  factory FilterActions.fromJson(Map<String, dynamic> json) => FilterActions(
     id: json["id"]??0,
     points: json["points"]??'',
     description: json["description"]??'',

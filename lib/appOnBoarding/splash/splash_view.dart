@@ -2,9 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_gif/flutter_gif.dart';
 import 'package:get/get.dart';
-import 'package:lottie/lottie.dart';
 import 'package:ripplefect/helper/common_classes/LocalStorage.dart';
-import 'package:ripplefect/helper/constants/CommonUi.dart';
 import 'package:ripplefect/helper/constants/ColorRes.dart';
 import '../../helper/routes/AppRoutes.dart';
 
@@ -28,6 +26,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
     return Scaffold(
       body: Center(
         child: Container(
+          padding: const EdgeInsets.only(left: 10,right:20,bottom:20,top: 20),
           width: MediaQuery.of(context).size.width,
           color: ColorRes.appColor,
           height:MediaQuery.of(context).size.height,
@@ -41,24 +40,30 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
   @override
   initState()  {
     super.initState();
-
     controller = FlutterGifController(vsync: this,duration: const Duration(seconds:1));
-    // controller.repeat(min:0, max:0, period:const Duration(seconds:4));
+    controller.repeat(min:0, max:0, period:const Duration(seconds:50));
 
-    Timer(const Duration(seconds: 6), () async {
+    Timer(const Duration(milliseconds: 5000), () async {
       if(localStorage.getAuthCode()!=''){
         Get.offAndToNamed(AppRoutes.dashboard);
       }else{
         Get.offAndToNamed(AppRoutes.onBoard);
       }
     });
-
   }
   Widget _buildHandGif(){
-    return Image.asset(
-      // controller: controller,
-      gaplessPlayback: false,
-       'assets/lottie/splash_lottie.gif',
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Image.asset(
+          // controller: controller,
+          gaplessPlayback: false,
+           repeat: ImageRepeat.noRepeat,
+           'assets/lottie/splash_lottie.gif',
+          fit: BoxFit.fill,
+        ),
+      ],
     );
   }
 }

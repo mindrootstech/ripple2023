@@ -11,6 +11,7 @@ import 'fonts.dart';
 
 class CommonUi {
   static var marginLeftRight=22.0;
+  static var paginationLimit=20;
 
   static String setPngImage(String name) {
     return "assets/images/$name.png";

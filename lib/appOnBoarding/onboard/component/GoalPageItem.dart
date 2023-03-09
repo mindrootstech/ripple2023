@@ -8,6 +8,7 @@ import 'package:ripplefect/appOnBoarding/onboard/controller/OnBoardController.da
 import 'package:ripplefect/helper/constants/CommonUi.dart';
 import 'package:ripplefect/helper/constants/ColorRes.dart';
 import 'package:ripplefect/helper/constants/fonts.dart';
+import 'package:ripplefect/helper/service/GlobalService.dart';
 
 import '../../../helper/constants/strings.dart';
 import '../../../helper/routes/AppRoutes.dart';
@@ -168,12 +169,20 @@ class GoalPageItem extends StatelessWidget {
   void movePage(OnboardController controller) {
     print("page number: ${controller.goalPageNo.value}");
     var toast = "Please select any of one";
+    var service=Get.find<GlobalServices>();
 
     if(controller.goalPageNo.value == 0){
       controller.progressValue.value = 0.25;
     }
     if(controller.goalPageNo.value == 1){
-      var anySelected = controller.list_1.where((p0) => p0.isSelected==true);
+      var anySelected = controller.list_1.where((p0) {
+        if(p0.isSelected.value==true){
+          service.selectedWhy=p0.id;
+          return true;
+        }else{
+          return false;
+        }
+      } );
       if(anySelected.isEmpty){
         CommonUi.showToast(toast);
         return;
@@ -181,7 +190,15 @@ class GoalPageItem extends StatelessWidget {
       controller.progressValue.value = 0.50;
     }
     if(controller.goalPageNo.value == 2){
-      var anySelected = controller.list_2.where((p0) => p0.isSelected==true);
+      service.selectedMore.clear();
+      var anySelected = controller.list_2.where((p0) {
+        if(p0.isSelected.value==true){
+          service.selectedMore.add(p0.id.toString());
+          return true;
+        }else{
+          return false;
+        }
+      });
       if(anySelected.isEmpty){
         CommonUi.showToast("Please select atleast one.");
         return;
@@ -189,7 +206,14 @@ class GoalPageItem extends StatelessWidget {
       controller.progressValue.value = 1.0;
     }
     if(controller.goalPageNo.value == 3){
-      var anySelected = controller.list_3.where((p0) => p0.isSelected==true);
+      var anySelected = controller.list_3.where((p0) {
+        if(p0.isSelected.value==true){
+          service.selectedGoal=p0.id;
+          return true;
+        }else{
+          return false;
+        }
+      } );
       if(anySelected.isEmpty){
         CommonUi.showToast(toast);
         return;

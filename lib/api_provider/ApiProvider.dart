@@ -186,13 +186,15 @@ class ApiProvider extends GetConnect {
   }
 
 
-  Future<String> getFilterActionApi() async {
+  Future<String> getFilterActionApi(String searchText, String catId, int page, int limit) async {
     try {
       final response = await client.post(Uri.parse("$baseUrl/filterActions"),
           headers: {'Authorization': "Bearer ${localStorage.getAuthCode()}"},
       body: {
-        "limit":'5',
-        "search":''
+        "limit":limit.toString(),
+        "search":searchText,
+        "page":page.toString(),
+        "cat_id":catId
       });
       if (response.statusCode == 200) {
         return response.body;
@@ -206,6 +208,59 @@ class ApiProvider extends GetConnect {
 
 
 
+  Future<String> updateProfileApi(String name, String email, String mobile, String city, String country, String desc, String whatYou, String whatYouWant, String goal, File imageFile) async {
+    try {
+      var headers = {
+        'Accept': 'application/json',
+        'Authorization': "Bearer ${localStorage.getAuthCode()}",
+      };
+      var request = http.MultipartRequest('POST', Uri.parse("$baseUrl/updateProfile"));
+      request.fields.addAll({
+        'first_name': name,
+        'last_name': '',
+        'email': email,
+        'mobile': mobile,
+        'city': city,
+        'country': country,
+        'bio': desc,
+        'why': whatYou,
+        'more': whatYouWant,
+        'goal': goal
+      });
 
+      if(imageFile.path != ''){
+        var stream = http.ByteStream(imageFile.openRead());
+        var length = await imageFile.length();
+        var multipartFile = http.MultipartFile("profile_image", stream, length, filename: imageFile.path);
+        request.files.add(multipartFile);
+      }else{
+      }
+      request.headers.addAll(headers);
+      http.StreamedResponse response = await request.send();
+      if (response.statusCode == 200) {
+        return response.stream.bytesToString();
+      }
+      else {
+        return response.stream.bytesToString();
+      }
+    }catch(e){
+      return 'error';
+    }
+    }
+
+
+  Future<String> deleteAccApi() async {
+    try {
+      final response = await client.post(Uri.parse("$baseUrl/deleteAccount"),
+          headers: {'Authorization': "Bearer ${localStorage.getAuthCode()}"});
+      if (response.statusCode == 200) {
+        return response.body;
+      } else {
+        return response.body;
+      }
+    } catch (e) {
+      return 'error';
+    }
+  }
 
 }

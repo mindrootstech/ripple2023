@@ -53,7 +53,7 @@ class SearchLocationFilterPart extends StatelessWidget {
               children: [
                 Container(
                   margin: const EdgeInsets.only(top: 10),
-                  decoration: CommonUi.roundedDecorationWithBorder(outLineColor: ColorRes.colorWhiteGrey,bgColor:ColorRes.white),
+                  decoration: CommonUi.roundedDecorationWithBorder(radius:4.0,outLineColor: ColorRes.colorWhiteGrey,bgColor:ColorRes.white),
                   padding: const EdgeInsets.all(4),
                   //filter
                   child: Row(
@@ -62,7 +62,7 @@ class SearchLocationFilterPart extends StatelessWidget {
                       const SizedBox(width:5),
                       SvgPicture.asset(CommonUi.setSvgImage('filter_icon')),
                       const SizedBox(width:5),
-                      Text(Strings.textFilter,style:CommonUi.customTextStyle(fontSize: 13,fontFamily: Fonts.bold),),
+                      Text(Strings.textFilter,style:CommonUi.customTextStyle(fontSize: 13,fontFamily: Fonts.semiBold),),
                       const Icon(Icons.arrow_drop_down_sharp)
                     ],
                   ),
@@ -77,14 +77,16 @@ class SearchLocationFilterPart extends StatelessWidget {
                           return Center(
                             child: Container(
                               margin: const EdgeInsets.only(top: 10,left: 8),
-                              decoration: CommonUi.roundedDecorationWithBorder(outLineColor: ColorRes.colorWhiteGrey,bgColor:ColorRes.white),
+                              decoration: CommonUi.roundedDecorationWithBorder(outLineColor: ColorRes.colorWhiteGrey,bgColor:ColorRes.white,radius: 4.0),
                               padding: const EdgeInsets.symmetric(horizontal: 6,vertical: 4),
                               child: Row(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
                                   Text('Open now',style:CommonUi.customTextStyle(fontSize: 13,fontFamily: Fonts.semiBold),),
+                                  const SizedBox(
+                                    width: 2,
+                                  ),
                                   const Icon(Icons.clear,size: 18,)
-
                                 ],
                               ),
                             ),

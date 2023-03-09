@@ -39,7 +39,9 @@ class HomeView extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   getHeaderPartView(controller),
-                  getFeaturePartView(controller),
+                  if(controller.challengeList.isNotEmpty)...{
+                    getFeaturePartView(controller),
+                  },
                   getSearchFieldView(controller),
                   forYouPartView(controller),
                   suggestionsView(controller)
@@ -375,7 +377,7 @@ class HomeView extends StatelessWidget {
                children: [
                  Container(
                    margin: const EdgeInsets.only(top: 10),
-                   decoration: CommonUi.roundedDecorationWithBorder(outLineColor: ColorRes.colorWhiteGrey,bgColor:ColorRes.white),
+                   decoration: CommonUi.roundedDecorationWithBorder(radius:4.0,outLineColor: ColorRes.colorWhiteGrey,bgColor:ColorRes.white),
                    padding: const EdgeInsets.all(4),
                    //filter
                    child: InkWell(
@@ -394,33 +396,39 @@ class HomeView extends StatelessWidget {
                      ),
                    ),
                  ),
-                 Expanded(
-                   child: SizedBox(
-                     height: 60,
-                     child: ListView.builder(
-                       scrollDirection: Axis.horizontal,
-                       itemCount: controller.categoryList.length,
-                       itemBuilder: (BuildContext context, int index) {
-                         return Center(
-                           child: Container(
-                             margin: const EdgeInsets.only(top: 10,left: 8),
-                             decoration: CommonUi.roundedDecorationWithBorder(outLineColor: ColorRes.colorWhiteGrey,bgColor:ColorRes.white),
-                             padding: const EdgeInsets.symmetric(horizontal: 6,vertical: 4),
-                             child: Row(
-                               mainAxisSize: MainAxisSize.min,
-                               children: [
-                                 Text(controller.categoryList[index].name,style:CommonUi.customTextStyle(fontSize: 13,fontFamily: Fonts.semiBold),),
-                                 const Icon(Icons.clear,size: 18,)
+                 if(controller.categoryList.isNotEmpty)...{
+                   Expanded(
+                     child: SizedBox(
+                       height: 60,
+                       child: ListView.builder(
+                           scrollDirection: Axis.horizontal,
+                           itemCount: controller.categoryList.length,
+                           itemBuilder: (BuildContext context, int index) {
+                             return Center(
+                               child: Container(
+                                 margin: const EdgeInsets.only(top: 10,left: 8),
+                                 decoration: CommonUi.roundedDecorationWithBorder(radius:4.0,outLineColor: ColorRes.colorWhiteGrey,bgColor:ColorRes.white),
+                                 padding: const EdgeInsets.symmetric(horizontal: 6,vertical: 4),
+                                 child: Row(
+                                   mainAxisSize: MainAxisSize.min,
+                                   children: [
+                                     Text(controller.categoryList[index].name,style:CommonUi.customTextStyle(fontSize: 13,fontFamily: Fonts.semiBold),),
+                                     const SizedBox(
+                                       width: 2,
+                                     ),
+                                     const Icon(Icons.clear,size: 18,)
 
-                               ],
-                             ),
-                           ),
-                         );
-                       }
+                                   ],
+                                 ),
+                               ),
+                             );
+                           }
 
+                       ),
                      ),
                    ),
-                 ),
+                 }
+
                ],
              ),
            ],
@@ -434,11 +442,8 @@ class HomeView extends StatelessWidget {
      return Column(
        crossAxisAlignment: CrossAxisAlignment.start,
        children: [
-         InkWell(
-           onTap: (){
-             Get.toNamed(AppRoutes.productDetail);
-           },
-           child: SizedBox(
+         if(controller.actionList.isNotEmpty)...{
+           SizedBox(
              height: 255,
              width: Get.width,
              child: ListView.builder(
@@ -447,103 +452,108 @@ class HomeView extends StatelessWidget {
                  scrollDirection: Axis.horizontal,
                  itemCount: controller.actionList.length,
                  itemBuilder: (BuildContext context, int index) {
-                   return Container(
-                     margin:  const EdgeInsets.only( right: 10),
-                     width: 175,
-                     height: 255,
-                     child: Stack(
-                       children: [
-                         Column(
-                           children: [
-                             SizedBox(
-                               width: 300,
-                               height: 104,
-                               child: ClipRRect(
-                                 borderRadius: const BorderRadius.only(topLeft: Radius.circular(20),topRight: Radius.circular(20)),
-                                 child: Image.network(
-                                   controller.actionList[index].mainImage??'',
-                                   fit: BoxFit.cover,
-                                   loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress){
-                                     if (loadingProgress == null) return child;
-                                     return  Center(
-                                       child: CircularProgressIndicator(
-                                         color: Colors.white70,
-                                         value: loadingProgress.expectedTotalBytes != null
-                                             ? loadingProgress.cumulativeBytesLoaded /
-                                             loadingProgress.expectedTotalBytes!
-                                             : null,
-                                       ),
-                                     );
-                                   },
+                   return GestureDetector(
+                     onTap: (){
+                       Get.toNamed(AppRoutes.productDetail);
+                     },
+                     child: Container(
+                       margin:  const EdgeInsets.only( right: 10),
+                       width: 175,
+                       height: 255,
+                       child: Stack(
+                         children: [
+                           Column(
+                             children: [
+                               SizedBox(
+                                 width: 300,
+                                 height: 104,
+                                 child: ClipRRect(
+                                   borderRadius: const BorderRadius.only(topLeft: Radius.circular(20),topRight: Radius.circular(20)),
+                                   child: Image.network(
+                                     controller.actionList[index].mainImage??'',
+                                     fit: BoxFit.cover,
+                                     loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress){
+                                       if (loadingProgress == null) return child;
+                                       return  Center(
+                                         child: CircularProgressIndicator(
+                                           color: Colors.white70,
+                                           value: loadingProgress.expectedTotalBytes != null
+                                               ? loadingProgress.cumulativeBytesLoaded /
+                                               loadingProgress.expectedTotalBytes!
+                                               : null,
+                                         ),
+                                       );
+                                     },
+                                   ),
                                  ),
                                ),
-                             ),
-                             Container(
-                               height:150,
-                               decoration: const BoxDecoration(
-                                   color: Colors.white,
-                                   borderRadius: BorderRadius.only(bottomRight: Radius.circular(20),bottomLeft: Radius.circular(20))
-                               ),
-                               padding: const EdgeInsets.all(14),
-                               child: Column(
-                                 children: [
-                                   Row(
-                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                     children: [
-                                       Image.asset(CommonUi.setPngImage("test_company"), height: 16,width: 45),
-                                       Container(
-                                         padding:const EdgeInsets.only(left: 8,right: 8,top: 2,bottom: 2),
-                                         decoration: CommonUi.curvedBoxDecoration(backgroundColor: ColorRes.appColor),
-                                         child: Text("${controller.actionList[index].points??''} Pts",style: CommonUi.customTextStyle(fontFamily: Fonts.bold,fontSize: 12,color: Colors.white),),
-                                       )
-                                     ],
-                                   ),
-                                   Padding(
-                                     padding: const EdgeInsets.only(left: 0, right: 8,top: 8),
-                                     child: Text(controller.actionList[index].description??'',
-                                       maxLines: 3,
-                                       textAlign: TextAlign.start,style: CommonUi.customTextStyle(fontFamily: Fonts.semiBold,fontSize: 15),),
-                                   ),
-                                   Expanded(
-                                     child: Column(
-                                       mainAxisAlignment: MainAxisAlignment.end,
+                               Container(
+                                 height:150,
+                                 decoration: const BoxDecoration(
+                                     color: Colors.white,
+                                     borderRadius: BorderRadius.only(bottomRight: Radius.circular(20),bottomLeft: Radius.circular(20))
+                                 ),
+                                 padding: const EdgeInsets.all(14),
+                                 child: Column(
+                                   children: [
+                                     Row(
+                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                        children: [
+                                         Image.asset(CommonUi.setPngImage("test_company"), height: 16,width: 45),
                                          Container(
-                                           height: 1,
-                                           margin: const EdgeInsets.only(top: 9),
-                                           padding: const EdgeInsets.only(left: 4,right: 4),
-                                           color: ColorRes.colorGray,
-                                         ),
-                                         Container(
-                                             width: Get.width,
-                                             margin: const EdgeInsets.only(right: 5, top: 10),
-                                             child: Align(
-                                                 alignment: Alignment.topRight,
-                                                 child: Image.asset(CommonUi.setPngImage("three_dots_icon"), height: 5,width: 25))),
+                                           padding:const EdgeInsets.only(left: 8,right: 8,top: 2,bottom: 2),
+                                           decoration: CommonUi.curvedBoxDecoration(backgroundColor: ColorRes.appColor),
+                                           child: Text("${controller.actionList[index].points??''} Pts",style: CommonUi.customTextStyle(fontFamily: Fonts.bold,fontSize: 12,color: Colors.white),),
+                                         )
                                        ],
                                      ),
-                                   ),
+                                     Padding(
+                                       padding: const EdgeInsets.only(left: 0, right: 8,top: 8),
+                                       child: Text(controller.actionList[index].description??'',
+                                         maxLines: 3,
+                                         textAlign: TextAlign.start,style: CommonUi.customTextStyle(fontFamily: Fonts.semiBold,fontSize: 15),),
+                                     ),
+                                     Expanded(
+                                       child: Column(
+                                         mainAxisAlignment: MainAxisAlignment.end,
+                                         children: [
+                                           Container(
+                                             height: 1,
+                                             margin: const EdgeInsets.only(top: 9),
+                                             padding: const EdgeInsets.only(left: 4,right: 4),
+                                             color: ColorRes.colorGray,
+                                           ),
+                                           Container(
+                                               width: Get.width,
+                                               margin: const EdgeInsets.only(right: 5, top: 10),
+                                               child: Align(
+                                                   alignment: Alignment.topRight,
+                                                   child: Image.asset(CommonUi.setPngImage("three_dots_icon"), height: 5,width: 25))),
+                                         ],
+                                       ),
+                                     ),
 
-                                 
 
 
-                                 ],
-                               ),
-                             )
-                           ],
-                         ),
-                         Container(
-                           alignment: Alignment.topRight,
-                           padding: const EdgeInsets.only(right: 5,top: 5),
-                           child: Image.asset(CommonUi.setPngImage("heart"),height: 25,width: 25,),
-                         ),
-                       ],
+
+                                   ],
+                                 ),
+                               )
+                             ],
+                           ),
+                           Container(
+                             alignment: Alignment.topRight,
+                             padding: const EdgeInsets.only(right: 5,top: 5),
+                             child: Image.asset(CommonUi.setPngImage("heart"),height: 25,width: 25,),
+                           ),
+                         ],
+                       ),
                      ),
                    );
                  }
              ),
            ),
-         ),
+         },
          const SizedBox(height: 17),
           Container(
             margin: const EdgeInsets.only(right: 24, bottom: 18),

@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ripplefect/helper/constants/CommonUi.dart';
+import 'package:ripplefect/myProfile/controller/MyProfileController.dart';
 import '../constants/strings.dart';
 
 
 class DeleteAccDialog {
+  final controller =Get.find<MyProfileController>();
+
   showDialog() {
     Get.defaultDialog(
       barrierDismissible: false,
@@ -48,6 +51,7 @@ class DeleteAccDialog {
                           child: CommonUi.customButtonSmall(buttonText: Strings.textYes,padding: 10.0,fontSize: 14.0,
                               callBack: (){
                                 Get.back();
+                                controller.deleteAccountImplementation();
                               }),
                         ),
                       ),

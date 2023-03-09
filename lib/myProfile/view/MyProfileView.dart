@@ -10,6 +10,7 @@ import 'package:ripplefect/helper/constants/fonts.dart';
 import 'package:ripplefect/helper/constants/strings.dart';
 import 'package:ripplefect/myProfile/controller/MyProfileController.dart';
 import '../../helper/bottom_sheets/ChooseCameraSheet.dart';
+import '../../helper/common_classes/CommonLoader.dart';
 import '../../helper/common_classes/InputValidationMixin.dart';
 import '../../helper/dialogs/DeleteAccDialog.dart';
 
@@ -23,7 +24,7 @@ class MyProfileView extends StatelessWidget with InputValidationMixin {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
-      body: Container(
+      body: SizedBox(
         height: Get.height,
         width: Get.width,
         child: Stack(
@@ -53,9 +54,14 @@ class MyProfileView extends StatelessWidget with InputValidationMixin {
               ),
             ),
 
-            // if(controller.loader.value)...{
-            //   const CommonLoader()
-            // }
+            Obx(() {
+              if(controller.loader.value){
+                return const CommonLoader();
+              }else{
+                return const SizedBox();
+              }
+            }),
+
           ],
         ),
       ),
@@ -262,7 +268,7 @@ class MyProfileView extends StatelessWidget with InputValidationMixin {
               callBack: () {
                 FocusScope.of(context).unfocus();
                 if (formGlobalKey.currentState!.validate()) {
-                  // controller.loginApiImplementation(1, '');
+                  controller.updateProfileApiImplementation();
                 }
               }),
           const SizedBox(

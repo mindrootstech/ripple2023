@@ -36,19 +36,23 @@ class Data {
   Data({
     required this.allCategory,
     required this.allActions,
+    required this.totalActionPages,
   });
 
   List<AllCategory> allCategory;
   List<AllAction> allActions;
+  int totalActionPages;
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
     allCategory: List<AllCategory>.from(json["All_category"].map((x) => AllCategory.fromJson(x))),
     allActions: List<AllAction>.from(json["all_actions"].map((x) => AllAction.fromJson(x))),
+    totalActionPages: json["total_action_pages"],
   );
 
   Map<String, dynamic> toJson() => {
     "All_category": List<dynamic>.from(allCategory.map((x) => x.toJson())),
     "all_actions": List<dynamic>.from(allActions.map((x) => x.toJson())),
+    "total_action_pages": totalActionPages,
   };
 }
 

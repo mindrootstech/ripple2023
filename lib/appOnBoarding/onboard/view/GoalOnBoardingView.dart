@@ -3,9 +3,6 @@ import 'package:get/get.dart';
 import 'package:ripplefect/appOnBoarding/onboard/component/GoalPageItem.dart';
 import 'package:ripplefect/helper/constants/CommonUi.dart';
 import 'package:ripplefect/helper/constants/ColorRes.dart';
-import 'package:ripplefect/helper/constants/fonts.dart';
-import 'package:ripplefect/helper/constants/strings.dart';
-import '../../../helper/routes/AppRoutes.dart';
 import '../controller/OnBoardController.dart';
 
 class GoalOnBoardingView extends StatelessWidget {

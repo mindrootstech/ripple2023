@@ -1,6 +1,7 @@
 
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ripplefect/api_provider/ApiProvider.dart';
 import 'package:ripplefect/dashBoard/home/model/HomeDataModel.dart';
@@ -23,9 +24,19 @@ class HomeController extends GetxController{
   var userProfile=UsersProfile();
   var challengeList=<Challenge>[];
   var categoryList=<CategoryTag>[];
-  var actionList=<Action>[];
+  var actionList=<FilterActions>[];
+
+
+
+  /// Action sheet controller...
   var filterActionList=<AllAction>[];
   var filterCategoryList=<AllCategory>[];
+  var searchActionTextController=TextEditingController();
+  var actionScrollController=ScrollController();
+  var selectedCatId=''.obs;
+  var selectedCatIndex=1000.obs;
+  var totalPage=1;
+  var currentPage=1;
 
 
   ///filter sheet controller...
@@ -43,20 +54,32 @@ class HomeController extends GetxController{
 
 
   @override
-  void onInit() {
+  Future<void> onInit() async {
     super.onInit();
-    getHomeDataImplementation();
-    getFilterActionImplementation();
+    await getHomeDataImplementation();
+    await getFilterActionImplementation('','',1,CommonUi.paginationLimit);
+    getActionPagination();
   }
 
 
+  void getActionPagination(){
+    actionScrollController.addListener(() {
+      if ((actionScrollController.position.pixels == actionScrollController.position.maxScrollExtent)) {
+        if (currentPage < totalPage) {
+          currentPage++;
+          getFilterActionImplementation('',selectedCatId.value,currentPage,CommonUi.paginationLimit);
+        }
+      }
+    });
+  }
 
-  void  getHomeDataImplementation() async {
+
+  Future<bool> getHomeDataImplementation() async {
     loader.value=true;
     await apiProvider.getHomeDataApi().then((value){
       if(value=='error'){
         loader.value=false;
-        return;
+        return false;
       }
       else{
         var response = homeDataModelFromJson(value);
@@ -64,40 +87,48 @@ class HomeController extends GetxController{
           if(response.data.usersProfile!=null){
             userProfile=response.data.usersProfile!;
             challengeList.addAll(response.data.challenges??[]);
+            categoryList.addAll(response.data.categoryTags??[]);
             actionList.addAll(response.data.articles??[]);
           }
-
-
         }else{
           CommonUi.showToast(response.message);
         }
         loader.value=false;
       }
+      return false;
     }).catchError((e){
       loader.value=false;
+      return false;
     });
+    return false;
   }
 
-  void  getFilterActionImplementation() async {
+  Future<bool> getFilterActionImplementation(String searchText, String catId, int page, int limit) async {
     loader.value=true;
-    await apiProvider.getFilterActionApi().then((value){
+    await apiProvider.getFilterActionApi(searchText,catId,page,limit).then((value){
       if(value=='error'){
         loader.value=false;
-        return;
+        return false;
       }
       else{
         var response = filterActionModelFromJson(value);
         if(response.status) {
+             if(filterCategoryList.isEmpty){
+               filterCategoryList.addAll(response.data.allCategory??[]);
+             }
             filterActionList.addAll(response.data.allActions??[]);
-            filterCategoryList.addAll(response.data.allCategory??[]);
+            totalPage=response.data.totalActionPages??0;
         }else{
           CommonUi.showToast(response.message);
         }
         loader.value=false;
       }
+      return false;
     }).catchError((e){
       loader.value=false;
+      return false;
     });
+    return false;
   }
 
 

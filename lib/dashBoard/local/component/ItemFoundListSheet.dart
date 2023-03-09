@@ -181,7 +181,16 @@ class ItemFoundListSheet extends StatelessWidget {
         height: 50,
         width: 200,
         decoration: CommonUi.curvedBoxDecorationWithShadow2(backgroundColor: ColorRes.buttonColor,shadowColor: Colors.transparent),
-        child: Center(child: Text('Add Business',style: CommonUi.customTextStyle(color: ColorRes.white,fontFamily: Fonts.regular,fontSize: 17),)),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SvgPicture.asset(CommonUi.setSvgImage('plus_white_icon')),
+            const SizedBox(
+              width: 8,
+            ),
+            Text('Add Business',style: CommonUi.customTextStyle(color: ColorRes.white,fontFamily: Fonts.regular,fontSize: 17),),
+          ],
+        ),
       ),
     );
   }

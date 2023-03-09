@@ -100,8 +100,9 @@ class ProductDetailView extends StatelessWidget {
     return Column(
       children: [
         Container(
-          margin: EdgeInsets.only(left: CommonUi.marginLeftRight, top: 15),
+          margin: EdgeInsets.only(left: CommonUi.marginLeftRight,right: CommonUi.marginLeftRight, top: 15),
           child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Image.asset(CommonUi.setPngImage("dummy_image")),
               const SizedBox(width: 18),

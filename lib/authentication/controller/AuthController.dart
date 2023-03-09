@@ -22,6 +22,9 @@ class AuthController extends GetxController{
   var loader=false.obs;
 
 
+
+
+
   ///Register controllers.......
   var rNameField = TextEditingController();
   var rEmailField = TextEditingController();
@@ -75,6 +78,12 @@ class AuthController extends GetxController{
     }
 
 
+   void  getSelectedCategories(){
+     var selectedWhy='';
+     var selectedMore='';
+     var selectedGoal='';
+
+    }
 
     //register user Api
   void  registerApiImplementation(int registerType,String socialToken) async {
