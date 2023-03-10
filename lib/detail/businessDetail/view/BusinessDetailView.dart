@@ -154,16 +154,19 @@ class BusinessDetailView extends StatelessWidget {
   }
 
 
-  getActionsTake() {
+ Widget getActionsTake() {
     return Container(
-      margin: const EdgeInsets.only(left: 30, top: 16, bottom: 16),
+      margin: const EdgeInsets.only( top: 16, bottom: 16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            Strings.textActionsTake,
-            style: CommonUi.customTextStyle(
-                fontFamily: Fonts.bold, fontSize: 18),
+          Container(
+            margin: EdgeInsets.symmetric(horizontal:  CommonUi.marginLeftRight),
+            child: Text(
+              Strings.textActionsTake,
+              style: CommonUi.customTextStyle(
+                  fontFamily: Fonts.bold, fontSize: 18),
+            ),
           ),
           const SizedBox(height: 16),
           SizedBox(
@@ -172,7 +175,7 @@ class BusinessDetailView extends StatelessWidget {
             child: ListView.builder(
               // shrinkWrap: true,
               physics: const BouncingScrollPhysics(),
-              padding: EdgeInsets.zero,
+              padding: EdgeInsets.symmetric(horizontal:  CommonUi.marginLeftRight),
               scrollDirection: Axis.horizontal,
               itemCount: 10,
               itemBuilder: (BuildContext context, int index) {
@@ -180,7 +183,7 @@ class BusinessDetailView extends StatelessWidget {
                   width: 170,
                   decoration: CommonUi.getBorderRadius(8.0, Colors.transparent,
                       borderWidth: 1.0, borderColor: ColorRes.noProgressColor),
-                  // margin:  EdgeInsets.only(left: CommonUi.marginLeftRight , right: CommonUi.marginLeftRight),
+                  margin:  const EdgeInsets.only(right: 12 ),
                   child: Stack(
 
                     children: [
@@ -243,7 +246,7 @@ class BusinessDetailView extends StatelessWidget {
                                       child: Text(
                                         "50 Pts",
                                         style: CommonUi.customTextStyle(
-                                            fontFamily: Fonts.bold,
+                                            fontFamily: Fonts.regular,
                                             fontSize: 11,
                                             color: Colors.white),
                                       ),
@@ -258,7 +261,7 @@ class BusinessDetailView extends StatelessWidget {
                                     "Advocate for the restoration of seagrass in our oceans.",
                                     textAlign: TextAlign.start,
                                     style: CommonUi.customTextStyle(
-                                        fontFamily: Fonts.semiBold,
+                                        fontFamily: Fonts.regular,
                                         fontSize: 15),
                                     maxLines: 2,
                                   ),
@@ -306,7 +309,7 @@ class BusinessDetailView extends StatelessWidget {
 
   Widget getOfferedRewards() {
     return Container(
-      margin: const EdgeInsets.only(left: 20, top: 16, bottom: 16, right: 20),
+      margin:  EdgeInsets.only(left: CommonUi.marginLeftRight, top: 16, bottom: 16, right:  CommonUi.marginLeftRight),
       child: Column(
         children: [
           Row(
@@ -342,11 +345,12 @@ class BusinessDetailView extends StatelessWidget {
                         borderWidth: 1.0,
                         borderColor: ColorRes.noProgressColor),
                     child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         SizedBox(
-                          width: 80,
-                          height: 120,
+                          width: 95,
+                          height: 130,
                           child: ClipRRect(
                             borderRadius:
                                 const BorderRadius.all(Radius.circular(4)),
@@ -379,15 +383,16 @@ class BusinessDetailView extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Text(
-                                      "The Rebrand",
-                                      style: CommonUi.customTextStyle(
-                                          fontFamily: Fonts.medium,
-                                          fontSize: 12),
-                                      textAlign: TextAlign.left,
+                                    Expanded(
+                                      child: Text(
+                                        "The Rebrand",
+                                        style: CommonUi.customTextStyle(
+                                            fontFamily: Fonts.semiBold,
+                                            fontSize: 12),
+                                        textAlign: TextAlign.left,
+                                      ),
                                     ),
                                     Container(
                                       decoration: CommonUi.getBorderRadius(
@@ -431,8 +436,8 @@ class BusinessDetailView extends StatelessWidget {
                                     "Get Reward",
                                     style: CommonUi.customTextStyle(
                                         color: ColorRes.buttonColor,
-                                        fontFamily: Fonts.medium,
-                                        fontSize: 10),
+                                        fontFamily: Fonts.semiBold,
+                                        fontSize: 12),
                                     textAlign: TextAlign.center,
                                   ),
                                 ),
@@ -452,7 +457,7 @@ class BusinessDetailView extends StatelessWidget {
                                       "Online",
                                       style: CommonUi.customTextStyle(
                                           fontFamily: Fonts.medium,
-                                          fontSize: 10),
+                                          fontSize: 11),
                                       textAlign: TextAlign.center,
                                     ),
                                   ],

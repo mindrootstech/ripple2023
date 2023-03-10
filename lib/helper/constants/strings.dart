@@ -25,6 +25,7 @@ class Strings {
   static String next = 'Next';
   static String alreadyAccount = 'Already have an account? ';
   static String login = 'Login';
+  static String textDone = 'Done';
 
 
   //onboard goal

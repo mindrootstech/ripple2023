@@ -7,6 +7,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:ripplefect/api_provider/ApiProvider.dart';
 import 'package:ripplefect/dashBoard/home/controller/HomeController.dart';
 import 'package:ripplefect/dashBoard/home/model/HomeDataModel.dart';
+import 'package:ripplefect/helper/service/GlobalService.dart';
 
 import '../../helper/common_classes/LocalStorage.dart';
 import '../../helper/constants/CommonUi.dart';
@@ -15,6 +16,7 @@ import '../../helper/routes/AppRoutes.dart';
 class MyProfileController extends GetxController{
   var apiProvider=ApiProvider();
   var localStorage=LocalStorage();
+  var service=Get.find<GlobalServices>();
   var nameController=TextEditingController();
   var emailController=TextEditingController();
   var passController=TextEditingController();
@@ -63,6 +65,7 @@ class MyProfileController extends GetxController{
   }
 
   void getPrefillProfileData() {
+    var result='';
     var userProfile=Get.find<HomeController>().userProfile;
      nameController.text=userProfile.firstName??'';
      emailController.text=userProfile.email??'';
@@ -72,13 +75,30 @@ class MyProfileController extends GetxController{
      countryController.text=userProfile.country??'';
      mediaImagePath.value=userProfile.profileImage??'';
      descriptionController.text=userProfile.bio??'';
-     whatYouController.text=userProfile.why??'';
-     whatYouWantController.text=userProfile.more??'';
-     goalController.text=userProfile.goal??'';
+    if(userProfile.why1!.isNotEmpty){
+      whatYouController.text=userProfile.why1?[0].name??'';
+    }
+     if(userProfile.more1!.isNotEmpty){
+       for(int i=0;i<userProfile.more1!.length;i++){
+         result="${userProfile.more1?[i].name??''},$result";
+         service.selectedMore=userProfile.more1??[];
+       }
+       whatYouWantController.text=result;
+     }
+    if(userProfile.goal1!.isNotEmpty){
+      goalController.text=userProfile.goal1?[0].name??'';
+    }
   }
 
 
   Future<void> updateProfileApiImplementation() async {
+    var selectedMore=<String>[];
+    for(int i=0;i<service.selectedMore.length;i++){
+      if(service.selectedMore[i].isSelected.value){
+        selectedMore.add(service.selectedMore[i].id.toString());
+      }
+    }
+
    var name =nameController.text;
    var email =emailController.text;
    var mobile =mobileController.text;
@@ -91,15 +111,17 @@ class MyProfileController extends GetxController{
    var imageFile=File(imagePath.value);
 
    loader.value=true;
-   await apiProvider.updateProfileApi(name,email,mobile,city,country,desc,whatYou,whatYouWant,goal,imageFile).then((value) {
+   await apiProvider.updateProfileApi(name,email,mobile,city,country,desc,whatYou,selectedMore,goal,imageFile).then((value) {
      if(value=='error'){
        loader.value=false;
        return;
      }
      else{
        var res = jsonDecode(value);
-       var response = UsersProfile.fromJson(res);
+       // var response = UsersProfile.fromJson(res);
        if(res['status']) {
+         Get.back();
+         // Get.find<HomeController>().userProfile=response;
          CommonUi.showToast(res['message']);
          getPrefillProfileData();
        }else{

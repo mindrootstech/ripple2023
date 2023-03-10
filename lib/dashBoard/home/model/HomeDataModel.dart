@@ -4,6 +4,8 @@
 
 import 'dart:convert';
 
+import '../../../appOnBoarding/onboard/model/OnboardModel.dart';
+
 HomeDataModel homeDataModelFromJson(String str) => HomeDataModel.fromJson(json.decode(str));
 
 String homeDataModelToJson(HomeDataModel data) => json.encode(data.toJson());
@@ -187,9 +189,12 @@ class UsersProfile {
      this.city,
      this.country,
      this.bio,
-     this.why,
-     this.more,
-     this.goal,
+     this.currentPoints,
+     this.lifetimePoints,
+     this.banner,
+     this.why1,
+     this.goal1,
+     this.more1,
   });
 
   int? id;
@@ -208,9 +213,12 @@ class UsersProfile {
   String? city;
   String? country;
   String? bio;
-  String? why;
-  String? more;
-  String? goal;
+  int? currentPoints;
+  int? lifetimePoints;
+  int? banner;
+  List<Goal>? why1;
+  List<Goal>? goal1;
+  List<Goal>? more1;
 
   factory UsersProfile.fromJson(Map<String, dynamic> json) => UsersProfile(
     id: json["id"]??0,
@@ -229,9 +237,12 @@ class UsersProfile {
     city: json["city"]??'',
     country: json["country"]??'',
     bio: json["bio"]??'',
-    why: json["why"]??'',
-    more: json["more"]??'',
-    goal: json["goal"]??'',
+    currentPoints: json["current_points"]??0,
+    lifetimePoints: json["lifetime_points"]??0,
+    banner: json["banner"]??0,
+    why1: json["why_1"]!=null?List<Goal>.from(json["why_1"].map((x) => Goal.fromJson(x))):<Goal>[],
+    goal1:json["goal_1"]!=null? List<Goal>.from(json["goal_1"].map((x) => Goal.fromJson(x))):<Goal>[],
+    more1:json["more_1"]!=null? List<Goal>.from(json["more_1"].map((x) => Goal.fromJson(x))):<Goal>[],
   );
 
   Map<String, dynamic> toJson() => {
@@ -251,8 +262,11 @@ class UsersProfile {
     "city": city,
     "country": country,
     "bio": bio,
-    "why": why,
-    "more": more,
-    "goal": goal,
+    "current_points": currentPoints,
+    "lifetime_points": lifetimePoints,
+    "banner": banner,
+    "why_1": List<dynamic>.from(why1!.map((x) => x.toJson())),
+    "goal_1": List<dynamic>.from(goal1!.map((x) => x.toJson())),
+    "more_1": List<dynamic>.from(more1!.map((x) => x.toJson())),
   };
 }

@@ -26,29 +26,36 @@ class GoalOnBoardingView extends StatelessWidget {
             child: CommonUi.customLayout(
               title: controller.titles.value[controller.titleNumber.value],
               onBack: (){
-                if(controller.goalPageNo.value != 1){
-                  controller.goalPageNo.value=controller.goalPageNo.value-2;
-                  movePage(controller);
-                  return;
+                if(controller.from!='profile') {
+                  if (controller.goalPageNo.value != 1) {
+                    controller.goalPageNo.value = controller.goalPageNo.value - 2;
+                    movePage(controller);
+                    return;
+                  }
                 }
                 Get.back();
 
               },
               child: Column(
                 children: [
-                  SizedBox(
-                    width: Get.width,
-                    height: 10,
-                    child: ClipRRect(
-                      borderRadius: const BorderRadius.all(Radius.circular(10)),
-                      child: LinearProgressIndicator(
-                        value: controller.progressValue.value,
-                        valueColor: const AlwaysStoppedAnimation<Color>(
-                            ColorRes.buttonColor),
-                        backgroundColor: ColorRes.noProgressColor,
+                  if(controller.from=='profile')...{
+                    const SizedBox(),
+                  }else...{
+                    SizedBox(
+                      width: Get.width,
+                      height: 10,
+                      child: ClipRRect(
+                        borderRadius: const BorderRadius.all(Radius.circular(10)),
+                        child: LinearProgressIndicator(
+                          value: controller.progressValue.value,
+                          valueColor: const AlwaysStoppedAnimation<Color>(
+                              ColorRes.buttonColor),
+                          backgroundColor: ColorRes.noProgressColor,
+                        ),
                       ),
                     ),
-                  ),
+                  },
+
                   Expanded(
                     child: PageView(
                       physics: const NeverScrollableScrollPhysics(),

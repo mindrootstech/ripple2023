@@ -46,7 +46,10 @@ class AllActionSheet{
                               if(controller.filterCategoryList.isNotEmpty)...{
                                 getCategoryListView(),
                               },
+
                                 getActionsList(),
+
+
                             ],
                           )
                       ),
@@ -54,9 +57,7 @@ class AllActionSheet{
 
                   ],
                 ),
-                if(controller.loader.value)...{
-                  const CommonLoader()
-                }
+
               ],
             );
           }
@@ -170,7 +171,7 @@ class AllActionSheet{
         children: [
           Text(Strings.textActions, style: CommonUi.customTextStyle(fontFamily: Fonts.semiBold, fontSize: 18),),
           const SizedBox(height: 16),
-          if(controller.filterActionList.isNotEmpty)...{
+          if(controller.filterActionList.isNotEmpty&&!controller.loader.value)...{
             SizedBox(
               width: Get.width,
               child: GridView.builder(
@@ -281,6 +282,12 @@ class AllActionSheet{
                 },
               ),
             ),
+          }else if(controller.loader.value)...{
+            Container(
+              margin: const EdgeInsets.only(top: 100),
+              child:const Center(child: CircularProgressIndicator()) ,
+            ),
+
           }
 
 

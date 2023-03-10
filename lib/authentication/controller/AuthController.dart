@@ -1,6 +1,7 @@
 
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/cupertino.dart';
@@ -12,6 +13,7 @@ import 'package:ripplefect/api_provider/ApiProvider.dart';
 import 'package:ripplefect/helper/common_classes/LocalStorage.dart';
 import 'package:ripplefect/helper/constants/strings.dart';
 import 'package:ripplefect/helper/routes/AppRoutes.dart';
+import 'package:ripplefect/helper/service/GlobalService.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import '../../../helper/constants/CommonUi.dart';
 import '../model/AuthModel.dart';
@@ -20,6 +22,7 @@ class AuthController extends GetxController{
   var apiProvider=ApiProvider();
   var localStorage=LocalStorage();
   var loader=false.obs;
+  var service=Get.find<GlobalServices>();
 
 
 
@@ -78,18 +81,18 @@ class AuthController extends GetxController{
     }
 
 
-   void  getSelectedCategories(){
-     var selectedWhy='';
-     var selectedMore='';
-     var selectedGoal='';
-
-    }
 
     //register user Api
   void  registerApiImplementation(int registerType,String socialToken) async {
+    var selectedMore=<String>[];
+    for(int i=0;i<service.selectedMore.length;i++){
+      if(service.selectedMore[i].isSelected.value){
+        selectedMore.add(service.selectedMore[i].id.toString());
+      }
+    }
     var userEmail=rEmailField.text.trim();
     loader.value=true;
-    await apiProvider.registerApi(rNameField.text,userEmail, rPassField.text,registerType,socialToken).then((value){
+    await apiProvider.registerApi(rNameField.text,userEmail, rPassField.text,registerType,socialToken,service.selectedWhy,selectedMore,service.selectedGoal).then((value){
       if(value=='error'){
         loader.value=false;
         return;
@@ -137,10 +140,17 @@ class AuthController extends GetxController{
     });
   }
 
+
   //Social Login
-  void  socialLoginApiImplementation(String name,String email,int loginType,String socialToken) async {
+  void  socialLoginApiImplementation(String name,String email,int loginType,String socialToken,String profileImage) async {
+    var selectedMore=<String>[];
+    for(int i=0;i<service.selectedMore.length;i++){
+      if(service.selectedMore[i].isSelected.value){
+        selectedMore.add(service.selectedMore[i].id.toString());
+      }
+    }
     loader.value=true;
-    await apiProvider.socialLoginApi(name,email,loginType,socialToken).then((value){
+    await apiProvider.socialLoginApi(name,email,loginType,socialToken,service.selectedWhy,selectedMore,service.selectedGoal,profileImage).then((value){
       if(value=='error'){
         loader.value=false;
         return;
@@ -307,8 +317,9 @@ class AuthController extends GetxController{
        var socialName = facebookProfile['name'];
        var socialEmail = facebookProfile['email'];
        var socialId = facebookProfile['id'];
+       var profileImage=map['profile_pic'];
        if(facebookLoginResult.accessToken!=null){
-         socialLoginApiImplementation(socialName,socialEmail,2,facebookLoginResult.accessToken!.token);
+         socialLoginApiImplementation(socialName,socialEmail,2,facebookLoginResult.accessToken!.token,profileImage);
        }else{
          loader.value = false;
        }
@@ -334,7 +345,7 @@ class AuthController extends GetxController{
     try {
       var data = await _googleSignIn.signIn();
       if(data!=null){
-        socialLoginApiImplementation(data.displayName??'',data.email??'',3,data.id??'');
+        socialLoginApiImplementation(data.displayName??'',data.email??'',3,data.id??'',data.photoUrl??'');
       }
 
     } catch (error) {
@@ -349,7 +360,7 @@ class AuthController extends GetxController{
           AppleIDAuthorizationScopes.email,
           AppleIDAuthorizationScopes.fullName,
         ],);
-    socialLoginApiImplementation(result.givenName??'',result.email??'',4,result.userIdentifier??'');
+    socialLoginApiImplementation(result.givenName??'',result.email??'',4,result.userIdentifier??'','');
 
     try {
       print("e");

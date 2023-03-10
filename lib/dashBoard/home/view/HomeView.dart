@@ -30,7 +30,7 @@ class HomeView extends StatelessWidget {
           child:Stack(children: [
             Image.asset(CommonUi.setPngImage('app_bg'),
               fit: BoxFit.fill,
-              height: 710,
+              height: controller.userProfile.banner==0?710:660,
               width: Get.width,
             ),
             Padding(
@@ -80,7 +80,7 @@ class HomeView extends StatelessWidget {
                    TextSpan(
                      children: [
                        TextSpan(
-                         text: '3110',
+                         text: controller.userProfile.currentPoints.toString(),
                          style: CommonUi.customTextStyle(
                              fontFamily: Fonts.bold,
                              color: ColorRes.white,
@@ -130,40 +130,46 @@ class HomeView extends StatelessWidget {
                ],
              ),
            ),
-           GestureDetector(
-             onTap: (){
-               Get.toNamed(AppRoutes.myProfile);
-             },
-             child: Container(
-               margin: const EdgeInsets.only(top: 18,bottom: 16),
-               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-               decoration: CommonUi.curvedBoxDecoration(),
-               child: Row(
-                 children: [
-                   Text("Complete profile & get 20 reward points!",
-                       style: CommonUi.customTextStyle(
-                         fontSize: 12,
-                         color: ColorRes.colorBlack,
-                         fontFamily: Fonts.medium,
-                       )),
-                   const Spacer(),
-                   Container(
-                     padding: const EdgeInsets.only(top: 2, bottom: 2, left: 10, right: 10),
-                     decoration: CommonUi.roundedDecorationWithBorder(
-                         outLineColor: ColorRes.buttonColor,
-                         bgColor: ColorRes.white,
-                         radius: 20.0),
-                     child: Text("Profile",
+           if(controller.userProfile.banner==0)...{
+             GestureDetector(
+               onTap: (){
+                 Get.toNamed(AppRoutes.myProfile);
+               },
+               child: Container(
+                 margin: const EdgeInsets.only(top: 18,bottom: 16),
+                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                 decoration: CommonUi.curvedBoxDecoration(),
+                 child: Row(
+                   children: [
+                     Text("Complete profile & get 20 reward points!",
                          style: CommonUi.customTextStyle(
-                             fontSize: 14,
-                             fontFamily: Fonts.medium,
-                             color: ColorRes.buttonColor)),
-                   ),
+                           fontSize: 12,
+                           color: ColorRes.colorBlack,
+                           fontFamily: Fonts.medium,
+                         )),
+                     const Spacer(),
+                     Container(
+                       padding: const EdgeInsets.only(top: 2, bottom: 2, left: 10, right: 10),
+                       decoration: CommonUi.roundedDecorationWithBorder(
+                           outLineColor: ColorRes.buttonColor,
+                           bgColor: ColorRes.white,
+                           radius: 20.0),
+                       child: Text("Profile",
+                           style: CommonUi.customTextStyle(
+                               fontSize: 14,
+                               fontFamily: Fonts.medium,
+                               color: ColorRes.buttonColor)),
+                     ),
 
-                 ],
+                   ],
+                 ),
                ),
              ),
-           ),
+           }else...{
+             const SizedBox(
+               height:40 ,
+             )
+           }
          ],
        ),
      );

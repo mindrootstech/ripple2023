@@ -40,10 +40,10 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
   @override
   initState()  {
     super.initState();
-    controller = FlutterGifController(vsync: this,duration: const Duration(seconds:1));
-    controller.repeat(min:0, max:0, period:const Duration(seconds:50));
+    // controller = FlutterGifController(vsync: this,duration: const Duration(seconds:1));
+    // controller.repeat(min:0, max:0, period:const Duration(seconds:50));
 
-    Timer(const Duration(milliseconds: 5000), () async {
+    Timer(const Duration(milliseconds: 5800), () async {
       if(localStorage.getAuthCode()!=''){
         Get.offAndToNamed(AppRoutes.dashboard);
       }else{
@@ -59,9 +59,11 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
         Image.asset(
           // controller: controller,
           gaplessPlayback: false,
+
            repeat: ImageRepeat.noRepeat,
            'assets/lottie/splash_lottie.gif',
           fit: BoxFit.fill,
+
         ),
       ],
     );

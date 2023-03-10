@@ -24,6 +24,11 @@ class GoalPageItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if(controller.from=='profile'){
+      if(controller.goalPageNo.value==2){
+        type=2;
+      }
+    }
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -158,7 +163,7 @@ class GoalPageItem extends StatelessWidget {
               },
             ),
           ),
-          CommonUi.customButton(buttonText:Strings.continueTxt,callBack: (){
+          CommonUi.customButton(buttonText:controller.from=='profile'?Strings.textDone:Strings.continueTxt,callBack: (){
             movePage(controller);
           }),
           const SizedBox(height: 20,)
@@ -167,6 +172,7 @@ class GoalPageItem extends StatelessWidget {
     );
   }
   void movePage(OnboardController controller) {
+    var result;
     print("page number: ${controller.goalPageNo.value}");
     var toast = "Please select any of one";
     var service=Get.find<GlobalServices>();
@@ -178,6 +184,7 @@ class GoalPageItem extends StatelessWidget {
       var anySelected = controller.list_1.where((p0) {
         if(p0.isSelected.value==true){
           service.selectedWhy=p0.id;
+          result=p0;
           return true;
         }else{
           return false;
@@ -187,13 +194,24 @@ class GoalPageItem extends StatelessWidget {
         CommonUi.showToast(toast);
         return;
       }
-      controller.progressValue.value = 0.50;
+      if(controller.from=='profile'){
+        Get.back(result: result );
+      }else{
+        controller.progressValue.value = 0.50;
+      }
+
     }
     if(controller.goalPageNo.value == 2){
       service.selectedMore.clear();
+
       var anySelected = controller.list_2.where((p0) {
         if(p0.isSelected.value==true){
-          service.selectedMore.add(p0.id.toString());
+          result=p0;
+          for(int i=0;i<controller.list_2.length;i++){
+            if(controller.list_2[i].isSelected.value==true){
+              service.selectedMore.add(controller.list_2[i]);
+            }
+          }
           return true;
         }else{
           return false;
@@ -203,12 +221,18 @@ class GoalPageItem extends StatelessWidget {
         CommonUi.showToast("Please select atleast one.");
         return;
       }
-      controller.progressValue.value = 1.0;
+      if(controller.from=='profile'){
+        Get.back(result:  result);
+      }else{
+        controller.progressValue.value = 1.0;
+      }
+
     }
     if(controller.goalPageNo.value == 3){
       var anySelected = controller.list_3.where((p0) {
         if(p0.isSelected.value==true){
           service.selectedGoal=p0.id;
+          result=p0;
           return true;
         }else{
           return false;
@@ -221,7 +245,11 @@ class GoalPageItem extends StatelessWidget {
     }
     controller.pControllers[1].animateToPage(controller.goalPageNo.value, duration: const Duration(milliseconds: 400), curve: Curves.easeIn);
     if(controller.titleNumber.value==2){
-      Get.offAllNamed(AppRoutes.completeOnBoard);
+      if(controller.from=='profile'){
+        Get.back(result:result);
+      }else{
+        Get.offAllNamed(AppRoutes.completeOnBoard);
+      }
     }
   }
 

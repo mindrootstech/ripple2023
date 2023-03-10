@@ -3,18 +3,18 @@ import 'package:flutter_gif/flutter_gif.dart';
 import 'package:get/get.dart';
 import 'package:ripplefect/api_provider/ApiProvider.dart';
 import 'package:ripplefect/helper/constants/CommonUi.dart';
+import 'package:ripplefect/helper/service/GlobalService.dart';
 
 import '../../../helper/constants/strings.dart';
 import '../model/OnboardModel.dart';
 
 class OnboardController extends GetxController {
   var apiProvider=ApiProvider();
-
+  var service=Get.find<GlobalServices>();
   var skipText = "SKIP".obs;
    List pControllers=<PageController>[];
-
-  // var pageController = PageController().obs;
   var pageNo = 0.obs;
+  var loader=false.obs;
 
 
   ///Goal OnBoarding controllers
@@ -27,12 +27,12 @@ class OnboardController extends GetxController {
   var list_2 = <Goal>[].obs;
   var list_3 = <Goal>[].obs;
   var selectedIndex=0.obs;
+  var from='';
 
 
   @override
   void onInit() {
-    pControllers.add(PageController());
-    pControllers.add(PageController());
+
     getOnBoardingData();
     super.onInit();
   }
@@ -43,24 +43,26 @@ class OnboardController extends GetxController {
   }
 
   Future<void> getOnBoardingData() async {
-   await apiProvider.onBoardingApi().then((value) {
-      if(value=='error'){
-        return;
-      }
-      else{
-        var response = onBoardModelFromJson(value);
-        if(response.status) {
-          // CommonUi.showToast(response.message);
-          list_1.addAll(response.data.why);
-          list_2.addAll(response.data.more);
-          list_3.addAll(response.data.goal);
-        }else{
-          CommonUi.showToast(response.message);
-        }
-      }
-    }).catchError((e){
+    list_1.addAll(service.onBoardData.why??[]);
+    list_2.addAll(service.onBoardData.more??[]);
+    list_3.addAll(service.onBoardData.goal??[]);
+    if(Get.arguments!=null){
+      from=Get.arguments[0]??'';
+      goalPageNo.value=Get.arguments[1]+1??0;
+      titleNumber.value=Get.arguments[1]??0;
+      pControllers.add(PageController());
+      pControllers.add(PageController(initialPage:titleNumber.value ));
+    }else{
+      pControllers.add(PageController());
+      pControllers.add(PageController());
+    }
 
-    });
+
+
+
+
+
+
   }
 
 

@@ -8,6 +8,7 @@ import 'package:ripplefect/helper/constants/CommonUi.dart';
 import 'package:ripplefect/helper/constants/ColorRes.dart';
 import 'package:ripplefect/helper/constants/fonts.dart';
 import 'package:ripplefect/helper/constants/strings.dart';
+import 'package:ripplefect/helper/routes/AppRoutes.dart';
 import 'package:ripplefect/myProfile/controller/MyProfileController.dart';
 import '../../helper/bottom_sheets/ChooseCameraSheet.dart';
 import '../../helper/common_classes/CommonLoader.dart';
@@ -163,7 +164,7 @@ class MyProfileView extends StatelessWidget with InputValidationMixin {
     );
   }
 
-  Widget getTextFields(String tittle, String hint,TextEditingController textController, bool obscureText, String? Function(String? value) validateError, {TextInputType? keyboardType}) {
+  Widget getTextFields(String tittle, String hint,TextEditingController textController, bool obscureText, String? Function(String? value) validateError, {TextInputType? keyboardType,bool enable=true }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -178,12 +179,37 @@ class MyProfileView extends StatelessWidget with InputValidationMixin {
         const SizedBox(
           height: 5,
         ),
-        TextFormField(
-          validator: validateError,
-          controller: textController,
-          keyboardType: keyboardType,
-          decoration: CommonUi.textFieldDecoration(hintText: hint),
-          obscureText: obscureText,
+        GestureDetector(
+          onTap: (){
+            if(enable==false&&!obscureText) {
+              if (hint == Strings.textOurChildren) {
+                Get.toNamed(AppRoutes.goalOnBoard, arguments: [ 'profile', 0])?.then((value) {
+                      controller.whatYouController.text=value.name;
+                });
+              }else if(hint == Strings.textReduceMyWaste){
+              Get.toNamed(AppRoutes.goalOnBoard, arguments: [ 'profile', 1])?.then((value) {
+                var result='';
+                for(int i=0;i<controller.service.selectedMore.length;i++){
+                  result ="${controller.service.selectedMore[i].name},$result";
+                  print('avsdhasfdsfd gdhsvvdh');
+                }
+                controller.whatYouWantController.text=result;
+              });
+            }else if(hint ==Strings.textEnterHere){
+              Get.toNamed(AppRoutes.goalOnBoard, arguments: [  'profile',  2])?.then((value) {
+                controller.goalController.text=value.name;
+              });
+            }}
+          },
+          child: TextFormField(
+            enabled: enable,
+            validator: validateError,
+            controller: textController,
+            keyboardType: keyboardType,
+            decoration: CommonUi.textFieldDecoration(hintText: hint),
+            obscureText: obscureText,
+
+          ),
         ),
       ],
     );
@@ -252,14 +278,14 @@ class MyProfileView extends StatelessWidget with InputValidationMixin {
         children: [
           getTextFields(Strings.textName, Strings.textEnterName, controller.nameController, false, validateNameError),
           getTextFields(Strings.textEmail, Strings.textEnterEmail, controller.emailController, false, validateEmailError),
-          getTextFields(Strings.textPassword, "********", controller.passController, true, validateNullError),
+          getTextFields(Strings.textPassword, "********", controller.passController, true, validateNullError,enable: false),
           getTextFields(Strings.textMobileNumber, Strings.textEnterMobileNumber, controller.mobileController, false, validateMobileError, keyboardType: TextInputType.number),
           getTextFields(Strings.textCity, Strings.textEnterCityName, controller.cityController, false, validateNullError),
           getTextFields(Strings.textCountry, Strings.textEnterCountryName, controller.countryController, false, validateNullError),
           getDescTextFields(Strings.textDescription, Strings.textEnterHere, controller.descriptionController, false, validateNullError),
-          getTextFields(Strings.textWhatIs, Strings.textOurChildren, controller.whatYouController, false, validateNullError),
-          getTextFields(Strings.textWhatYourWant, Strings.textReduceMyWaste, controller.whatYouWantController, false, validateNullError),
-          getTextFields(Strings.textGoal, Strings.textEnterHere, controller.goalController, false, validateNullError),
+          getTextFields(Strings.textWhatIs, Strings.textOurChildren, controller.whatYouController, false, validateNullError,enable: false),
+          getTextFields(Strings.textWhatYourWant, Strings.textReduceMyWaste, controller.whatYouWantController, false, validateNullError,enable: false),
+          getTextFields(Strings.textGoal, Strings.textEnterHere, controller.goalController, false, validateNullError,enable: false),
           const SizedBox(height: 35,
           ),
           CommonUi.customButton(

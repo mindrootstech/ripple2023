@@ -29,7 +29,7 @@ class AppPages {
   static final routes = [
     GetPage(name: AppRoutes.splash, page: () => const SplashScreen()),
     GetPage(name: AppRoutes.onBoard, page: () => const OnboardView(), binding: OnboardBinding()),
-    GetPage(name: AppRoutes.goalOnBoard, page: () => const GoalOnBoardingView()),
+    GetPage(name: AppRoutes.goalOnBoard, page: () => const GoalOnBoardingView(), binding: OnboardBinding()),
     GetPage(name: AppRoutes.completeOnBoard, page: () =>  CompleteOnboardView(),binding: AuthBinding()),
     GetPage(name: AppRoutes.signup, page: () =>  SignupView(),binding: AuthBinding()),
     GetPage(name: AppRoutes.login, page: () =>  LoginView(),binding: AuthBinding()),

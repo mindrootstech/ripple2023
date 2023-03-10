@@ -36,25 +36,25 @@ class OnBoardModel {
 
 class Data {
   Data({
-    required this.why,
-    required this.more,
-    required this.goal,
+     this.why,
+     this.more,
+     this.goal,
   });
 
-  List<Goal> why;
-  List<Goal> more;
-  List<Goal> goal;
+  List<Goal>? why;
+  List<Goal>? more;
+  List<Goal>? goal;
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
-    why: List<Goal>.from(json["why"].map((x) => Goal.fromJson(x))),
-    more: List<Goal>.from(json["more"].map((x) => Goal.fromJson(x))),
-    goal: List<Goal>.from(json["goal"].map((x) => Goal.fromJson(x))),
+    why:json["why"].length>0? List<Goal>.from(json["why"].map((x) => Goal.fromJson(x))):<Goal>[],
+    more:json["more"].length>0? List<Goal>.from(json["more"].map((x) => Goal.fromJson(x))):<Goal>[],
+    goal:json["goal"].length>0? List<Goal>.from(json["goal"].map((x) => Goal.fromJson(x))):<Goal>[],
   );
 
   Map<String, dynamic> toJson() => {
-    "why": List<dynamic>.from(why.map((x) => x.toJson())),
-    "more": List<dynamic>.from(more.map((x) => x.toJson())),
-    "goal": List<dynamic>.from(goal.map((x) => x.toJson())),
+    "why": List<dynamic>.from(why!.map((x) => x.toJson())),
+    "more": List<dynamic>.from(more!.map((x) => x.toJson())),
+    "goal": List<dynamic>.from(goal!.map((x) => x.toJson())),
   };
 }
 

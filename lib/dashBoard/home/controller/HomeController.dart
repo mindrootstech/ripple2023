@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:ripplefect/api_provider/ApiProvider.dart';
 import 'package:ripplefect/dashBoard/home/model/HomeDataModel.dart';
 import 'package:ripplefect/helper/routes/AppRoutes.dart';
+import 'package:ripplefect/helper/service/GlobalService.dart';
 
 import '../../../helper/common_classes/LocalStorage.dart';
 import '../../../helper/constants/CommonUi.dart';
@@ -15,6 +16,7 @@ class HomeController extends GetxController{
   var currentIndex=0.obs;
   var apiProvider=ApiProvider();
   var localStorage=LocalStorage();
+  var service=Get.find<GlobalServices>();
 
 
   var loader=false.obs;
@@ -56,6 +58,7 @@ class HomeController extends GetxController{
   @override
   Future<void> onInit() async {
     super.onInit();
+    getFilterCategory();
     await getHomeDataImplementation();
     await getFilterActionImplementation('','',1,CommonUi.paginationLimit);
     getActionPagination();
@@ -154,6 +157,10 @@ class HomeController extends GetxController{
       loader.value=false;
       CommonUi.showToast('error');
     });
+  }
+
+  void getFilterCategory() {
+    // categoriesList.addAll(service.onBoardData.more??[]);
   }
 
 

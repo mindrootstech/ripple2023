@@ -14,7 +14,7 @@ class ApiProvider extends GetConnect {
   final String baseUrl = "https://development.mind-roots.com/rippl/api"; ///dev url
 
 
-  Future<String> registerApi(String name,String email, String password, int registerType, String socialToken) async {
+  Future<String> registerApi(String name,String email, String password, int registerType, String socialToken, int selectedWhy, List<String> selectedMore, int selectedGoal) async {
     var deviceType = '';
     if (Platform.isIOS) {
       deviceType = 'ios';
@@ -30,6 +30,9 @@ class ApiProvider extends GetConnect {
         'device_type': deviceType,
         'device_token': 'dfjdsj',
         'social_token': socialToken ,
+        'why': selectedWhy.toString() ,
+        'more[]': selectedMore.toString() ,
+        'goal': selectedGoal.toString() ,
       });
       if (response.statusCode == 200) {
         return response.body;
@@ -69,7 +72,7 @@ class ApiProvider extends GetConnect {
   }
 
 
-  Future<String> socialLoginApi(String name,String email, int socialType, String socialToken) async {
+  Future<String> socialLoginApi(String name,String email, int socialType, String socialToken,int selectedWhy, List<String> selectedMore, int selectedGoal, String profileImage) async {
     var deviceType = '';
     if (Platform.isIOS) {
       deviceType = 'ios';
@@ -84,6 +87,10 @@ class ApiProvider extends GetConnect {
         'device_type': deviceType,
         'device_token': 'sdfsd',
         'social_token': socialToken ,
+        'why': selectedWhy.toString() ,
+        'more[]': selectedMore.toString() ,
+        'goal': selectedGoal.toString() ,
+        'profile_image': profileImage.toString() ,
       });
       if (response.statusCode == 200) {
         return response.body;
@@ -208,7 +215,7 @@ class ApiProvider extends GetConnect {
 
 
 
-  Future<String> updateProfileApi(String name, String email, String mobile, String city, String country, String desc, String whatYou, String whatYouWant, String goal, File imageFile) async {
+  Future<String> updateProfileApi(String name, String email, String mobile, String city, String country, String desc, String whatYou, List<String> whatYouWant, String goal, File imageFile) async {
     try {
       var headers = {
         'Accept': 'application/json',
@@ -224,7 +231,7 @@ class ApiProvider extends GetConnect {
         'country': country,
         'bio': desc,
         'why': whatYou,
-        'more': whatYouWant,
+        'more[]': whatYouWant.toString(),
         'goal': goal
       });
 
