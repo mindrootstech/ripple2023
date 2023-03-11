@@ -125,9 +125,7 @@ class AllActionSheet{
 
                               ),
                           ),
-                            Container(
-                              color: ColorRes.lightBlackColor,
-                            ),
+
                             Positioned(
                               top: 16,
                               left: 19,
@@ -182,7 +180,7 @@ class AllActionSheet{
                     crossAxisSpacing: 10,
                     mainAxisSpacing: 15),
                 physics: const BouncingScrollPhysics(),
-                padding: EdgeInsets.zero,
+                padding: const EdgeInsets.only(bottom: 20),
                 scrollDirection: Axis.vertical,
                 itemCount: controller.filterActionList.length,
                 itemBuilder: (BuildContext context, int index) {

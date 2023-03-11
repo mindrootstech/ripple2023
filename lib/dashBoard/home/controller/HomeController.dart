@@ -11,22 +11,22 @@ import 'package:ripplefect/helper/service/GlobalService.dart';
 import '../../../helper/common_classes/LocalStorage.dart';
 import '../../../helper/constants/CommonUi.dart';
 import '../model/FilterActionModel.dart';
+import '../model/HomeFilterActionModel.dart';
 
 class HomeController extends GetxController{
   var currentIndex=0.obs;
   var apiProvider=ApiProvider();
   var localStorage=LocalStorage();
   var service=Get.find<GlobalServices>();
-
-
   var loader=false.obs;
+  var actionLoader=false.obs;
 
 
   ///Home view controller...
   var userProfile=UsersProfile();
   var challengeList=<Challenge>[];
   var categoryList=<CategoryTag>[];
-  var actionList=<FilterActions>[];
+  var actionList=<HomeAction>[];
 
 
 
@@ -46,10 +46,9 @@ class HomeController extends GetxController{
   var timeSelected=false.obs;
   var categoriesSelected=false.obs;
   var showCheckValue=false.obs;
-  var actionTypeList=['Local','Global','Online','Saved'];
-  var timeList = ["5 mins ","Under 30 mins","Couple hours","Ongoing"];
-  var categoriesList = ["Compost","Reduce waste in your home","Food Waste","Preserve Oceans","Sustainable Fashion","Reduce Emissions"];
-
+  var actionTypeList=<FilterActionType>[];
+  var timeList = <FilterActionType>[];
+  var categoriesList = <FilterActionType>[];
 
 
 
@@ -60,7 +59,9 @@ class HomeController extends GetxController{
     super.onInit();
     getFilterCategory();
     await getHomeDataImplementation();
+    await getHomeFilterImplementation(true);
     await getFilterActionImplementation('','',1,CommonUi.paginationLimit);
+
     getActionPagination();
   }
 
@@ -91,12 +92,15 @@ class HomeController extends GetxController{
             userProfile=response.data.usersProfile!;
             challengeList.addAll(response.data.challenges??[]);
             categoryList.addAll(response.data.categoryTags??[]);
-            actionList.addAll(response.data.articles??[]);
+            actionTypeList.addAll(response.data.filterActionType??[]);
+            categoriesList.addAll(response.data.allCategories??[]);
+            timeList.addAll(response.data.timeFilter??[]);
+
           }
         }else{
           CommonUi.showToast(response.message);
+          loader.value=false;
         }
-        loader.value=false;
       }
       return false;
     }).catchError((e){
@@ -116,9 +120,9 @@ class HomeController extends GetxController{
       else{
         var response = filterActionModelFromJson(value);
         if(response.status) {
-             if(filterCategoryList.isEmpty){
-               filterCategoryList.addAll(response.data.allCategory??[]);
-             }
+          if(filterCategoryList.isEmpty){
+            filterCategoryList.addAll(response.data.allCategory??[]);
+          }
             filterActionList.addAll(response.data.allActions??[]);
             totalPage=response.data.totalActionPages??0;
         }else{
@@ -134,6 +138,43 @@ class HomeController extends GetxController{
     return false;
   }
 
+  Future<bool> getHomeFilterImplementation(bool clear) async {
+    var actionType='';
+    var time = '';
+    var categories = '';
+    if(clear){
+      getClearSelectedCheckId(actionTypeList);
+      getClearSelectedCheckId(timeList);
+      getClearSelectedCheckId(categoriesList);
+    }else{
+      actionType= getSelectedCheckId(actionTypeList);
+      time= getSelectedCheckId(timeList);
+      categories= getSelectedCheckId(categoriesList);
+    }
+
+    actionLoader.value=true;
+    await apiProvider.getHomeFilterActionApi(actionType,time,categories).then((value){
+      if(value=='error'){
+        actionLoader.value=false;
+        return false;
+      }
+      else{
+        var res=jsonDecode(value);
+        var response = homeFilterActionModelFromJson(value);
+        if(response.status) {
+          actionList.clear();
+          actionList.addAll(response.data.actions??[]);
+        }else{
+        }
+        actionLoader.value=false;
+      }
+      return false;
+    }).catchError((e){
+      actionLoader.value=false;
+      return false;
+    });
+    return false;
+  }
 
 
   void  logoutApiImplementation() async {
@@ -147,6 +188,7 @@ class HomeController extends GetxController{
         var res = jsonDecode(value);
         if(res['status']) {
           localStorage.clearPrefAllData();
+          service.clearServiceData();
           Get.offAllNamed(AppRoutes.login);
         }else{
           CommonUi.showToast('log');
@@ -161,6 +203,28 @@ class HomeController extends GetxController{
 
   void getFilterCategory() {
     // categoriesList.addAll(service.onBoardData.more??[]);
+  }
+
+  String getSelectedCheckId(List<FilterActionType> list) {
+    var result='';
+    if(list.isNotEmpty){
+      for(int i=0;i<list.length;i++){
+        if(list[i].isSelected!.value){
+          result=list[i].id.toString();
+        }
+      }
+      return result;
+    }else{
+      return '';
+    }
+  }
+
+  void getClearSelectedCheckId(List<FilterActionType> list) {
+    for(int i=0;i<list.length;i++){
+      if(list[i].isSelected!.value){
+       list[i].isSelected!.value=false;
+      }
+    }
   }
 
 

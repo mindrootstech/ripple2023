@@ -11,7 +11,7 @@ class DashboardController extends GetxController{
 
 
   final List<Widget> children = [
-     HomeView(),
+    HomeView(),
     LocalView(),
     Container(),
     Container(),

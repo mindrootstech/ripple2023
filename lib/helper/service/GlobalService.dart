@@ -23,6 +23,10 @@ class GlobalServices extends GetxService {
 
 
   void clearServiceData() {
+     selectedWhy=0;
+     selectedMore.clear();
+     selectedGoal=0;
+     onBoardData=Data();
 
   }
 

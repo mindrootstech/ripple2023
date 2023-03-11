@@ -129,7 +129,7 @@ class ProductDetailView extends StatelessWidget {
                     fontSize: 14, color: ColorRes.white)),
                 ),
                 Text(Strings.textImpact,
-                style: CommonUi.customTextStyle(fontFamily: Fonts.medium, fontSize: 16, color: ColorRes.greyColor)),
+                style: CommonUi.customTextStyle(fontFamily: Fonts.semiBold, fontSize: 16, color: ColorRes.greyColor)),
                 const SizedBox(width: 4),
                 Image.asset(CommonUi.setPngImage('info_icon'),height: 18,width: 18)
 
@@ -146,7 +146,7 @@ class ProductDetailView extends StatelessWidget {
               Image.asset(CommonUi.setPngImage('plus_icon'),height: 22,width: 22),
                 const SizedBox(width: 4),
                 Text("120 ${Strings.textPts}",
-                    style: CommonUi.customTextStyle(fontFamily: Fonts.medium, fontSize: 16, color: ColorRes.greyColor)),
+                    style: CommonUi.customTextStyle(fontFamily: Fonts.semiBold, fontSize: 16, color: ColorRes.greyColor)),
             ],),
             Container(
               margin:const EdgeInsets.only(left: 8, right: 8),
@@ -159,7 +159,7 @@ class ProductDetailView extends StatelessWidget {
                 Image.asset(CommonUi.setPngImage('location_icon'),height: 18,width: 18),
                 const SizedBox(width: 4),
                 Text("Online",
-                    style: CommonUi.customTextStyle(fontFamily: Fonts.medium, fontSize: 16, color: ColorRes.greyColor)),
+                    style: CommonUi.customTextStyle(fontFamily: Fonts.semiBold, fontSize: 16, color: ColorRes.greyColor)),
               ],
             )
           ],
@@ -234,7 +234,7 @@ class ProductDetailView extends StatelessWidget {
           const SizedBox(
             height:16 ,
           ),
-          Text(Strings.textWhyItMatters, style: CommonUi.customTextStyle(fontFamily: Fonts.medium,fontSize: 20)),
+          Text(Strings.textWhyItMatters, style: CommonUi.customTextStyle(fontFamily: Fonts.semiBold,fontSize: 20)),
           const SizedBox(
             height:16 ,
           ),
@@ -253,7 +253,7 @@ class ProductDetailView extends StatelessWidget {
             moreStyle: CommonUi.customTextStyle(fontFamily: Fonts.medium, fontSize: 16, color: ColorRes.buttonColor,),
           ),
           const SizedBox(height: 22,),
-          Text(Strings.textHowYouCan,  style: CommonUi.customTextStyle(fontFamily: Fonts.medium, fontSize: 20)),
+          Text(Strings.textHowYouCan,  style: CommonUi.customTextStyle(fontFamily: Fonts.semiBold, fontSize: 20)),
           const SizedBox(height: 16,),
           Text("Get the free browser extension and plant trees with every search.\n\n"
               "How Ecosia works? \n1. Search the web with Ecosia."
@@ -270,6 +270,7 @@ class ProductDetailView extends StatelessWidget {
             color: ColorRes.noProgressColor,
           ),
           Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text('Learn more about Ecosia',style: CommonUi.customTextStyle(color: ColorRes.colorGreen2,fontFamily: Fonts.semiBold,fontSize: 15),),
               const SizedBox(

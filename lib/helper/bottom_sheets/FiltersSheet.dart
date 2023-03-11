@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import '../../dashBoard/home/controller/HomeController.dart';
+import '../../dashBoard/home/model/HomeDataModel.dart';
 import '../../helper/constants/ColorRes.dart';
 import '../../helper/constants/CommonUi.dart';
 import '../../helper/constants/fonts.dart';
@@ -48,11 +49,20 @@ class FiltersSheet{
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Expanded(child: Text('Clear all',style: CommonUi.customTextStyle(fontFamily: Fonts.semiBold,fontSize: 17,color: ColorRes.buttonColor),)),
+                  Expanded(child: GestureDetector(
+                    onTap: (){
+                      Get.back();
+                      controller.getHomeFilterImplementation(true);
+                    },
+                      child: Text('Clear all',style: CommonUi.customTextStyle(fontFamily: Fonts.semiBold,fontSize: 17,color: ColorRes.buttonColor),))),
                   Expanded(
                     child: SizedBox(
                       height: 40,
-                      child: CommonUi.customButtonSmall(buttonText: "Show 10 results",padding: 10.0,fontSize: 14.0),
+                      child: CommonUi.customButtonSmall(
+                          buttonText: "Show 10 results",padding: 10.0,fontSize: 14.0,callBack:(){
+                        Get.back();
+                        controller.getHomeFilterImplementation(false);
+                      }),
                     ),
                   )
                 ],
@@ -177,7 +187,7 @@ Widget getTitleText(String text, bool isSelected) {
 }
 
 
-Widget filterValuesList(List<String> list, HomeController controller) {
+Widget filterValuesList(List<FilterActionType> list, HomeController controller) {
   return Column(
     children: [
       if(controller.categoriesSelected.value)...{
@@ -214,19 +224,19 @@ Widget filterValuesList(List<String> list, HomeController controller) {
             padding: const EdgeInsets.only(left: 8),
             child: Row(
               children: [
-                Obx(()=>
-                   Checkbox(
-                    value: controller.showCheckValue.value,
-                    activeColor: ColorRes.buttonColor,
-                    onChanged: (value) {
-                      controller.showCheckValue.value=value??false;
-                    },
+                   Obx(()=>
+                      Checkbox(
+                      value: list[index].isSelected?.value??false,
+                      activeColor: ColorRes.buttonColor,
+                      onChanged: (value) {
+                        list[index].isSelected?.value=value??false;
+                      },
                   ),
-                ),
+                   ),
                 Expanded(
                   child: Container(
                     padding: const EdgeInsets.symmetric(vertical: 15),
-                    child:  Text(list[index],style: CommonUi.customTextStyle(fontSize: 15,fontFamily: Fonts.semiBold),),
+                    child:  Text(list[index].name,style: CommonUi.customTextStyle(fontSize: 15,fontFamily: Fonts.semiBold),),
                   ),
                 ),
               ],
@@ -237,3 +247,5 @@ Widget filterValuesList(List<String> list, HomeController controller) {
     ],
   );
 }
+
+

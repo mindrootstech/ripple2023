@@ -4,6 +4,8 @@
 
 import 'dart:convert';
 
+import 'package:get/get.dart';
+
 import '../../../appOnBoarding/onboard/model/OnboardModel.dart';
 
 HomeDataModel homeDataModelFromJson(String str) => HomeDataModel.fromJson(json.decode(str));
@@ -40,18 +42,28 @@ class Data {
      this.challenges,
      this.categoryTags,
      this.articles,
+     this.filterActionType,
+     this.timeFilter,
+     this.allCategories,
   });
 
   UsersProfile? usersProfile;
   List<Challenge>? challenges;
   List<CategoryTag>? categoryTags;
   List<FilterActions>? articles;
+  List<FilterActionType>? filterActionType;
+  List<FilterActionType>? timeFilter;
+  List<FilterActionType>? allCategories;
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
     usersProfile:json["users_profile"]!=null? UsersProfile.fromJson(json["users_profile"]):UsersProfile(),
     challenges:json["challenges"].length>0? List<Challenge>.from(json["challenges"].map((x) => Challenge.fromJson(x))):<Challenge>[],
     categoryTags:json["category_tags"].length>0? List<CategoryTag>.from(json["category_tags"].map((x) => CategoryTag.fromJson(x))):<CategoryTag>[],
     articles:json["actions"].length>0? List<FilterActions>.from(json["actions"].map((x) => FilterActions.fromJson(x))):<FilterActions>[],
+    filterActionType: List<FilterActionType>.from(json["filter_action_type"].map((x) => FilterActionType.fromJson(x))),
+    timeFilter: List<FilterActionType>.from(json["time_filter"].map((x) => FilterActionType.fromJson(x))),
+    allCategories: List<FilterActionType>.from(json["all_categories"].map((x) => FilterActionType.fromJson(x))),
+
   );
 
   Map<String, dynamic> toJson() => {
@@ -59,8 +71,35 @@ class Data {
     "challenges": List<dynamic>.from(challenges!.map((x) => x.toJson())),
     "category_tags": List<dynamic>.from(categoryTags!.map((x) => x.toJson())),
     "actions": List<dynamic>.from(articles!.map((x) => x.toJson())),
+    "filter_action_type": List<dynamic>.from(filterActionType!.map((x) => x)),
+    "time_filter": List<dynamic>.from(timeFilter!.map((x) => x)),
+    "all_categories": List<dynamic>.from(allCategories!.map((x) => x.toJson())),
   };
 }
+
+class FilterActionType {
+  FilterActionType({
+    required this.id,
+    required this.name,
+    this.isSelected
+  });
+
+  int id;
+  String name;
+  RxBool? isSelected;
+
+  factory FilterActionType.fromJson(Map<String, dynamic> json) => FilterActionType(
+    id: json["id"],
+    name: json["name"],
+    isSelected:false.obs
+  );
+
+  Map<String, dynamic> toJson() => {
+    "id": id,
+    "name": name,
+  };
+}
+
 
 
 class FilterActions {
@@ -86,8 +125,6 @@ class FilterActions {
     points: json["points"]??'',
     description: json["description"]??'',
     mainImage: json["main_image"]??'',
-
-
   );
 
   Map<String, dynamic> toJson() => {
@@ -181,7 +218,6 @@ class UsersProfile {
      this.socialToken,
      this.profileImage,
      this.emailVerifiedAt,
-     this.status,
      this.lastLogin,
      this.createdAt,
      this.updatedAt,
@@ -205,7 +241,6 @@ class UsersProfile {
   String? socialToken;
   String? profileImage;
   String? emailVerifiedAt;
-  int? status;
   String? lastLogin;
   String? createdAt;
   String?  updatedAt;
@@ -229,7 +264,6 @@ class UsersProfile {
     socialToken: json["social_token"]??'',
     profileImage: json["profile_image"]??'',
     emailVerifiedAt: json["email_verified_at"]??'',
-    status: json["status"]??0??'',
     lastLogin: json["last_login"]??'',
     createdAt: json["created_at"]??'',
     updatedAt: json["updated_at"]??'',
@@ -254,7 +288,6 @@ class UsersProfile {
     "social_token": socialToken,
     "profile_image": profileImage,
     "email_verified_at": emailVerifiedAt,
-    "status": status,
     "last_login": lastLogin,
     "created_at": createdAt,
     "updated_at": updatedAt,

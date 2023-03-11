@@ -84,15 +84,22 @@ class AuthController extends GetxController{
 
     //register user Api
   void  registerApiImplementation(int registerType,String socialToken) async {
-    var selectedMore=<String>[];
-    for(int i=0;i<service.selectedMore.length;i++){
-      if(service.selectedMore[i].isSelected.value){
-        selectedMore.add(service.selectedMore[i].id.toString());
+    var selectedMore='';
+    var selectedWhy='';
+    var selectedGoal='';
+    if(service.selectedMore.isNotEmpty){
+      for(int i=0;i<service.selectedMore.length;i++){
+          selectedMore="${service.selectedMore[i].id.toString()},$selectedMore";
       }
     }
+   if(service.selectedWhy!=0){
+     selectedWhy=service.selectedWhy.toString();
+   }if(service.selectedGoal!=0){
+      selectedGoal=service.selectedGoal.toString();
+   }
     var userEmail=rEmailField.text.trim();
     loader.value=true;
-    await apiProvider.registerApi(rNameField.text,userEmail, rPassField.text,registerType,socialToken,service.selectedWhy,selectedMore,service.selectedGoal).then((value){
+    await apiProvider.registerApi(rNameField.text,userEmail, rPassField.text,registerType,socialToken,selectedGoal,selectedMore,selectedGoal).then((value){
       if(value=='error'){
         loader.value=false;
         return;
@@ -143,14 +150,21 @@ class AuthController extends GetxController{
 
   //Social Login
   void  socialLoginApiImplementation(String name,String email,int loginType,String socialToken,String profileImage) async {
-    var selectedMore=<String>[];
-    for(int i=0;i<service.selectedMore.length;i++){
-      if(service.selectedMore[i].isSelected.value){
-        selectedMore.add(service.selectedMore[i].id.toString());
+    var selectedMore='';
+    var selectedWhy='';
+    var selectedGoal='';
+    if(service.selectedMore.isNotEmpty){
+      for(int i=0;i<service.selectedMore.length;i++){
+        selectedMore="${service.selectedMore[i].id.toString()},$selectedMore";
       }
     }
+    if(service.selectedWhy!=0){
+      selectedWhy=service.selectedWhy.toString();
+    }if(service.selectedGoal!=0){
+      selectedGoal=service.selectedGoal.toString();
+    }
     loader.value=true;
-    await apiProvider.socialLoginApi(name,email,loginType,socialToken,service.selectedWhy,selectedMore,service.selectedGoal,profileImage).then((value){
+    await apiProvider.socialLoginApi(name,email,loginType,socialToken,selectedWhy,selectedMore,selectedGoal,profileImage).then((value){
       if(value=='error'){
         loader.value=false;
         return;

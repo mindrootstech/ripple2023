@@ -449,7 +449,7 @@ class HomeView extends StatelessWidget {
        crossAxisAlignment: CrossAxisAlignment.start,
        children: [
          if(controller.actionList.isNotEmpty)...{
-           SizedBox(
+           !controller.actionLoader.value? SizedBox(
              height: 255,
              width: Get.width,
              child: ListView.builder(
@@ -501,6 +501,7 @@ class HomeView extends StatelessWidget {
                                  ),
                                  padding: const EdgeInsets.all(14),
                                  child: Column(
+                                   crossAxisAlignment: CrossAxisAlignment.start,
                                    children: [
                                      Row(
                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -558,7 +559,9 @@ class HomeView extends StatelessWidget {
                    );
                  }
              ),
-           ),
+           ):Center(child: Container(
+             margin: const EdgeInsets.only(top: 30),
+               child: const CircularProgressIndicator())),
          },
          const SizedBox(height: 17),
           Container(

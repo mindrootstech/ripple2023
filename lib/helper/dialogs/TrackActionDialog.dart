@@ -23,7 +23,9 @@ class TrackActionDialog {
           children: [
             Align(
               alignment: Alignment.center,
-                child: Text(Strings.textKnowHowTrack,style: CommonUi.customTextStyle(fontFamily: Fonts.semiBold,fontSize: 22))),
+                child: Text(Strings.textKnowHowTrack,
+                    textAlign: TextAlign.center,
+                    style: CommonUi.customTextStyle(fontFamily: Fonts.semiBold,fontSize: 22))),
             Container(
               margin: EdgeInsets.symmetric( vertical: CommonUi.marginLeftRight),
               height: 1,

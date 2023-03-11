@@ -14,7 +14,7 @@ class ApiProvider extends GetConnect {
   final String baseUrl = "https://development.mind-roots.com/rippl/api"; ///dev url
 
 
-  Future<String> registerApi(String name,String email, String password, int registerType, String socialToken, int selectedWhy, List<String> selectedMore, int selectedGoal) async {
+  Future<String> registerApi(String name,String email, String password, int registerType, String socialToken, String selectedWhy, String selectedMore, String selectedGoal) async {
     var deviceType = '';
     if (Platform.isIOS) {
       deviceType = 'ios';
@@ -72,7 +72,7 @@ class ApiProvider extends GetConnect {
   }
 
 
-  Future<String> socialLoginApi(String name,String email, int socialType, String socialToken,int selectedWhy, List<String> selectedMore, int selectedGoal, String profileImage) async {
+  Future<String> socialLoginApi(String name,String email, int socialType, String socialToken,String selectedWhy, String selectedMore, String selectedGoal, String profileImage) async {
     var deviceType = '';
     if (Platform.isIOS) {
       deviceType = 'ios';
@@ -215,7 +215,7 @@ class ApiProvider extends GetConnect {
 
 
 
-  Future<String> updateProfileApi(String name, String email, String mobile, String city, String country, String desc, String whatYou, List<String> whatYouWant, String goal, File imageFile) async {
+  Future<String> updateProfileApi(String name, String email, String mobile, String city, String country, String desc, String whatYou, String whatYouWant, String goal, File imageFile) async {
     try {
       var headers = {
         'Accept': 'application/json',
@@ -231,7 +231,7 @@ class ApiProvider extends GetConnect {
         'country': country,
         'bio': desc,
         'why': whatYou,
-        'more[]': whatYouWant.toString(),
+        'more[]': whatYouWant,
         'goal': goal
       });
 
@@ -260,6 +260,22 @@ class ApiProvider extends GetConnect {
     try {
       final response = await client.post(Uri.parse("$baseUrl/deleteAccount"),
           headers: {'Authorization': "Bearer ${localStorage.getAuthCode()}"});
+      if (response.statusCode == 200) {
+        return response.body;
+      } else {
+        return response.body;
+      }
+    } catch (e) {
+      return 'error';
+    }
+  }
+
+
+  Future<String> getHomeFilterActionApi(String actionType, String time, String catId) async {
+    try {
+      final response = await client.get(Uri.parse("$baseUrl/home-page-filter-section?action_type=$actionType&time=$time&category=$catId"),
+          headers: {'Authorization': "Bearer ${localStorage.getAuthCode()}"},
+          );
       if (response.statusCode == 200) {
         return response.body;
       } else {

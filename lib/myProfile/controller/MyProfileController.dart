@@ -6,9 +6,8 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:ripplefect/api_provider/ApiProvider.dart';
 import 'package:ripplefect/dashBoard/home/controller/HomeController.dart';
-import 'package:ripplefect/dashBoard/home/model/HomeDataModel.dart';
 import 'package:ripplefect/helper/service/GlobalService.dart';
-
+import '../../dashBoard/home/model/HomeDataModel.dart';
 import '../../helper/common_classes/LocalStorage.dart';
 import '../../helper/constants/CommonUi.dart';
 import '../../helper/routes/AppRoutes.dart';
@@ -77,6 +76,7 @@ class MyProfileController extends GetxController{
      descriptionController.text=userProfile.bio??'';
     if(userProfile.why1!.isNotEmpty){
       whatYouController.text=userProfile.why1?[0].name??'';
+      service.selectedWhy=userProfile.why1?[0].id??0;
     }
      if(userProfile.more1!.isNotEmpty){
        for(int i=0;i<userProfile.more1!.length;i++){
@@ -87,15 +87,17 @@ class MyProfileController extends GetxController{
      }
     if(userProfile.goal1!.isNotEmpty){
       goalController.text=userProfile.goal1?[0].name??'';
+      service.selectedGoal=userProfile.goal1?[0].id??0;
     }
   }
 
 
   Future<void> updateProfileApiImplementation() async {
-    var selectedMore=<String>[];
-    for(int i=0;i<service.selectedMore.length;i++){
-      if(service.selectedMore[i].isSelected.value){
-        selectedMore.add(service.selectedMore[i].id.toString());
+    var homeController=Get.find<HomeController>();
+    var selectedMore='';
+    if(service.selectedMore.isNotEmpty){
+      for(int i=0;i<service.selectedMore.length;i++){
+          selectedMore="${service.selectedMore[i].id.toString()},$selectedMore";
       }
     }
 
@@ -105,32 +107,48 @@ class MyProfileController extends GetxController{
    var city =cityController.text;
    var country =countryController.text;
    var desc=descriptionController.text;
-   var whatYou=whatYouController.text;
-   var whatYouWant=whatYouWantController.text;
-   var goal=goalController.text;
+    var whatYou='';
+    var goal='';
+   if(service.selectedWhy==0){
+     whatYou ='';
+
+   }else{
+     whatYou =service.selectedWhy.toString();
+   }
+    if(service.selectedWhy==0){
+      goal ='';
+    }else{
+       goal=service.selectedGoal.toString();
+    }
+
+
    var imageFile=File(imagePath.value);
 
    loader.value=true;
+   homeController.loader.value=true;
    await apiProvider.updateProfileApi(name,email,mobile,city,country,desc,whatYou,selectedMore,goal,imageFile).then((value) {
      if(value=='error'){
        loader.value=false;
+       homeController.loader.value=false;
        return;
      }
      else{
        var res = jsonDecode(value);
-       // var response = UsersProfile.fromJson(res);
+       var response = UsersProfile.fromJson(res['profile_data']);
        if(res['status']) {
          Get.back();
-         // Get.find<HomeController>().userProfile=response;
+         Get.find<HomeController>().userProfile=response;
          CommonUi.showToast(res['message']);
          getPrefillProfileData();
        }else{
          CommonUi.showToast(res['message']);
        }
        loader.value=false;
+       homeController.loader.value=false;
      }
    }).catchError((e){
      loader.value=false;
+     homeController.loader.value=false;
    });
   }
 
@@ -145,6 +163,7 @@ class MyProfileController extends GetxController{
         var res = jsonDecode(value);
         if(res['status']) {
           localStorage.clearPrefAllData();
+          service.clearServiceData();
           Get.offAllNamed(AppRoutes.login);
         }else{
           CommonUi.showToast('log');
