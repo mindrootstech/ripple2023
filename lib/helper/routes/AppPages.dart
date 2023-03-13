@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:ripplefect/authentication/binding/AuthBinding.dart';
 import 'package:ripplefect/dashBoard/DashboardView.dart';
 import 'package:ripplefect/dashBoard/binding/DashboardBinding.dart';
+import 'package:ripplefect/dashBoard/local/addBusiness/AddNewBusiness.dart';
 import 'package:ripplefect/dashBoard/local/binding/LocalBinding.dart';
 import 'package:ripplefect/detail/businessDetail/binding/BusinessDetailBinding.dart';
 import 'package:ripplefect/detail/businessDetail/view/BusinessDetailView.dart';
@@ -40,6 +41,7 @@ class AppPages {
     GetPage(name: AppRoutes.productDetail, page: () =>   const ProductDetailView(), binding: ProductDetailBinding()),
     GetPage(name: AppRoutes.businessDetail, page: () =>   const BusinessDetailView(), binding: BusinessDetailBinding()),
     GetPage(name: AppRoutes.myProfile, page: () =>    MyProfileView(), binding: MyProfileBinding()),
+    GetPage(name: AppRoutes.addNewBusiness, page: () =>    AddNewBusiness(), binding: BusinessDetailBinding()),
   ];
 
 

@@ -26,7 +26,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
     return Scaffold(
       body: Center(
         child: Container(
-          padding: const EdgeInsets.only(left: 10,right:20,bottom:20,top: 20),
+          padding: const EdgeInsets.only(left: 10,right:30,bottom:20,top: 20),
           width: MediaQuery.of(context).size.width,
           color: ColorRes.appColor,
           height:MediaQuery.of(context).size.height,

@@ -13,6 +13,7 @@ class AppRoutes {
   static const String productDetail = '/productDetail';
   static const String businessDetail = '/businessDetail';
   static const String myProfile = '/myProfile';
+  static const String addNewBusiness = '/addNewBusiness';
 
 
 }
