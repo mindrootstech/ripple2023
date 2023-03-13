@@ -201,4 +201,15 @@ class Strings {
 
   static String textActionsTake='Actions you can take';
 
+
+  static String name ='Name';
+  static String category ='Category';
+  static String link ='Link';
+  static String description ='Description';
+  static String enterBusinessName ='Enter business name';
+  static String enterBusinessCategoryName ='Enter business category name';
+  static String descriptionHint ='Enter more information about your business or brand (optional)';
+  static String linkHint ='Enter Link (optional)';
+
+
 }

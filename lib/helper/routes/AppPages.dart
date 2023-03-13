@@ -24,7 +24,7 @@ import '../../detail/productDetail/view/ProductDetailView.dart';
 import 'AppRoutes.dart';
 
 class AppPages {
-  static const initial = AppRoutes.splash;
+  static const initial = AppRoutes.addNewBusiness;
 
 
   static final routes = [
