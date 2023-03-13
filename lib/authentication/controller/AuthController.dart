@@ -215,6 +215,7 @@ class AuthController extends GetxController{
 
 
 
+
   //verification code api
   void  vcApiImplementation() async {
     var userEmail=fpEmailField.text.trim();
