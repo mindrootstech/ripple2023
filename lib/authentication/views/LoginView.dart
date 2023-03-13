@@ -135,13 +135,13 @@ class LoginView extends StatelessWidget with InputValidationMixin{
                           Wrap(
                             spacing: 17,
                             children: [
-                              InkWell(
+                              GestureDetector(
                                   onTap: (){
                                     controller.loginWithGoogle();
                                   },
                                   child: socialLoginImage("google")),
 
-                              InkWell(
+                              GestureDetector(
                                   onTap: (){
                                     controller.loginWithFacebook();
                                   },
@@ -149,7 +149,7 @@ class LoginView extends StatelessWidget with InputValidationMixin{
 
 
                               if(Platform.isIOS)...{
-                                InkWell(
+                                GestureDetector(
                                     onTap: (){
                                       controller.applyAppleLogin();
                                     }, child: socialLoginImage("apple")),

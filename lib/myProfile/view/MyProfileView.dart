@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -23,7 +24,7 @@ class MyProfileView extends StatelessWidget with InputValidationMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: true,
       backgroundColor: Colors.white,
       body: SizedBox(
         height: Get.height,
@@ -281,13 +282,12 @@ class MyProfileView extends StatelessWidget with InputValidationMixin {
           getTextFields(Strings.textPassword, "********", controller.passController, true, validateNullError,enable: false),
           getTextFields(Strings.textMobileNumber, Strings.textEnterMobileNumber, controller.mobileController, false, validateMobileError, keyboardType: TextInputType.number),
           getTextFields(Strings.textCity, Strings.textEnterCityName, controller.cityController, false, validateNullError),
-          getTextFields(Strings.textCountry, Strings.textEnterCountryName, controller.countryController, false, validateNullError),
+          getCountryTextFields(Strings.textCountry,Strings.textEnterCountryName, context),
           getDescTextFields(Strings.textDescription, Strings.textEnterHere, controller.descriptionController, false, validateNullError),
           getTextFields(Strings.textWhatIs, Strings.textOurChildren, controller.whatYouController, false, validateNullError,enable: false),
           getTextFields(Strings.textWhatYourWant, Strings.textReduceMyWaste, controller.whatYouWantController, false, validateNullError,enable: false),
           getTextFields(Strings.textGoal, Strings.textEnterHere, controller.goalController, false, validateNullError,enable: false),
-          const SizedBox(height: 35,
-          ),
+          const SizedBox(height: 35,),
           CommonUi.customButton(
               buttonText: Strings.textUpdate,
               fontSize: 18.0,
@@ -314,10 +314,82 @@ class MyProfileView extends StatelessWidget with InputValidationMixin {
                         color: ColorRes.buttonColor),
                   ))),
           const SizedBox(
-            height: 20,
+            height: 30,
           ),
         ],
       ),
     );
   }
+
+ Widget getCountryTextFields(String textCountry,String hint, BuildContext context, ) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const SizedBox(
+          height: 15,
+        ),
+        Text(
+          textCountry,
+          style: CommonUi.customTextStyle(
+              fontFamily: Fonts.semiBold, fontSize: 18.0),
+        ),
+        const SizedBox(
+          height: 5,
+        ),
+        GestureDetector(
+          onTap: (){
+            showCountryPicker(
+              context: context,
+              countryListTheme: CountryListThemeData(
+                flagSize: 25,
+                backgroundColor: Colors.white,
+                textStyle: const TextStyle(fontSize: 16, color: Colors.blueGrey),
+                bottomSheetHeight: 500, // Optional. Country list modal height
+                //Optional. Sets the border radius for the bottomsheet.
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(20.0),
+                  topRight: Radius.circular(20.0),
+                ),
+                //Optional. Styles the search field.
+                inputDecoration: InputDecoration(
+                  labelText: 'Search',
+                  hintText: 'Start typing to search',
+                  prefixIcon: const Icon(Icons.search),
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: const Color(0xFF8C98A8).withOpacity(0.2),
+                    ),
+                  ),
+                ),
+              ),
+              onSelect: (Country country) {
+                controller.selectedCountry.value=  country.displayName;
+                controller.countryController.text=  country.displayName;
+              },
+            );
+          },
+          child: Container(
+            width: Get.width,
+            height: 50,
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            decoration: CommonUi.getBorderRadius(4.0, ColorRes.white,borderWidth: 1.0,borderColor: ColorRes.textFieldOutlineColor),
+            child: Obx(()=>
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children:  [
+                  if(controller.selectedCountry.value!='')...{
+                    Text(controller.selectedCountry.value,style: CommonUi.customTextStyle(),),
+                  }else...{
+                    Text(hint,style: CommonUi.customTextStyle(color: ColorRes.greyColor),),
+                  },
+
+                  const Icon(Icons.keyboard_arrow_down_sharp),
+                ],
+              ),
+            ),
+          ),
+        )
+      ],
+    );
+ }
 }

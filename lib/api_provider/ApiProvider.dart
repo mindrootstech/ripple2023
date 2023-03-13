@@ -1,6 +1,4 @@
-import 'dart:convert';
 import 'dart:io';
-
 import 'package:get/get.dart';
 import 'package:http/http.dart' show Client;
 import 'package:http/http.dart' as http;
@@ -271,10 +269,19 @@ class ApiProvider extends GetConnect {
   }
 
 
-  Future<String> getHomeFilterActionApi(String actionType, String time, String catId) async {
+  Future<String> getHomeFilterActionApi(String actionType, String time, String catId,String deleteActionType,String deleteTimeType,String deleteCatType ) async {
     try {
-      final response = await client.get(Uri.parse("$baseUrl/home-page-filter-section?action_type=$actionType&time=$time&category=$catId"),
+      final response = await client.post(Uri.parse("$baseUrl/home-page-filter-section"),
           headers: {'Authorization': "Bearer ${localStorage.getAuthCode()}"},
+          body: {
+            "action_type":actionType.toString(),
+            "time":time.toString(),
+            "category":catId.toString(),
+            "delete_action_type":deleteActionType.toString(),
+            "delete_time_type":deleteTimeType.toString(),
+            "delete_category_type":deleteCatType.toString(),
+
+          }
           );
       if (response.statusCode == 200) {
         return response.body;
@@ -285,5 +292,24 @@ class ApiProvider extends GetConnect {
       return 'error';
     }
   }
+
+
+  Future<String> getProductDetailApi(String id) async {
+    try {
+      final response = await client.post(Uri.parse("$baseUrl/action"),
+        headers: {'Authorization': "Bearer ${localStorage.getAuthCode()}"},
+          body: {
+            "id":id.toString(),
+          });
+      if (response.statusCode == 200) {
+        return response.body;
+      } else {
+        return response.body;
+      }
+    } catch (e) {
+      return 'error';
+    }
+  }
+
 
 }

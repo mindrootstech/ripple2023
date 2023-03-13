@@ -25,6 +25,8 @@ class HomeController extends GetxController{
   ///Home view controller...
   var userProfile=UsersProfile();
   var challengeList=<Challenge>[];
+
+  //home filter bottom part
   var categoryList=<CategoryTag>[];
   var actionList=<HomeAction>[];
 
@@ -49,6 +51,8 @@ class HomeController extends GetxController{
   var actionTypeList=<FilterActionType>[];
   var timeList = <FilterActionType>[];
   var categoriesList = <FilterActionType>[];
+  var searchCategoriesList = <FilterActionType>[];
+  var catListRefresh=false.obs;
 
 
 
@@ -59,7 +63,7 @@ class HomeController extends GetxController{
     super.onInit();
     getFilterCategory();
     await getHomeDataImplementation();
-    await getHomeFilterImplementation(true);
+    await getHomeFilterImplementation(true,'','','');
     await getFilterActionImplementation('','',1,CommonUi.paginationLimit);
 
     getActionPagination();
@@ -91,9 +95,9 @@ class HomeController extends GetxController{
           if(response.data.usersProfile!=null){
             userProfile=response.data.usersProfile!;
             challengeList.addAll(response.data.challenges??[]);
-            categoryList.addAll(response.data.categoryTags??[]);
             actionTypeList.addAll(response.data.filterActionType??[]);
             categoriesList.addAll(response.data.allCategories??[]);
+            searchCategoriesList.addAll(response.data.allCategories??[]);
             timeList.addAll(response.data.timeFilter??[]);
 
           }
@@ -138,7 +142,7 @@ class HomeController extends GetxController{
     return false;
   }
 
-  Future<bool> getHomeFilterImplementation(bool clear) async {
+  Future<bool> getHomeFilterImplementation(bool clear, String deleteActionType,String deleteTimeType,String deleteCatType) async {
     var actionType='';
     var time = '';
     var categories = '';
@@ -153,7 +157,7 @@ class HomeController extends GetxController{
     }
 
     actionLoader.value=true;
-    await apiProvider.getHomeFilterActionApi(actionType,time,categories).then((value){
+    await apiProvider.getHomeFilterActionApi(actionType,time,categories,deleteActionType,deleteTimeType,deleteCatType).then((value){
       if(value=='error'){
         actionLoader.value=false;
         return false;
@@ -163,7 +167,10 @@ class HomeController extends GetxController{
         var response = homeFilterActionModelFromJson(value);
         if(response.status) {
           actionList.clear();
+          categoryList.clear();
           actionList.addAll(response.data.actions??[]);
+          categoryList.addAll(response.data.categoryTags??[]);
+
         }else{
         }
         actionLoader.value=false;
@@ -210,7 +217,7 @@ class HomeController extends GetxController{
     if(list.isNotEmpty){
       for(int i=0;i<list.length;i++){
         if(list[i].isSelected!.value){
-          result=list[i].id.toString();
+          result="${list[i].id},$result";
         }
       }
       return result;
@@ -226,6 +233,18 @@ class HomeController extends GetxController{
       }
     }
   }
-
+ void searchCatByName(String value) {
+   categoriesList.clear();
+   categoriesList = searchCategoriesList.where((item) => item.name.toLowerCase().contains(value.toLowerCase())).toList();
+    if(catListRefresh.value){
+      catListRefresh.value=false;
+    }else{
+      catListRefresh.value=true;
+    }
+  }
+  void refreshCatList() {
+    categoriesList.clear();
+    categoriesList.addAll(searchCategoriesList);
+  }
 
 }

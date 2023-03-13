@@ -35,16 +35,23 @@ class HomeFilterActionModel {
 class Data {
   Data({
     required this.actions,
+    required this.categoryTags,
+
   });
 
   List<HomeAction> actions;
+  List<CategoryTag>? categoryTags;
+
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
     actions: List<HomeAction>.from(json["actions"].map((x) => HomeAction.fromJson(x))),
+    categoryTags:json["category_tags"].length>0? List<CategoryTag>.from(json["category_tags"].map((x) => CategoryTag.fromJson(x))):<CategoryTag>[],
+
   );
 
   Map<String, dynamic> toJson() => {
     "actions": List<dynamic>.from(actions.map((x) => x.toJson())),
+    "category_tags": List<dynamic>.from(categoryTags!.map((x) => x.toJson())),
   };
 }
 
@@ -80,3 +87,26 @@ class HomeAction {
   };
 }
 
+class CategoryTag {
+  CategoryTag({
+    required this.id,
+    required this.name,
+    required this.type,
+  });
+
+  int id;
+  String name;
+  String type;
+
+  factory CategoryTag.fromJson(Map<String, dynamic> json) => CategoryTag(
+    id: json["id"]??0,
+    name: json["name"]??'',
+    type: json["type"]??'',
+  );
+
+  Map<String, dynamic> toJson() => {
+    "id": id,
+    "name": name,
+    "type": type,
+  };
+}

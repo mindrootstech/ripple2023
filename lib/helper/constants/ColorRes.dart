@@ -16,6 +16,7 @@ class ColorRes {
   static const Color ultralightTextColor = Color.fromRGBO(196, 196, 196, 1);
   static const Color noProgressColor = Color.fromRGBO(236, 236, 236, 1);
   static const Color bluecolor = Color.fromRGBO(135, 183, 254, 1);
+  static const Color blueColorLight = Color.fromRGBO(231, 241, 255, 1.0);
   static const Color colorNavyBlue = Color.fromRGBO(42, 51, 79, 1);
   static const Color lightBluecolor = Color.fromRGBO(231, 241, 255, 1);
   static const Color lightBorderColor = Color.fromRGBO(240, 241, 250, 1.0);

@@ -30,6 +30,7 @@ class MyProfileController extends GetxController{
   var imagePath = "".obs;
   var mediaImagePath = "".obs;
   var storageImagePath = "".obs;
+  var selectedCountry = "".obs;
   var loader=false.obs;
 
 
@@ -72,6 +73,7 @@ class MyProfileController extends GetxController{
      mobileController.text=userProfile.mobile??'';
      cityController.text=userProfile.city??'';
      countryController.text=userProfile.country??'';
+     selectedCountry.value=userProfile.country??'';
      mediaImagePath.value=userProfile.profileImage??'';
      descriptionController.text=userProfile.bio??'';
     if(userProfile.why1!.isNotEmpty){

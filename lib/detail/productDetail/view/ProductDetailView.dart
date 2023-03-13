@@ -4,10 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:readmore/readmore.dart';
+import 'package:ripplefect/helper/common_classes/CommonLoader.dart';
 import 'package:ripplefect/helper/constants/ColorRes.dart';
 import 'package:ripplefect/helper/constants/CommonUi.dart';
 import 'package:ripplefect/helper/constants/strings.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../helper/constants/fonts.dart';
 import '../../../helper/dialogs/TrackActionDialog.dart';
@@ -22,14 +24,14 @@ class ProductDetailView extends StatelessWidget {
     return Scaffold(
       body: GetX<ProductDetailController>(
         builder: (controller) {
-          return Column(
+          return !controller.loader.value? Column(
             children: [
               Expanded(
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
                       getPageViewAndIndicator(controller),
-                      getHeadingToOnlineText(),
+                      getHeadingToOnlineText(controller),
                       // getImpactMetrics(controller),
                       whyItMatters(controller),
 
@@ -39,7 +41,7 @@ class ProductDetailView extends StatelessWidget {
               ),
               getBottomBoxPart(),
             ],
-          );
+          ):const CommonLoader();
         },
       ),
     );
@@ -54,12 +56,12 @@ class ProductDetailView extends StatelessWidget {
             SizedBox(
               height: 260,
               child: PageView.builder(
-                itemCount: controller.bannerImages.length,
+                itemCount: controller.productDetailModel.otherImageNew?.length,
                 physics: const ClampingScrollPhysics(),
                 onPageChanged: (value) {},
                 controller: controller.pageController,
                 itemBuilder: (BuildContext context, int index) {
-                  return CommonUi.loadBannerImages(controller.bannerImages[index]);
+                  return CommonUi.loadBannerImages(controller.productDetailModel.otherImageNew?[index]);
                 },
               ),
             ),
@@ -78,12 +80,12 @@ class ProductDetailView extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 12),
-        controller.bannerImages.isNotEmpty ?
+        controller.productDetailModel.otherImageNew!=null&& controller.productDetailModel.otherImageNew!.isNotEmpty ?
         Container(
           margin: const EdgeInsets.only(bottom: 10),
           child: SmoothPageIndicator(
               controller: controller.pageController,
-              count: controller.bannerImages.length,
+              count: controller.productDetailModel.otherImageNew!.length,
               effect: const SlideEffect(
                   spacing: 8,
                   dotWidth: 8,
@@ -96,7 +98,7 @@ class ProductDetailView extends StatelessWidget {
     );
   }
 
-  Widget getHeadingToOnlineText(){
+  Widget getHeadingToOnlineText(ProductDetailController controller){
     return Column(
       children: [
         Container(
@@ -104,10 +106,13 @@ class ProductDetailView extends StatelessWidget {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Image.asset(CommonUi.setPngImage("dummy_image")),
+              Image.network(controller.productDetailModel.mainImage??'',
+              height: 78,
+              fit: BoxFit.fill,
+              width: 78,),
               const SizedBox(width: 18),
               Expanded(
-                child: Text("Switch your search engine to Ecosia and plant a tree while browsing.",
+                child: Text(controller.productDetailModel.title??'',
                     style: CommonUi.customTextStyle(fontFamily: Fonts.semiBold,
                         fontSize: 20)),
               )
@@ -145,7 +150,7 @@ class ProductDetailView extends StatelessWidget {
               children: [
               Image.asset(CommonUi.setPngImage('plus_icon'),height: 22,width: 22),
                 const SizedBox(width: 4),
-                Text("120 ${Strings.textPts}",
+                Text("${controller.productDetailModel.points} ${Strings.textPts}",
                     style: CommonUi.customTextStyle(fontFamily: Fonts.semiBold, fontSize: 16, color: ColorRes.greyColor)),
             ],),
             Container(
@@ -239,11 +244,7 @@ class ProductDetailView extends StatelessWidget {
             height:16 ,
           ),
           ReadMoreText(
-            "Trees mean a happy environment, healthy people, and a strong economy. "
-                "We use the profit we make from your searches to plant trees where they "
-                "are needed most. We restore and protect biodiversity hotspots."
-                "Trees mean a happy environment, healthy people, and a strong economy."
-                "are needed most. We restore and protect biodiversity hotspots. ",
+            controller.productDetailModel.description??'',
             style:CommonUi.customTextStyle(fontFamily: Fonts.regular, fontSize: 17),
             trimLines: 5,
             colorClickableText: ColorRes.buttonColor,
@@ -255,9 +256,7 @@ class ProductDetailView extends StatelessWidget {
           const SizedBox(height: 22,),
           Text(Strings.textHowYouCan,  style: CommonUi.customTextStyle(fontFamily: Fonts.semiBold, fontSize: 20)),
           const SizedBox(height: 16,),
-          Text("Get the free browser extension and plant trees with every search.\n\n"
-              "How Ecosia works? \n1. Search the web with Ecosia."
-              "\n2. Browse ads to generate income for Ecosia.\n3. Ecosia uses this income to plant trees.",
+          Text(controller.productDetailModel.contribute??'',
               style: CommonUi.customTextStyle(fontFamily: Fonts.regular, fontSize: 17)),
           const SizedBox(height: 16,),
           Text(Strings.textLearnMore,
@@ -269,16 +268,23 @@ class ProductDetailView extends StatelessWidget {
             width: Get.width,
             color: ColorRes.noProgressColor,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text('Learn more about Ecosia',style: CommonUi.customTextStyle(color: ColorRes.colorGreen2,fontFamily: Fonts.semiBold,fontSize: 15),),
-              const SizedBox(
-                width: 4,
-              ),
-              SvgPicture.asset(CommonUi.setSvgImage('green_arrow')),
+          GestureDetector(
+            onTap: () async {
+              if (!await launchUrl(Uri.parse(controller.productDetailModel.contributeLink??''),mode: LaunchMode.externalApplication)) {
+              throw 'Could not launch';
+              }
+            },
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text('Learn more about Ecosia',style: CommonUi.customTextStyle(color: ColorRes.colorGreen2,fontFamily: Fonts.semiBold,fontSize: 15),),
+                const SizedBox(
+                  width: 4,
+                ),
+                SvgPicture.asset(CommonUi.setSvgImage('green_arrow')),
 
-            ],
+              ],
+            ),
           ),
           const SizedBox(
             height: 16,

@@ -132,13 +132,13 @@ class CompleteOnboardView extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              InkWell(
+              GestureDetector(
                   onTap: (){
                     controller.loginWithGoogle();
                   },
                   child: socialLoginImage("google")),
 
-              InkWell(
+              GestureDetector(
                   onTap: (){
                     controller.loginWithFacebook();
                   },
@@ -146,13 +146,13 @@ class CompleteOnboardView extends StatelessWidget {
 
 
               if(Platform.isIOS)...{
-                InkWell(
+                GestureDetector(
                     onTap: (){
                       controller.applyAppleLogin();
                     }, child: socialLoginImage("apple")),
               },
 
-              InkWell(
+              GestureDetector(
                   onTap: (){
                     Get.toNamed(AppRoutes.signup);
                   },

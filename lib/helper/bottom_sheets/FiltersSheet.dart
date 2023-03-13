@@ -14,6 +14,7 @@ class FiltersSheet{
   var controller=Get.find<HomeController>();
 
   void showSheet(){
+    controller.refreshCatList();
     Get.bottomSheet(
       SizedBox(
         height: Get.height/1.8,
@@ -33,7 +34,7 @@ class FiltersSheet{
                     }else if(controller.timeSelected.value)...{
                       Expanded(flex:2,child: filterValuesList(controller.timeList,controller))
                     }else...{
-                      Expanded(flex:2,child: filterValuesList(controller. categoriesList,controller))
+                      !controller.catListRefresh.value? Expanded(flex:2,child: filterValuesList(controller. categoriesList,controller)):Expanded(flex:2,child: filterValuesList(controller. categoriesList,controller))
                     }
 
                   ],
@@ -52,7 +53,7 @@ class FiltersSheet{
                   Expanded(child: GestureDetector(
                     onTap: (){
                       Get.back();
-                      controller.getHomeFilterImplementation(true);
+                      controller.getHomeFilterImplementation(true,'','','');
                     },
                       child: Text('Clear all',style: CommonUi.customTextStyle(fontFamily: Fonts.semiBold,fontSize: 17,color: ColorRes.buttonColor),))),
                   Expanded(
@@ -61,7 +62,7 @@ class FiltersSheet{
                       child: CommonUi.customButtonSmall(
                           buttonText: "Show 10 results",padding: 10.0,fontSize: 14.0,callBack:(){
                         Get.back();
-                        controller.getHomeFilterImplementation(false);
+                        controller.getHomeFilterImplementation(false,'','','');
                       }),
                     ),
                   )
@@ -204,6 +205,14 @@ Widget filterValuesList(List<FilterActionType> list, HomeController controller) 
                 // obscureText: !controller.passVisible.value,
                 decoration: CommonUi.textFieldDecoration(hintText: Strings.textSearchHint2,
                     passwordVisible: null,contentLeft: 48,verticalSpace:0.0),
+                onChanged: (value){
+                  controller.searchCatByName(value);
+                },
+                onFieldSubmitted: (value){
+                  if(value==''){
+                   controller.refreshCatList();
+                  }
+                },
               ),
               Positioned(
                   top: 0,
@@ -216,36 +225,38 @@ Widget filterValuesList(List<FilterActionType> list, HomeController controller) 
         ),
         ),
       },
-      Expanded(
-        child: ListView.builder(
-            itemCount: list.length,
-            itemBuilder: (context,index){
-          return Container(
-            padding: const EdgeInsets.only(left: 8),
-            child: Row(
-              children: [
-                   Obx(()=>
-                      Checkbox(
-                      value: list[index].isSelected?.value??false,
-                      activeColor: ColorRes.buttonColor,
-                      onChanged: (value) {
-                        list[index].isSelected?.value=value??false;
-                      },
+         Expanded(
+          child: ListView.builder(
+              itemCount: list.length,
+              itemBuilder: (context,index){
+            return Container(
+              padding: const EdgeInsets.only(left: 8),
+              child: Row(
+                children: [
+                     Obx(()=>
+                        Checkbox(
+                        value: list[index].isSelected?.value??false,
+                        activeColor: ColorRes.buttonColor,
+                        onChanged: (value) {
+                          list[index].isSelected?.value=value??false;
+                        },
+                    ),
+                     ),
+                  Expanded(
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(vertical: 15),
+                      child:  Text(list[index].name,style: CommonUi.customTextStyle(fontSize: 15,fontFamily: Fonts.semiBold),),
+                    ),
                   ),
-                   ),
-                Expanded(
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(vertical: 15),
-                    child:  Text(list[index].name,style: CommonUi.customTextStyle(fontSize: 15,fontFamily: Fonts.semiBold),),
-                  ),
-                ),
-              ],
-            ),
-          );
-        }),
-      ),
+                ],
+              ),
+            );
+          }),
+        ),
     ],
   );
 }
+
+
 
 

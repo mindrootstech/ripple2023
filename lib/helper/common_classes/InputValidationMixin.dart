@@ -25,7 +25,7 @@ mixin InputValidationMixin {
 
 
   bool isMobileValid(String number) {
-    if(number.length<10){
+    if(number.length<13){
       return true;
     }else{
       return false;

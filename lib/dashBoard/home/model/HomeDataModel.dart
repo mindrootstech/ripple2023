@@ -40,7 +40,6 @@ class Data {
   Data({
      this.usersProfile,
      this.challenges,
-     this.categoryTags,
      this.articles,
      this.filterActionType,
      this.timeFilter,
@@ -49,7 +48,6 @@ class Data {
 
   UsersProfile? usersProfile;
   List<Challenge>? challenges;
-  List<CategoryTag>? categoryTags;
   List<FilterActions>? articles;
   List<FilterActionType>? filterActionType;
   List<FilterActionType>? timeFilter;
@@ -58,7 +56,6 @@ class Data {
   factory Data.fromJson(Map<String, dynamic> json) => Data(
     usersProfile:json["users_profile"]!=null? UsersProfile.fromJson(json["users_profile"]):UsersProfile(),
     challenges:json["challenges"].length>0? List<Challenge>.from(json["challenges"].map((x) => Challenge.fromJson(x))):<Challenge>[],
-    categoryTags:json["category_tags"].length>0? List<CategoryTag>.from(json["category_tags"].map((x) => CategoryTag.fromJson(x))):<CategoryTag>[],
     articles:json["actions"].length>0? List<FilterActions>.from(json["actions"].map((x) => FilterActions.fromJson(x))):<FilterActions>[],
     filterActionType: List<FilterActionType>.from(json["filter_action_type"].map((x) => FilterActionType.fromJson(x))),
     timeFilter: List<FilterActionType>.from(json["time_filter"].map((x) => FilterActionType.fromJson(x))),
@@ -69,7 +66,6 @@ class Data {
   Map<String, dynamic> toJson() => {
     "users_profile": usersProfile!.toJson(),
     "challenges": List<dynamic>.from(challenges!.map((x) => x.toJson())),
-    "category_tags": List<dynamic>.from(categoryTags!.map((x) => x.toJson())),
     "actions": List<dynamic>.from(articles!.map((x) => x.toJson())),
     "filter_action_type": List<dynamic>.from(filterActionType!.map((x) => x)),
     "time_filter": List<dynamic>.from(timeFilter!.map((x) => x)),
@@ -136,25 +132,6 @@ class FilterActions {
   };
 }
 
-class CategoryTag {
-  CategoryTag({
-    required this.id,
-    required this.name,
-  });
-
-  int id;
-  String name;
-
-  factory CategoryTag.fromJson(Map<String, dynamic> json) => CategoryTag(
-    id: json["id"]??0,
-    name: json["name"]??'',
-  );
-
-  Map<String, dynamic> toJson() => {
-    "id": id,
-    "name": name,
-  };
-}
 
 class Challenge {
   Challenge({

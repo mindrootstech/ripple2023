@@ -187,7 +187,8 @@ class AllActionSheet{
                   return GestureDetector(
                     onTap: (){
                       Get.back();
-                      Get.toNamed(AppRoutes.productDetail);
+                      var id=controller.filterActionList[index].id.toString();
+                      Get.toNamed(AppRoutes.productDetail,parameters: {'id':id});
                     },
                     child: Container(
                       decoration: CommonUi.getBorderRadius(8.0, Colors.transparent,borderWidth: 1.0, borderColor: ColorRes.noProgressColor),

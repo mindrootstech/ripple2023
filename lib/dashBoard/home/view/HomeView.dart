@@ -410,21 +410,34 @@ class HomeView extends StatelessWidget {
                            scrollDirection: Axis.horizontal,
                            itemCount: controller.categoryList.length,
                            itemBuilder: (BuildContext context, int index) {
-                             return Center(
-                               child: Container(
-                                 margin: const EdgeInsets.only(top: 10,left: 8),
-                                 decoration: CommonUi.roundedDecorationWithBorder(radius:4.0,outLineColor: ColorRes.colorWhiteGrey,bgColor:ColorRes.white),
-                                 padding: const EdgeInsets.symmetric(horizontal: 6,vertical: 4),
-                                 child: Row(
-                                   mainAxisSize: MainAxisSize.min,
-                                   children: [
-                                     Text(controller.categoryList[index].name,style:CommonUi.customTextStyle(fontSize: 13,fontFamily: Fonts.semiBold),),
-                                     const SizedBox(
-                                       width: 2,
-                                     ),
-                                     const Icon(Icons.clear,size: 18,)
+                             return GestureDetector(
+                               onTap: (){
+                                 var id=controller.categoryList[index].id.toString();
+                                 if(controller.categoryList[index].type=='action_type'){
+                                   controller.getHomeFilterImplementation(false,id,'','');
+                                 }else if(controller.categoryList[index].type=='time'){
+                                   controller.getHomeFilterImplementation(false,'',id,'');
+                                 }else if(controller.categoryList[index].type=='category'){
+                                   controller.getHomeFilterImplementation(false,'','',id);
+                                 }
+                                 controller.categoryList.removeAt(index);
+                               },
+                               child: Center(
+                                 child: Container(
+                                   margin: const EdgeInsets.only(top: 10,left: 8),
+                                   decoration: CommonUi.roundedDecorationWithBorder(radius:4.0,outLineColor: ColorRes.buttonColor,bgColor:ColorRes.blueColorLight),
+                                   padding: const EdgeInsets.symmetric(horizontal: 6,vertical: 4),
+                                   child: Row(
+                                     mainAxisSize: MainAxisSize.min,
+                                     children: [
+                                       Text(controller.categoryList[index].name,style:CommonUi.customTextStyle(fontSize: 13,fontFamily: Fonts.semiBold),),
+                                       const SizedBox(
+                                         width: 2,
+                                       ),
+                                       const Icon(Icons.clear,size: 18,)
 
-                                   ],
+                                     ],
+                                   ),
                                  ),
                                ),
                              );
@@ -460,7 +473,8 @@ class HomeView extends StatelessWidget {
                  itemBuilder: (BuildContext context, int index) {
                    return GestureDetector(
                      onTap: (){
-                       Get.toNamed(AppRoutes.productDetail);
+                       var id=controller.actionList[index].id.toString();
+                       Get.toNamed(AppRoutes.productDetail,parameters: {'id':id});
                      },
                      child: Container(
                        margin:  const EdgeInsets.only( right: 10),
@@ -516,7 +530,7 @@ class HomeView extends StatelessWidget {
                                      ),
                                      Padding(
                                        padding: const EdgeInsets.only(left: 0, right: 8,top: 8),
-                                       child: Text(controller.actionList[index].description??'',
+                                       child: Text(controller.actionList[index].title??'',
                                          maxLines: 3,
                                          textAlign: TextAlign.start,style: CommonUi.customTextStyle(fontFamily: Fonts.semiBold,fontSize: 15),),
                                      ),
