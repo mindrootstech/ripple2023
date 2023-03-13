@@ -359,7 +359,7 @@ class AuthController extends GetxController{
     try {
       var data = await _googleSignIn.signIn();
       if(data!=null){
-        socialLoginApiImplementation(data.displayName??'',data.email??'',3,data.id??'',data.photoUrl??'');
+        socialLoginApiImplementation(data.displayName??'',data.email??'',1,data.id??'',data.photoUrl??'');
       }
 
     } catch (error) {
@@ -374,7 +374,7 @@ class AuthController extends GetxController{
           AppleIDAuthorizationScopes.email,
           AppleIDAuthorizationScopes.fullName,
         ],);
-    socialLoginApiImplementation(result.givenName??'',result.email??'',4,result.userIdentifier??'','');
+    socialLoginApiImplementation(result.givenName??'',result.email??'',3,result.userIdentifier??'','');
 
     try {
       print("e");
